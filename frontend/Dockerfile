@@ -1,0 +1,13 @@
+# Sử dụng image node phiên bản LTS
+FROM node:16.13.0-alpine3.11
+# Thiết lập thư mục làm việc
+WORKDIR /usr/src/app
+# Copy package.json và package-lock.json để cài đặt dependencies
+COPY package*.json ./
+# Cài đặt dependencies
+RUN npm install
+COPY . /app/frontend
+# Build ứng dụng Vue.js
+RUN npm run build
+EXPOSE 8080
+CMD [ "npm", "--prefix", "run", "serve" ]
