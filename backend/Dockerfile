@@ -14,7 +14,7 @@ COPY ./requirements.txt /app/backend
 RUN pip install --no-cache-dir -r requirements.txt
 # copy project
 COPY . /app/backend
-EXPOSE 8000
+EXPOSE 30001
 
 CMD ["python3", "manage.py", "runserver"]
 

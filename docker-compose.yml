@@ -6,11 +6,11 @@ services:
     build: "./backend"
     volumes:
       - ./:/app/backend
-    command: python3 backend/manage.py runserver 0.0.0.0:8000
+    command: python3 backend/manage.py runserver 0.0.0.0:30001
     networks:
       - django-nginx
     ports:
-      - "8000:8000"
+      - "30001:30001"
   frontend:
     image: frontend_image
     container_name: frontend
