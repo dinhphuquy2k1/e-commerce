@@ -1,140 +1,159 @@
 <template>
-    <div class="ms-footer d-flex justify-content-between">
-        <div class="flex-grow-1">
+    <div class="ms-footer d-flex flex-column justify-content-between">
+        <div class="flex-grow-1 ms-footer_content">
             <div class="row">
                 <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="ms-footer_logo-container d-flex align-items-center">
-                <div class="logo"></div>
-                            <div class="title"></div>
+                    <div class="ms-footer_logo-container d-flex align-items-center gap-2">
+                        <div class="logo"></div>
+                        <div class="title"></div>
+                    </div>
+                    <div class="text-start text-wrap mt-3">
+                        <span class="fw-semibold ms-footer_label">Hỗ trợ khách hàng:</span>
+                        <br>
+                        (629) 555-0129
+                        <br>
+                        <span class="ms-footer_label mt-2">Thành Phố Hà Nội</span>
+                        support@ecommerce.com
+                    </div>
+                    <div class="social-container mt-3 d-flex">
+                        <div class="facebook me-2">
+                            <div class="icon"></div>
                         </div>
-                        <div class="text-start text-wrap mt-3">
-                            <span class="fw-semibold">Hỗ trợ khách hàng:</span>
-                            (629) 555-0129
-                            <br>
-                            <span class="fw-semibold">Email:</span>
-                            support@ecommerce.com
-                            <br>
-                            <span class="fw-semibold">Địa chỉ:</span>
-                            Thành Phố Hà Nội
+                        <div class="twitter me-2">
+                            <div class="icon"></div>
                         </div>
-                        <div class="social-container mt-3 d-flex">
-                            <div class="facebook me-2">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="twitter me-2">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="linkedin me-2">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="instagram me-2">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="youtube me-2">
-                                <div class="icon"></div>
-                            </div>
+                        <div class="linkedin me-2">
+                            <div class="icon"></div>
                         </div>
+                        <div class="instagram me-2">
+                            <div class="icon"></div>
+                        </div>
+                        <div class="youtube me-2">
+                            <div class="icon"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="title text-start ps-3 fw-semibold mb-2">Thông tin</div>
-                    <ul class="nav flex-column text-start">
-                    <li class="nav-item">
-                        Thông tin
-                    </li>
-                    <li class="nav-item">
-                        Cửa hàng
-                    </li>
-                    <li class="nav-item">
-                        Sản phẩm
-                    </li>
-                    <li class="nav-item">
-                        Trang cá nhân
-                    </li>
-                    </ul>
-                </div>
-                <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="title text-start ps-3 fw-semibold mb-2">Đối tác</div>
+                    <div class="title text-start ps-3 fw-semibold mb-2">Danh mục hàng đầu</div>
                     <ul class="nav flex-column text-start">
                         <li class="nav-item">
-                            Thông tin
+                            Laptop
                         </li>
                         <li class="nav-item">
-                            Cửa hàng
+                            Điện thoại
                         </li>
                         <li class="nav-item">
-                            Sản phẩm
+                            Tai nghe
+                        </li>
+                        <li class="nav-item nav-item_type">
+                            <div class="line"></div>
+                            Phụ kiện
                         </li>
                         <li class="nav-item">
-                            Trang cá nhân
-                        </li>
-                    </ul>
-                </div>
-                <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="title text-start ps-3 fw-semibold mb-2">Về chúng tôi</div>
-                    <ul class="nav flex-column text-start">
-                        <li class="nav-item">
-                            Trung tâm hỗ trợ
+                            Camera 
                         </li>
                         <li class="nav-item">
-                            Hoàn tiền
-                        </li>
-                        <li class="nav-item">
-                            Giao hàng
-                        </li>
-                        <li class="nav-item">
-                            Liên hệ
+                            Sạc
                         </li>
                     </ul>
                 </div>
                 <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="title text-start ps-3 fw-semibold mb-2">Người dùng</div>
+                    <div class="title text-start ps-3 fw-semibold mb-2">Danh mục liên kết</div>
                     <ul class="nav flex-column text-start">
                         <li class="nav-item">
-                            Đăng nhập
+                            Laptop
                         </li>
                         <li class="nav-item">
-                            Đăng kí
+                            Điện thoại
                         </li>
                         <li class="nav-item">
-                            Thiết lập
+                            Tai nghe
                         </li>
                         <li class="nav-item">
-                            Thông tin
+                            Camera 
+                        </li>
+                        <li class="nav-item">
+                            Sạc
                         </li>
                     </ul>
                 </div>
                 <div class="ms-footer_item col-lg col-md-4 col-6">
-                    <div class="title text-start ps-3 fw-semibold mb-2">Tải xuống</div>
-                    <ul class="nav flex-column text-start">
-                        <li class="nav-item">
-                            <div class="download-app_store"></div>
+                    <div class="title text-start fw-semibold mb-2">Tải xuống</div>
+                    <ul class="nav flex-column text-start gap-3">
+                        <li class="nav-item download">
+                            <div class="icon icon-gg_play"></div>
+                            <div class="d-flex flex-column">
+                                <span>Get it now</span>
+                                <span>Google Play</span>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <div class="download-google_play"></div>
+                        <li class="nav-item download">
+                            <div class="icon icon-app_store"></div>
+                            <div class="d-flex flex-column">
+                                <span>Get it now</span>
+                                <span>Google Play</span>
+                            </div>
                         </li>
                     </ul>
+                </div>
+                <div class="ms-footer_item col-lg col-md-4 col-6 ms-popular_list">
+                    <div class="title text-start fw-semibold mb-2">Thẻ phổ biến</div>
+                    <div class="d-flex flex-wrap gap-2 ms-popular_list">
+                        <div class="item-popular">Game</div>
+                        <div class="item-popular">iPhone</div>
+                        <div class="item-popular">TV</div>
+                        <div class="item-popular">Asus Laptops</div>
+                        <div class="item-popular">Macbook</div>
+                        <div class="item-popular">SSD</div>
+                        <div class="item-popular">Graphics Card</div>
+                        <div class="item-popular">Power Bank</div>
+                        <div class="item-popular">Smart TV</div>
+                        <div class="item-popular">Speaker</div>
+                        <div class="item-popular">Tablet</div>
+                        <div class="item-popular">Microwave</div>
+                        <div class="item-popular">Samsung</div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="ms-footer_copyright">
+            PhuQuy - eCommerce Template © 2023. Design by Templatecookie
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+    $padding-left-right: 150px;
+    $padding: 72px;
     .ms-footer{
         min-height: 256px;
         flex-shrink: 0;
-        background: #fff;
-        padding: 24px 130px 24px 130px;
+        color: #FFF;
+        background: #191C1F;
+        .ms-footer_copyright{
+            display: flex;
+            padding: 24px 150px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #191C1F;
+            box-shadow: 0px 1px 0px 0px #303639 inset;
+            color: #ADB7BC;
+        }
+        .ms-footer_content{
+            padding: $padding $padding-left-right $padding $padding-left-right;
+        }
         .ms-footer_item{
             .ms-footer_logo-container{
                 .logo{
-                width: 44px;
-                height: 44px;
-                background-image: url('@public/assets/icons/logo-symbol.svg');
-                background-repeat: no-repeat;
-                background-color: transparent;
+                    width: 48px;
+                    height: 48px;
+                    background-image: url('@public/assets/icons/logo_footer.svg');
+                    background-repeat: no-repeat;
+                    background-color: transparent;
                 }
                 .title{
+                    color: #FFF;
                     width: 77px;
                     height: 21.101px;
                     flex-shrink: 0;
@@ -143,11 +162,78 @@
                     background-color: transparent;
                 }
             }
+            .ms-footer_label{
+                color: #77878F;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px;
+            }
+
+            .title{
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 24px; /* 150% */
+                text-transform: uppercase;
+            }
 
             .nav-item{
                 color: #8B96A5;
                 padding: 0.5rem 1rem;
                 cursor: pointer;
+            }
+
+            .nav-item.nav-item_type{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                color: #FFF;
+                .line{
+                    width: 24px;
+                    height: 2px;
+                    background: #EBC80C;
+                }
+            }
+
+            .item-popular{
+                padding: 6px 12px;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                border-radius: 2px;
+                border: 1px solid #303639;
+            }
+
+            .nav-item.download{
+                max-width: 176px;
+                display: flex;
+                padding: 16px 20px;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                border-radius: 3px;
+                background: #303639;
+                .icon{
+                    width: 32px;
+                    height: 32px;
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+                }
+                &:hover{
+                    text-decoration: none;
+                    color: #8B96A5;
+                }
+                .icon-gg_play{
+                    background-image: url('@public/assets/icons/Icon=google-play 1.svg');
+                }
+                .icon-app_store{
+                    background-image: url('@public/assets/icons/Apple---Negative 1.svg');
+                }
             }
 
             .nav-item:hover{

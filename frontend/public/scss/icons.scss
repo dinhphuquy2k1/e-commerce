@@ -1,0 +1,186 @@
+.icon16 {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.icon20 {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.icon24 {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    position: relative;
+}
+
+.icon-error-text {
+    height: 14px;
+    width: 14px;
+    display: inline-flex;
+    background-image: url('@public/assets/icons/error-icon.svg');
+}
+
+span.icon24 {
+    margin-top: 2px;
+}
+
+.icon60 {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    position: relative;
+}
+
+.icon24:before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 18px;
+    top: 0;
+    left: 0;
+}
+
+.icon24.ic-change-password:before {
+    background: transparent url('@public/assets/icons/ic_change_password.35654efd.svg') no-repeat;
+    height: 24px;
+    width: 24px;
+}
+
+.icon24.delete:before {
+    background-position: -336px -72px;
+}
+
+.icon16.icon-note {
+    background: transparent url('@public/assets/icons/info-circle.b41a442e.svg') no-repeat;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.icon24.back:before {
+    background-position: -336px 0;
+}
+
+.icon24.add-blue:before {
+    background-image: url('@public/assets/icons/add_blue.6a2d268a.svg');
+    background-position: 50%;
+}
+
+.icon24:before {
+    height: 24px;
+    width: 24px;
+    margin-right: 12px !important;
+}
+
+.icon24.ic-setting-profile:before {
+    background: transparent url('@public/assets/icons/ic_setting_profile.10919537.svg') no-repeat;
+    height: 24px;
+    width: 24px;
+}
+
+.icon24.logout:before {
+    background: transparent url('@public/assets/icons/ic_log_out.c8494c69.svg') no-repeat;
+    height: 24px;
+    width: 24px;
+}
+
+.icon32 {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.icon {
+    /* background: url(../../assets/images/Sprites.64af8f61.svg) no-repeat; */
+    cursor: pointer;
+}
+
+.error-icon {
+    margin: 5px 2px 0 0;
+}
+
+.icon.search-right {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.icon24.search:before {
+    background-position: -289px -24px;
+}
+
+.cego_sprites {
+    background: transparent url('@public/assets/images/CeGo_Sprites.f3e906b1.svg') no-repeat;
+}
+
+.icon-excel {
+    background: transparent url('@public/assets/icons/zip.svg') no-repeat;
+    background-size: contain;
+    filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
+    background-position: center;
+}
+
+.icon-zip {
+    background: transparent url('@public/assets/icons/zip.svg') no-repeat;
+    background-size: contain;
+    filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
+    background-position: center;
+}
+
+.sprites {
+    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+}
+
+
+.icon24:before {
+    content: "";
+    position: absolute;
+    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+    height: 24px;
+    width: 24px;
+    top: 0;
+    left: 0;
+}
+
+.icon24.add-white:before {
+    background-position: -192px -96px;
+}
+
+.icon24.edit:before {
+    background-position: 0 -72px;
+}
+
+.icon24.chevron-down-white:before {
+    background-position: -242px -168px;
+}
+
+.icon24.upload:before {
+    background-position: -312px 0px;
+}
+
+.icon24.more:before {
+    background-position: -168px -48px;
+}
+
+.close-button:before {
+    content: "";
+    display: block;
+    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.close-button:before {
+    background-position: -242px -26px;
+}
+
+.icon24.filter:before {
+    background-position: -96px -48px;
+}

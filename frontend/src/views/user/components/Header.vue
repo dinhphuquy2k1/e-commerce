@@ -1,34 +1,40 @@
 <template>
-    <div class="m-header w-100 d-flex justify-content-between">
-        <div class="m-logo_container d-flex align-items-center">
-            <div class="logo"></div>
-            <div class="title"></div>
+    <div class="m-header w-100 d-flex flex-column justify-content-between align-items-center">
+        <div class="w-100 d-flex justify-content-between align-items-center ms-top_header">
+            <div>
+                Welcome to Clicon online eCommerce store. 
+            </div>
+            <div class="social-contact_container d-flex justify-content-between align-items-center">
+                <div class="pe-3">Theo dõi: </div>
+                <div class="social-contact_list d-flex gap-2">
+                    <div class="social-contact_item twitter"></div>
+                    <div class="social-contact_item facebook"></div>
+                    <div class="social-contact_item pinterest"></div>
+                    <div class="social-contact_item youtube"></div>
+                    <div class="social-contact_item instagram"></div>
+                </div>
+            </div>
         </div>
-        <div class="m-search_form d-flex flex-grow-1">
-            <div class="d-flex ms-search_form-group flex-grow-1">
-                <InputText type="text" v-model="value" class="ms-input_search h-100"/>
-                <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Select a City" class="rounded-0 h-100 ms-dropdown_search" />
+        <div class="w-100 d-flex justify-content-between align-items-center ms-middle_header">
+            <div class="m-logo_container d-flex align-items-center">
+                <div class="logo"></div>
+                <div class="title">BRAND</div>
             </div>
-            <button class="ms-btn primary ms-btn_search">
-                <div class="text">Tìm kiếm</div>
-            </button>
-        </div>
-        <div class="m-header_actions d-flex">
-            <div class="d-flex cart pointer flex-column align-items-center ms-4 me-4 item-action">
-                <div class="icon"></div>
-                <div class="title">Giỏ hàng</div>
+            <div class="m-search_form flex-row d-flex flex-grow-1 align-items-center">
+                <InputText type="search" v-model="value" class="ms-input_search" placeholder="Tìm kiếm"/>
+                <div class="icon24 icon search-right search"></div>
             </div>
-            <div class="d-flex message pointer flex-column align-items-center me-4 item-action">
-                <div class="icon"></div>
-                <div class="title">Tin nhắn</div>
-            </div>
-            <div class="d-flex love pointer flex-column align-items-center me-4 item-action">
-                <div class="icon"></div>
-                <div class="title">Yêu thích</div>
-            </div>
-            <div class="d-flex profile pointer flex-column align-items-center item-action">
-                <div class="icon"></div>
-                <div class="title">Tài khoản</div>
+            <div class="m-header_actions d-flex">
+                <div class="d-flex cart pointer flex-column justify-content-center ms-4 me-4 item-action">
+                    <div class="icon"></div>
+                    <div class="title">2</div>
+                </div>
+                <div class="d-flex love pointer flex-column align-items-center justify-content-center me-4 item-action">
+                    <div class="icon"></div> 
+                </div>
+                <div class="d-flex profile pointer flex-column align-items-center justify-content-center item-action">
+                    <div class="icon"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -59,37 +65,72 @@ export default {
 
 
 <style lang="scss" scoped>
+    $padding-header-left-right: 150px;
+    $padding-header: 12px;
     .m-header{
-        height: 86px;
         flex-shrink: 0;
-        background: #fff;
-        padding: 24px 130px 24px 130px;
+        background: #1B6392;
+        .ms-top_header{
+            padding: $padding-header $padding-header-left-right $padding-header $padding-header-left-right;
+            color: #FFF;
+            box-shadow: 0px -1px 0px 0px rgba(255, 255, 255, 0.16) inset;
+        }
+        .ms-middle_header{
+            padding: $padding-header $padding-header-left-right $padding-header $padding-header-left-right;
+        }
+        .social-contact_container{
+            .social-contact_list{
+                .social-contact_item{
+                    width: 16px;
+                    height: 16px;
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+                } 
+                .twitter{
+                    background-image: url('@public/assets/icons/Twitter.svg');
+                } 
+                .facebook{
+                    background-image: url('@public/assets/icons/Facebook.svg');
+                } 
+                .pinterest{
+                    background-image: url('@public/assets/icons/Pinterest.svg');
+                } 
+                .youtube{
+                    background-image: url('@public/assets/icons/Youtube.svg');
+                } 
+                .instagram{
+                    background-image: url('@public/assets/icons/Instagram.svg');
+                } 
+            }
+        }
         .m-logo_container{
-            gap: 6.214px;
+            gap: 8px;
             flex-shrink: 0;
             padding: 1px 23.786px 1px 0px;
-            height: 46px;
-            width: 150px;
-
+            height: 48px;
             .logo{
-                width: 44px;
-                height: 44px;
-                background-image: url('@public/assets/icons/logo-symbol.svg');
+                width: 48px;
+                height: 48px;
+                background-size: contain;
+                background-image: url('@public/assets/icons/logo.svg');
                 background-repeat: no-repeat;
                 background-color: transparent;
             }
             .title{
-                width: 77px;
-                height: 21.101px;
-                flex-shrink: 0;
-                background-image: url('@public/assets/icons/Brand.svg');
-                background-repeat: no-repeat;
-                background-color: transparent;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 40px; /* 125% */
+                letter-spacing: -0.64px;
+                color: #FFF;
             }
         }
 
         .m-search_form{
             max-width: 665px;
+            background: #fff;
+            border-radius: 4px;
+            height: 40px;
             .ms-btn_search{
                 border-radius: 0px;
                 border-top-right-radius: 4px;
@@ -107,20 +148,35 @@ export default {
         }
         .m-header_actions{
             .icon{
-                width: 25px;
-                height: 25px;
+                width: 32px;
+                height: 32px;
                 flex-shrink: 0;
                 background-repeat: no-repeat;
                 background-color: transparent;
             }
             .cart{
+                position: relative;
                 .icon{
                     background-image: url('@public/assets/icons/cart.svg');
+                }
+                .title{
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    padding: 1px;
+                    right: 0;
+                    top: 0;
+                    font-size: 12px;
+                    text-align: center;
+                    line-height: 16px;
+                    color: #1B6392;
+                    background: #fff;
+                    border-radius: 50%;
                 }
             }
             .love{
                 .icon{
-                    background-image: url('@public/assets/icons/love.svg');
+                    background-image: url('@public/assets/icons/Heart.svg');
                 }
             }
             .message{
@@ -130,7 +186,7 @@ export default {
             }
             .profile{
                 .icon{
-                    background-image: url('@public/assets/icons/profile.svg');
+                    background-image: url('@public/assets/icons/User.svg');
                 }
             }
            
