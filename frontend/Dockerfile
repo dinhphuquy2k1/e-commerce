@@ -1,7 +1,7 @@
 # Sử dụng image node phiên bản LTS
 FROM node:16.13.0-alpine3.11
 # Thiết lập thư mục làm việc
-WORKDIR /usr/src/app
+WORKDIR /app/frontend
 # Copy package.json và package-lock.json để cài đặt dependencies
 COPY package*.json ./
 # Cài đặt dependencies
