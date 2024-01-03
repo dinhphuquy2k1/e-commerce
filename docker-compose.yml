@@ -19,9 +19,10 @@ services:
       - ./:/app/frontend
     ports:
       - "8080:8080"
-    command: npm --prefix frontend run serve
+    command: npm run serve
     depends_on:
       - backend
+    restart: always
     networks:
       - django-nginx
   nginx:
