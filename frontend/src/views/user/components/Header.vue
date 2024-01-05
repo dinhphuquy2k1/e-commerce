@@ -37,6 +37,33 @@
                 </div>
             </div>
         </div>
+        <div class="w-100 d-flex justify-content-between align-items-center ms-bottom_header">
+            <div class="left-side d-flex align-items-center gap-3">
+                <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Category" class="ms-category"/>
+                <div class="left-side_item align-items-center justify-content-center">
+                    <div class="icon map"></div>
+                    <div class="title">
+                        Track Order
+                    </div>
+                </div>
+                <div class="left-side_item align-items-center justify-content-center">
+                    <div class="icon compare"></div>
+                    <div class="title">
+                        So sánh
+                    </div>
+                </div>
+                <div class="left-side_item align-items-center justify-content-center">
+                    <div class="icon support"></div>
+                    <div class="title">
+                        Hỗ trợ khách hàng
+                    </div>
+                </div>
+            </div>
+            <div class="call-now d-flex align-items-center gap-2">
+                <div class="icon"></div>
+                <div class="title">+1-202-555-0104</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,6 +104,57 @@ export default {
         }
         .ms-middle_header{
             padding: $padding-header $padding-header-left-right $padding-header $padding-header-left-right;
+        }
+
+        .ms-bottom_header{
+            background: #FFF;
+            box-shadow: 0px -1px 0px 0px #E4E7E9 inset;
+            padding: 16px $padding-header-left-right 16px $padding-header-left-right;
+            .left-side{
+                .ms-category{
+                    width: 154px;
+                    background: #F2F4F5;
+                    color: #191C1F;
+                }
+                .left-side_item{
+                    padding: 0px 6px 0px 6px;
+                    cursor: pointer;
+                    display: flex;
+                    height: 40px;
+                    line-height: 40px;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: row;
+                    text-wrap: nowrap;
+                    .title{
+                        padding-left: 6px;
+                    }
+                    .icon{
+                        background-repeat: no-repeat;
+                        background-color: transparent;
+                        width: 24px;
+                        height: 24px;
+                    }
+                    .map{
+                        background-image: url('@public/assets/icons/MapPinLine.svg');
+                    }
+                    .compare{
+                        background-image: url('@public/assets/icons/ArrowsCounterClockwise.svg');
+                    }
+                    .support{
+                        background-image: url('@public/assets/icons/Headphones.svg');
+                    }
+                }
+            }
+            .call-now{
+                .icon{
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+                    background-image: url('@public/assets/icons/PhoneCall.svg');
+                    width: 28px;
+                    height: 28px;
+                }
+            }
         }
         .social-contact_container{
             .social-contact_list{

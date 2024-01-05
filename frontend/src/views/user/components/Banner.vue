@@ -1,6 +1,6 @@
 <template>
     <div class="ms-banner d-flex row">
-        <div class="ms-carousel col-lg-7 col-12">
+        <div class="ms-carousel col-lg-7 col-12 col-sm-7">
             <Carousel :value="products" :numVisible="1" :numScroll="1" circular :autoplayInterval="5000" class="h-100">
                 <template #item="slotProps">
                     <div class="d-flex h-100 p-4 position-relative">
@@ -18,7 +18,7 @@
                 </template>
             </Carousel>
         </div>
-        <div class="ms-sub_carousel col-lg-5 col-12 d-flex flex-grow-1">
+        <div class="ms-sub_carousel col-lg-5 col-sm-5 col-12 d-flex flex-grow-1">
             <div class="d-flex row flex-grow-1 flex-column px-3 gy-3">
                 <div class="col ms-sub_banner-item">
                     <div class="title text-start text-wrap">SUMMER SALES</div>

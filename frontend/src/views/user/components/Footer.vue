@@ -12,7 +12,10 @@
                         <br>
                         (629) 555-0129
                         <br>
-                        <span class="ms-footer_label mt-2">Thành Phố Hà Nội</span>
+                        <br>
+                        <span class="ms-footer_label mt-3">Thành Phố Hà Nội</span>
+                        <br>
+                        <br>
                         support@ecommerce.com
                     </div>
                     <div class="social-container mt-3 d-flex">

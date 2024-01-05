@@ -12,7 +12,7 @@ body {
     font-family: GoogleSans;
     font-size: 14px;
     color: #212121;
-    background: #F7FAFC;
+    background: #FFFFFF;
     overflow: hidden;
 }
 
@@ -52,10 +52,16 @@ body {
     height: 100vh;
 }
 
+.row{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
 .ms-btn{
     min-height: 36px;
     height: 40px;
     min-width: 80px;
+    line-height: 40px;
     border: none;
     box-shadow: none;
     position: relative;
@@ -76,6 +82,30 @@ body {
         color: #fff;
         background: #127FFF;
     }
+    &.orange{
+        background: #FA8232;
+    }
+    &.light-pink{
+        background: #FFE7D6;
+    }
+    &.white{
+        background: #fff;
+    }
+    &.icon-only{
+        min-width: 48px;
+    }
+    .icon-only{
+        width: 24px;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        height: 24px;
+    }
+}
+
+.h-40{
+    min-height: 40px !important;
+    height: 40px !important;
+    max-height: 40px !important;
 }
 
 .pointer{
@@ -84,6 +114,14 @@ body {
 
 .fs-20{
     font-size: 20px;
+}
+
+.fs-24{
+    font-size: 24px;
+}
+
+.fs-16{
+    font-size: 16px;
 }
 
 .flex-1{
@@ -96,4 +134,41 @@ body {
 
 .fs-32{
     font-size: 32px;
+}
+
+.p-16{
+    padding: 16px;
+}
+
+.pb-24{
+    padding-bottom: 24px;
+}
+
+.p-image img{
+    max-width: 100%;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon{
+    color: #EBC80C;
+}
+
+.h-48{
+    height: 48px;
+}
+
+.p-tooltip-arrow{
+    left: 47% !important;
+}
+
+.p-tooltip-text {
+    background: #182d4b !important;
+    color: #fff !important;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 100;
+    font-family: GoogleSans !important;
+    padding: 6px !important;
+    min-width: 40px;
+    text-align: center;
+    display: block;
 }

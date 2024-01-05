@@ -3,7 +3,7 @@ FROM node:lts-alpine
 # Thiết lập thư mục làm việc
 WORKDIR /app/frontend
 # Copy package.json và package-lock.json để cài đặt dependencies
-COPY package*.json ./
+COPY package*.json /app/frontend
 # Cài đặt dependencies
 RUN npm install
 COPY . /app/frontend
