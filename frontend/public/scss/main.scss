@@ -14,6 +14,7 @@ body {
     color: #212121;
     background: #FFFFFF;
     overflow: hidden;
+    line-height: unset;
 }
 
 @font-face {
@@ -92,7 +93,7 @@ body {
         background: #fff;
     }
     &.icon-only{
-        min-width: 48px;
+        min-width: 40px;
     }
     .icon-only{
         width: 24px;
@@ -100,6 +101,10 @@ body {
         background-color: transparent;
         height: 24px;
     }
+}
+
+.pr-24{
+    padding-right: 24px;
 }
 
 .h-40{
@@ -156,6 +161,10 @@ body {
     height: 48px;
 }
 
+.h-40{
+    height: 40px;
+}
+
 .p-tooltip-arrow{
     left: 47% !important;
 }
@@ -171,4 +180,44 @@ body {
     min-width: 40px;
     text-align: center;
     display: block;
+}
+
+.p-tag.hot{
+    color: #fff;
+    background: #EE5858;
+}
+
+.p-tag.sold-out {
+    color: #fff;
+    background: #929FA5;
+}
+.p-tag.sale {
+    color: #191C1F;
+    background: #EFD33D;
+}
+
+.p-tag.best-deal{
+    color: #fff;
+    background: #2DA5F3;
+}
+
+.p-tag.sale-text{
+    color: #fff;
+    background: #2DB224;
+}
+
+.p-tag{
+    z-index: 2;
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-style: normal;
+    font-weight: 600;
+    width: -moz-max-content;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    .p-tag-value{
+        line-height: unset;
+        text-transform: uppercase;
+    }
 }

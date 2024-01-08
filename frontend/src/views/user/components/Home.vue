@@ -43,16 +43,31 @@
         <div>
             <TopOffer></TopOffer>
         </div>
+        <div>
+            <StoreCategories/>
+        </div>
+        <div>
+            <FeaturedProducts/>
+        </div>
+        <div>
+            <ComputerAccessories/>
+        </div>
     </div>
 </template>
 
 <script>
 import Banner from '@/views/user/components/Banner.vue';
 import TopOffer from '@/views/user/components/TopOffer.vue';
+import StoreCategories from '@/views/user/components/StoreCategories.vue';
+import FeaturedProducts from '@/views/user/components/FeaturedProducts.vue';
+import ComputerAccessories from '@/views/user/components/ComputerAccessories.vue';
 export default {
     components:{
         Banner,
-        TopOffer
+        TopOffer,
+        StoreCategories,
+        FeaturedProducts,
+        ComputerAccessories
     }
 }
 </script>

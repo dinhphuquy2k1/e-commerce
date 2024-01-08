@@ -82,13 +82,13 @@
                                 <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
                                 <div class="ms-offer-buttons w-100">
                                     <div class="d-flex justify-content-between gap-3">
-                                        <Button class="ms-btn orange rounded-circle h-48 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
+                                        <Button class="ms-btn orange rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
                                             <div class="icon-only icon-heart_black"></div>
                                         </Button>
-                                        <Button class="ms-btn white rounded-circle h-48 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Thêm vào giỏ hàng`, escape: true }">
+                                        <Button class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Thêm vào giỏ hàng`, escape: true }">
                                             <div class="icon-only icon-simple_cart-black"></div>
                                         </Button>
-                                        <Button class="ms-btn white rounded-circle h-48 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
+                                        <Button class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4" v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
                                             <div class="icon-only icon-eye"></div>
                                         </Button>
                                     </div>
