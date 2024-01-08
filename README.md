@@ -33,6 +33,6 @@
 
     http://localhost:8080/
     
-    http://0.0.0.0:30001/
+    http://localhost:30001/
 
 ## mysql接続情報
