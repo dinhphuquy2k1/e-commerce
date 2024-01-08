@@ -17,6 +17,7 @@ services:
     build: "./frontend"
     volumes:
       - ./:/app/frontend
+      - /app/frontend/node_modules
     ports:
       - "8080:8080"
     command: npm --prefix frontend run serve

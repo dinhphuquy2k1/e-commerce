@@ -6,6 +6,7 @@ WORKDIR /app/frontend
 COPY package*.json /app/frontend
 # Cài đặt dependencies
 RUN npm install
+RUN npm install --location=global @vue/cli
 COPY . /app/frontend
 # Build ứng dụng Vue.js
 RUN npm run build
