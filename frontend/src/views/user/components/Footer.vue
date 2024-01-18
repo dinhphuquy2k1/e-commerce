@@ -126,7 +126,6 @@
 </template>
 
 <style lang="scss" scoped>
-    $padding-left-right: 150px;
     $padding: 72px;
     .ms-footer{
         min-height: 256px;
@@ -144,7 +143,7 @@
             color: #ADB7BC;
         }
         .ms-footer_content{
-            padding: $padding $padding-left-right $padding $padding-left-right;
+            padding: $padding $padding-base $padding-base;
         }
         .ms-footer_item{
             .ms-footer_logo-container{

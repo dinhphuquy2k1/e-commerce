@@ -13,7 +13,7 @@ body {
     font-size: 14px;
     color: #212121;
     background: #FFFFFF;
-    overflow: hidden;
+    overflow: auto;
     line-height: unset;
 }
 
@@ -51,11 +51,6 @@ body {
 
 .h-100vh{
     height: 100vh;
-}
-
-.row{
-    --bs-gutter-x: 0;
-    --bs-gutter-y: 0;
 }
 
 .ms-btn{

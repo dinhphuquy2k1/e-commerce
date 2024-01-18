@@ -1,7 +1,7 @@
 <template>
     <div class="m-wrapper w-100 d-flex h-100vh flex-column">
         <Header />
-        <div style="overflow: auto;">
+        <div>
             <Home />
             <Subscribe/>
             <Footer />

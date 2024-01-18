@@ -92,24 +92,23 @@ export default {
 
 
 <style lang="scss" scoped>
-    $padding-header-left-right: 150px;
     $padding-header: 12px;
     .m-header{
         flex-shrink: 0;
         background: #1B6392;
         .ms-top_header{
-            padding: $padding-header $padding-header-left-right $padding-header $padding-header-left-right;
+            padding: $padding-header $padding-base $padding-header $padding-base;
             color: #FFF;
             box-shadow: 0px -1px 0px 0px rgba(255, 255, 255, 0.16) inset;
         }
         .ms-middle_header{
-            padding: $padding-header $padding-header-left-right $padding-header $padding-header-left-right;
+            padding: $padding-header $padding-base $padding-header $padding-base;
         }
 
         .ms-bottom_header{
             background: #FFF;
             box-shadow: 0px -1px 0px 0px #E4E7E9 inset;
-            padding: 16px $padding-header-left-right 16px $padding-header-left-right;
+            padding: 16px $padding-base 16px $padding-base;
             .left-side{
                 .ms-category{
                     width: 154px;

@@ -209,6 +209,11 @@ span.icon24 {
     background-image: url('@public/assets/icons/ArrowRightWhite.svg');
 }
 
+.icon-arrow-left_orange{
+    rotate: 180;
+    background-image: url('@public/assets/icons/ArrowRightOrange.svg');
+}
+
 .icon-w24{
     width: 24px;
     height: 24px;
@@ -217,4 +222,16 @@ span.icon24 {
 .icon-w20{
     width: 20px;
     height: 20px;
+}
+
+.icon-user-circle{
+    background-image: url('@public/assets/icons/UserCircle.svg');
+}
+
+.icon-calendar-blank{
+    background-image: url('@public/assets/icons/CalendarBlank.svg');
+}
+
+.icon-chat-circle-dots{
+    background-image: url('@public/assets/icons/ChatCircleDots.svg');
 }
