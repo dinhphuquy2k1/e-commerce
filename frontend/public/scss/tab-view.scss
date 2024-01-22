@@ -1,0 +1,29 @@
+.p-tabview-nav-container {
+  ol, ul, dl {
+    margin: unset;
+    padding: unset;
+  }
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: #FA8232;
+  color: var(--Gray-900);
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  padding: 18px 20px;
+  color: var(--Gray-600);
+  font-weight: 500;
+  border-color: #FFF;
+  display: flex;
+  justify-content: center;
+}
+
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  border-color: #FA8232;
+}
+
+.p-tabview .p-tabview-nav {
+  border-bottom: 1px solid var(--Gray-100);
+}
+

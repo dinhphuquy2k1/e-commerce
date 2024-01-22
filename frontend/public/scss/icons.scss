@@ -1,237 +1,289 @@
 .icon16 {
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-    min-height: 16px;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
 }
 
 .icon20 {
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
-    min-height: 20px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .icon24 {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
-    position: relative;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  position: relative;
 }
 
 .icon-error-text {
-    height: 14px;
-    width: 14px;
-    display: inline-flex;
-    background-image: url('@public/assets/icons/error-icon.svg');
+  height: 14px;
+  width: 14px;
+  display: inline-flex;
+  background-image: url('@public/assets/icons/error-icon.svg');
 }
 
 span.icon24 {
-    margin-top: 2px;
+  margin-top: 2px;
 }
 
 .icon60 {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    position: relative;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+  position: relative;
 }
 
 .icon24:before {
-    content: "";
-    position: absolute;
-    height: 20px;
-    width: 18px;
-    top: 0;
-    left: 0;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 18px;
+  top: 0;
+  left: 0;
 }
 
 .icon24.ic-change-password:before {
-    background: transparent url('@public/assets/icons/ic_change_password.35654efd.svg') no-repeat;
-    height: 24px;
-    width: 24px;
+  background: transparent url('@public/assets/icons/ic_change_password.35654efd.svg') no-repeat;
+  height: 24px;
+  width: 24px;
 }
 
 .icon24.delete:before {
-    background-position: -336px -72px;
+  background-position: -336px -72px;
 }
 
 .icon16.icon-note {
-    background: transparent url('@public/assets/icons/info-circle.b41a442e.svg') no-repeat;
-    margin-left: 3px;
-    cursor: pointer;
+  background: transparent url('@public/assets/icons/info-circle.b41a442e.svg') no-repeat;
+  margin-left: 3px;
+  cursor: pointer;
 }
 
 .icon24.back:before {
-    background-position: -336px 0;
+  background-position: -336px 0;
 }
 
 .icon24.add-blue:before {
-    background-image: url('@public/assets/icons/add_blue.6a2d268a.svg');
-    background-position: 50%;
+  background-image: url('@public/assets/icons/add_blue.6a2d268a.svg');
+  background-position: 50%;
 }
 
 .icon24:before {
-    height: 24px;
-    width: 24px;
-    margin-right: 12px !important;
+  height: 24px;
+  width: 24px;
+  margin-right: 12px !important;
 }
 
 .icon24.ic-setting-profile:before {
-    background: transparent url('@public/assets/icons/ic_setting_profile.10919537.svg') no-repeat;
-    height: 24px;
-    width: 24px;
+  background: transparent url('@public/assets/icons/ic_setting_profile.10919537.svg') no-repeat;
+  height: 24px;
+  width: 24px;
 }
 
 .icon24.logout:before {
-    background: transparent url('@public/assets/icons/ic_log_out.c8494c69.svg') no-repeat;
-    height: 24px;
-    width: 24px;
+  background: transparent url('@public/assets/icons/ic_log_out.c8494c69.svg') no-repeat;
+  height: 24px;
+  width: 24px;
 }
 
 .icon32 {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
 }
 
 .icon {
-    /* background: url(../../assets/images/Sprites.64af8f61.svg) no-repeat; */
-    cursor: pointer;
+  /* background: url(../../assets/images/Sprites.64af8f61.svg) no-repeat; */
+  cursor: pointer;
 }
 
 .error-icon {
-    margin: 5px 2px 0 0;
+  margin: 5px 2px 0 0;
 }
 
 .icon.search-right {
-    margin-right: 10px;
-    cursor: pointer;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .icon24.search:before {
-    background-position: -289px -24px;
+  background-position: -289px -24px;
 }
 
 .cego_sprites {
-    background: transparent url('@public/assets/images/CeGo_Sprites.f3e906b1.svg') no-repeat;
+  background: transparent url('@public/assets/images/CeGo_Sprites.f3e906b1.svg') no-repeat;
 }
 
 .icon-excel {
-    background: transparent url('@public/assets/icons/zip.svg') no-repeat;
-    background-size: contain;
-    filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
-    background-position: center;
+  background: transparent url('@public/assets/icons/zip.svg') no-repeat;
+  background-size: contain;
+  filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
+  background-position: center;
 }
 
 .icon-zip {
-    background: transparent url('@public/assets/icons/zip.svg') no-repeat;
-    background-size: contain;
-    filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
-    background-position: center;
+  background: transparent url('@public/assets/icons/zip.svg') no-repeat;
+  background-size: contain;
+  filter: invert(36%) sepia(88%) saturate(2399%) hue-rotate(207deg) brightness(101%) contrast(101%);
+  background-position: center;
 }
 
 .sprites {
-    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+  background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
 }
 
 
 .icon24:before {
-    content: "";
-    position: absolute;
-    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
-    height: 24px;
-    width: 24px;
-    top: 0;
-    left: 0;
+  content: "";
+  position: absolute;
+  background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+  height: 24px;
+  width: 24px;
+  top: 0;
+  left: 0;
 }
 
 .icon24.add-white:before {
-    background-position: -192px -96px;
+  background-position: -192px -96px;
 }
 
 .icon24.edit:before {
-    background-position: 0 -72px;
+  background-position: 0 -72px;
 }
 
 .icon24.chevron-down-white:before {
-    background-position: -242px -168px;
+  background-position: -242px -168px;
 }
 
 .icon24.upload:before {
-    background-position: -312px 0px;
+  background-position: -312px 0px;
 }
 
 .icon24.more:before {
-    background-position: -168px -48px;
+  background-position: -168px -48px;
 }
 
 .close-button:before {
-    content: "";
-    display: block;
-    background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
-    height: 20px;
-    width: 20px;
+  content: "";
+  display: block;
+  background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
+  height: 20px;
+  width: 20px;
 }
 
 .close-button:before {
-    background-position: -242px -26px;
+  background-position: -242px -26px;
 }
 
 .icon24.filter:before {
-    background-position: -96px -48px;
+  background-position: -96px -48px;
 }
 
-.icon-heart_black{
-    background-image: url('@public/assets/icons/Heart_black.svg');
+.icon-heart_black {
+  background-image: url('@public/assets/icons/Heart_black.svg');
 }
 
-.icon-simple_cart{
-    background-image: url('@public/assets/icons/ShoppingCartSimple.svg');
+.icon-simple_cart {
+  background-image: url('@public/assets/icons/ShoppingCartSimple.svg');
 }
 
-.icon-simple_cart-black{
-    background-image: url('@public/assets/icons/ShoppingCartSimpleBlack.svg');
+.icon-simple_cart-black {
+  background-image: url('@public/assets/icons/ShoppingCartSimpleBlack.svg');
 }
 
-.icon-eye{
-    background-image: url('@public/assets/icons/Eye.svg');
+.icon-compare {
+  background-image: url('@public/assets/icons/ArrowsCounterClockwise.svg');
 }
 
-.icon-arrow-right_orange{
-    background-image: url('@public/assets/icons/ArrowRightOrange.svg');
+.icon-eye {
+  background-image: url('@public/assets/icons/Eye.svg');
 }
 
-.icon-arrow-right_white{
-    background-image: url('@public/assets/icons/ArrowRightWhite.svg');
+.icon-arrow-right_orange {
+  background-image: url('@public/assets/icons/ArrowRightOrange.svg');
 }
 
-.icon-arrow-left_orange{
-    rotate: 180;
-    background-image: url('@public/assets/icons/ArrowRightOrange.svg');
+.icon-arrow-right_white {
+  background-image: url('@public/assets/icons/ArrowRightWhite.svg');
 }
 
-.icon-w24{
-    width: 24px;
-    height: 24px;
+.icon-arrow-left_white {
+  rotate: 180deg;
+  background-image: url('@public/assets/icons/ArrowRightWhite.svg');
 }
 
-.icon-w20{
-    width: 20px;
-    height: 20px;
+.icon-arrow-left_orange {
+  rotate: 180deg;
+  background-image: url('@public/assets/icons/ArrowRightOrange.svg');
 }
 
-.icon-user-circle{
-    background-image: url('@public/assets/icons/UserCircle.svg');
+.icon-w24 {
+  width: 24px;
+  height: 24px;
 }
 
-.icon-calendar-blank{
-    background-image: url('@public/assets/icons/CalendarBlank.svg');
+.icon-w20 {
+  width: 20px;
+  height: 20px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
-.icon-chat-circle-dots{
-    background-image: url('@public/assets/icons/ChatCircleDots.svg');
+.icon-user-circle {
+  background-image: url('@public/assets/icons/UserCircle.svg');
+}
+
+.icon-calendar-blank {
+  background-image: url('@public/assets/icons/CalendarBlank.svg');
+}
+
+.icon-chat-circle-dots {
+  background-image: url('@public/assets/icons/ChatCircleDots.svg');
+}
+
+.icon-home {
+  background-image: url('@public/assets/icons/House.svg');
+}
+
+.icon-home_orange {
+  background-image: url('@public/assets/icons/HouseOrange.svg');
+}
+
+.icon-medal {
+  background-image: url('@public/assets/icons/Medal.svg');
+}
+
+.icon-truck {
+  background-image: url('@public/assets/icons/Truck.svg');
+}
+
+.icon-handshake {
+  background-image: url('@public/assets/icons/Handshake.svg');
+}
+
+.icon-head-phone_orange {
+  background-image: url('@public/assets/icons/Head_Phone_Orange.svg');
+}
+
+.icon-credit_card_orange {
+  background-image: url('@public/assets/icons/CreditCardOrange.svg');
+}
+
+.icon-google {
+  background-image: url('@public/assets/icons/Google.png');
+}
+
+.icon-apple{
+  background-image: url('@public/assets/icons/Apple.svg');
+}
+
+.icon-arrow-left_black{
+  background-image: url('@public/assets/icons/ArrowLeft.svg');
 }
