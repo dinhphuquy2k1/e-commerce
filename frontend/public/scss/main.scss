@@ -4,6 +4,7 @@
 @import './input.scss';
 @import './icons.scss';
 @import './tab-view.scss';
+@import './menu.scss';
 
 * {
   margin: 0;
@@ -59,7 +60,6 @@ body {
   min-height: 36px;
   height: 40px;
   min-width: 80px;
-  line-height: 40px;
   border: none;
   box-shadow: none;
   position: relative;
@@ -277,3 +277,10 @@ body {
   flex: unset;
 }
 
+.truncate-text-2{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}

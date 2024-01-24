@@ -143,7 +143,7 @@
             color: #ADB7BC;
         }
         .ms-footer_content{
-            padding: $padding $padding-base $padding-base;
+            padding: $padding $padding-base;
         }
         .ms-footer_item{
             .ms-footer_logo-container{

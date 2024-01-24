@@ -287,3 +287,43 @@ span.icon24 {
 .icon-arrow-left_black{
   background-image: url('@public/assets/icons/ArrowLeft.svg');
 }
+
+.icon-checks{
+  background-image: url('@public/assets/icons/Checks.svg');
+}
+
+.icon-user-blue{
+  background-image: url('@public/assets/icons/UserBlue.svg');
+}
+
+.icon-map-pin-line_blue{
+  background-image: url('@public/assets/icons/MapPinLineBlue.svg');
+}
+
+.icon-map-trifold_blue{
+  background-image: url('@public/assets/icons/MapTrifoldBlue.svg');
+}
+
+.icon-check-circle_green{
+  background-image: url('@public/assets/icons/CheckCircleGreen.svg');
+}
+
+.icon-notepad-blue{
+  background-image: url('@public/assets/icons/NotepadBlue.svg');
+}
+
+.icon24.more:before {
+    background-position: -168px -48px;
+}
+
+.icon-checkout-circle{
+  background-image: url('@public/assets/icons/checkout-circle.svg');
+}
+
+.icon-stack-orange{
+  background-image: url('@public/assets/icons/StackOrange.svg');
+}
+
+.icon-stack-white{
+  background-image: url('@public/assets/icons/StackWhite.svg');
+}
