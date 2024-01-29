@@ -190,14 +190,17 @@ span.icon24 {
 }
 
 .icon-simple_cart {
+  background-position: center;
   background-image: url('@public/assets/icons/ShoppingCartSimple.svg');
 }
 
 .icon-simple_cart-black {
+  background-position: center;
   background-image: url('@public/assets/icons/ShoppingCartSimpleBlack.svg');
 }
 
 .icon-compare {
+  background-position: center;
   background-image: url('@public/assets/icons/ArrowsCounterClockwise.svg');
 }
 
@@ -206,10 +209,12 @@ span.icon24 {
 }
 
 .icon-arrow-right_orange {
+  background-position: center;
   background-image: url('@public/assets/icons/ArrowRightOrange.svg');
 }
 
 .icon-arrow-right_white {
+  background-position: center;
   background-image: url('@public/assets/icons/ArrowRightWhite.svg');
 }
 
@@ -326,4 +331,8 @@ span.icon24 {
 
 .icon-stack-white{
   background-image: url('@public/assets/icons/StackWhite.svg');
+}
+
+.icon-close-cricle{
+  background-image: url('@public/assets/icons/close_cricle.svg');
 }

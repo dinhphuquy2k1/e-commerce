@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'home',
         components: {
             header: () => import('@/views/user/components/Header.vue'),
-            content: () => import('@/views/user/components/Checkout.vue'),
+            content: () => import('@/views/user/components/WishList.vue'),
             footer: () => import('@/views/user/components/Footer.vue'),
         },
         children: [
