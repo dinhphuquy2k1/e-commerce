@@ -18,6 +18,7 @@
   min-width: 24px;
   min-height: 24px;
   position: relative;
+  background-position: center;
 }
 
 .icon-error-text {
@@ -44,8 +45,10 @@ span.icon24 {
   position: absolute;
   height: 20px;
   width: 18px;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-position: center;
 }
 
 .icon24.ic-change-password:before {
@@ -76,7 +79,6 @@ span.icon24 {
 .icon24:before {
   height: 24px;
   width: 24px;
-  margin-right: 12px !important;
 }
 
 .icon24.ic-setting-profile:before {
@@ -145,8 +147,6 @@ span.icon24 {
   background: transparent url('@public/assets/images/Sprites.64af8f61.svg') no-repeat;
   height: 24px;
   width: 24px;
-  top: 0;
-  left: 0;
 }
 
 .icon24.add-white:before {
@@ -236,7 +236,8 @@ span.icon24 {
 .icon-w20 {
   width: 20px;
   height: 20px;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
@@ -285,54 +286,73 @@ span.icon24 {
   background-image: url('@public/assets/icons/Google.png');
 }
 
-.icon-apple{
+.icon-apple {
   background-image: url('@public/assets/icons/Apple.svg');
 }
 
-.icon-arrow-left_black{
+.icon-arrow-left_black {
   background-image: url('@public/assets/icons/ArrowLeft.svg');
 }
 
-.icon-checks{
+.icon-checks {
   background-image: url('@public/assets/icons/Checks.svg');
 }
 
-.icon-user-blue{
+.icon-user-blue {
   background-image: url('@public/assets/icons/UserBlue.svg');
 }
 
-.icon-map-pin-line_blue{
+.icon-map-pin-line_blue {
   background-image: url('@public/assets/icons/MapPinLineBlue.svg');
 }
 
-.icon-map-trifold_blue{
+.icon-map-trifold_blue {
   background-image: url('@public/assets/icons/MapTrifoldBlue.svg');
 }
 
-.icon-check-circle_green{
+.icon-check-circle_green {
   background-image: url('@public/assets/icons/CheckCircleGreen.svg');
 }
 
-.icon-notepad-blue{
+.icon-notepad-blue {
   background-image: url('@public/assets/icons/NotepadBlue.svg');
 }
 
 .icon24.more:before {
-    background-position: -168px -48px;
+  background-position: -168px -48px;
 }
 
-.icon-checkout-circle{
+.icon-checkout-circle {
   background-image: url('@public/assets/icons/checkout-circle.svg');
 }
 
-.icon-stack-orange{
+.icon-stack-orange {
   background-image: url('@public/assets/icons/StackOrange.svg');
 }
 
-.icon-stack-white{
+.icon-stack-white {
   background-image: url('@public/assets/icons/StackWhite.svg');
 }
 
-.icon-close-cricle{
+.icon-close-cricle {
   background-image: url('@public/assets/icons/close_cricle.svg');
+}
+
+.icon24.icon-setting {
+  &:before {
+    background-position: -264px -168px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.icon24.icon-notify {
+  &:before {
+    background-position: -24px -48px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 }

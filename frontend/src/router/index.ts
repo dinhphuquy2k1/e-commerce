@@ -5,13 +5,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'home',
         components: {
-            header: () => import('@/views/user/components/Header.vue'),
-            content: () => import('@/views/user/components/WishList.vue'),
-            footer: () => import('@/views/user/components/Footer.vue'),
+            home: () => import('@/views/user/HomeView.vue'),
         },
         children: [
             {
-                path: '/',
+                path: '',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
                     menu: () => import('@/views/user/components/MenuSetting.vue'),
@@ -26,6 +24,31 @@ const routes: Array<RouteRecordRaw> = [
                     menu: () => import('@/views/user/components/MenuSetting.vue'),
                     content: () => import('@/views/user/components/OrderHistory.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
+                },
+            },
+        ],
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        components: {
+            home: () => import('@/views/admin/HomeView.vue'),
+        },
+        children: [
+            {
+                path: '',
+                components: {
+                    header: () => import('@/views/admin/components/Header.vue'),
+                    content: () => import('@/views/admin/components/ProductList.vue'),
+                    navbar: () => import('@/views/admin/components/NavBar.vue'),
+                },
+            },
+            {
+                path: 'setting',
+                components: {
+                    header: () => import('@/views/admin/components/Header.vue'),
+                    content: () => import('@/views/admin/components/ProductList.vue'),
+                    navbar: () => import('@/views/admin/components/NavBar.vue'),
                 },
             },
         ],

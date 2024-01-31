@@ -176,6 +176,10 @@ export default {
         text-transform: uppercase;
       }
 
+      .p-datatable .p-datatable-tbody > tr > td{
+        padding: 16px;
+      }
+
       .ms-price-group {
         .ms-price-origin {
           color: var(--Gray-400);

@@ -203,7 +203,7 @@ body {
 }
 
 .p-tooltip-arrow {
-  left: 47% !important;
+  left: 50% !important;
 }
 
 .p-tooltip-text {
@@ -217,6 +217,11 @@ body {
   min-width: 40px;
   text-align: center;
   display: block;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
 }
 
 .p-tag.hot {
@@ -400,4 +405,35 @@ body {
   padding-left: 6px;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex1 {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cdd3d6;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
 
