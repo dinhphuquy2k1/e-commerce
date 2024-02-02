@@ -202,24 +202,19 @@ body {
   height: 40px;
 }
 
-.p-tooltip-arrow {
-  left: 50% !important;
-}
-
 .p-tooltip-text {
   background: #182d4b !important;
   color: #fff !important;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 100;
-  font-family: GoogleSans !important;
   padding: 6px !important;
   min-width: 40px;
   text-align: center;
   display: block;
 }
 
-a{
+a {
   text-decoration: none;
   color: #000;
 }
@@ -291,6 +286,11 @@ a{
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
+}
+
+ol, ul, dl{
+  margin: unset;
+  padding: unset;
 }
 
 .truncate-text-3 {
@@ -406,34 +406,47 @@ a{
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
 .flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+}
+
+nav a {
+  font-weight: unset !important;
 }
 
 .flex1 {
-    flex: 1;
-    min-height: 0;
-    min-width: 0;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cdd3d6;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
+  background: #cdd3d6;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #fff;
+  background: #fff;
 }
 
+.p-dropdown .p-dropdown-label.p-placeholder {
+  color: #6b7280 !important;
+}
+
+.ms-error-text {
+  margin-top: 6px;
+  text-align: left;
+  color: #e61d1d;
+}

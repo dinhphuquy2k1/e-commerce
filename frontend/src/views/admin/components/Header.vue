@@ -56,8 +56,10 @@ export default {
 <style lang="scss">
 .ma-header-wrapper {
   height: 56px;
+  min-height: 56px;
   background: #fff;
   width: 100%;
+  box-shadow: inset 0 1.5px 2px 0 rgba(0, 0, 0, .1);
 
   .ma-header-container {
     .left-side {

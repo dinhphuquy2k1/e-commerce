@@ -3,7 +3,7 @@
     <router-view name="header"></router-view>
     <div class="d-flex ma-main flex-grow-1">
       <router-view name="navbar"></router-view>
-      <div class="ma-content d-flex">
+      <div class="ma-content d-flex overflow-auto">
         <router-view name="content"></router-view>
       </div>
     </div>
@@ -30,7 +30,7 @@ export default {
     overflow: auto;
 
     .ma-content {
-      padding: 16px;
+      padding: 24px;
       transition: padding .2s;
       width: 100%;
       height: 100%;
@@ -40,6 +40,27 @@ export default {
         font-size: 20px;
         font-weight: 700;
         line-height: 35px;
+      }
+
+      .group-form_list{
+        gap: 16px;
+      }
+
+      .group-form_box {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          color: var(--Gray-900);
+          text-align: left;
+          margin-bottom: 10px;
+        }
+
+        .description{
+          text-align: left;
+          color: rgba(0,0,0,.55);
+          margin-bottom: 10px;
+        }
       }
 
       .form-list {

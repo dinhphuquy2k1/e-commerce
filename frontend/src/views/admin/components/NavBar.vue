@@ -1,5 +1,5 @@
 <template>
-  <div class="ma-navbar position-relative d-flex flex-column justify-content-between"
+  <nav class="ma-navbar position-relative d-flex flex-column justify-content-between"
        :class="{'collapsed': isCollapsed}">
     <div class="left-container flex-grow-1">
       <PanelMenu :model="items" multiple>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-  </div>
+  </nav>
 </template>
 
 <script>
