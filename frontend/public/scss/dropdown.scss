@@ -113,8 +113,13 @@
   padding: 0 8px;
   margin: 0 8px 0 8px;
 
-  &.p-focus{
+  &.p-focus {
     background: #fff;
+  }
+
+  &.p-highlight {
+    background: #dfebff;
+    color: #000;
   }
 
   &:hover {

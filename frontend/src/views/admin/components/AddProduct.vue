@@ -194,9 +194,11 @@
                   Tỷ lệ khung hình video phải từ 9:16 đến 16:9. Kích thước tập tin tối đa: 100 MB.
                 </div>
                 <div class="col-6 ma-item-video">
-                  <div></div>
+                  <div class="icon">
+                     <Image :src="require('@public/assets/icons/video.svg')" alt="Image"/>
+                  </div>
                   <div class="title">
-                    Chính diện
+                    Video
                   </div>
                 </div>
                 <div class="ms-error-text"></div>
@@ -485,6 +487,10 @@ export default {
     align-items: center;
     border-radius: 4px;
     border: 1px dashed rgba(0, 0, 0, .14);
+
+    .icon{
+      margin-bottom: 8px;
+    }
 
     &:hover {
       cursor: pointer;
