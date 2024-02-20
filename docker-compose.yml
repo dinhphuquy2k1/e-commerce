@@ -38,6 +38,19 @@ services:
       - django-static:/usr/src/app/static
     networks:
       - django-nginx
+  db:
+    image: mysql:8.0
+    container_name: database
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'ecommerce'
+      MYSQL_USER: 'ecommerce'
+      MYSQL_PASSWORD: '1181080029'
+      MYSQL_ROOT_PASSWORD: '1181080029'
+    ports:
+      - "5107:3306"
+    networks:
+      - backend
 
 volumes:
   django-static:
@@ -45,3 +58,6 @@ volumes:
 networks:
   django-nginx:
     driver: bridge
+  backend:
+    driver: bridge
+    name: backend
