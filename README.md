@@ -16,7 +16,7 @@
     git clone git@github.com:dinhphuquy2k1/e-commerce.git
     ```
 
-4. backendを起動
+4. backend
  
     intel mac
 
@@ -28,6 +28,16 @@
     ```sh
     docker-compose -f docker-compose-arm.yml up
     ```
+   
+   library django
+   ``` sh
+   pip freeze > requirements.txt
+   ```
+
+   active virtual environment 
+   ``` sh
+   source env/bin/activate
+   ```
 
 5. Open web page locally
 
@@ -35,4 +45,3 @@
     
     http://localhost:30001/
 
-## mysql接続情報
