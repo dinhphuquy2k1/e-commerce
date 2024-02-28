@@ -1,7 +1,7 @@
 1. Download Docker Desktop
-
-    https://www.docker.com/products/docker-desktop/
-    
+   ```sh
+   https://www.docker.com/products/docker-desktop/
+    ```
 2. Download nvm
 
     ```sh
@@ -17,31 +17,36 @@
     ```
 
 4. backend
- 
-    intel mac
+
+   intel mac
 
     ``` sh
     docker-compose up
     ```
 
-    apple silicon mac
+   apple silicon mac
     ```sh
     docker-compose -f docker-compose-arm.yml up
     ```
-   
+
    library django
    ``` sh
    pip freeze > requirements.txt
    ```
 
-   active virtual environment 
+   active virtual environment
    ``` sh
    source env/bin/activate
    ```
 
 5. Open web page locally
 
-    http://localhost:8080/
-    
-    http://localhost:30001/
+   http://localhost:8080/
 
+   http://localhost:30001/
+
+## database and sql
+
+   ``` sh
+   sudo docker exec db sh /docker-entrypoint-initdb/update_sql.sh
+   ```

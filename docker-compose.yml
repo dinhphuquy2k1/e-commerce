@@ -54,6 +54,7 @@ services:
       MYSQL_ROOT_HOST: '%'
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d
     ports:
       - "5107:3306"
     networks:
