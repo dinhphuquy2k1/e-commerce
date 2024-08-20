@@ -1,0 +1,32 @@
+$padding-base: 300px;
+$input-select-height: 36px;
+$navbar-width: 220px;
+:root {
+  --Primary-600: #DE732D;
+  --Primary-500: #FA8232;
+  --Primary-200: #FFCEAD;
+  --Primary-100: #FFE7D6;
+  --Gray-00: #FFF;
+  --Gray-50: #F2F4F5;
+  --Gray-100: #E4E7E9;
+  --Gray-200: #C9CFD2;
+  --Gray-400: #929FA5;
+  --Gray-600: #5F6C72;
+  --Gray-700: #475156;
+  --Gray-900: #191C1F;
+  --Secondary-50: #EAF6FE;
+  --Secondary-500: #2DA5F3;
+  --Success-50: #EAF7E9;
+  --Success-100: #D5F0D3;
+  --Success-500: #2DB224;
+  --Warning-50: #FDFAE7;
+  --Warning-200: #F7E99E;
+  --theme-arco-color-text-1: rgba(0, 0, 0, .92);
+  --theme-arco-color-text-2: rgba(0, 0, 0, .65);
+  --theme-arco-color-text-3: rgba(0, 0, 0, .55);
+  --theme-arco-primary-6: rgba(0, 153, 149);
+  --theme-arco-color-bg-bg1: #f0f0f0;
+  --theme-arco-color-bg-white: #fff;
+  --primary: #fff;
+  --gray: #fbfbfe;
+}

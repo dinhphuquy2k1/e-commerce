@@ -1,0 +1,9 @@
+.p-dialog {
+  border-radius: 4px !important;
+}
+
+.p-dialog-header-icon {
+  &:focus {
+    box-shadow: unset;
+  }
+}

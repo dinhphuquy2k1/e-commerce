@@ -1,0 +1,248 @@
+.ms-btn {
+  min-height: 36px;
+  height: 40px;
+  min-width: 80px;
+  border: none;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 4px;
+  white-space: nowrap;
+  align-items: center;
+  justify-items: center;
+
+  &:disabled {
+    opacity: .56;
+  }
+
+  &.p-selectbutton {
+    &.ms-selectbutton_roles {
+      display: flex;
+      gap: 16px;
+
+      .p-button {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .05);
+        padding: 8px 16px;
+        color: #000;
+
+        &:focus {
+          box-shadow: unset;
+        }
+
+        &:hover {
+          background-color: rgba(0, 0, 0, .08);
+        }
+
+        &.p-highlight {
+          border-color: #2979ff;
+          color: #2979ff;
+          background: transparent;
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .p-button {
+      height: 36px;
+
+      .p-button-label {
+        font-weight: 500;
+      }
+    }
+
+  }
+
+  .text {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0 16px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &.custom-btn {
+    border: unset;
+    color: #000;
+    background: white;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:hover {
+      background: #e0e0e0;
+    }
+  }
+
+  &.border-primary {
+    font-weight: 500;
+    color: #2979ff;
+    background: transparent;
+    min-height: 0 !important;
+    max-height: 20px;
+
+    &:hover {
+      color: #1a73e8 !important;
+      text-decoration: underline;
+    }
+  }
+
+  &.primary-outline {
+    color: #2979ff;
+    background: #fff;
+    border: 1px solid #2979ff;
+
+    &:not(:disabled):hover {
+      background: #eef4ff;
+    }
+  }
+
+  &.primary {
+    color: #fff;
+    background: #127FFF;
+
+    &:not(:disabled):hover {
+      background: #1a73e8;
+    }
+  }
+
+  &.btn-secondary {
+    border: 1px solid #e0e0e0;
+    color: #000;
+    background: #fff;
+
+    &:not(:disabled):hover {
+      background: #f4f5f8;
+    }
+  }
+
+  &.orange {
+    background: #FA8232;
+    color: #fff;
+
+    &:hover {
+      background: var(--Primary-600, #DE732D);
+
+    }
+  }
+
+  &.btn-image {
+    background: white;
+    color: #000;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 106px;
+    width: 106px;
+    gap: 0 !important;
+    border: 1px dashed rgba(0, 0, 0, .14);
+
+    &:hover {
+      border-color: #2979ff;
+    }
+  }
+
+  &.light-pink {
+    background: #FFE7D6;
+  }
+
+  &.white {
+    background: #fff;
+  }
+
+  &.secondary {
+    background-color: rgba(0, 0, 0, .05);
+    color: #000;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
+  }
+
+  &.btn-transparent {
+    background-color: transparent;
+    color: rgba(0, 0, 0, .55);
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
+  }
+
+  &.icon-only {
+    min-width: 40px;
+  }
+
+  .icon-only {
+    width: 24px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    height: 24px;
+  }
+
+  &.border-orange {
+    border-radius: 3px;
+    border: 2px solid var(--Primary-500, #FA8232);
+    background: #fff;
+    color: var(--Primary-500, #FA8232);
+
+    &:hover {
+      color: #fff;
+      background: #FA8232;
+    }
+  }
+
+  &.border-orange_white {
+    border-radius: 3px;
+    border: 2px solid var(--Primary-100);
+    background: #fff;
+    color: var(--Primary-500, #FA8232);
+
+    &:hover {
+      color: #fff;
+      background: #FA8232;
+    }
+  }
+
+  &.ms-spit-button_group {
+    position: relative;
+    display: flex;
+    padding-right: 30px;
+
+    .p-splitbutton-defaultbutton {
+      background: transparent;
+      border: unset;
+
+      &:focus {
+        box-shadow: unset;
+      }
+    }
+
+    .p-splitbutton-menubutton {
+      position: absolute;
+      width: 100%;
+      border: unset;
+      background: transparent;
+
+      &:focus {
+        box-shadow: unset;
+      }
+
+      .p-icon.p-button-icon {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}
