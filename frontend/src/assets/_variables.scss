@@ -2,7 +2,7 @@ $input-select-height: 36px;
 $navbar-width: 220px;
 
 :root {
-  --padding-base: 50px;
+  --padding-base: 300px;
   --Primary-600: #DE732D;
   --Primary-500: #FA8232;
   --Primary-200: #FFCEAD;
@@ -17,6 +17,7 @@ $navbar-width: 220px;
   --Gray-900: #191C1F;
   --Secondary-50: #EAF6FE;
   --Secondary-500: #2DA5F3;
+  --Secondary-700: #1B6392;
   --Success-50: #EAF7E9;
   --Success-100: #D5F0D3;
   --Success-500: #2DB224;
@@ -30,6 +31,18 @@ $navbar-width: 220px;
   --theme-arco-color-bg-white: #fff;
   --primary: #fff;
   --gray: #fbfbfe;
+}
+
+@media (max-width: 1400px) {
+  :root {
+    --padding-base: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --padding-base: 100px;
+  }
 }
 
 @media (max-width: 768px) {
