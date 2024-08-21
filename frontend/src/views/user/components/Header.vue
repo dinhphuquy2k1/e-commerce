@@ -21,7 +21,7 @@
         <div class="title">Noble</div>
       </div>
       <div class="m-search_form flex-row d-flex flex-grow-1 align-items-center">
-        <InputText type="search" v-model="value" class="ms-input_search" :placeholder="$t('search_prompt')"/>
+        <InputText type="search" v-model="textSearch" class="ms-input_search" :placeholder="$t('search_prompt')"/>
         <div class="icon24 icon search-right search"></div>
       </div>
       <div class="m-header_actions d-flex">
@@ -80,6 +80,7 @@ export default {
   data() {
     return {
       selectedCity: null,
+      textSearch: null,
       cities: [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},

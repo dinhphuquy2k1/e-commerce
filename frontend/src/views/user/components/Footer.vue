@@ -1,129 +1,176 @@
 <template>
   <footer class="ms-footer d-flex flex-column justify-content-between">
-    <div class="flex-grow-1 ms-footer_content">
-      <div class="row">
-        <div class="ms-footer_item col-lg col-md-4 col-6">
-          <div class="ms-footer_logo-container d-flex align-items-center gap-2">
-            <div class="logo"></div>
-            <div class="title"></div>
-          </div>
-          <div class="text-start text-wrap mt-3">
-            <span class="fw-semibold ms-footer_label">Hỗ trợ khách hàng:</span>
-            <br>
-            (629) 555-0129
-            <br>
-            <br>
-            <span class="ms-footer_label mt-3">Thành Phố Hà Nội</span>
-            <br>
-            <br>
-            support@ecommerce.com
-          </div>
-          <div class="social-container mt-3 d-flex">
-            <div class="facebook me-2">
-              <div class="icon"></div>
+    <div class="ms-footer-desktop">
+      <div class="flex-grow-1 ms-footer_content">
+        <div class="row">
+          <div class="ms-footer_item col-lg col-md-4 col-6">
+            <div class="ms-footer_logo-container d-flex align-items-center gap-2">
+              <div class="logo"></div>
+              <div class="title"></div>
             </div>
-            <div class="twitter me-2">
-              <div class="icon"></div>
+            <div class="text-start text-wrap mt-3">
+              <span class="fw-semibold ms-footer_label">Hỗ trợ khách hàng:</span>
+              <br>
+              (629) 555-0129
+              <br>
+              <br>
+              <span class="ms-footer_label mt-3">Thành Phố Hà Nội</span>
+              <br>
+              <br>
+              support@ecommerce.com
             </div>
-            <div class="linkedin me-2">
-              <div class="icon"></div>
-            </div>
-            <div class="instagram me-2">
-              <div class="icon"></div>
-            </div>
-            <div class="youtube me-2">
-              <div class="icon"></div>
-            </div>
-          </div>
-        </div>
-        <div class="ms-footer_item col-lg col-md-4 col-6">
-          <div class="title text-start ps-3 fw-semibold mb-2">Danh mục hàng đầu</div>
-          <ul class="nav flex-column text-start">
-            <li class="nav-item">
-              Laptop
-            </li>
-            <li class="nav-item">
-              Điện thoại
-            </li>
-            <li class="nav-item">
-              Tai nghe
-            </li>
-            <li class="nav-item nav-item_type">
-              <div class="line"></div>
-              Phụ kiện
-            </li>
-            <li class="nav-item">
-              Camera
-            </li>
-            <li class="nav-item">
-              Sạc
-            </li>
-          </ul>
-        </div>
-        <div class="ms-footer_item col-lg col-md-4 col-6">
-          <div class="title text-start ps-3 fw-semibold mb-2">Danh mục liên kết</div>
-          <ul class="nav flex-column text-start">
-            <li class="nav-item">
-              Laptop
-            </li>
-            <li class="nav-item">
-              Điện thoại
-            </li>
-            <li class="nav-item">
-              Tai nghe
-            </li>
-            <li class="nav-item">
-              Camera
-            </li>
-            <li class="nav-item">
-              Sạc
-            </li>
-          </ul>
-        </div>
-        <div class="ms-footer_item col-lg col-md-4 col-6">
-          <div class="title text-start fw-semibold mb-2">Tải xuống</div>
-          <ul class="nav flex-column text-start gap-3">
-            <li class="nav-item download">
-              <div class="icon icon-gg_play"></div>
-              <div class="d-flex flex-column">
-                <span>Get it now</span>
-                <span>Google Play</span>
+            <div class="social-container mt-3 d-flex">
+              <div class="facebook me-2">
+                <div class="icon"></div>
               </div>
-            </li>
-            <li class="nav-item download">
-              <div class="icon icon-app_store"></div>
-              <div class="d-flex flex-column">
-                <span>Get it now</span>
-                <span>Google Play</span>
+              <div class="twitter me-2">
+                <div class="icon"></div>
               </div>
-            </li>
-          </ul>
-        </div>
-        <div class="ms-footer_item col-lg col-md-4 col-6 ms-popular_list">
-          <div class="title text-start fw-semibold mb-2">Thẻ phổ biến</div>
-          <div class="d-flex flex-wrap gap-2 ms-popular_list">
-            <div class="item-popular">Game</div>
-            <div class="item-popular">iPhone</div>
-            <div class="item-popular">TV</div>
-            <div class="item-popular">Asus Laptops</div>
-            <div class="item-popular">Macbook</div>
-            <div class="item-popular">SSD</div>
-            <div class="item-popular">Graphics Card</div>
-            <div class="item-popular">Power Bank</div>
-            <div class="item-popular">Smart TV</div>
-            <div class="item-popular">Speaker</div>
-            <div class="item-popular">Tablet</div>
-            <div class="item-popular">Microwave</div>
-            <div class="item-popular">Samsung</div>
+              <div class="linkedin me-2">
+                <div class="icon"></div>
+              </div>
+              <div class="instagram me-2">
+                <div class="icon"></div>
+              </div>
+              <div class="youtube me-2">
+                <div class="icon"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ms-footer_item col-lg col-md-4 col-6">
+            <div class="title text-start ps-3 fw-semibold mb-2">Danh mục hàng đầu</div>
+            <ul class="nav flex-column text-start">
+              <li class="nav-item">
+                Laptop
+              </li>
+              <li class="nav-item">
+                Điện thoại
+              </li>
+              <li class="nav-item">
+                Tai nghe
+              </li>
+              <li class="nav-item nav-item_type">
+                <div class="line"></div>
+                Phụ kiện
+              </li>
+              <li class="nav-item">
+                Camera
+              </li>
+              <li class="nav-item">
+                Sạc
+              </li>
+            </ul>
+          </div>
+          <div class="ms-footer_item col-lg col-md-4 col-6">
+            <div class="title text-start ps-3 fw-semibold mb-2">Danh mục liên kết</div>
+            <ul class="nav flex-column text-start">
+              <li class="nav-item">
+                Laptop
+              </li>
+              <li class="nav-item">
+                Điện thoại
+              </li>
+              <li class="nav-item">
+                Tai nghe
+              </li>
+              <li class="nav-item">
+                Camera
+              </li>
+              <li class="nav-item">
+                Sạc
+              </li>
+            </ul>
+          </div>
+          <div class="ms-footer_item col-lg col-md-4 col-6">
+            <div class="title text-start fw-semibold mb-2">Tải xuống</div>
+            <ul class="nav flex-column text-start gap-3">
+              <li class="nav-item download">
+                <div class="icon icon-gg_play"></div>
+                <div class="d-flex flex-column">
+                  <span>Get it now</span>
+                  <span>Google Play</span>
+                </div>
+              </li>
+              <li class="nav-item download">
+                <div class="icon icon-app_store"></div>
+                <div class="d-flex flex-column">
+                  <span>Get it now</span>
+                  <span>Google Play</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="ms-footer_item col-lg col-md-4 col-6 ms-popular_list">
+            <div class="title text-start fw-semibold mb-2">Thẻ phổ biến</div>
+            <div class="d-flex flex-wrap gap-2 ms-popular_list">
+              <div class="item-popular">Game</div>
+              <div class="item-popular">iPhone</div>
+              <div class="item-popular">TV</div>
+              <div class="item-popular">Asus Laptops</div>
+              <div class="item-popular">Macbook</div>
+              <div class="item-popular">SSD</div>
+              <div class="item-popular">Graphics Card</div>
+              <div class="item-popular">Power Bank</div>
+              <div class="item-popular">Smart TV</div>
+              <div class="item-popular">Speaker</div>
+              <div class="item-popular">Tablet</div>
+              <div class="item-popular">Microwave</div>
+              <div class="item-popular">Samsung</div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="ms-footer_copyright">
+        PhuQuy - eCommerce Template © 2023. Design by Templatecookie
+      </div>
     </div>
-    <div class="ms-footer_copyright">
-      PhuQuy - eCommerce Template © 2023. Design by Templatecookie
+    <div class="ms-footer-mobile d-flex align-items-center justify-content-between">
+      <router-link :to="{name: item.route}" class="icon-w32 icon" :class="[item.icon, {[`${item.icon}-primary`]: isHovered[index] || activeItemMobile === item}]"
+                   v-for="(item, index) in menuMobiles" @mouseover="isHovered[index] = true"
+                   @click="activeItemMobile = item"
+                   @mouseleave="isHovered[index] = false">
+      </router-link>
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isHovered: {},
+      activeItemMobile: {},
+      menuMobiles: [
+        {
+          icon: 'icon-fluent_home',
+          title: '',
+          route: 'home',
+        },
+        {
+          icon: 'icon-cil-search',
+          title: '',
+          route: 'user_setting',
+        },
+        {
+          icon: 'icon-heart',
+          title: '',
+          route: 'user_setting',
+        },
+        {
+          icon: 'icon-bag',
+          title: '',
+          route: 'user_setting',
+        },
+        {
+          icon: 'icon-profile-avatar',
+          title: '',
+          route: 'user_setting',
+        }
+      ]
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 $padding: 72px;
@@ -309,5 +356,32 @@ $padding: 72px;
       background-image: url('@public/assets/images/download_google_play.svg');
     }
   }
+
+  .ms-footer-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ms-footer {
+    min-height: 65px;
+    position: sticky;
+    background: #ffffff;
+    bottom: 0;
+    z-index: 100;
+
+    .ms-footer-desktop {
+      display: none;
+    }
+
+    .ms-footer-mobile {
+      display: flex !important;
+      padding-left: 30px;
+      padding-right: 30px;
+      flex: 1;
+    }
+  }
 }
 </style>
+<script setup lang="ts">
+</script>

@@ -242,6 +242,11 @@ span.icon24 {
   }
 }
 
+.icon-w32 {
+  width: 30px;
+  height: 30px;
+}
+
 .icon-w40{
   width: 40px;
   height: 40px;
@@ -261,6 +266,46 @@ span.icon24 {
 
 .icon-home {
   background-image: url('@public/assets/icons/House.svg');
+}
+
+.icon-bag {
+  background-image: url('@public/assets/icons/bi_bag.svg');
+}
+
+.icon-bag-primary {
+  background-image: url('@public/assets/icons/bi_bag_primary.svg');
+}
+
+.icon-heart {
+  background-image: url('@public/assets/icons/heart.svg');
+}
+
+.icon-heart-primary {
+  background-image: url('@public/assets/icons/heart_primary.svg');
+}
+
+.icon-profile-avatar {
+  background-image: url('@public/assets/icons/profile_avatar.svg');
+}
+
+.icon-profile-avatar-primary {
+  background-image: url('@public/assets/icons/profile_avatar_primary.svg');
+}
+
+.icon-cil-search {
+  background-image: url('@public/assets/icons/cil_search.svg');
+}
+
+.icon-cil-search-primary {
+  background-image: url('@public/assets/icons/cil_search_primary.svg');
+}
+
+.icon-fluent_home {
+  background-image: url('@public/assets/icons/fluent_home-32-regular.svg');
+}
+
+.icon-fluent_home-primary {
+  background-image: url('@public/assets/icons/fluent_home-32-primary.svg');
 }
 
 .icon-home_orange {

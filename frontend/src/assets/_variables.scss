@@ -2,7 +2,7 @@ $input-select-height: 36px;
 $navbar-width: 220px;
 
 :root {
-  --padding-base: 300px;
+  --padding-base: 200px;
   --Primary-600: #DE732D;
   --Primary-500: #FA8232;
   --Primary-200: #FFCEAD;
@@ -35,7 +35,7 @@ $navbar-width: 220px;
 
 @media (max-width: 1400px) {
   :root {
-    --padding-base: 200px;
+    --padding-base: 150px;
   }
 }
 

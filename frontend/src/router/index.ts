@@ -3,13 +3,13 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'home',
         components: {
             home: () => import('@/views/user/HomeView.vue'),
         },
         children: [
             {
                 path: '',
+                name: 'home',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
                     content: () => import('@/views/user/components/Home.vue'),
@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
                     content: () => import('@/views/user/components/OrderHistory.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
+                name: 'user_setting'
             },
         ],
     },
