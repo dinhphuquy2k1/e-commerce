@@ -145,7 +145,7 @@ $padding: 72px;
   }
 
   .ms-footer_content {
-    padding: $padding $padding-base;
+    padding: $padding var(--padding-base);
   }
 
   .ms-footer_item {

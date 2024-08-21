@@ -144,7 +144,7 @@ export default {
 <style lang="scss" scoped>
 $padding-top-bottom: 72px;
 .ms-top_offer-wrapper {
-  padding: 0 $padding-base 0 $padding-base;
+  padding: 0 var(--padding-base) 0 var(--padding-base);
   .ms-top_offer-container {
     padding: $padding-top-bottom 0 $padding-top-bottom 0;
 

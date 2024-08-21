@@ -396,7 +396,7 @@ export default {
 
 <style lang="scss">
 .ms-product-detail_container {
-  padding: 0 $padding-base;
+  padding: 0 var(--padding-base);
 
   .ms-product-information_container {
     .ms-product-information-tab-view {

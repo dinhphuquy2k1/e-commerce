@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss">
 .ms-settings_wrapper {
-  padding: 40px $padding-base;
+  padding: 40px var(--padding-base);
 
   .ms-settings_container {
     --bs-gutter-y: 72px;

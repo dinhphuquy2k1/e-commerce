@@ -121,7 +121,7 @@ export default {
 
 <style lang="scss">
 .ms-promotion-tile_wrapper {
-  padding: 0 $padding-base;
+  padding: 0 var(--padding-base);
 
   .ms-promotion-tile_container {
     padding: 72px 0;

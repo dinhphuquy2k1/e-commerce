@@ -126,7 +126,7 @@ export default {
 
 <style lang="scss" scoped>
 .ms-banner{
-  padding: 24px $padding-base 24px $padding-base;
+  padding: 24px var(--padding-base) 24px var(--padding-base);
     max-height: 520px;
     height: 520px;
     .ms-carousel{

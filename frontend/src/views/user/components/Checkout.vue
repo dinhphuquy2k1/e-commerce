@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss">
 .ms-checkout-wrapper {
-  padding: 0 $padding-base;
+  padding: 0 var(--padding-base);
 
   .ms-checkout-container {
     max-width: 500px;

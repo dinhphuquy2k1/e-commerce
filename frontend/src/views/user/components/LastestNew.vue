@@ -115,7 +115,7 @@ export default {
 <style lang="scss">
 .ms-lastes-new_wrapper {
   background: var(--Gray-50);
-  padding: 0 $padding-base 0 $padding-base;
+  padding: 0 var(--padding-base) 0 var(--padding-base);
 
   .p-carousel-prev, .p-carousel-next {
     visibility: hidden;

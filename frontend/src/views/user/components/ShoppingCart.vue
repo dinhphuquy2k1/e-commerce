@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss">
 .ms-shopping-cart_wrapper {
-  padding: 0 $padding-base;
+  padding: 0 var(--padding-base);
 
   .ms-shopping-cart_container {
     background: var(--Gray-00, #FFF);

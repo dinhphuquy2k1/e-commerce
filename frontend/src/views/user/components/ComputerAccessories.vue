@@ -220,7 +220,7 @@ export default {
 
 <style lang="scss">
 .ms-featured_product-wrapper{
-  padding: 0 $padding-base 0 $padding-base;
+  padding: 0 var(--padding-base) 0 var(--padding-base);
 }
 .ms-computer-main {
   padding-left: 0 !important;

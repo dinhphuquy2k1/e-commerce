@@ -153,7 +153,7 @@ export default {
 
 <style lang="scss">
 .ms-wish-list_wrapper {
-  padding: 72px $padding-base;
+  padding: 72px var(--padding-base);
 
   .ms-wish-list_container {
     border-radius: 4px;

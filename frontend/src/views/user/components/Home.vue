@@ -91,9 +91,9 @@ export default {
 <style lang="scss" scoped>
 .ms-home {
   .core-value_container {
-    padding: 0 $padding-base 0 $padding-base;
+    padding: 0 var(--padding-base) 0 var(--padding-base);
     .corevalue {
-      padding: 0 $padding-base 0 $padding-base;
+      padding: 0 var(--padding-base) 0 var(--padding-base);
       border-radius: 6px;
       border: 1px solid #E4E7E9;
       background: #FFF;

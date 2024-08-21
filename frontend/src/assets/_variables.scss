@@ -1,7 +1,8 @@
-$padding-base: 300px;
 $input-select-height: 36px;
 $navbar-width: 220px;
+
 :root {
+  --padding-base: 50px;
   --Primary-600: #DE732D;
   --Primary-500: #FA8232;
   --Primary-200: #FFCEAD;
@@ -29,4 +30,10 @@ $navbar-width: 220px;
   --theme-arco-color-bg-white: #fff;
   --primary: #fff;
   --gray: #fbfbfe;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --padding-base: 20px;
+  }
 }

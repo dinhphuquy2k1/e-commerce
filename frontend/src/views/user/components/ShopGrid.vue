@@ -340,7 +340,7 @@ export default {
 
 <style lang="scss">
 .ms-shop-grid_wrapper {
-  padding: 40px $padding-base;
+  padding: 40px var(--padding-base);
 
   .ms-shop-grid_container {
 

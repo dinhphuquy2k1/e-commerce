@@ -159,7 +159,7 @@ export default {
 
 <style lang="scss">
 .ms-store_categories-wrapper {
-  padding: 0 $padding-base 0 $padding-base;
+  padding: 0 var(--padding-base) 0 var(--padding-base);
 }
 
 .ms-store_categories {
