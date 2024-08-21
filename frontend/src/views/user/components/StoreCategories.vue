@@ -5,7 +5,7 @@
         Mua sắm với danh mục
       </div>
       <div class="ms-store_categories-main">
-        <Carousel :value="products" :numVisible="6" :numScroll="1" :responsiveOptions="responsiveOptions">
+        <Carousel :value="products" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular :autoplayInterval="3000">
           <template #item="slotProps">
             <div class="d-flex flex-column align-items-center justify-content-center store-category_item">
               <div>
@@ -133,24 +133,19 @@ export default {
       responsiveOptions: [
         {
           breakpoint: '1400px',
-          numVisible: 2,
+          numVisible: 4,
           numScroll: 1
         },
         {
-          breakpoint: '1199px',
+          breakpoint: '1200px',
           numVisible: 3,
           numScroll: 1
         },
         {
-          breakpoint: '767px',
+          breakpoint: '768px',
           numVisible: 2,
           numScroll: 1
         },
-        {
-          breakpoint: '575px',
-          numVisible: 1,
-          numScroll: 1
-        }
       ]
     };
   },
@@ -168,7 +163,7 @@ export default {
     text-align: center;
     font-size: 32px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 40px;
   }
 

@@ -2,14 +2,14 @@
   <div class="ms-lastes-new_wrapper">
     <div class="ms-lastes-new_container d-flex flex-column">
       <div class="ms-lastest-new_header">
-        Tin mới nhất
+        {{ $t('latest_news') }}
       </div>
       <div class="ms-lastest-new_main">
         <Carousel :value="news" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
           <template #item="slotProps">
             <div class="d-flex flex-column align-items-center justify-content-center store-category_item">
-              <div>
-                <Image :src="require('@public/assets/news/'+ slotProps.data.image)" alt="Image"/>
+              <div class="w-100">
+                <Image :src="require('@public/assets/news/'+ slotProps.data.image)" alt="Image" imageClass="w-100"/>
               </div>
               <div class="ms-facts mt-3 d-flex justify-content-start w-100">
                 <div class="ms-item">
@@ -110,21 +110,16 @@ export default {
       responsiveOptions: [
         {
           breakpoint: '1400px',
-          numVisible: 2,
-          numScroll: 1
-        },
-        {
-          breakpoint: '1199px',
           numVisible: 3,
           numScroll: 1
         },
         {
-          breakpoint: '767px',
+          breakpoint: '1200px',
           numVisible: 2,
           numScroll: 1
         },
         {
-          breakpoint: '575px',
+          breakpoint: '576px',
           numVisible: 1,
           numScroll: 1
         }
@@ -158,7 +153,7 @@ export default {
     text-align: center;
     font-size: 32px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     padding-bottom: 40px;
   }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="ms-promotion-tile_wrapper">
     <div class="ms-promotion-tile_container">
-      <div class="row gy-2 ms-box-wrapper">
-        <div class="col-xxl-3 col-xl-4 col-lg-6 ms-box-container">
+      <div class="row gy-4 ms-box-wrapper">
+        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -101,18 +101,6 @@ export default {
           inventoryStatus: 'LOWSTOCK',
           rating: 3
         },
-        {
-          id: '1003',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
       ],
     }
   }
@@ -135,7 +123,7 @@ export default {
         color: var(--Gray-900, #191C1F);
         font-size: 16px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       .ms-box-item {

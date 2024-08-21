@@ -3,42 +3,18 @@
     <div>
       <Banner></Banner>
     </div>
-    <div class="core-value_container">
-      <div class="corevalue d-flex flex-row flex-wrap align-items-center">
-        <div class="item d-flex">
-          <div class="icon package">
+    <div class="core-value_container container">
+      <div class="corevalue d-flex flex-row">
+        <div v-for="(item, index) in coreValues" class="d-flex flex-row flex-wrap flex-1">
+          <div class="item d-flex">
+            <div class="icon" :class="[item.icon]">
+            </div>
+            <div class="title d-flex flex-column justify-content-between">
+              <span class="content">{{item.title}}</span>
+              <strong class="description">{{item.description}}</strong>
+            </div>
           </div>
-          <div class="title d-flex flex-column align-items-start justify-content-between">
-            <span class="content">Giao hàng nhanh chóng</span>
-            <span class="description">Giao hàng trong 24/H</span>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="item d-flex">
-          <div class="icon trophy">
-          </div>
-          <div class="title d-flex flex-column align-items-start justify-content-between">
-            <span class="content">Hoàn trả trong 24h</span>
-            <span class="description">Đảm bảo hoàn tiền 100%</span>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="item d-flex">
-          <div class="icon credit-card">
-          </div>
-          <div class="title d-flex flex-column align-items-start justify-content-between">
-            <span class="content">Thanh toán an toàn</span>
-            <span class="description">Tiền của bạn được an toàn</span>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="item d-flex">
-          <div class="icon headphone">
-          </div>
-          <div class="title d-flex flex-column align-items-start justify-content-between">
-            <span class="content">Hỗ trợ 24/7</span>
-            <span class="description">Liên hệ / nhắn tin trực tuyến</span>
-          </div>
+          <div class="line" v-if="index !== coreValues.length- 1"></div>
         </div>
       </div>
     </div>
@@ -84,6 +60,32 @@ export default {
     LastestNew,
     FooterBanner,
     PromotionalTile
+  },
+  data() {
+    return {
+      coreValues: [
+        {
+          title: this.$t('fast_delivery'),
+          description: this.$t('delivery_in_24h'),
+          icon: 'package',
+        },
+        {
+          title: this.$t('return_policy'),
+          description: this.$t('easy'),
+          icon: 'trophy',
+        },
+        {
+          title: this.$t('secure_payment'),
+          description: this.$t('your_money_is_safe'),
+          icon: 'credit-card',
+        },
+        {
+          title: this.$t('support_24_7'),
+          description: this.$t('contact_online_chat'),
+          icon: 'headphone',
+        }
+      ]
+    }
   }
 }
 </script>
@@ -92,23 +94,23 @@ export default {
 .ms-home {
   .core-value_container {
     padding: 0 var(--padding-base) 0 var(--padding-base);
+
     .corevalue {
-      padding: 0 var(--padding-base) 0 var(--padding-base);
       border-radius: 6px;
       border: 1px solid #E4E7E9;
       background: #FFF;
+      display: flex;
       margin-top: 24px;
       padding: 16px;
-      gap: 14px;
 
       .item {
-        gap: 16px;
-        padding: 16px;
+        gap: 8px;
+        padding: 8px;
         flex: 1;
 
         .icon {
-          width: 40px;
-          height: 40px;
+          min-width: 40px;
+          min-height: 40px;
           background-repeat: no-repeat;
           background-color: transparent;
         }
@@ -131,14 +133,14 @@ export default {
 
         .title {
           .content {
+            font-size: 13px;
             font-style: normal;
             font-weight: 500;
           }
 
           .description {
-            font-style: normal;
-            font-weight: 400;
-            color: #5F6C72;
+            font-weight: 600;
+            font-size: 16px;
           }
         }
       }
