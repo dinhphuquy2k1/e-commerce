@@ -2,10 +2,10 @@
   <header class="m-header w-100 d-flex flex-column justify-content-between align-items-center">
     <div class="w-100 d-flex justify-content-between align-items-center ms-top_header">
       <div>
-        Welcome to NobleGoods online eCommerce store.
+        {{$t('welcome_message')}}
       </div>
       <div class="social-contact_container d-flex justify-content-between align-items-center">
-        <div class="pe-3">Theo dõi:</div>
+        <div class="pe-3">{{ $t('follow') }}:</div>
         <div class="social-contact_list d-flex gap-2">
           <div class="social-contact_item twitter"></div>
           <div class="social-contact_item facebook"></div>
@@ -44,19 +44,19 @@
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon map"></div>
           <div class="title">
-            Track Order
+            {{ $t('track_order') }}
           </div>
         </div>
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon compare"></div>
           <div class="title">
-            So sánh
+            {{$t('compare')}}
           </div>
         </div>
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon support"></div>
           <div class="title">
-            Hỗ trợ khách hàng
+            {{$t('customer_support')}}
           </div>
         </div>
       </div>

@@ -1,3 +1,8 @@
 {
-  "search_prompt": "Hôm nay bạn cần tìm gì?"
+  "welcome_message": "Welcome to NobleGoods online eCommerce store.",
+  "search_prompt": "Hôm nay bạn cần tìm gì?",
+  "customer_support": "Hỗ trợ khách hàng",
+  "compare": "So sánh",
+  "follow": "Theo dõi",
+  "track_order": "Theo dõi đơn hàng"
 }
