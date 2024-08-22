@@ -2,7 +2,7 @@
   <header class="m-header w-100 d-flex flex-column justify-content-between align-items-center">
     <div class="w-100 d-flex justify-content-between align-items-center ms-top_header">
       <div>
-        {{$t('welcome_message')}}
+        {{ $t('welcome_message') }}
       </div>
       <div class="social-contact_container d-flex justify-content-between align-items-center">
         <div class="pe-3">{{ $t('follow') }}:</div>
@@ -15,7 +15,9 @@
         </div>
       </div>
     </div>
-    <div class="w-100 d-flex justify-content-between align-items-center ms-middle_header">
+    <div class="w-100 d-flex justify-content-between gap-12 align-items-center ms-middle_header"
+         :class="{ 'fixed': isScrolled }">
+      <div class="icon-w32 icon-list_white pointer ms-header_list"></div>
       <div class="m-logo_container d-flex align-items-center">
         <div class="logo"></div>
         <div class="title">Noble</div>
@@ -25,7 +27,7 @@
         <div class="icon24 icon search-right search"></div>
       </div>
       <div class="m-header_actions d-flex">
-        <div class="d-flex cart pointer flex-column justify-content-center ms-4 me-4 item-action">
+        <div class="d-flex cart pointer flex-column justify-content-center me-4 item-action">
           <div class="icon"></div>
           <div class="title">2</div>
         </div>
@@ -50,19 +52,21 @@
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon compare"></div>
           <div class="title">
-            {{$t('compare')}}
+            {{ $t('compare') }}
           </div>
         </div>
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon support"></div>
           <div class="title">
-            {{$t('customer_support')}}
+            {{ $t('customer_support') }}
           </div>
         </div>
       </div>
-      <div class="call-now d-flex align-items-center gap-2">
-        <div class="icon"></div>
-        <div class="title">+1-202-555-0104</div>
+      <div class="right-side">
+        <div class="call-now d-flex align-items-center gap-2">
+          <div class="icon"></div>
+          <div class="title">+84-325-451-325</div>
+        </div>
       </div>
     </div>
   </header>
@@ -81,6 +85,7 @@ export default {
     return {
       selectedCity: null,
       textSearch: null,
+      isScrolled: false,
       cities: [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -90,6 +95,17 @@ export default {
       ]
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      this.isScrolled = window.scrollY > 50;
+    },
+  },
 }
 </script>
 
@@ -98,7 +114,7 @@ export default {
 $padding-header: 12px;
 .m-header {
   flex-shrink: 0;
-  background: #1B6392;
+  background: var(--Secondary-700);
 
   .ms-top_header {
     padding: $padding-header var(--padding-base) $padding-header var(--padding-base);
@@ -108,6 +124,10 @@ $padding-header: 12px;
 
   .ms-middle_header {
     padding: $padding-header var(--padding-base) $padding-header var(--padding-base);
+
+    .ms-header_list {
+      display: none;
+    }
   }
 
   .ms-bottom_header {
@@ -203,7 +223,7 @@ $padding-header: 12px;
   .m-logo_container {
     gap: 8px;
     flex-shrink: 0;
-    padding: 1px 23.786px 1px 0px;
+    padding: 1px 0 1px 0;
     height: 48px;
 
     .logo {
@@ -299,6 +319,53 @@ $padding-header: 12px;
       }
     }
 
+  }
+}
+
+@media (max-width: 1200px) {
+  .m-header {
+    .ms-bottom_header {
+      .right-side {
+        display: none !important;
+      }
+
+      .left-side {
+        flex: 1;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .m-header {
+    .ms-bottom_header {
+      display: none !important;
+    }
+
+    .ms-middle_header {
+
+      &.fixed {
+        position: fixed;
+        top: 0;
+        background: var(--Secondary-700);
+        z-index: 100000;
+      }
+
+      .m-search_form {
+        display: none !important;
+      }
+
+      .ms-header_list {
+        display: block;
+      }
+
+      .m-header_actions {
+        .love {
+          display: none !important;
+        }
+      }
+    }
   }
 }
 </style>
