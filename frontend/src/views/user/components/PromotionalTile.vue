@@ -2,7 +2,7 @@
   <div class="ms-promotion-tile_wrapper">
     <div class="ms-promotion-tile_container">
       <div class="row gy-4 ms-box-wrapper">
-        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-sm-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-sm-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-sm-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-6 col-lg-6 ms-box-container">
+        <div class="col-xxl-3 col-xl-6 col-sm-6 ms-box-container">
           <div class="text-start title">FLASH SALE TODAY</div>
           <div class="ms-box-item d-flex" v-for="item in products" :key="item">
             <div class="ms-box-item_left">
