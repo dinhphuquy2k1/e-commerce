@@ -13,103 +13,108 @@
         </div>
       </div>
       <div class="top-offer_main w-100">
-        <div class="row">
-          <div class="col-sm-3 position-relative first-offer d-flex flex-column">
-            <div class="ms-offer-tag">
-              <div class="sold-out ms-offer-tag_item d-none">
-                BÁN HẾT
+        <div class="row gx-3 gy-3">
+          <div class="col-xxl-3 d-flex">
+            <div class="d-flex flex-1 flex-column position-relative first-offer">
+              <div class="ms-offer-tag">
+                <div class="sold-out ms-offer-tag_item d-none">
+                  BÁN HẾT
+                </div>
+                <div class="sale ms-offer-tag_item">
+                  19% OFF
+                </div>
+                <div class="hot ms-offer-tag_item d-none">
+                  HOT
+                </div>
               </div>
-              <div class="sale ms-offer-tag_item">
-                19% OFF
+              <div class="ms-offer_image">
+                <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
+                <div class="ms-offer-buttons w-100"></div>
               </div>
-              <div class="hot ms-offer-tag_item d-none">
-                HOT
+              <div class="rating d-flex gap-2 flex-wrap">
+                <div class="star-rating">
+                  <Rating v-model="rating" readonly :cancel="false"/>
+                </div>
+                <div class="quantity-rating">
+                  (52,677)
+                </div>
               </div>
-            </div>
-            <div class="ms-offer_image">
-              <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
-              <div class="ms-offer-buttons w-100"></div>
-            </div>
-            <div class="rating d-flex gap-2 flex-wrap">
-              <div class="star-rating">
-                <Rating v-model="rating" readonly :cancel="false"/>
+              <div class="ms-offer_name text-start">
+                Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...
               </div>
-              <div class="quantity-rating">
-                (52,677)
+              <div class="ms-offer_price text-start">
+                <span class="offer-price_origin">25.000.000đ</span>
+                <span class="offer-price_final">20.000.000đ</span>
               </div>
-            </div>
-            <div class="ms-offer_name text-start">
-              Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...
-            </div>
-            <div class="ms-offer_price text-start">
-              <span class="offer-price_origin">25.000.000đ</span>
-              <span class="offer-price_final">20.000.000đ</span>
-            </div>
-            <div class="ms-offer_description text-start">
-              Games built using the Xbox Series X|S development kit showcase unparalleled load times, visuals.
-            </div>
-            <div class="ms-offer-buttons d-flex flex-grow-1 w-100">
-              <div class="d-flex gap-2 flex-wrap justify-content-between w-100">
-                <Button class="ms-btn light-pink d-flex icon-only justify-content-center ms-btn_search mt-4"
-                        v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
-                  <div class="icon-only icon-heart_black"></div>
-                </Button>
-                <Button
-                    class="ms-btn orange d-flex justify-content-center flex-grow-1 ms-btn_search mt-4 ps-3 pe-3 gap-2">
-                  <div class="icon-only icon-simple_cart"></div>
-                  <div class="fw-semibold">Thêm vào giỏ hàng</div>
-                </Button>
-                <Button class="ms-btn light-pink d-flex icon-only justify-content-center ms-btn_search mt-4"
-                        v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
-                  <div class="icon-only icon-eye"></div>
-                </Button>
+              <div class="ms-offer_description text-start">
+                Games built using the Xbox Series X|S development kit showcase unparalleled load times, visuals.
               </div>
-              <div></div>
-              <div></div>
+              <div class="ms-offer-buttons d-flex flex-grow-1 w-100">
+                <div class="d-flex gap-2 flex-wrap justify-content-between w-100">
+                  <Button class="ms-btn light-pink d-flex icon-only justify-content-center ms-btn_search mt-4"
+                          v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
+                    <div class="icon-only icon-heart_black"></div>
+                  </Button>
+                  <Button
+                      class="ms-btn orange d-flex justify-content-center flex-grow-1 ms-btn_search mt-4 ps-3 pe-3 gap-2">
+                    <div class="icon-only icon-simple_cart"></div>
+                    <div class="fw-semibold">Giỏ hàng</div>
+                  </Button>
+                  <Button class="ms-btn light-pink d-flex icon-only justify-content-center ms-btn_search mt-4"
+                          v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
+                    <div class="icon-only icon-eye"></div>
+                  </Button>
+                </div>
+                <div></div>
+                <div></div>
+              </div>
             </div>
           </div>
-          <div class="col-sm-9">
-            <div class="row" v-for="row in 2" :key="row">
-              <div class="col p-16 col-sm-3 d-flex flex-column justify-content-between" v-for="index in 4" :key="index">
-                <div class="ms-offer-tag">
-                  <div class="sold-out ms-offer-tag_item d-none">
-                    BÁN HẾT
-                  </div>
-                  <div class="sale ms-offer-tag_item d-none">
-                    19% OFF
-                  </div>
-                  <div class="hot ms-offer-tag_item">
-                    HOT
-                  </div>
-                </div>
-                <div class="ms-offer_image position-relative">
-                  <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
-                  <div class="ms-offer-buttons w-100">
-                    <div class="d-flex justify-content-between gap-3">
-                      <Button
-                          class="ms-btn orange rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
-                        <div class="icon-only icon-heart_black"></div>
-                      </Button>
-                      <Button
-                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: `Thêm vào giỏ hàng`, escape: true }">
-                        <div class="icon-only icon-simple_cart-black"></div>
-                      </Button>
-                      <Button
-                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
-                        <div class="icon-only icon-eye"></div>
-                      </Button>
+          <div class="col-xxl-9">
+            <div class="row gx-3 gy-3">
+              <div class="col-md-4 col-6 col-lg-3 d-flex flex-column justify-content-between"
+                   v-for="item in products" :key="item">
+                <div class="top-offer_item">
+                  <div class="ms-offer-tag">
+                    <div class="sold-out ms-offer-tag_item d-none">
+                      BÁN HẾT
+                    </div>
+                    <div class="sale ms-offer-tag_item d-none">
+                      19% OFF
+                    </div>
+                    <div class="hot ms-offer-tag_item">
+                      HOT
                     </div>
                   </div>
-                </div>
-                <div class="ms-offer_name text-start">
-                  Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...
-                </div>
-                <div class="ms-offer_price text-start">
-                  <span class="offer-price_origin">25.000.000đ</span>
-                  <span class="offer-price_final">20.000.000đ</span>
+                  <div class="ms-offer_image position-relative">
+                    <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
+                    <div class="ms-offer-buttons w-100">
+                      <div class="d-flex justify-content-between gap-3">
+                        <Button
+                            class="ms-btn orange rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
+                            v-tooltip.bottom="{ value: `Yêu thích`, escape: true }">
+                          <div class="icon-only icon-heart_black"></div>
+                        </Button>
+                        <Button
+                            class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
+                            v-tooltip.bottom="{ value: `Thêm vào giỏ hàng`, escape: true }">
+                          <div class="icon-only icon-simple_cart-black"></div>
+                        </Button>
+                        <Button
+                            class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
+                            v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
+                          <div class="icon-only icon-eye"></div>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ms-offer_name text-start">
+                    {{ item.name }}
+                  </div>
+                  <div class="ms-offer_price text-start">
+                    <span class="offer-price_origin">25.000.000đ</span>
+                    <span class="offer-price_final">20.000.000đ</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -136,6 +141,48 @@ export default {
   data() {
     return {
       rating: 5,
+      products: [
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+        {
+          'name': 'Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...',
+          'price_origin': '25.000.000đ',
+          'price_final': '25.000.000đ',
+        },
+      ]
     }
   }
 }
@@ -145,6 +192,7 @@ export default {
 $padding-top-bottom: 72px;
 .ms-top_offer-wrapper {
   padding: 0 var(--padding-base) 0 var(--padding-base);
+
   .ms-top_offer-container {
     padding: $padding-top-bottom 0 $padding-top-bottom 0;
 
@@ -167,7 +215,7 @@ $padding-top-bottom: 72px;
           color: #2DA5F3;
           font-size: 14px;
           font-style: normal;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 25px;
         }
 
@@ -182,46 +230,36 @@ $padding-top-bottom: 72px;
     }
 
     .top-offer_main {
-      .row {
-        .col-sm-9 {
-          border: 1px solid #E4E7E9;
+      .top-offer_item {
+        .ms-offer-buttons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          height: 100%;
+          position: absolute;
+          padding: 0 44px 0 44px;
+          visibility: hidden;
         }
 
-        .row {
+        &:hover {
+          cursor: pointer;
+
           .ms-offer-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            height: 100%;
-            position: absolute;
-            padding: 0px 44px 0px 44px;
-            visibility: hidden;
-          }
-
-          .col {
-            min-height: 296px;
-            border-right: 1px solid #E4E7E9;
-            position: relative;
-          }
-
-          .col:hover {
-            cursor: pointer;
-
-            .ms-offer-buttons {
-              background: rgba(0, 0, 0, 0.20);
-              visibility: visible;
-            }
-          }
-
-          .col:last-child {
-            border-right: none;
+            background: rgba(0, 0, 0, 0.20);
+            visibility: visible;
           }
         }
+      }
 
-        .row:first-child {
-          border-bottom: 1px solid #E4E7E9;
-        }
+      .col {
+        min-height: 296px;
+        border-right: 1px solid #E4E7E9;
+        position: relative;
+      }
+
+      .col:last-child {
+        border-right: none;
       }
 
       .ms-offer-tag {
@@ -299,8 +337,8 @@ $padding-top-bottom: 72px;
         cursor: pointer;
         gap: 12px;
         padding: 16px;
+        border-radius: 4px;
         border: 1px solid #E4E7E9;
-        border-right: none;
 
         .ms-offer_image {
           max-width: 100%;
@@ -349,8 +387,19 @@ $padding-top-bottom: 72px;
           }
         }
       }
+
+      .top-offer_item {
+        padding: 12px;
+        border-radius: 4px;
+        border: 1px solid #E4E7E9;
+      }
     }
   }
 }
 
+@media (max-width: 1400px) {
+  .first-offer {
+    display: none !important;
+  }
+}
 </style>
