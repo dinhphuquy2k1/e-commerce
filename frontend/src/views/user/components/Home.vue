@@ -3,18 +3,18 @@
     <div>
       <Banner></Banner>
     </div>
-    <div class="core-value_container container">
-      <div class="corevalue d-flex flex-row">
-        <div v-for="(item, index) in coreValues" class="d-flex flex-row flex-wrap flex-1">
+    <div class="core-value_container">
+      <div class="corevalue row g-0">
+        <div v-for="(item, index) in coreValues" class="col-xxl-3 col-sm-6 col-6 corevalue-item">
           <div class="item d-flex">
             <div class="icon" :class="[item.icon]">
             </div>
             <div class="title d-flex flex-column justify-content-between">
-              <span class="content">{{item.title}}</span>
-              <strong class="description">{{item.description}}</strong>
+              <span class="content">{{ item.title }}</span>
+              <strong class="description">{{ item.description }}</strong>
             </div>
           </div>
-          <div class="line" v-if="index !== coreValues.length- 1"></div>
+          <!--          <div class="line" v-if="index !== coreValues.length- 1"></div>-->
         </div>
       </div>
     </div>
@@ -103,6 +103,18 @@ export default {
       margin-top: 24px;
       padding: 16px;
 
+      .corevalue-item {
+        border-right: 1px solid #E4E7E9;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        &:not(:first-child){
+          padding-left: 10px;
+        }
+      }
+
       .item {
         gap: 8px;
         padding: 8px;
@@ -139,8 +151,9 @@ export default {
           }
 
           .description {
-            font-weight: 600;
-            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            color: #5F6C72;
           }
         }
       }
@@ -153,5 +166,19 @@ export default {
     }
   }
 
+}
+
+@media (max-width: 1400px) {
+  .corevalue {
+    .corevalue-item {
+      &:nth-child(2) {
+        border-right: none !important;
+      }
+
+      &:nth-child(3) {
+        padding-left: 0 !important;
+      }
+    }
+  }
 }
 </style>
