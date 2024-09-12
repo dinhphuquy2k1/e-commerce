@@ -1,0 +1,37 @@
+.p-carousel {
+  .p-link {
+    &:enabled {
+      &:hover {
+        background: #91919180;
+      }
+    }
+
+    background: #e3e3e3;
+    border-radius: 50%;
+
+    svg {
+      color: #888;
+    }
+
+  }
+
+  &.lr-slider-carousel {
+    position: relative;
+
+    .p-link {
+      position: absolute;
+
+      &.p-carousel-next {
+        right: -12px;
+        z-index: 10;
+      }
+
+      &.p-carousel-prev {
+        left: -12px;
+        z-index: 10;
+      }
+
+    }
+
+  }
+}

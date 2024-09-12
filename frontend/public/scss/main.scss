@@ -11,6 +11,8 @@
 @import './table.scss';
 @import './dialog.scss';
 @import './button.scss';
+@import './carousel.scss';
+@import './galleria.scss';
 
 * {
   box-sizing: border-box;
@@ -97,6 +99,13 @@ body {
   height: 40px !important;
   max-height: 40px !important;
 }
+
+.h-36 {
+  min-height: 36px !important;
+  height: 36px !important;
+  max-height: 36px !important;
+}
+
 
 .text-link {
   color: #2979ff !important;
@@ -748,4 +757,14 @@ nav a {
       }
     }
   }
+}
+
+.w-32 {
+  width: 32px;
+  height: 32px;
+}
+
+.wm-32 {
+  min-width: 32px;
+  min-height: 32px;
 }

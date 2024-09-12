@@ -114,6 +114,7 @@ input:focus {
     text-align: center;
     border: none;
     min-width: 10px;
+    height: unset;
   }
 
   .p-button {
@@ -121,7 +122,7 @@ input:focus {
     background: #fff;
     border: none;
     border-radius: 4px;
-    height: 40px;
+    height: $input-height;
 
     &.p-button-icon-only {
       width: unset;

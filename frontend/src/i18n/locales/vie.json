@@ -14,5 +14,15 @@
   "your_money_is_safe": "Tiền của bạn được an toàn",
   "secure_payment": "Thanh toán an toàn",
   "support_24_7": "Hỗ trợ 24/7",
-  "contact_online_chat": "Liên hệ / Nhắn tin trực tuyến"
+  "contact_online_chat": "Liên hệ / Nhắn tin trực tuyến",
+  "comment_about": "Bình luận về {name}",
+  "email": "Email",
+  "full_name": "Họ tên",
+  "phone_number": "Số điện thoại mua hàng",
+  "content_min_length": "Nội dung. Tối thiểu 15 ký tự",
+  "your_rating": "Đánh giá của bạn",
+  "comment_requirements": "Để gửi bình luận, bạn cần nhập tối thiểu trường họ tên và nội dung",
+  "submit_comment": "Gửi bình luận",
+  "rating": "Đánh giá",
+  "enter_your_comment": "Nhập bình luận của bạn"
 }

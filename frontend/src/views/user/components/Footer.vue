@@ -2,7 +2,7 @@
   <footer class="ms-footer d-flex flex-column justify-content-between">
     <div class="ms-footer-desktop">
       <div class="flex-grow-1 ms-footer_content">
-        <div class="row">
+        <div class="row g-3">
           <div class="ms-footer_item col-lg col-md-4 col-6">
             <div class="ms-footer_logo-container d-flex align-items-center gap-2">
               <div class="logo"></div>
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start ps-3 fw-semibold mb-2">Danh mục hàng đầu</div>
+            <div class="title text-start fw-semibold mb-2">Danh mục hàng đầu</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -62,7 +62,7 @@
             </ul>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start ps-3 fw-semibold mb-2">Danh mục liên kết</div>
+            <div class="title text-start fw-semibold mb-2">Danh mục liên kết</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -125,7 +125,8 @@
       </div>
     </div>
     <div class="ms-footer-mobile d-flex align-items-center justify-content-between">
-      <router-link :to="{name: item.route}" class="icon-w32 icon" :class="[item.icon, {[`${item.icon}-primary`]: isHovered[index] || activeItemMobile === item}]"
+      <router-link :to="{name: item.route}" class="icon-w32 icon"
+                   :class="[item.icon, {[`${item.icon}-primary`]: isHovered[index] || activeItemMobile === item}]"
                    v-for="(item, index) in menuMobiles" @mouseover="isHovered[index] = true"
                    @click="activeItemMobile = item"
                    @mouseleave="isHovered[index] = false">
@@ -234,7 +235,7 @@ $padding: 72px;
 
     .nav-item {
       color: #8B96A5;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0;
       cursor: pointer;
     }
 
@@ -362,26 +363,26 @@ $padding: 72px;
   }
 }
 
-@media (max-width: 768px) {
-  .ms-footer {
-    min-height: 65px;
-    position: sticky;
-    background: #ffffff;
-    bottom: 0;
-    z-index: 100;
-
-    .ms-footer-desktop {
-      display: none;
-    }
-
-    .ms-footer-mobile {
-      display: flex !important;
-      padding-left: 30px;
-      padding-right: 30px;
-      flex: 1;
-    }
-  }
-}
+//@media (max-width: 768px) {
+//  .ms-footer {
+//    min-height: 65px;
+//    position: sticky;
+//    background: #ffffff;
+//    bottom: 0;
+//    z-index: 100;
+//
+//    .ms-footer-desktop {
+//      display: none;
+//    }
+//
+//    .ms-footer-mobile {
+//      display: flex !important;
+//      padding-left: 30px;
+//      padding-right: 30px;
+//      flex: 1;
+//    }
+//  }
+//}
 </style>
 <script setup lang="ts">
 </script>

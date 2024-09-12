@@ -15,9 +15,9 @@ export default {
 <style lang="scss">
 @import url('../public/scss/main.scss');
 
-.p-dropdown, .p-treeselect, .p-multiselect, .p-inputtext, .ms-btn {
+.p-dropdown, .p-treeselect, .p-multiselect, .p-inputtext:not(.p-inputtextarea, .p-inputnumber-input), .ms-btn {
   line-height: unset;
-  height: $input-select-height;
+  height: $input-height;
 }
 
 nav {

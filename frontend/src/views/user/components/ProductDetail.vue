@@ -2,26 +2,42 @@
   <div class="ms-product-detail_wrapper">
     <BreadCrumb></BreadCrumb>
     <div class="ms-product-detail_container">
-      <div class="ms-product-view_container row d-flex">
-        <div class="ms-product-view_preview d-flex flex-column col flex-grow-1">
-          <div class="ms-product-image-main d-flex align-items-center justify-content-center flex-grow-1">
-            <Image :src="require('@public/assets/images/products/drone.png')" class="flex-grow-1" width="300px" preview
-                   alt="Image"/>
-          </div>
-          <div class="ms-product-image-sub">
-            <Carousel :value="products" :numVisible="6" :numScroll="1" :responsiveOptions="responsiveOptions">
+      <div class="ms-product-view_container row d-flex g-4">
+        <div class="ms-product-view_preview d-flex flex-column col-md-6 col-12 flex-grow-1">
+          <!--          <div class="ms-product-image-main d-flex align-items-center justify-content-center flex-grow-1">-->
+          <!--            <Image :src="require('@public/assets/images/products/drone.png')" class="flex-grow-1" width="300"-->
+          <!--                   height="300" preview-->
+          <!--                   alt="Image"/>-->
+          <!--          </div>-->
+          <div class="ms-product-images flex-1 d-flex">
+            <Galleria :value="products" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true"
+                      :containerClass="['ms-product-images_galleria lr-slider-galleria d-flex flex-1', {'ms-product-images_galleria_no-thumbnail': products.length <= 1}]">
               <template #item="slotProps">
-                <div class="d-flex flex-column align-items-center justify-content-center ms-image-sub_item">
-                  <div class="ms-image-box">
-                    <Image :src="require('@public/assets/images/products/'+ slotProps.data.image)" width="96"
-                           alt="Image"/>
-                  </div>
+                <Image :src="require('@public/assets/images/products/'+ slotProps.item.image)"
+                       alt="Image" preview/>
+              </template>
+              <template #thumbnail="slotProps">
+                <div class="images_galleria-item_thumbnail">
+                  <Image :src="require('@public/assets/images/products/'+ slotProps.item.image)"
+                         alt="Image"/>
                 </div>
               </template>
-            </Carousel>
+            </Galleria>
+            <!--            <Carousel :value="products" :page="pageImage" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions"-->
+            <!--                      @update:page="changeImage"-->
+            <!--                      class="lr-slider-carousel">-->
+            <!--              <template #item="slotProps">-->
+            <!--                <div class="d-flex flex-column align-items-center justify-content-center ms-image-sub_item">-->
+            <!--                  <div class="ms-image-box pointer">-->
+            <!--                    <Image :src="require('@public/assets/images/products/'+ slotProps.data.image)"-->
+            <!--                           alt="Image"/>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </template>-->
+            <!--            </Carousel>-->
           </div>
         </div>
-        <div class="ms-product-view_detail col">
+        <div class="ms-product-view_detail col-md-6 col-12">
           <div class="rating d-flex gap-2 flex-wrap mt-3">
             <div class="star-rating">
               <Rating v-model="rating" readonly :cancel="false"/>
@@ -61,13 +77,44 @@
             </div>
           </div>
 
-          <div class="ms-option-box">
+          <div class="ms-option-box mt-4">
+            <div class="row g-3">
+              <!--              <div class="col-6">-->
+              <!--                <div class="ms-option-title mb-2">-->
+              <!--                  Màu sắc-->
+              <!--                </div>-->
 
+              <!--                <div class="ms-option-list">-->
+              <!--                  <ScrollPanel>-->
+              <!--                    <div class="d-flex gap-3">-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                      <div class="wm-32 rounded-circle" style="background: red"></div>-->
+              <!--                    </div>-->
+              <!--                  </ScrollPanel>-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <div class="col-6 ">
+                <div class="ms-option-title mb-2">
+                  Màu sắc
+                </div>
+                <div class="ms-option-list">
+                  <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Category"
+                            class="ms-category"/>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="group-button d-flex row gy-2 gx-3">
             <div class="col-xxl-3">
-              <InputNumber v-model="value" showButtons buttonLayout="horizontal" class="w-100"
+              <InputNumber v-model="value" showButtons buttonLayout="horizontal" class="w-100 h-36"
                            decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary">
                 <template #incrementbuttonicon>
                   <span class="pi pi-plus"/>
@@ -93,8 +140,8 @@
             </div>
           </div>
 
-          <div class="sub-group-button row gy-2">
-            <div class="col-xxl-6 gap-4 d-flex ms-left-side">
+          <div class="sub-group-button d-flex gy-2 justify-content-between flex-wrap gap-3">
+            <div class="gap-4 d-flex ms-left-side">
               <div class="item">
                 <div class="icon icon-heart_black"></div>
                 <div class="title truncate-text">Yêu thích</div>
@@ -104,7 +151,7 @@
                 <div class="title truncate-text">So sánh</div>
               </div>
             </div>
-            <div class="col-xxl-6 ms-right-side d-flex gap-3 align-items-center justify-content-end">
+            <div class="ms-right-side d-flex gap-3 align-items-center justify-content-end">
               <div>Chia sẻ:</div>
               <div class="d-flex align-items-center gap-2">
                 <Image :src="require('@public/assets/icons/Copy.svg')" width="20" alt="Image"/>
@@ -131,7 +178,7 @@
           </div>
         </div>
       </div>
-      <div class="ms-product-information_container">
+      <div class="ms-product-information_container mb-5">
         <TabView class="ms-product-information-tab-view">
           <TabPanel header="Mô tả">
             <div class="ms-description-box row">
@@ -204,15 +251,56 @@
               </div>
             </div>
           </TabPanel>
-          <TabPanel header="Đánh giá">
-            <p class="m-0">
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-              atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
-              sunt in culpa qui
-              officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-              expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-              minus.
-            </p>
+          <TabPanel :header="$t('rating')">
+            <div class="ms-rating-box row">
+              <div class="ms-rating-left-side">
+                <div class="title">{{ $t('comment_about', {name: 'John Doe'}) }}</div>
+                <div class="content mt-4 d-flex flex-column gap-3">
+                  <div class="rc-form review-form row g-4">
+                    <div class="col-md-4">
+                      <Textarea v-model="value" rows="4" cols="30"/>
+                    </div>
+                    <div class="col-md-8 d-flex">
+                      <div class="flex-1 d-flex">
+                        <div class="row gy-4 g-4 flex-1">
+                          <div class="col-6">
+                            <InputText type="text" :placeholder="$t('full_name')"/>
+                          </div>
+                          <div class="col-6">
+                            <InputText type="text" :placeholder="$t('phone_number')"/>
+                          </div>
+                          <div class="col-6">
+                            <InputText type="text" :placeholder="$t('email')"/>
+                          </div>
+                          <div class="col d-flex align-items-center">
+                            <div class="d-flex align-items-center gap-3">
+                              {{ $t('your_rating') }}:
+                              <Rating v-model="value" :cancel="false"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rc-form-button">
+                    <div class="row g-0">
+                      <div class="col-6 d-flex align-items-center">{{ $t('comment_requirements') }}</div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <div>
+                          <Button
+                              class="ms-btn border-orange d-flex justify-content-center flex-grow-1 ps-3 pe-3 gap-2">
+                            <div class="fw-semibold">{{ $t('submit_comment') }}</div>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rc-form-item">
+                    <CommentView :comments="comments"/>
+                  </div>
+                </div>
+              </div>
+            </div>
           </TabPanel>
           <TabPanel header="Thông tin thêm">
             <p class="m-0">
@@ -235,6 +323,56 @@
           </TabPanel>
         </TabView>
       </div>
+
+      <div class="ms-product-relationship">
+        <div class="row">
+          <div class="col-xl-3 mb-3 col-md-12" v-for="item in 4">
+            <div class="ms-product-relationship-mobile d-none">
+              <div class="text-start title mb-3">FLASH SALE TODAY</div>
+              <Carousel :value="products" :page="pageImage" :numVisible="2" :numScroll="1"
+                        :responsiveOptions="responsiveProductRelationshipOptions"
+                        :showIndicators="false"
+                        @update:page="changeImage"
+                        class="lr-slider-carousel">
+                <template #item="slotProps">
+                  <div class="ms-box-item d-flex flex-column gap-3 pointer">
+                    <div class="ms-box-item_left">
+                      <div class="ms-box-image">
+                        <Image :src="require('@public/assets/images/products/Image.png')" alt="Image"/>
+                      </div>
+                    </div>
+                    <div class="ms-box-item_right d-flex flex-column align-items-between justify-content-between">
+                      <div class="title text-start truncate-text-2">Bose Sport Earbuds - Wireless Earphones - Bluetooth
+                        In
+                        Ear
+                      </div>
+                      <div class="price text-start">20.000.000đ</div>
+                    </div>
+                  </div>
+                </template>
+              </Carousel>
+            </div>
+            <div class="ms-product-relationship-desktop">
+              <div class="text-start title mb-3">FLASH SALE TODAY</div>
+              <div class="d-flex flex-column gap-3 ms-box-items">
+                <div class="ms-box-item d-flex gap-3 pointer" v-for="item in products" :key="item">
+                  <div class="ms-box-item_left">
+                    <div class="ms-box-image">
+                      <Image :src="require('@public/assets/images/products/Image.png')" alt="Image"/>
+                    </div>
+                  </div>
+                  <div class="ms-box-item_right d-flex flex-column align-items-between justify-content-between">
+                    <div class="title text-start truncate-text-2">Bose Sport Earbuds - Wireless Earphones - Bluetooth In
+                      Ear
+                    </div>
+                    <div class="price text-start">20.000.000đ</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -244,7 +382,12 @@ import InputNumber from 'primevue/inputnumber';
 import BreadCrumb from '@/views/user/components/BreadCrumb.vue';
 import Image from 'primevue/image';
 import Carousel from 'primevue/carousel';
+import Galleria from 'primevue/galleria';
 import Button from 'primevue/button';
+import Textarea from 'primevue/textarea';
+import InputText from 'primevue/inputtext';
+import CommentView from '@/views/user/components/CommentView.vue';
+import Dropdown from 'primevue/dropdown';
 import Rating from 'primevue/rating';
 import Tag from 'primevue/tag';
 import TabView from 'primevue/tabview';
@@ -262,16 +405,53 @@ export default {
     InputNumber,
     TabView,
     TabPanel,
-    ScrollPanel
-
+    ScrollPanel,
+    Galleria,
+    Textarea,
+    InputText,
+    CommentView,
+    Dropdown,
   },
   data() {
     return {
       rating: 5,
       value: 1,
+      pageImage: 0,
+      comments: [
+        {
+          'content': 'test',
+          'child': [
+            {
+              'content': '123',
+            },
+            {
+              'content': '456'
+            },
+            {
+              'content': '456'
+            }
+          ]
+        },
+        {
+          'content': 'comment 2',
+          'child': [],
+        }
+      ],
       products: [
         {
           id: '1000',
+          code: 'f230fh0g3',
+          name: 'Bamboo Watch',
+          description: 'Product Description',
+          image: 'Rectangle 20.png',
+          price: 65,
+          category: 'Accessories',
+          quantity: 24,
+          inventoryStatus: 'INSTOCK',
+          rating: 5
+        },
+        {
+          id: '1001',
           code: 'f230fh0g3',
           name: 'Bamboo Watch',
           description: 'Product Description',
@@ -284,93 +464,22 @@ export default {
         },
         {
           id: '1001',
-          code: 'nvklal433',
-          name: 'Black Watch',
+          code: 'f230fh0g3',
+          name: 'Bamboo Watch',
           description: 'Product Description',
           image: 'Image.png',
-          price: 72,
+          price: 65,
           category: 'Accessories',
-          quantity: 61,
-          inventoryStatus: 'INSTOCK',
-          rating: 4
-        },
-        {
-          id: '1002',
-          code: 'zz21cz3c1',
-          name: 'Blue Band',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 79,
-          category: 'Fitness',
-          quantity: 2,
-          inventoryStatus: 'LOWSTOCK',
-          rating: 3
-        },
-        {
-          id: '1003',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
+          quantity: 24,
           inventoryStatus: 'INSTOCK',
           rating: 5
         },
-        {
-          id: '1004',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1005',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1006',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
+
       ],
       responsiveOptions: [
         {
           breakpoint: '1400px',
-          numVisible: 2,
+          numVisible: 4,
           numScroll: 1
         },
         {
@@ -380,15 +489,37 @@ export default {
         },
         {
           breakpoint: '767px',
-          numVisible: 2,
+          numVisible: 3,
           numScroll: 1
         },
         {
           breakpoint: '575px',
-          numVisible: 1,
+          numVisible: 2,
           numScroll: 1
         }
+      ],
+      responsiveProductRelationshipOptions: [
+        {
+          breakpoint: '992px',
+          numVisible: 2,
+          numScroll: 1
+        },
+        {
+          breakpoint: '767px',
+          numVisible: 2,
+          numScroll: 1
+        },
+        {
+          breakpoint: '420px',
+          numVisible: 1,
+          numScroll: 1
+        },
       ]
+    }
+  },
+  methods: {
+    changeImage() {
+      console.log(this.pageImage)
     }
   }
 }
@@ -403,7 +534,7 @@ export default {
       border: 1px solid var(--Gray-100);
       border-radius: 4px;
 
-      .ms-description-box {
+      .ms-description-box, .ms-rating-box {
         .title {
           color: var(--Gray-900);
           font-size: 16px;
@@ -438,6 +569,7 @@ export default {
         .ms-description-right-side {
           border-left: 1px solid #E4E7E9;
           padding-left: 24px;
+
           .content {
             text-align: left;
             color: var(--Gray-600);
@@ -466,25 +598,30 @@ export default {
       }
 
       .p-tabview-nav {
+        box-sizing: border-box;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         border-bottom: 1px solid var(--Gray-100);
         background: var(--Gray-00);
         margin: unset;
+        display: flex;
+        justify-content: center;
 
         li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
           border-color: #FA8232;
           color: var(--Gray-900);
+          border-bottom-width: 2px;
         }
 
         li.p-highlight .p-tabview-nav-link {
           color: var(--Gray-900);
           border-color: #FA8232;
+          border-bottom-width: 2px;
         }
 
         .p-tabview-nav-link {
-          border-bottom: 1px solid #fff;
-          padding: 18px 20px;
+          //border-bottom: 1px solid #fff;
+          padding: 20px;
           color: #707070;
           font-weight: 500;
         }
@@ -494,12 +631,146 @@ export default {
 
   .ms-product-view_container {
     padding: 32px 0;
-    gap: 56px;
 
     .ms-product-view_preview {
+      .ms-product-images_galleria {
+
+        &.ms-product-images_galleria_no-thumbnail {
+          .p-galleria-thumbnail-wrapper {
+            display: none;
+          }
+        }
+
+        .p-galleria-content {
+          display: flex;
+          flex: 1;
+        }
+
+        .p-galleria-item-wrapper {
+          height: 400px;
+          max-height: 400px;
+          border: 1px solid var(--Gray-100, #E4E7E9);
+          padding: 16px;
+          border-radius: 4px;
+          margin-bottom: 24px;
+
+          .p-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            img {
+              width: auto;
+              height: auto;
+              max-height: 100%;
+              object-fit: contain;
+              max-width: 100%;
+            }
+          }
+        }
+
+        .p-galleria-thumbnail-wrapper {
+          display: flex;
+
+          .p-galleria-thumbnail-container {
+            flex: 1;
+            max-height: 100%;
+
+            .p-galleria-thumbnail-items-container {
+              height: 100%;
+
+              .p-galleria-thumbnail-items {
+                height: 120px;
+                min-height: 120px;
+                max-height: 120px;
+
+                .p-galleria-thumbnail-item {
+                  max-height: 100%;
+                  height: 100%;
+                  display: flex;
+                  padding: 8px 0 8px 8px;
+
+                  &.p-galleria-thumbnail-item-start {
+                    padding-left: 0;
+                  }
+
+                  &.p-galleria-thumbnail-item-end {
+                    padding-right: 0;
+                  }
+
+                  .p-galleria-thumbnail-item-content {
+                    height: 100%;
+                    border-radius: 2px;
+                    border: 1px solid var(--Gray-100, #E4E7E9);
+                    flex-grow: 1;
+
+                    .images_galleria-item_thumbnail {
+                      display: flex;
+                      height: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      padding: 2px;
+
+                      .p-image {
+                        height: 100%;
+                        max-height: 100%;
+
+                        img {
+                          height: 100%;
+                          max-height: 100%;
+                        }
+                      }
+                    }
+
+                  }
+
+                  &.p-galleria-thumbnail-item-current {
+                    .p-galleria-thumbnail-item-content {
+                      border: 2px solid var(--Primary-500, #FA8232);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &.ms-product-images_galleria_no-thumbnail {
+          .p-galleria-thumbnail-wrapper {
+            display: none;
+          }
+
+          .p-galleria-item-wrapper {
+            flex: 1;
+            max-height: 600px;
+          }
+        }
+      }
+
       .ms-product-image-main {
         max-height: 464px;
-        max-width: 616px;
+        padding: 16px;
+        border-radius: 4px;
+        border: 1px solid var(--Gray-100, #E4E7E9);
+
+        .p-image {
+          display: flex;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .p-image-preview-container {
+          &:hover {
+            .p-image-preview-indicator {
+              //background: transparent;
+              border-radius: 4px;
+            }
+          }
+        }
       }
 
       .ms-product-image-sub {
@@ -510,12 +781,32 @@ export default {
         }
 
         .ms-image-sub_item {
+          height: 100%;
           padding: 3px;
 
           .ms-image-box {
-            padding: 8px;
+            max-height: 100%;
+            height: 100%;
+            width: 100%;
+            padding: 16px;
             border-radius: 2px;
             border: 1px solid var(--Gray-100, #E4E7E9);
+            display: flex;
+            align-items: center;
+            justify-items: center;
+
+            .p-image {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-items: center;
+
+              img {
+                height: 65px;
+                width: 65px;
+                margin: auto;
+              }
+            }
           }
 
         }
@@ -600,6 +891,144 @@ export default {
       border: 1px solid var(--Gray-100, #E4E7E9);
       background: var(--Gray-00, #FFF);
       gap: 12px;
+    }
+  }
+
+  .ms-product-relationship {
+    .ms-product-relationship-mobile, .ms-product-relationship-desktop {
+      & > .title {
+        color: var(--Gray-900, #191C1F);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+
+    .ms-box-item {
+      padding: 12px;
+      border-radius: 3px;
+      border: 1px solid var(--Gray-100, #E4E7E9);
+      background: var(--Gray-00, #FFF);
+
+      .ms-box-item_left {
+        .ms-box-image {
+          width: 100px;
+        }
+      }
+
+      .ms-box-item_right {
+        .title {
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .ms-product-relationship {
+    .ms-product-relationship-mobile {
+      display: block !important;
+
+      .p-carousel-items-container {
+        .p-carousel-item {
+          padding-left: 8px;
+          padding-right: 8px;
+
+          &.p-carousel-item-start {
+            padding-left: unset;
+          }
+
+          &.p-carousel-item-end {
+            padding-right: unset;
+          }
+        }
+      }
+
+      .ms-box-item {
+        flex-direction: column !important;
+
+        .ms-box-item_left {
+          display: flex;
+          justify-content: center;
+
+          .ms-box-image {
+            display: flex;
+            justify-content: center;
+            width: 200px;
+          }
+        }
+
+        .ms-box-item_right {
+          .title {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .ms-product-relationship-desktop {
+      display: none;
+
+      .ms-box-items {
+        flex-direction: row !important;
+
+        .ms-box-item {
+          flex-direction: column !important;
+
+          .ms-box-item_left {
+            display: flex;
+            justify-content: center;
+
+            .ms-box-image {
+              width: 200px;
+            }
+          }
+
+          .ms-box-item_right {
+            .title {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+@media (max-width: 1200px) {
+  .ms-product-relationship-desktop {
+    .ms-box-items {
+      flex-direction: row !important;
+
+      .ms-box-item {
+        flex-direction: column !important;
+
+        .ms-box-item_left {
+          display: flex;
+          justify-content: center;
+
+          .ms-box-image {
+            width: 200px;
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        .ms-box-item_right {
+          .title {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .ms-product-relationship-mobile {
+    .ms-box-image {
+      max-width: 150px;
     }
   }
 }

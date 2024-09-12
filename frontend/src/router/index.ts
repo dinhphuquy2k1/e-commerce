@@ -18,13 +18,22 @@ const routes: Array<RouteRecordRaw> = [
             },
             {
                 path: '/setting',
+                name: 'user_setting',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
                     menu: () => import('@/views/user/components/MenuSetting.vue'),
                     content: () => import('@/views/user/components/OrderHistory.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
-                name: 'user_setting'
+            },
+            {
+                path: '/product/detail',
+                name: 'product_detail',
+                components: {
+                    header: () => import('@/views/user/components/Header.vue'),
+                    content: () => import('@/views/user/components/ProductDetail.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
             },
         ],
     },

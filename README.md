@@ -37,4 +37,6 @@
    BE: http://localhost:30001/
 
    PHPMYADMIN: http://localhost:30002/
-
+        server: e-db
+        username: ecommerce
+        password: 1181080029
