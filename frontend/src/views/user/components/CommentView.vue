@@ -13,9 +13,9 @@
       </div>
       <div class="content mt-3"> {{ comment.content }}
       </div>
-      <div class="childs mt-3" v-if="comment?.child.length > 0">
+      <div class="childs mt-3">
         <div class="comment-list">
-          <div class="rt-form-item d-flex gap-3 mb-4" v-for="childItem in comment.child">
+          <div class="rt-form-item d-flex gap-3 mb-4" v-for="childItem in comment.child" v-if="comment?.child.length > 0">
             <div class="avt">
               <Image :src="require('@public/assets/icons/googlepay.svg')" width="50" alt="Image"/>
             </div>
@@ -104,6 +104,10 @@ export default {
 <style lang="scss" scoped>
 .rt-form-item {
   .info {
+    .ms-input {
+      display: none;
+    }
+
     .date {
       font-size: 13px;
       color: var(--Gray-500);
@@ -119,19 +123,16 @@ export default {
 
       .comment-list {
         .reply {
-          .ms-input {
-            display: none;
-          }
+        }
+      }
+    }
+
+    &:hover {
+      .reply {
+        .ms-input {
+          display: block;
         }
 
-        &:hover {
-          .reply {
-            .ms-input {
-              display: block;
-            }
-
-          }
-        }
       }
     }
   }
