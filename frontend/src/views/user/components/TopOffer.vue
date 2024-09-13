@@ -72,7 +72,7 @@
           </div>
           <div class="col-xxl-9">
             <div class="row gx-3 gy-3">
-              <div class="col-md-4 col-6 col-lg-3 d-flex flex-column justify-content-between"
+              <div class="col-md-4 col-12 col-sm-6 col-lg-3 d-flex flex-column justify-content-between"
                    v-for="item in products" :key="item">
                 <div class="top-offer_item">
                   <div class="ms-offer-tag">

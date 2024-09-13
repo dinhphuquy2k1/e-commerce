@@ -35,13 +35,13 @@ $navbar-width: 220px;
 
 @media (max-width: 1400px) {
   :root {
-    --padding-base: 150px;
+    --padding-base: 100px;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   :root {
-    --padding-base: 100px;
+    --padding-base: 50px;
   }
 }
 

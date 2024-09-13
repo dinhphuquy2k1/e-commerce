@@ -2,63 +2,19 @@
   <div class="ms-shop-grid_wrapper">
     <div class="ms-shop-grid_container ms-feature-product-wrapper row">
       <div class="left-side col-md-3">
-        <Panel :header="$t('category')" toggleable class="ms-category">
-          <div v-for="category in getCategory" :key="category.key" class="d-flex gap-2 align-items-center pointer">
-            <RadioButton v-model="filters.category" :inputId="`category-${category.key}`" name="dynamic"
-                         :value="category.name"/>
-            <label :for="`category-${category.key}`" class=" truncate-text-1 pointer" :title="category.label">{{
-                category.label
-              }}</label>
-          </div>
-        </Panel>
-
-        <Panel :header="$t('price')" toggleable class="ms-price">
-          <div class="w-100">
-            <Slider v-model="filters.rangePrice" range class="w-100" :max="99999999" @slideend="changePrice"/>
-            <div class="row mt-2 gy-3">
-              <div class="col-xxl-6 d-flex gap-2 flex-column">
-                <div class="label text-start">{{ $t('min_price') }}</div>
-                <InputText :placeholder="$t('min_price')" v-model="filters.rangePrice[0]"/>
-              </div>
-              <div class="col-xxl-6 d-flex gap-2 flex-column">
-                <div class="label text-start">{{ $t('max_price') }}</div>
-                <InputText :placeholder="$t('max_price')" v-model="filters.rangePrice[1]"/>
-              </div>
-            </div>
-            <div class="ms-error-text" v-if="invalidFilters['rangePrice']">{{ invalidFilters['rangePrice']}}</div>
-            <div class="d-flex flex-column mt-3" style="gap: 12px;">
-              <div v-for="category in sliderPriceOptions" :key="category.key" class="d-flex gap-2 align-items-center">
-                <RadioButton v-model="selectedCategory" :inputId="category.key" name="dynamic" :value="category.name"/>
-                <label :for="category.key" class="ml-2 pointer">{{ $t(category.name) }}</label>
-              </div>
-            </div>
-          </div>
-        </Panel>
-
-        <Panel :header="$t('brand')" toggleable class="ms-brand">
-          <div class="row gy-2">
-            <div v-for="brand of getBrand" :key="brand.id" class="d-flex gap-2 align-items-center col-xxl-12">
-              <Checkbox v-model="selectedCategories" :inputId="`brand-${brand.id}`" :name="`brand-${brand.id}`"
-                        :value="`brand-${brand.id}`"/>
-              <label :for="`brand-${brand.id}`" class="truncate-text-1 pointer">{{ brand.brand_name }}</label>
-            </div>
-          </div>
-        </Panel>
-
-        <Panel header="Đánh giá" toggleable class="ms-rating">
-          <div class="row gy-2">
-            <div v-for="(item, index) in ratings" :key="item" class="d-flex gap-2 align-items-center col-xxl-12 pointer">
-              <Checkbox v-model="filters.brand" :inputId="`rating-${item}`" name="category" :value="item"/>
-              <Rating v-model="ratings[index]" readonly :cancel="false" :for="`rating-${item}`" class="pointer"/>
-            </div>
-          </div>
-        </Panel>
-
+        <Sidebar v-model:visible="visibleFilters" class="ms-filter-sidebar">
+          <ShopGirdFilter @applyFilter="applyFilter" :filtersParent="filtersParent"/>
+        </Sidebar>
+        <ShopGirdFilter @applyFilter="applyFilter" v-if="!visibleFilters" :filtersParent="filtersParent"/>
       </div>
       <div class="right-side ms-featured_product-container col-md-9 d-flex flex-column">
-        <div class="header mb-3 d-flex flex-row align-items-center justify-content-between flex-wrap">
+        <div class="header mb-3 d-flex flex-row align-items-center justify-content-between flex-wrap gap-3">
+          <div class="ms-filter-box-mobile d-flex align-items-center gap-2 pointer" @click="visibleFilters = true">
+            Bộ lọc
+            <div class="icon-w24 icon-media-setting"></div>
+          </div>
           <div class="m-search_form flex-row d-flex align-items-center d-flex w-50">
-            <InputText type="search" v-model="filters.search" class="ms-input_search w-100" placeholder="Tìm kiếm"/>
+            <InputText type="search" v-model="search" class="ms-input_search w-100" placeholder="Tìm kiếm"/>
             <div class="icon24 icon search-right search"></div>
           </div>
           <div class="d-flex flex-row align-items-center gap-2">
@@ -80,13 +36,13 @@
         </div>
         <div class="main ms-product-list d-flex gx-0 gy-0 flex-grow-1">
           <div class="row gx-3 gy-3 mt-2">
-            <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6 ms-item position-relative" v-for="item in products"
+            <div class="col-xxl-3 col-lg-4 col-sm-6 ms-item position-relative" v-for="item in products"
                  :key="item">
               <div class="ms-item-main d-flex flex-column justify-content-between">
-                <div class="ms-offer-tag">
-                  <Tag value="HOT" class="hot ms-offer-tag_item"></Tag>
-                </div>
                 <div class="ms-product_image position-relative">
+                  <div class="ms-offer-tag position-absolute top-0 left-0">
+                    <Tag value="HOT" class="hot ms-offer-tag_item"></Tag>
+                  </div>
                   <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
                   <div class="ms-product-buttons w-100">
                     <div class="d-flex justify-content-between gap-3">
@@ -146,8 +102,8 @@ import Chip from 'primevue/chip';
 import Image from 'primevue/image';
 import Paginator from 'primevue/paginator';
 import Dropdown from 'primevue/dropdown';
-
-import {mapActions, mapGetters} from "vuex";
+import Sidebar from 'primevue/sidebar';
+import ShopGirdFilter from "@/views/user/components/gird/ShopGirdFilter.vue";
 import Button from 'primevue/button';
 import Tag from 'primevue/tag';
 
@@ -165,9 +121,8 @@ export default {
     Dropdown,
     Button,
     Tag,
-  },
-  computed: {
-    ...mapGetters(['getCategory', 'getBrand'])
+    Sidebar,
+    ShopGirdFilter,
   },
   data() {
     return {
@@ -179,30 +134,11 @@ export default {
         {name: 'Istanbul', code: 'IST'},
         {name: 'Paris', code: 'PRS'}
       ],
-      filters: {
-        category: null,
-        brand: [],
-        rangePrice: [20000000, 60000000],
-        search: null,
-      },
-      invalidFilters: [],
+      search: null,
+      visibleFilters: false,
+      filtersParent: {},
       selectedCategory: 'Production',
       selectedCategories: null,
-      ratings: [
-        5,
-        4,
-        3,
-        2,
-      ],
-      sliderPriceOptions: [
-        {name: 'under_1_million', key: 'A'},
-        {name: 'from_2_to_3_million', key: 'B'},
-        {name: 'from_3_to_4_million', key: 'C'},
-        {name: 'from_6_to_8_million', key: 'D'},
-        {name: 'from_15_to_20_million', key: 'O'},
-        {name: 'from_20_to_100_million', key: 'Q'},
-        {name: 'over_100_million', key: 'R'},
-      ],
       products: [
         {
           id: '1000',
@@ -351,40 +287,24 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadCategory', 'loadBrand']),
-
-    /**
-     * Sự kiện kéo khoảng giá tiền
-     */
-    changePrice() {
-      this.invalidFilters['rangePrice'] = null;
-      if (this.filters.rangePrice[1] < this.filters.rangePrice[0]) {
-        this.invalidFilters['rangePrice'] = this.$t('invalid_price');
-      }
-      else {
-        this.applyFilter(true)
-      }
+    applyFilter(filters, isWithTimeOut = false) {
+      let timeOut = isWithTimeOut ? 750 : 0;
+      clearTimeout(this.debounce);
+      this.debounce = setTimeout(() => {
+        if (JSON.stringify(filters) !== JSON.stringify(this.filtersParent)) {
+          this.filtersParent = filters;
+        }
+      }, timeOut);
     },
-
-    applyFilter(isWithTimeOut = false) {
-        let timeOut = isWithTimeOut ? 750 : 0;
-        setTimeout(function () {
-          console.log(1223)
-        }, timeOut);
-    }
-  },
-  created() {
-    this.loadCategory();
-    this.loadBrand();
   },
 }
 </script>
 
 <style lang="scss">
-.ms-shop-grid_wrapper {
+.ms-shop-grid_wrapper, .ms-filter-sidebar {
   padding: 40px var(--padding-base);
 
-  .ms-shop-grid_container {
+  .ms-shop-grid_container, .ms-shop-gird_desktop {
 
     .p-panel-header {
       border: unset;
@@ -449,6 +369,10 @@ export default {
           border-radius: 4px;
         }
 
+        .ms-filter-box-mobile {
+          display: none !important;
+        }
+
         .m-search_form:focus-within {
           border: 1px solid #0073e6;
         }
@@ -471,6 +395,7 @@ export default {
 
       .p-paginator {
         border-top: unset !important;
+        padding: unset;
 
         .p-paginator-pages {
           display: flex;
@@ -494,5 +419,34 @@ export default {
     }
 
   }
+}
+
+.ms-filter-sidebar {
+  padding: unset;
+}
+
+@media (max-width: 768px) {
+  .ms-shop-grid_wrapper {
+    .ms-shop-grid_container {
+      .left-side {
+        .ms-shop-gird_desktop {
+          display: none;
+        }
+      }
+
+      .right-side {
+        .header {
+          .ms-filter-box-mobile {
+            display: flex !important;
+          }
+
+          .m-search_form {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+
 }
 </style>
