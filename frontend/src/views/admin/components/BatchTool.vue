@@ -2,7 +2,7 @@
   <div class="form-list flex-grow-1 d-flex overflow-auto">
     <div class="d-flex flex-column flex-grow-1">
       <div class="d-flex flex-row title-box">
-        <div class="list-title flex-grow-1 text-start">{{ MESSAGE.BATCH_TOOLS }}</div>
+        <div class="list-title flex-grow-1 text-start">{{ $t('batch_tools') }}</div>
       </div>
       <div class="flex-1 d-flex">
         <div class=" bg-white rounded-8 px-24 flex1 py-32 flex flex-wrap">
@@ -32,9 +32,7 @@ import {MESSAGE} from "../../../common/enums";
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   },
   components: {},
   data() {

@@ -146,7 +146,7 @@
                           <div class="label">{{ property['name'] }}</div>
                           <div class="">
                             <InputText v-model="selectedProperty[index]"
-                                       :placeholder="MESSAGE.INPUT_PROPERTY_PLACEHOLDER"></InputText>
+                                       :placeholder="$t('input_property_placeholder')"></InputText>
                           </div>
                           <div class="ms-error-text"></div>
                         </div>
@@ -160,7 +160,7 @@
                             <Dropdown v-model="selectedProperty[index]" :options="property.property_values"
                                       optionLabel="value"
                                       @before-show="beforeShowSelectWithAddOption(index)"
-                                      :placeholder="MESSAGE.SELECT_PROPERTY_PLACEHOLDER"
+                                      :placeholder="$t('select_property_placeholder')"
                                       showClear
                                       filter
                                       checkmark
@@ -173,7 +173,7 @@
                                     <div class="">
                                       <InputText v-model="valueSelectAddOption[index]"
                                                  :class="{'error': invalidValueSelectAddOption[index]}"
-                                                 :placeholder="MESSAGE.INPUT_PROPERTY_PLACEHOLDER"></InputText>
+                                                 :placeholder="$t('input_property_placeholder')"></InputText>
                                     </div>
                                     <div class="ms-error-text" v-if="invalidValueSelectAddOption[index]">
                                       {{ invalidValueSelectAddOption[index] }}
@@ -195,7 +195,7 @@
                           <div class="">
                             <MultiSelect v-model="selectedProperty[index]" :options="property.property_values"
                                          optionLabel="value"
-                                         :placeholder="MESSAGE.SELECT_PROPERTY_PLACEHOLDER"
+                                         :placeholder="$t('select_property_placeholder')"
                                          display="chip"
                                          filter
                                          @before-show="beforeShowSelectWithAddOption(index)"
@@ -207,7 +207,7 @@
                                     <div class="">
                                       <InputText v-model="valueSelectAddOption[index]"
                                                  :class="{'error': invalidValueSelectAddOption[index]}"
-                                                 :placeholder="MESSAGE.INPUT_PROPERTY_PLACEHOLDER"></InputText>
+                                                 :placeholder="$t('input_property_placeholder')"></InputText>
                                     </div>
                                     <div class="ms-error-text" v-if="invalidValueSelectAddOption[index]">
                                       {{ invalidValueSelectAddOption[index] }}
@@ -234,7 +234,7 @@
                     <div class="">
                       <Dropdown v-model="selectedProduct.brand" :options="brands" optionLabel="brand_name"
                                 placeholder="Chọn một thương hiệu"
-                                :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
+                                :emptyMessage="$t('please_enter')"
                                 checkmark
                                 filter
                                 panelClass="ms-dropdown-checkmark"
@@ -247,7 +247,7 @@
                               <div class="">
                                 <InputText v-model="valueBrandSelectAddOption"
                                            :class="{'error': invalidAddBrandOption['brand']}"
-                                           :placeholder="MESSAGE.ENTER"></InputText>
+                                           :placeholder="$t('enter')"></InputText>
                               </div>
                               <div class="ms-error-text" v-if="invalidAddBrandOption['brand']">
                                 {{ invalidAddBrandOption['brand'] }}
@@ -318,8 +318,8 @@
                       <div class="">
                         <Dropdown v-model="selectedProduct.size_id" :options="sizeList" optionLabel="size_name"
                                   optionValue="id"
-                                  :placeholder="MESSAGE.SELECT_SIZE_CHART_TEMPLATE"
-                                  :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
+                                  :placeholder="$t('select_size_chart_template')"
+                                  :emptyMessage="$t('please_enter')"
                                   checkmark
                                   filter
                                   panelClass="ms-dropdown-checkmark"
@@ -517,7 +517,7 @@
                             </div>
                           </div>
                           <div class="d-flex align-items-center">
-                            <InputText v-model="listVariant[key].name" :placeholder="MESSAGE.INPUT_PLACEHOLDER_VARIANT"
+                            <InputText v-model="listVariant[key].name" :placeholder="$t('input_placeholder_variant')"
                                        :class="{'error': invalidVariant[`name${key}`]}" maxlength="50"
                                        @input="changeNameVariant($event, key)"></InputText>
                             <div class="icon-w24 ms-1" style="margin-right: 45px;">
@@ -587,7 +587,7 @@
                                     <div class="">
                                       <InputText v-model="item.option[slotProps.index].value"
                                                  :class="{'error': invalidVariant[`${key}${slotProps.index}`]}"
-                                                 :placeholder="MESSAGE.INPUT_PROPERTY_PLACEHOLDER"
+                                                 :placeholder="$t('input_property_placeholder')"
                                                  maxlength="50"
                                                  @blur="changeVariantValue(key, slotProps.index)"></InputText>
                                     </div>
@@ -652,7 +652,7 @@
                                   <InputText v-model="itemVariant[key].value"
                                              :class="{'error': invalidVariant[key]}"
                                              maxlength="50"
-                                             :placeholder="MESSAGE.INPUT_PROPERTY_PLACEHOLDER"
+                                             :placeholder="$t('input_property_placeholder')"
                                              @blur="changeVariantValue(key)"></InputText>
                                 </div>
                                 <div class="ms-error-text" v-if="invalidVariant[key]">
@@ -708,8 +708,8 @@
                           Danh sách biến thể
                         </div>
                         <div>
-                          <ToggleButton v-model="isBatchEditing" :onLabel="MESSAGE.BATCH_EDITING"
-                                        :offLabel="MESSAGE.BATCH_EDITING" class="ms-btn">
+                          <ToggleButton v-model="isBatchEditing" :onLabel="$t('batch_editing')"
+                                        :offLabel="$t('batch_editing')" class="ms-btn">
                             <template #icon>
                               <div class="icon_up"></div>
                             </template>
@@ -742,7 +742,7 @@
                         </div>
                         <div class="col">
                           <InputText v-model="batchEditingVariant['skuSeller']"
-                                     :placeholder="MESSAGE.SKU_SELLER"></InputText>
+                                     :placeholder="$t('sku_seller')"></InputText>
                         </div>
                         <div class="col order-md-last">
                           <Button
@@ -796,12 +796,12 @@
                           </Column>
                           <Column field="sku_seller" style="min-width: 140px; position: unset;">
                             <template #header>
-                              {{ MESSAGE.SKU_SELLER }}
+                              {{ $t('sku_seller') }}
                             </template>
                             <template #body="slotProps">
                               <div :ref="`variant_sku_seller_${slotProps.index}`">
                                 <InputText v-model="variantsData[slotProps.index].sku_seller"
-                                           :placeholder="MESSAGE.SKU_SELLER"></InputText>
+                                           :placeholder="$t('sku_seller')"></InputText>
                               </div>
                             </template>
                           </Column>
@@ -897,7 +897,7 @@
                   Tên biểu đồ kích cỡ
                 </div>
                 <div class="">
-                  <InputText v-model="sizeTableData.size_name" :placeholder="MESSAGE.PLEASE_ENTER"
+                  <InputText v-model="sizeTableData.size_name" :placeholder="$t('please_enter')"
                              :class="{'error': invalidSizeTable['name']}"></InputText>
                 </div>
                 <div class="ms-error-text" v-if="invalidSizeTable['name']">
@@ -917,7 +917,7 @@
                       optionLabel="label"
                       :selectionLimit="6"
                       :class="{'error': invalidSizeTable['option']}"
-                      :placeholder="MESSAGE.SELECT_PROPERTY_PLACEHOLDER"
+                      :placeholder="$t('select_property_placeholder')"
                       display="chip"
                       class="ms-category text-start"></MultiSelect>
                 </div>
@@ -942,7 +942,7 @@
                   Thông tin này sẽ được hiển thị cho khách hàng để tham khảo.
                 </div>
                 <div class="">
-                  <InputText v-model="sizeTableData.note" :placeholder="MESSAGE.PLEASE_ENTER"></InputText>
+                  <InputText v-model="sizeTableData.note" :placeholder="$t('please_enter')"></InputText>
                 </div>
                 <div class="ms-error-text"></div>
               </div>
@@ -968,7 +968,7 @@
                               <div class="d-flex align-items-center">
                                 <InputText v-model="sizeTableData.size_option[slotProps.index].value"
                                            :class="{'error': invalidSizeTable[`option${slotProps.index}`]}"
-                                           :placeholder="MESSAGE.ENTER"></InputText>
+                                           :placeholder="$t('enter')"></InputText>
                               </div>
                             </div>
                           </template>
@@ -984,7 +984,7 @@
                               <div class="">
                                 <InputText v-model="sizeTableData.size_option[slotProps.index][indexColumn]"
                                            :class="{'error': invalidSizeTable[`option${slotProps.index}${indexColumn}`]}"
-                                           :placeholder="MESSAGE.ENTER"></InputText>
+                                           :placeholder="$t('enter')"></InputText>
                               </div>
                               <div class="ms-error-text"
                               >
@@ -1074,7 +1074,7 @@ import TheLoading from "@/components/TheLoading.vue";
 import 'cropperjs/dist/cropper.css';
 import {getCategory} from '@/api/category'
 import {getCategoryProperty} from '@/api/category-property'
-import {MESSAGE} from "@/common/enums";
+
 import {formatCurrency} from "@/common/function";
 import {uploadImage} from "@/api/image";
 import {addProduct} from "@/api/product";
@@ -1083,9 +1083,7 @@ import {getSize, addSize} from "@/api/size";
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   },
   components: {
     TheLoading,
@@ -1386,10 +1384,10 @@ export default {
     validateSizeTable() {
       this.invalidSizeTable = [];
       if (this.sizeTableData.size_name === null || this.sizeTableData.size_name.trim() === "") {
-        this.invalidSizeTable['name'] = MESSAGE.PLEASE_ENTER
+        this.invalidSizeTable['name'] = this.$t('please_enter')
       }
       if (!this.selectedSizeTableOption) {
-        this.invalidSizeTable['option'] = MESSAGE.PLEASE_CHOOSE
+        this.invalidSizeTable['option'] = this.$t('please_choose')
       }
 
 
@@ -1572,7 +1570,7 @@ export default {
         return null;
       }
       if (this.properties.properties[index].property_values.filter(item => item.value.toLocaleString() === value.toLocaleString()).length > 0) {
-        this.invalidValueSelectAddOption[index] = MESSAGE.INVALID_OPTION_SELECT;
+        this.invalidValueSelectAddOption[index] = this.$t('invalid_option_select');
         return null;
       }
       let option = {
@@ -1724,7 +1722,7 @@ export default {
         // thay đổi giá trị
         if (this.listVariant[key].name !== "") {
           if (this.listVariant.filter((item, k) => item.name != null && item.name.toLocaleLowerCase() === this.listVariant[key].name.toLocaleLowerCase() && k !== key).length > 0) {
-            this.invalidVariant[`name${key}`] = MESSAGE.INVALID_EXITS_VARIANT_NAME;
+            this.invalidVariant[`name${key}`] = this.$t('invalid_exits_variant_name');
           }
         }
       }, 750)
@@ -1748,35 +1746,35 @@ export default {
       delete this.invalidVariant[`name${key}`]
       delete this.invalidVariant[key]
       if (this.listVariant[key].name === null || this.listVariant[key].name === "" || (this.isVariantImage && this.listVariant[key].name === "")) {
-        this.invalidVariant[`name${key}`] = MESSAGE.INVALID_EMPTY_VARIANT_NAME;
+        this.invalidVariant[`name${key}`] = this.$t('invalid_empty_variant_name');
       }
       this.listVariant[key].option.forEach((item, index) => {
         delete this.invalidVariant[`image${key}${index}`]
         if (item === "") {
-          this.invalidVariant[`${key}${index}`] = MESSAGE.INVALID_EMPTY_VARIANT;
+          this.invalidVariant[`${key}${index}`] = this.$t('invalid_empty_variant');
         }
         // kiểm tra giá trị đã tồn tại chưa
         else if (this.listVariant[key].option.filter((item, k) => item.value != null && item.value.toLocaleLowerCase() === this.listVariant[key].option[index].value.toLocaleLowerCase() && k !== index).length > 0) {
-          this.invalidVariant[`${key}${index}`] = MESSAGE.INVALID_EXITS_VARIANT;
+          this.invalidVariant[`${key}${index}`] = this.$t('invalid_exits_variant');
         }
 
         if (this.isVariantImage && !item.image) {
-          this.invalidVariant[`image${key}${index}`] = MESSAGE.ADD_PRODUCT_IMAGE;
+          this.invalidVariant[`image${key}${index}`] = this.$t('add_product_image');
         }
       })
 
       if (this.itemVariant[key].value === null && this.listVariant[key].option.length === 0) {
-        this.invalidVariant[key] = MESSAGE.INVALID_EMPTY_VARIANT;
+        this.invalidVariant[key] = this.$t('invalid_empty_variant');
       }
 
       if (this.itemVariant[key].value !== null) {
         if (this.isVariantImage && !this.itemVariant[key].image) {
-          this.invalidVariant[`image${key}`] = MESSAGE.ADD_PRODUCT_IMAGE;
+          this.invalidVariant[`image${key}`] = this.$t('add_product_image');
         }
       }
 
       if (this.listVariant[key].option.filter(item => item.value != null && this.itemVariant[key].value != null && item.value.toLocaleLowerCase() === this.itemVariant[key].value.toLocaleLowerCase()).length > 0) {
-        this.invalidVariant[key] = MESSAGE.INVALID_EXITS_VARIANT;
+        this.invalidVariant[key] = this.$t('invalid_exits_variant');
       }
 
       return Object.keys(this.invalidVariant).length <= 0;
@@ -1802,18 +1800,18 @@ export default {
       if (index != null) {
         //check rỗng
         if (this.listVariant[key].option[index].value === "") {
-          this.invalidVariant[`${key}${index}`] = MESSAGE.INVALID_EMPTY_VARIANT;
+          this.invalidVariant[`${key}${index}`] = this.$t('invalid_empty_variant');
         }
         // kiểm tra giá trị đã tồn tại chưa
         else if (this.listVariant[key].option.filter((item, k) => item.value != null && item.value.toLocaleLowerCase() === this.listVariant[key].option[index].value.toLocaleLowerCase() && k !== index).length > 0) {
-          this.invalidVariant[`${key}${index}`] = MESSAGE.INVALID_EXITS_VARIANT;
+          this.invalidVariant[`${key}${index}`] = this.$t('invalid_exits_variant');
         }
       }
       // thêm mới
       else {
         delete this.invalidVariant[key]
         if (this.listVariant[key].option.filter(item => item.value != null && item.value.toLocaleLowerCase() === this.itemVariant[key].value.toLocaleLowerCase()).length > 0) {
-          this.invalidVariant[key] = MESSAGE.INVALID_EXITS_VARIANT;
+          this.invalidVariant[key] = this.$t('invalid_exits_variant');
         } else {
           setTimeout(() => {
             this.listVariant[key].option.push({
@@ -2061,42 +2059,42 @@ export default {
       this.invalidProduct = [];
 
       if (!this.imageProducts[0].image) {
-        this.invalidProduct['image'] = MESSAGE.PLEASE_UPLOAD_ONE_IMAGE;
+        this.invalidProduct['image'] = this.$t('please_upload_one_image');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'image';
       }
 
       if (!this.selectedProduct.product_name || this.selectedProduct.product_name.trim() === "") {
-        this.invalidProduct['product_name'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+        this.invalidProduct['product_name'] = this.$t('please_fill_in_this_field');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'product_name';
       }
       if (!this.selectedCategory) {
-        this.invalidProduct['category'] = MESSAGE.PLEASE_CHOOSE_ONE_OPTION;
+        this.invalidProduct['category'] = this.$t('please_choose_one_option');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'category';
       }
 
       if (!this.selectedProduct.brand) {
-        this.invalidProduct['brand'] = MESSAGE.PLEASE_CHOOSE_ONE_OPTION;
+        this.invalidProduct['brand'] = this.$t('please_choose_one_option');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'brand';
       }
 
       if (!this.selectedProduct.description) {
-        this.invalidProduct['description'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+        this.invalidProduct['description'] = this.$t('please_fill_in_this_field');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'description';
       }
 
       if (this.properties.size_table) {
         if (this.sizeTable === null) {
-          this.invalidProduct['size_table'] = MESSAGE.PLEASE_CHOOSE_ONE_OPTION;
+          this.invalidProduct['size_table'] = this.$t('please_choose_one_option');
           scrollToInvalidProduct = scrollToInvalidProduct ?? 'sizeTable';
         } else {
           // bảng kích thước
           if (Number.parseInt(this.sizeTable) === 0 && !this.selectedProduct.size_id) {
-            this.invalidProduct['description'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+            this.invalidProduct['description'] = this.$t('please_fill_in_this_field');
             scrollToInvalidProduct = scrollToInvalidProduct ?? 'sizeTable';
           }
           // hình ảnh bảng kích thước
           if (Number.parseInt(this.sizeTable) === 1 && !this.sizeImage) {
-            this.invalidProduct['sizeImage'] = MESSAGE.SIZE_IMAGE;
+            this.invalidProduct['sizeImage'] = this.$t('size_image');
             scrollToInvalidProduct = scrollToInvalidProduct ?? 'sizeTable';
           }
         }
@@ -2129,11 +2127,11 @@ export default {
       // không có biến thể
       else {
         if (!this.saleInfomation.retailPrice) {
-          this.invalidProduct['retail_price'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+          this.invalidProduct['retail_price'] = this.$t('please_fill_in_this_field');
           scrollToInvalidProduct = scrollToInvalidProduct ?? 'product_no_variant';
         }
         if (!this.saleInfomation.quantity) {
-          this.invalidProduct['quantity'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+          this.invalidProduct['quantity'] = this.$t('please_fill_in_this_field');
           scrollToInvalidProduct = scrollToInvalidProduct ?? 'product_no_variant';
         }
       }
@@ -2204,7 +2202,7 @@ export default {
     async appendOptionToBrandSelect() {
       this.invalidAddBrandOption = [];
       if (this.valueBrandSelectAddOption === null || this.valueBrandSelectAddOption.trim() === "") {
-        this.invalidAddBrandOption['brand'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+        this.invalidAddBrandOption['brand'] = this.$t('please_fill_in_this_field');
       }
       if (Object.keys(this.invalidAddBrandOption).length > 0) {
         return;

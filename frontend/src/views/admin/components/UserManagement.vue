@@ -8,10 +8,10 @@
       <TabView class="flex1 d-flex flex-column" :pt="{
      panelContainer: { class: 'flex1 d-flex flex-column' },
     }">
-        <TabPanel :header="MESSAGE.USER_ADDED">
+        <TabPanel :header="$t('user_added')">
           <header class="flex pb-24">
             <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-              {{ MESSAGE.USER_ADDED }}
+              {{ $t('user_added') }}
             </h3>
           </header>
           <div class="d-flex gap-2 mb-5 align-items-center">
@@ -21,12 +21,12 @@
                   :options="roles.roles"
                   :showToggleAll="false"
                   optionLabel="role_name"
-                  :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
-                  :placeholder="MESSAGE.ROLES"
+                  :emptyMessage="$t('please_enter')"
+                  :placeholder="$t('roles')"
                   display="chip"
                   class="ms-category max-w-266 text-start"></MultiSelect>
               <InputText v-model="searchEmail"
-                         :placeholder="MESSAGE.ENTER_YOUR_EMAIL_ADDRESS"></InputText>
+                         :placeholder="$t('enter_your_email_address')"></InputText>
             </div>
             <div class="theme-arco-divider-vertical mx-16"></div>
             <div>
@@ -55,7 +55,7 @@
                   <div>Không tìm thấy kết quả nào</div>
                 </div>
               </template>
-              <Column field="warehouse_name" style="min-width: 200px" :header="MESSAGE.USER_EMAIL">
+              <Column field="warehouse_name" style="min-width: 200px" :header="$t('user_email')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading"> {{ data[field] }}</div>
                   <div v-else>
@@ -63,7 +63,7 @@
                   </div>
                 </template>
               </Column>
-              <Column field="detailed_address" style="min-width: 500px" dataKey="id" :header="MESSAGE.ROLES">
+              <Column field="detailed_address" style="min-width: 500px" dataKey="id" :header="$t('roles')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading">
                     <div v-if="data[field]">
@@ -80,7 +80,7 @@
                   </div>
                 </template>
               </Column>
-              <Column field="warehouse_contact" style="min-width: 180px" dataKey="id" :header="MESSAGE.ACT">
+              <Column field="warehouse_contact" style="min-width: 180px" dataKey="id" :header="$t('act')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading">
                     <div v-if="data[field]">
@@ -100,10 +100,10 @@
             </DataTable>
           </div>
         </TabPanel>
-        <TabPanel :header="MESSAGE.ROLE_ADDED">
+        <TabPanel :header="$t('role_added')">
           <header class="flex pb-24">
             <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-              {{ MESSAGE.ROLE_ADDED }}
+              {{ $t('role_added') }}
             </h3>
           </header>
           <div class="d-flex gap-2 mb-5 align-items-center">
@@ -139,7 +139,7 @@
                   <div>Không tìm thấy kết quả nào</div>
                 </div>
               </template>
-              <Column field="role_name" style="min-width: 200px; max-width: 200px" :header="MESSAGE.ROLE_NAME">
+              <Column field="role_name" style="min-width: 200px; max-width: 200px" :header="$t('role_name')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading" class="truncate-text-3"> {{ data[field] }}</div>
                   <div v-else>
@@ -148,7 +148,7 @@
                 </template>
               </Column>
               <Column field="description" style="min-width: 170px; max-width: 170px" dataKey="id"
-                      :header="MESSAGE.DESCRIPTION">
+                      :header="$t('description')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading" class="truncate-text-3" v-tooltip="data[field]">
                     {{ data[field] }}
@@ -158,7 +158,7 @@
                   </div>
                 </template>
               </Column>
-              <Column field="role_type" style="min-width: 170px; max-width: 170px" dataKey="id" :header="MESSAGE.TYPE">
+              <Column field="role_type" style="min-width: 170px; max-width: 170px" dataKey="id" :header="$t('type')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading" class="truncate-text-3">
                     {{ data[field] }}
@@ -169,7 +169,7 @@
                 </template>
               </Column>
               <Column frozen align-frozen="right" field="permissions" style="min-width: 300px; max-width: 300px"
-                      dataKey="id" :header="MESSAGE.PERMISSION">
+                      dataKey="id" :header="$t('permission')">
                 <template #body="{ data, field, slotProps }">
                   <div v-if="!isLoading" class="truncate-text-3" v-tooltip="data[field]">
                     {{ data[field] }}
@@ -190,7 +190,7 @@
       </div>
     </div>
   </div>
-  <Dialog v-model:visible="isCreateUser" modal :header="MESSAGE.ADD_USERS" :style="{ width: '40rem' }">
+  <Dialog v-model:visible="isCreateUser" modal :header="$t('add_users')" :style="{ width: '40rem' }">
     <div>
       <div class="theme-m4b-alert theme-m4b-alert-info d-flex gap-2 mb-4 align-items-center">
         <div class="icon icon-info"></div>
@@ -206,8 +206,8 @@
               :options="roles.roles"
               :showToggleAll="false"
               optionLabel="role_name"
-              :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
-              :placeholder="MESSAGE.ROLES"
+              :emptyMessage="$t('please_enter')"
+              :placeholder="$t('roles')"
               display="chip"
               class="ms-category w-100 text-start">
             <template #option="{option}">
@@ -222,7 +222,7 @@
         <div class="label d-flex flex-column gap-2">
           Địa chỉ email
           <InputText v-model="selectedAddEmail"
-                     :placeholder="MESSAGE.ENTER_YOUR_EMAIL_ADDRESS"></InputText>
+                     :placeholder="$t('enter_your_email_address')"></InputText>
         </div>
         <div class="ms-error-text"></div>
       </div>
@@ -237,13 +237,13 @@
         </Button>
         <Button @click="cropImage"
                 class="ms-btn primary blue d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-          <div class="fw-semibold">{{ MESSAGE.SEND }}</div>
+          <div class="fw-semibold">{{ $t('SEND') }}</div>
         </Button>
       </div>
 
     </template>
   </Dialog>
-  <Dialog v-model:visible="isCreateRole" modal :header="MESSAGE.ADD_NEW_ROLES" :style="{ width: '40rem' }">
+  <Dialog v-model:visible="isCreateRole" modal :header="$t('add_new_roles')" :style="{ width: '40rem' }">
     <div>
       <div class="theme-m4b-alert theme-m4b-alert-info d-flex gap-2 mb-4 align-items-center">
         <div class="icon icon-info"></div>
@@ -253,32 +253,32 @@
       </div>
       <div class="group-form_box mb-3">
         <div class="label d-flex flex-column gap-2">
-          {{ MESSAGE.ROLE_NAME }}
+          {{ $t('role_name') }}
           <InputText v-model="selectedAddEmail"
-                     :placeholder="MESSAGE.PLEASE_ENTER_A_ROLE_NAME"></InputText>
+                     :placeholder="$t('please_enter_a_role_name')"></InputText>
         </div>
         <div class="ms-error-text"></div>
       </div>
 
       <div class="group-form_box mb-4">
         <div class="label d-flex flex-column gap-2">
-          {{ MESSAGE.ROLE_DESCRIPTION }}
+          {{ $t('role_description') }}
           <InputText v-model="selectedAddEmail"
-                     :placeholder="MESSAGE.PLEASE_DESCRIBE_THE_ROLE"></InputText>
+                     :placeholder="$t('please_describe_the_role')"></InputText>
         </div>
         <div class="ms-error-text"></div>
       </div>
 
       <div class="group-form_box mb-4">
         <div class="label d-flex flex-column gap-2">
-          {{ MESSAGE.SET_PERMISSIONS }}
+          {{ $t('set_permissions') }}
           <MultiSelect
               v-model="selectedAddRoles"
               :options="roles.roles"
               :showToggleAll="false"
               optionLabel="role_name"
-              :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
-              :placeholder="MESSAGE.SELECT_PERMISSION_WANT_GRANT"
+              :emptyMessage="$t('please_enter')"
+              :placeholder="$t('select_permission_want_grant')"
               display="chip"
               class="ms-category w-100 text-start"></MultiSelect>
         </div>
@@ -295,7 +295,7 @@
         </Button>
         <Button @click="cropImage"
                 class="ms-btn primary blue d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-          <div class="fw-semibold">{{ MESSAGE.SEND }}</div>
+          <div class="fw-semibold">{{ $t('SEND') }}</div>
         </Button>
       </div>
 
@@ -317,13 +317,10 @@ import SelectButton from 'primevue/selectbutton';
 import Dropdown from 'primevue/dropdown';
 import MultiSelect from 'primevue/multiselect';
 import {getRoles, getRoleByType} from "@/api/role";
-import {MESSAGE} from "@/common/enums";
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   },
   components: {
     Button,

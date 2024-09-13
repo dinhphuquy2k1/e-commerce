@@ -7,11 +7,11 @@
       <TabView class="flex1 d-flex flex-column" :pt="{
      panelContainer: { class: 'flex1 d-flex flex-column' },
     }">
-        <TabPanel class="flex1" :header="MESSAGE.ACCOUNT_INFORMATION">
+        <TabPanel class="flex1" :header="$t('account_information')">
           <div class="ms-tab_panel">
             <header class="flex pb-24">
               <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-                {{ MESSAGE.LOGIN_INFORMATION }}
+                {{ $t('login_information') }}
               </h3>
             </header>
             <div class="d-flex flex1">
@@ -38,7 +38,7 @@
                       <div>
                         <Button
                             class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                          <div class="fw-medium">{{ MESSAGE.CHANGE }}</div>
+                          <div class="fw-medium">{{ $t('change') }}</div>
                         </Button>
                       </div>
                     </div>
@@ -52,7 +52,7 @@
                       <div>
                         <Button
                             class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                          <div class="fw-medium">{{ MESSAGE.CHANGE }}</div>
+                          <div class="fw-medium">{{ $t('change') }}</div>
                         </Button>
                       </div>
                     </div>
@@ -72,7 +72,7 @@
           <div class="ms-tab_panel mt-4">
             <header class="flex pb-24">
               <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-                {{ MESSAGE.ACCOUNT_SECURITY }}
+                {{ $t('account_security') }}
               </h3>
             </header>
             <div class="d-flex flex-column">
@@ -193,11 +193,11 @@
 
           </div>
         </TabPanel>
-        <TabPanel :header="MESSAGE.SELLER_INFORMATION">
+        <TabPanel :header="$t('seller_information')">
           <div class="ms-tab_panel">
             <header class="flex pb-24">
               <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-                {{ MESSAGE.SELLER_INFORMATION }}
+                {{ $t('seller_information') }}
               </h3>
             </header>
             <div class="d-flex gap-5">
@@ -286,11 +286,11 @@
             </div>
           </div>
         </TabPanel>
-        <TabPanel :header="MESSAGE.BUSINESS_INFORMATION">
+        <TabPanel :header="$t('business_information')">
           <div class="ms-tab_panel">
             <header class="flex pb-24">
               <h3 class="flex flex-1 text-head-l font-semibold text-gray-1 items-center">
-                {{ MESSAGE.BUSINESS_INFORMATION }}
+                {{ $t('business_information') }}
               </h3>
             </header>
             <div class="row gx-3 gy-5">
@@ -339,13 +339,11 @@ import SelectButton from 'primevue/selectbutton';
 import Dropdown from 'primevue/dropdown';
 import MultiSelect from 'primevue/multiselect';
 import {getRoles, getRoleByType} from "@/api/role";
-import {MESSAGE} from "@/common/enums";
+
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   },
   components: {
     Button,

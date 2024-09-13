@@ -65,7 +65,7 @@
             </div>
           </template>
         </Column>
-        <Column frozen alignFrozen="right" style="min-width: 120px; text-align: center;" :header="MESSAGE.ACT">
+        <Column frozen alignFrozen="right" style="min-width: 120px; text-align: center;" :header="$t('act')">
           <template #body="slotProps">
             <div class="row-actions flex-row" v-if="!isLoading">
               <div class="item" @click="onRowSelect(slotProps.data)">
@@ -186,14 +186,12 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Dropdown from 'primevue/dropdown';
 import Dialog from 'primevue/dialog';
-import {MESSAGE} from "@/common/enums";
+
 import {getCategory} from "@/api/category";
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   },
   components: {
     Button,

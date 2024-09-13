@@ -3,7 +3,7 @@
     <div class="d-flex flex-column flex-grow-1">
       <div class="d-flex flex-row title-box align-items-center gap-2">
         <div class="icon24 back pointer" @click="this.$router.go(-1)"></div>
-        <div class="list-title flex-grow-1 text-start">{{ MESSAGE.MASS_LISTING }}</div>
+        <div class="list-title flex-grow-1 text-start">{{ $t('mass_listing') }}</div>
       </div>
       <div class="flex-1 d-flex row g-3">
         <div class="d-flex flex-column gap-3 col-3" style="max-width: 400px">
@@ -141,8 +141,8 @@
               chọn.
             </div>
             <Dropdown v-model="selectedCategory" :options="categories" optionLabel="label"
-                      :placeholder="MESSAGE.PLEASE_CHOOSE_ONE_OPTION"
-                      :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
+                      :placeholder="$t('please_choose_one_option')"
+                      :emptyMessage="$t('please_enter')"
                       checkmark
                       filter
                       panelClass="ms-dropdown-checkmark"
@@ -175,8 +175,8 @@
               tả.
             </div>
             <MultiSelect v-model="selectedBrand" :options="brands" optionLabel="brand_name"
-                         :placeholder="MESSAGE.PLEASE_SELECT_BRAND"
-                         :emptyMessage="MESSAGE.EMPTY_DROPDOWN"
+                         :placeholder="$t('please_select_brand')"
+                         :emptyMessage="$t('please_enter')"
                          checkmark
                          :showToggleAll="false"
                          panelClass="ms-dropdown-checkmark"
@@ -188,7 +188,7 @@
                     <div class="">
                       <InputText v-model="valueBrandSelectAddOption"
                                  :class="{'error': invalidAddBrandOption['brand']}"
-                                 :placeholder="MESSAGE.ENTER"></InputText>
+                                 :placeholder="$t('enter')"></InputText>
                     </div>
                     <div class="ms-error-text" v-if="invalidAddBrandOption['brand']">
                       {{ invalidAddBrandOption['brand'] }}
@@ -207,7 +207,7 @@
                 @click="btnAddProduct"
                 v-if="selectedCategory"
                 class="ms-btn primary d-flex justify-content-center w-100 mt-5 ms-btn_search ps-3 pe-3 gap-2">
-              <div class="">{{ MESSAGE.DOWNLOAD_THE_TEMPLATE }}</div>
+              <div class="">{{ $t('download_the_template') }}</div>
             </Button>
           </div>
           <div v-else>
@@ -294,7 +294,7 @@ import MultiSelect from "primevue/multiselect";
 import InputText from 'primevue/inputtext';
 import Panel from 'primevue/panel';
 import Button from "primevue/button";
-import {MESSAGE} from "@/common/enums";
+
 import {getBrand, addBrand} from "@/api/brand";
 import {getCategory} from "@/api/category";
 
@@ -326,7 +326,7 @@ export default {
     async appendOptionToBrandSelect() {
       this.invalidAddBrandOption = [];
       if (this.valueBrandSelectAddOption === null || this.valueBrandSelectAddOption.trim() === "") {
-        this.invalidAddBrandOption['brand'] = MESSAGE.PLEASE_FILL_IN_THIS_FIELD;
+        this.invalidAddBrandOption['brand'] = this.$t('please_fill_in_this_field');
       }
       if (Object.keys(this.invalidAddBrandOption).length > 0) {
         return;
@@ -374,9 +374,7 @@ export default {
   },
 
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    }
+
   }
 
 }

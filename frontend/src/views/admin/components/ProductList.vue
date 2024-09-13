@@ -26,7 +26,7 @@
               <div class="box-content flex-column">
                 <div class="group-form_box mt-2">
                   <div class="label d-flex align-items-center pt-0">
-                    {{ MESSAGE.CATEGORY }}
+                    {{ $t('category') }}
                   </div>
                   <div class="mt-2">
                     <TreeSelect v-model="filter.category" :options="getCategory"
@@ -38,19 +38,19 @@
                 </div>
                 <div class="group-form_box">
                   <div class="label d-flex align-items-center">
-                    {{ MESSAGE.PRICE }}
+                    {{ $t('price') }}
                   </div>
                   <div class="mt-2 d-flex gap-3">
                     <InputNumber v-model="filter.minPrice" inputClass="text-start" class="flex-grow-1"
                                  mode="currency"
                                  :max="999999999"
-                                 :placeholder="MESSAGE.MINIMUM_PRICE"
+                                 :placeholder="$t('min_price')"
                                  currency="VND" locale="vi"/>
                     <div class="line" style="color:rgba(0,0,0,.25)">_</div>
                     <InputNumber v-model="filter.maxPrice" inputClass="text-start" class="flex-grow-1"
                                  mode="currency"
                                  :max="999999999"
-                                 :placeholder="MESSAGE.MAXIMUM_PRICE"
+                                 :placeholder="$t('max_price')"
                                  currency="VND" locale="vi"/>
                   </div>
                   <div class="ms-error-text">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="group-form_box mt-2">
                   <div class="label d-flex align-items-center pt-0">
-                    {{ MESSAGE.INVENTORY_STATUS }}
+                    {{ $t('inventory_status') }}
                   </div>
                   <div class="mt-2 d-flex gap-3">
                     <div v-for="item in listInventory" :key="item.key" class="d-flex gap-1 align-items-center pointer">
@@ -76,12 +76,12 @@
                   <Button
                       @click="toggleFilter"
                       class="ms-btn btn-secondary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                    <div class="">{{ MESSAGE.CANCEL }}</div>
+                    <div class="">{{ $t('cancel') }}</div>
                   </Button>
                   <Button
                       @click="$router.push({name: 'add_product'})"
                       class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                    <div class="fw-semibold">{{ MESSAGE.APPLY }}</div>
+                    <div class="fw-semibold">{{ $t('apply') }}</div>
                   </Button>
                 </div>
               </div>
@@ -218,14 +218,11 @@ import Dropdown from "primevue/dropdown";
 import InputNumber from "primevue/inputnumber";
 import TreeSelect from "primevue/treeselect";
 import RadioButton from 'primevue/radiobutton';
-import {MESSAGE} from "@/common/enums";
+
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    },
     ...mapGetters(['getNUmberOfRecords', 'getNumberDefault', 'getCategory', 'products', 'isLoadingProduct', 'getFilterDefault'])
   },
   components: {

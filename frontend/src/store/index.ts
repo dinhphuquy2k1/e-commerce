@@ -3,6 +3,7 @@ import paging from "@/store/modules/paging";
 import category from "@/store/modules/category";
 import product from "@/store/modules/product";
 import order from "@/store/modules/order";
+import brand from "@/store/modules/brand";
 
 export default createStore({
     modules: {
@@ -10,5 +11,6 @@ export default createStore({
         category,
         product,
         order,
+        brand,
     }
 })

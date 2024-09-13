@@ -35,6 +35,15 @@ const routes: Array<RouteRecordRaw> = [
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
+            {
+                path: '/shop/gird',
+                name: 'shop_gird',
+                components: {
+                    header: () => import('@/views/user/components/Header.vue'),
+                    content: () => import('@/views/user/components/ShopGrid.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+            },
         ],
     },
     {
