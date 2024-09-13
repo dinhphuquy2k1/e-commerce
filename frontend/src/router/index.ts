@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'shop_gird',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    content: () => import('@/views/user/components/ShopGrid.vue'),
+                    content: () => import('@/views/user/components/gird/ShopGrid.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
