@@ -13,15 +13,23 @@
 
     <Panel :header="$t('price')" toggleable class="ms-price">
       <div class="w-100">
-        <Slider v-model="filters.rangePrice" range class="w-100" :max="999999999" @slideend="changePrice"/>
+        <Slider v-model="filters.rangePrice" range class="w-100" :max="999999999" @change="$emit('applyFilter', filters, true)"/>
         <div class="row mt-2 gy-3">
           <div class="col-xxl-6 d-flex gap-2 flex-column">
             <div class="label text-start">{{ $t('min_price') }}</div>
-            <InputText :placeholder="$t('min_price')" v-model="filters.rangePrice[0]"/>
+            <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[0]" v-if="filters.rangePrice[0] < filters.rangePrice[1]"
+                         mode="currency" inputClass="text-start"
+                         currency="VND" locale="vi"/>
+            <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[1]"
+                         mode="currency" inputClass="text-start"
+                         currency="VND" locale="vi" v-else/>
           </div>
           <div class="col-xxl-6 d-flex gap-2 flex-column">
             <div class="label text-start">{{ $t('max_price') }}</div>
-            <InputText :placeholder="$t('max_price')" v-model="filters.rangePrice[1]"/>
+            <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[1]" v-if="filters.rangePrice[1] > filters.rangePrice[0]" mode="currency"
+                         currency="VND" locale="vi" inputClass="text-start"/>
+            <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[0]" mode="currency"
+                         currency="VND" locale="vi" inputClass="text-start" v-else/>
           </div>
         </div>
         <div class="ms-error-text" v-if="invalidFilters['rangePrice']">{{ invalidFilters['rangePrice'] }}</div>
@@ -66,6 +74,7 @@ import Checkbox from 'primevue/checkbox';
 import {mapActions, mapGetters, mapState} from "vuex";
 import Slider from 'primevue/slider';
 import Rating from 'primevue/rating';
+import InputNumber from 'primevue/inputnumber';
 
 export default {
   props: {
@@ -79,6 +88,7 @@ export default {
     Checkbox,
     Slider,
     Rating,
+    InputNumber,
   },
   computed: {
     ...mapGetters(['getCategory', 'getBrand']),
@@ -111,18 +121,6 @@ export default {
   },
   methods: {
     ...mapActions(['loadCategory', 'loadBrand']),
-    /**
-     * Sự kiện kéo khoảng giá tiền
-     */
-    changePrice() {
-      this.invalidFilters['rangePrice'] = null;
-      if (this.filters.rangePrice[1] < this.filters.rangePrice[0]) {
-        this.invalidFilters['rangePrice'] = this.$t('invalid_price');
-      } else {
-        this.$emit('applyFilter', this.filters, true);
-      }
-    },
-
   },
   async created() {
     if (Object.keys(this.filtersParent).length !== 0) {

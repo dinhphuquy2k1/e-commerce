@@ -24,15 +24,15 @@
           </div>
         </div>
         <div class="sub-header d-flex gx-0 gy-0 justify-content-between align-items-center flex-wrap row">
-          <div class="left-side col-xxl-9 row align-items-center text-start">
-            <span class="col-xxl-2 pl-0">{{ $t('filter') }}:</span>
-            <div class="d-flex flex-wrap flex-shrink-1 col-xxl-10 gap-2 gx-0 gy-0">
+          <div class="left-side d-flex align-items-center text-start gap-3">
+            <span class="pl-0">{{ $t('filter') }}:</span>
+            <div class="d-flex flex-1 flex-wrap flex-shrink-1 col-xxl-10 gap-2 gx-0 gy-0">
               <Chip label="Iphone 11" removable/>
               <Chip label="Ipad" removable/>
               <Chip label="Thriller" removable/>
             </div>
+            <div class="right-side">tesst</div>
           </div>
-          <div class="right-side col-xxl-3">tesst</div>
         </div>
         <div class="main ms-product-list d-flex gx-0 gy-0 flex-grow-1">
           <div class="row gx-3 gy-3 mt-2">
@@ -431,6 +431,11 @@ export default {
       .left-side {
         .ms-shop-gird_desktop {
           display: none;
+        }
+      }
+      .right-side {
+        .sub-header{
+          display: none !important;
         }
       }
 
