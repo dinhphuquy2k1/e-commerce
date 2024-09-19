@@ -41,7 +41,7 @@
     </div>
     <div class="w-100 d-flex justify-content-between align-items-center ms-bottom_header">
       <div class="left-side d-flex align-items-center gap-3">
-        <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Category"
+        <Dropdown v-model="selectedCity" :options="getCategory" optionLabel="name" placeholder="Category"
                   class="ms-category"/>
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon map"></div>
@@ -75,11 +75,15 @@
 <script>
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   components: {
     Dropdown,
     InputText
+  },
+  computed: {
+    ...mapGetters(['getCategory']),
   },
   data() {
     return {
@@ -102,10 +106,14 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    ...mapActions(['loadCategory']),
     handleScroll() {
       this.isScrolled = window.scrollY > 50;
     },
   },
+  created() {
+    this.loadCategory();
+  }
 }
 </script>
 

@@ -33,7 +33,8 @@
   "from_15_to_20_million": "Từ 15 triệu đến 20 triệu",
   "from_20_to_100_million": "Từ 20 triệu đến 100 triệu",
   "over_100_million": "Trên 100 triệu",
-  "price": "Giá tiền",
+  "price": "Giá",
+  "price_money": "Giá tiền",
   "category": "Danh mục",
   "min_price": "Giá tối thiểu",
   "max_price": "Giá tối đa",
@@ -99,5 +100,9 @@
   "cancel": "Hủy",
   "apply": "Áp dụng",
   "inventory_status": "Trạng thái hàng tồn kho",
-  "transfer_option": "Tùy chọn vận chuyển"
+  "transfer_option": "Tùy chọn vận chuyển",
+  "sort_by": "Sắp xếp theo",
+  "best_selling": "Bán chạy",
+  "newest": "Mới nhất",
+  "related": "Liên quan"
 }

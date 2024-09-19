@@ -38,7 +38,7 @@
                 </div>
                 <div class="group-form_box">
                   <div class="label d-flex align-items-center">
-                    {{ $t('price') }}
+                    {{ $t('price_money') }}
                   </div>
                   <div class="mt-2 d-flex gap-3">
                     <InputNumber v-model="filter.minPrice" inputClass="text-start" class="flex-grow-1"

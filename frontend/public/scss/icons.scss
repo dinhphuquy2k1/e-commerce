@@ -237,6 +237,11 @@ span.icon24 {
   height: 24px;
 }
 
+.icon-w16 {
+  width: 16px;
+  height: 16px;
+}
+
 .icon-w20 {
   width: 20px;
   height: 20px;
@@ -524,4 +529,12 @@ span.icon24 {
 
 .icon-media-setting {
   background: transparent url("@public/assets/icons/icon-media-setting.svg") no-repeat center;
+}
+
+.icon-sort-duo {
+  background: transparent url("@public/assets/icons/icon-sort-duo.svg") no-repeat center;
+}
+
+.icon-sort-up {
+  background: transparent url("@public/assets/icons/icon-sort-up.svg") no-repeat center;
 }

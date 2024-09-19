@@ -11,25 +11,25 @@
       </div>
     </Panel>
 
-    <Panel :header="$t('price')" toggleable class="ms-price">
+    <Panel :header="$t('price_money')" toggleable class="ms-price">
       <div class="w-100">
-        <Slider v-model="filters.rangePrice" range class="w-100" :max="999999999" @change="$emit('applyFilter', filters, true)"/>
+        <Slider v-model="filters.rangePrice" range class="w-100" :max="maxRangePrice" @slideend="$emit('applyFilter', filters, true)"/>
         <div class="row mt-2 gy-3">
           <div class="col-xxl-6 d-flex gap-2 flex-column">
             <div class="label text-start">{{ $t('min_price') }}</div>
             <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[0]" v-if="filters.rangePrice[0] < filters.rangePrice[1]"
-                         mode="currency" inputClass="text-start"
-                         currency="VND" locale="vi"/>
+                         mode="currency" inputClass="text-start" :min="0" :max="maxRangePrice"
+                         currency="VND" locale="vi" @input="$emit('applyFilter', filters, true)"/>
             <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[1]"
-                         mode="currency" inputClass="text-start"
-                         currency="VND" locale="vi" v-else/>
+                         mode="currency" inputClass="text-start" :min="0" :max="maxRangePrice"
+                         currency="VND" locale="vi" @input="$emit('applyFilter', filters, true)" v-else/>
           </div>
           <div class="col-xxl-6 d-flex gap-2 flex-column">
             <div class="label text-start">{{ $t('max_price') }}</div>
             <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[1]" v-if="filters.rangePrice[1] > filters.rangePrice[0]" mode="currency"
-                         currency="VND" locale="vi" inputClass="text-start"/>
+                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @input="$emit('applyFilter', filters, true)"/>
             <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[0]" mode="currency"
-                         currency="VND" locale="vi" inputClass="text-start" v-else/>
+                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @input="$emit('applyFilter', filters, true)" v-else/>
           </div>
         </div>
         <div class="ms-error-text" v-if="invalidFilters['rangePrice']">{{ invalidFilters['rangePrice'] }}</div>
@@ -71,7 +71,7 @@ import Panel from 'primevue/panel';
 import RadioButton from 'primevue/radiobutton';
 import InputText from 'primevue/inputtext';
 import Checkbox from 'primevue/checkbox';
-import {mapActions, mapGetters, mapState} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import Slider from 'primevue/slider';
 import Rating from 'primevue/rating';
 import InputNumber from 'primevue/inputnumber';
@@ -101,6 +101,7 @@ export default {
         rangePrice: [20000000, 60000000],
         search: null,
       },
+      maxRangePrice: 999999999,
       invalidFilters: [],
       sliderPriceOptions: [
         {name: 'under_1_million', key: 'A', value: [0, 1000000]},
@@ -126,11 +127,10 @@ export default {
     if (Object.keys(this.filtersParent).length !== 0) {
       this.filters = {...this.filtersParent}
     }
-    await this.loadCategory();
     await this.loadBrand();
-    if (!this.filters.category && this.getCategory.length > 0) {
-      this.filters.category = this.getCategory[0].key
-    }
+    // if (!this.filters.category && this.getCategory.length > 0) {
+    //   this.filters.category = this.getCategory[0].key
+    // }
   },
 }
 </script>
