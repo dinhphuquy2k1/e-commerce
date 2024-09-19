@@ -21,8 +21,8 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'user_setting',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    menu: () => import('@/views/user/components/MenuSetting.vue'),
-                    content: () => import('@/views/user/components/OrderHistory.vue'),
+                    menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                    content: () => import('@/views/user/components/dashboard/OrderHistory.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
@@ -43,6 +43,52 @@ const routes: Array<RouteRecordRaw> = [
                     content: () => import('@/views/user/components/gird/ShopGrid.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
+            },
+            {
+                path: 'dashboard',
+                components: {
+                    content: () => import('@/views/user/components/dashboard/Settings.vue'),
+                    header: () => import('@/views/user/components/Header.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+                children: [
+                    {
+                        path: '',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/AccountSetting.vue'),
+                        }
+                    },
+                    {
+                        path: 'order-history',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/OrderHistory.vue'),
+                        }
+                    },
+                    {
+                        path: 'settings',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/AccountSetting.vue'),
+                        },
+                    },
+                    {
+                        path: 'wish-list',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/WishList.vue'),
+                        },
+                    },
+                    {
+                        path: 'shop-cart',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/ShoppingCart.vue'),
+                        },
+                    },
+
+                ],
             },
         ],
     },

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ms-dashboard-settings">
     <Menu :model="items">
       <template #item="{ item, props }">
         <router-link v-if="item.to" v-slot="{ href, navigate }" :to="item.to" custom>
@@ -29,6 +29,11 @@ export default {
           to: '/',
         },
         {
+          label: 'Lich sử đơn hàng',
+          icon: 'pi pi-search',
+          to: '/setting',
+        },
+        {
           label: 'Search',
           icon: 'pi pi-search',
           to: '/setting',
@@ -40,5 +45,7 @@ export default {
 </script>
 
 <style>
-
+.ms-dashboard-settings {
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.08);
+}
 </style>

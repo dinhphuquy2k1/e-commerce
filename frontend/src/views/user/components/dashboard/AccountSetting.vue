@@ -2,9 +2,9 @@
   <div class="ms-account-setting_wrapper">
     <div class="ms-account-setting_container d-flex flex-column">
       <div class="ms-account-setting_header">
-        <div class="header text-start">Thiết lập tài khoản</div>
+        <div class="header text-start">{{ $t('account_settings')}}</div>
         <div class="content row gx-0 gy-0">
-          <div class="col-xxl-3 gy-3 mt-0 gx-3">
+          <div class="col-xxl-3 gy-3 mt-0 gx-3 d-flex justify-content-center">
             <Image alt="Image" preview>
               <template #indicatoricon>
                 <i class="pi pi-search"></i>
@@ -18,38 +18,38 @@
             </Image>
           </div>
           <div class="col-xxl-9 row gx-3 mt-0 gy-3">
-            <div class="item col-xxl-6 d-flex flex-column">
-              <div class="label">Tên hiển thị</div>
+            <div class="item col-6 d-flex flex-column">
+              <div class="label">{{$t('display_name')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-xxl-6">
-              <div class="label">Tài khoản</div>
+            <div class="item col-6">
+              <div class="label">{{$t('account')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-xxl-6">
-              <div class="label">Họ tên</div>
+            <div class="item col-6">
+              <div class="label">{{$t('full_name')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-xxl-6">
-              <div class="label">Email</div>
+            <div class="item col-6">
+              <div class="label">{{ $t('email')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-xxl-6">
-              <div class="label">Số điện thoại</div>
+            <div class="item col-6">
+              <div class="label">{{$t('phone_number')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-xxl-6">
-              <div class="label">Ngày sinh</div>
+            <div class="item col-6">
+              <div class="label">{{$t('date_of_birth')}}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
@@ -57,7 +57,7 @@
             <div class="item col-xxl-12 d-flex">
               <Button class="ms-btn orange ms-btn_search mt-4 text-center ps-4 pe-4">
                 <div class="d-flex align-items-center gap-1">
-                  <div>Cập nhật</div>
+                  <div>{{ $t('update')}}</div>
                 </div>
               </Button>
             </div>
@@ -66,55 +66,55 @@
       </div>
       <div class="ms-account-setting_content d-flex flex-column mt-4">
         <div class="left-side">
-          <div class="header text-start">Địa chỉ giao hàng</div>
+          <div class="header text-start">{{$t('shipping_address')}}</div>
           <div class="content row gy-0 gx-0">
             <div class="col-xxl-12 row gx-3 mt-0 gy-3">
               <div class="item col-xxl-12">
-                <div class="label">Họ tên</div>
+                <div class="label">{{$t('full_name')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Họ và tên"/>
+                  <InputText type="text" :placeholder="$t('customer_full_name')"/>
                 </div>
               </div>
-              <div class="item col-xxl-6">
-                <div class="label">Email</div>
+              <div class="item col-6">
+                <div class="label">{{$t('email')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Địa chỉ email"/>
+                  <InputText type="text" :placeholder="$t('email_address')"/>
                 </div>
               </div>
-              <div class="item col-xxl-6">
-                <div class="label">Số điện thoại</div>
+              <div class="item col-6">
+                <div class="label">{{$t('phone_number')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Số điện thoại"/>
+                  <InputText type="text" :placeholder="$t('phone_number')"/>
                 </div>
               </div>
-              <div class="item col-xxl-6">
+              <div class="item col-6">
                 <div class="label">Tỉnh/Thành phố</div>
                 <div class="value">
                   <InputText type="text"/>
                 </div>
               </div>
-              <div class="item col-xxl-6">
+              <div class="item col-6">
                 <div class="label">Quận Huyện</div>
                 <div class="value">
                   <InputText type="text"/>
                 </div>
               </div>
               <div class="item col-xxl-12">
-                <div class="label">Địa chỉ nhận hàng</div>
+                <div class="label">{{ $t('delivery_address')}}</div>
                 <div class="value">
                   <InputText type="text"/>
                 </div>
               </div>
               <div class="item col-xxl-12">
-                <div class="label">Ghi chú</div>
+                <div class="label">{{ $t('note')}}</div>
                 <div class="value">
-                  <Textarea rows="4" cols="30" class="h-100" placeholder="Ghi chú"/>
+                  <Textarea rows="4" cols="30" class="h-100" :placeholder="$t('note')"/>
                 </div>
               </div>
               <div class="item col-xxl-12 d-flex">
                 <Button class="ms-btn orange ms-btn_search mt-4 text-center ps-4 pe-4">
                   <div class="d-flex align-items-center gap-1">
-                    <div>Cập nhật</div>
+                    <div>{{ $t('update')}}</div>
                   </div>
                 </Button>
               </div>
@@ -124,31 +124,31 @@
       </div>
       <div class="ms-account-setting_content d-flex flex-column mt-4">
         <div class="left-side">
-          <div class="header text-start">Thay đổi mật khẩu</div>
+          <div class="header text-start">{{ $t('change_password')}}</div>
           <div class="content row gy-0 gx-0">
             <div class="col-xxl-12 row gx-3 mt-0 gy-3">
               <div class="item col-xxl-12">
-                <div class="label">Mật khẩu hiện tại</div>
+                <div class="label">{{ $t('current_password')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Mật khẩu hiện tại"/>
+                  <InputText type="text" :placeholder="$t('current_password')"/>
                 </div>
               </div>
               <div class="item col-xxl-12">
-                <div class="label">Mật khẩu mới</div>
+                <div class="label">{{$t('new_password')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Mật khẩu mới"/>
+                  <InputText type="text" :placeholder="$t('new_password')"/>
                 </div>
               </div>
               <div class="item col-xxl-12">
-                <div class="label">Nhập lại mật khẩu</div>
+                <div class="label">{{$t('confirm_password')}}</div>
                 <div class="value">
-                  <InputText type="text" placeholder="Nhập lại mật khẩu"/>
+                  <InputText type="text" :placeholder="$t('confirm_password')"/>
                 </div>
               </div>
               <div class="item col-xxl-12 d-flex">
                 <Button class="ms-btn orange ms-btn_search mt-4 text-center ps-4 pe-4">
                   <div class="d-flex align-items-center gap-1">
-                    <div>Cập nhật</div>
+                    <div>{{$t('update')}}</div>
                   </div>
                 </Button>
               </div>

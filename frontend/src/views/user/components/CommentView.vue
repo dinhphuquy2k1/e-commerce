@@ -44,7 +44,7 @@
                         <InputText type="text" :placeholder="$t('full_name')"/>
                       </div>
                       <div class="col-4">
-                        <InputText type="text" :placeholder="$t('phone_number')"/>
+                        <InputText type="text" :placeholder="$t('purchase_phone_number')"/>
                       </div>
                       <div class="col-4">
                         <InputText type="text" :placeholder="$t('email')"/>
