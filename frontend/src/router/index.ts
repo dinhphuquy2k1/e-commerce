@@ -87,6 +87,13 @@ const routes: Array<RouteRecordRaw> = [
                             content: () => import('@/views/user/components/dashboard/ShoppingCart.vue'),
                         },
                     },
+                    {
+                        path: 'browsing-history',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/BrowsingHistory.vue'),
+                        },
+                    },
 
                 ],
             },
