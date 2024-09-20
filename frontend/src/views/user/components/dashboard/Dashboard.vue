@@ -171,7 +171,7 @@
 
 <script>
 import Button from 'primevue/button';
-import BrowsingHistoryItem from "@/views/user/components/BrowsingHistoryItem.vue";
+import BrowsingHistoryItem from "@/views/user/components/dashboard/BrowsingHistoryItem.vue";
 
 export default {
   components: {

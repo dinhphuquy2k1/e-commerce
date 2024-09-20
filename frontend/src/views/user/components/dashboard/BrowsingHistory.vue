@@ -15,17 +15,26 @@
 
         </div>
       </div>
-      <div class="main"></div>
+      <div class="filter-box">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="main mt-3">
+        <div v-for="item in 3" class="d-flex gap-3 mb-3">
+          <BrowsingHistoryItem :header="'17 tháng 9 năm 2024'" :with-pagination="false"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import InputSwitch from 'primevue/inputswitch';
-
+import BrowsingHistoryItem from "@/views/user/components/dashboard/BrowsingHistoryItem.vue";
 export default {
   components: {
-    InputSwitch
+    InputSwitch,
+    BrowsingHistoryItem,
   },
   data(){
     return{

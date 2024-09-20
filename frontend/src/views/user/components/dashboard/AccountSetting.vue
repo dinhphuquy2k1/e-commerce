@@ -21,37 +21,37 @@
             </Image>
           </div>
           <div class="col-xxl-9 row gx-3 mt-0 gy-3">
-            <div class="item col-6 d-flex flex-column">
+            <div class="item col-sm-6 d-flex flex-column">
               <div class="label">{{ $t('display_name') }}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-6">
+            <div class="item col-sm-6">
               <div class="label">{{ $t('account') }}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-6">
+            <div class="item col-sm-6">
               <div class="label">{{ $t('full_name') }}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-6">
+            <div class="item col-sm-6">
               <div class="label">{{ $t('email') }}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-6">
+            <div class="item col-sm-6">
               <div class="label">{{ $t('phone_number') }}</div>
               <div class="value">
                 <InputText type="text"/>
               </div>
             </div>
-            <div class="item col-6">
+            <div class="item col-sm-6">
               <div class="label">{{ $t('date_of_birth') }}</div>
               <div class="value">
                 <InputText type="text"/>
@@ -78,25 +78,25 @@
                   <InputText type="text" :placeholder="$t('customer_full_name')"/>
                 </div>
               </div>
-              <div class="item col-6">
+              <div class="item col-sm-6">
                 <div class="label">{{ $t('email') }}</div>
                 <div class="value">
                   <InputText type="text" :placeholder="$t('email_address')"/>
                 </div>
               </div>
-              <div class="item col-6">
+              <div class="item col-sm-6">
                 <div class="label">{{ $t('phone_number') }}</div>
                 <div class="value">
                   <InputText type="text" :placeholder="$t('phone_number')"/>
                 </div>
               </div>
-              <div class="item col-6">
+              <div class="item col-sm-6">
                 <div class="label">Tỉnh/Thành phố</div>
                 <div class="value">
                   <InputText type="text"/>
                 </div>
               </div>
-              <div class="item col-6">
+              <div class="item col-sm-6">
                 <div class="label">Quận Huyện</div>
                 <div class="value">
                   <InputText type="text"/>
@@ -167,12 +167,14 @@
 import InputText from 'primevue/inputtext';
 import Image from 'primevue/image';
 import Textarea from 'primevue/textarea';
+import Button from 'primevue/button';
 
 export default {
   components: {
     InputText,
     Image,
-    Textarea
+    Textarea,
+    Button,
   }
 }
 </script>

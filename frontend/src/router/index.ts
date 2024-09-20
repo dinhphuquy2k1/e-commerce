@@ -91,7 +91,7 @@ const routes: Array<RouteRecordRaw> = [
                         path: 'browsing-history',
                         components: {
                             menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
-                            content: () => import('@/views/user/components/BrowsingHistory.vue'),
+                            content: () => import('@/views/user/components/dashboard/BrowsingHistory.vue'),
                         },
                     },
 

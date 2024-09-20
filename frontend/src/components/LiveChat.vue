@@ -2,7 +2,7 @@
   <div class="live-chat">
     <div id="live-chat-btn" v-if="isShow">
       <div class="image has-tooltip" v-tooltip="'Mở trang trò chuyện'"></div>
-      <div class="hide" @click="isShow = false"></div>
+<!--      <div class="hide" @click="isShow = false"></div>-->
     </div>
     <div id="quick-icon" v-else>
       <div class="toggle" @click="isToggle = !isToggle">
@@ -31,7 +31,7 @@ export default {
 .live-chat {
   #live-chat-btn {
     position: fixed;
-    bottom: 32px;
+    bottom: 80px;
     right: 24px;
     height: 56px;
     width: 56px;

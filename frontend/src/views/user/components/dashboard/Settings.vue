@@ -1,8 +1,10 @@
 <template>
   <div class="ms-settings_wrapper">
-    <div class="ms-settings_container row g-5">
+    <div class="ms-settings_container row g-lg-5">
       <div class="ms-settings-left_side col-md-3">
-        <router-view name="menu"></router-view>
+        <div class="ms-menu-setting">
+          <router-view name="menu"></router-view>
+        </div>
       </div>
       <div class="ms-settings-right_side col-md-9 pr-0">
         <router-view name="content"></router-view>
@@ -13,10 +15,12 @@
 
 <script>
 import Menu from 'primevue/menu';
+import SpeedDial from 'primevue/speeddial';
 
 export default {
   components: {
     Menu,
+    SpeedDial,
   },
   data() {
     return {
@@ -43,8 +47,11 @@ export default {
 
   .ms-settings_container {
     .ms-settings-left_side {
-      position: sticky;
-      top: 20px;
+      .ms-menu-setting {
+        position: sticky;
+        top: 20px;
+
+      }
     }
 
     .ms-settings-right_side {
