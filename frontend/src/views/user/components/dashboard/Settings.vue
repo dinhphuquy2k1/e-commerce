@@ -4,7 +4,7 @@
       <div class="ms-settings-left_side col-md-3">
         <router-view name="menu"></router-view>
       </div>
-      <div class="ms-settings-right_side col-md-9">
+      <div class="ms-settings-right_side col-md-9 pr-0">
         <router-view name="content"></router-view>
       </div>
     </div>

@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
                         path: '',
                         components: {
                             menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
-                            content: () => import('@/views/user/components/dashboard/AccountSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/Dashboard.vue'),
                         }
                     },
                     {

@@ -119,5 +119,10 @@
   "customer_full_name": "Họ và tên",
   "email_address": "Địa chỉ email",
   "delivery_address": "Địa chỉ nhận hàng",
-  "note": "Ghi chú"
+  "note": "Ghi chú",
+  "account_dashboard_info": "Từ bảng điều khiển tài khoản của bạn, bạn có thể dễ dàng kiểm tra và xem <b>Đơn hàng gần đây</b> của mình, quản lý <b>Địa chỉ giao hàng và thanh toán</b> cũng như chỉnh sửa <b>Mật khẩu</b> và <b>Chi tiết tài khoản</b> của bạn.",
+  "billing_address": "Địa chỉ thanh toán",
+  "browsing_history": "Lịch sử duyệt web",
+  "no_data": "Không có dữ liệu",
+  "view_all": "Xem tất cả"
 }
