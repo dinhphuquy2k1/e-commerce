@@ -2,7 +2,7 @@
   <div class="ms-browsing-wrapper">
     <div class="ms-browsing-container">
       <div class="header d-flex justify-content-between">
-        <div class="left-side">
+        <div class="left-side fs-20 fw-bold">
           Lịch sử duyệt web
         </div>
         <div class="right-side d-flex justify-content-center align-items-center gap-3">

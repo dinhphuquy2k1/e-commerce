@@ -124,5 +124,11 @@
   "billing_address": "Địa chỉ thanh toán",
   "browsing_history": "Lịch sử duyệt web",
   "no_data": "Không có dữ liệu",
-  "view_all": "Xem tất cả"
+  "view_all": "Xem tất cả",
+  "track_order_instruction": "Để theo dõi đơn hàng của bạn, vui lòng nhập ID đơn hàng của bạn vào trường nhập bên dưới và nhấn nút “Theo dõi đơn hàng”, mã này đã được cung cấp cho bạn trên biên nhận và trong email xác nhận mà bạn nhận được.",
+  "payment_email": "Email thanh toán",
+  "order_id": "ID đơn hàng",
+  "order_id_sent": "ID đơn hàng mà chúng tôi đã gửi cho bạn trong địa chỉ email của bạn.",
+  "lookup": "Tra cứu",
+  "no_results_found": "Không tìm thấy kết quả nào"
 }

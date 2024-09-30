@@ -2,7 +2,7 @@
   <div class="ms-account-setting_wrapper">
     <div class="ms-account-setting_container d-flex flex-column">
       <div class="ms-account-setting_header">
-        <div class="header text-start">{{ $t('account_settings') }}</div>
+        <div class="header text-start text-uppercase">{{ $t('account_settings') }}</div>
         <div class="content row gx-0 gy-0">
           <div class="col-xxl-3 gy-3 mt-0 gx-3 d-flex justify-content-center flex-1">
             <Image alt="Image" preview class="ms-avatar rounded-0">
@@ -69,7 +69,7 @@
       </div>
       <div class="ms-account-setting_content d-flex flex-column mt-4">
         <div class="left-side">
-          <div class="header text-start">{{ $t('shipping_address') }}</div>
+          <div class="header text-start text-uppercase">{{ $t('shipping_address') }}</div>
           <div class="content row gy-0 gx-0">
             <div class="col-xxl-12 row gx-3 mt-0 gy-3">
               <div class="item col-xxl-12">
@@ -127,7 +127,7 @@
       </div>
       <div class="ms-account-setting_content d-flex flex-column mt-4">
         <div class="left-side">
-          <div class="header text-start">{{ $t('change_password') }}</div>
+          <div class="header text-start text-uppercase">{{ $t('change_password') }}</div>
           <div class="content row gy-0 gx-0">
             <div class="col-xxl-12 row gx-3 mt-0 gy-3">
               <div class="item col-xxl-12">

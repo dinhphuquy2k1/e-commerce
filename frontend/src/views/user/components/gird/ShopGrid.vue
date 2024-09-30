@@ -1,13 +1,13 @@
 <template>
   <div class="ms-shop-grid_wrapper">
-    <div class="ms-shop-grid_container ms-feature-product-wrapper row">
+    <div class="ms-shop-grid_container row">
       <div class="left-side col-md-3">
         <Sidebar v-model:visible="visibleFilters" class="ms-filter-sidebar">
           <ShopGirdFilter @applyFilter="applyFilter" :filtersParent="filtersParent"/>
         </Sidebar>
         <ShopGirdFilter @applyFilter="applyFilter" v-if="!visibleFilters" :filtersParent="filtersParent"/>
       </div>
-      <div class="right-side ms-featured_product-container col-md-9 d-flex flex-column">
+      <div class="right-side col-md-9 d-flex flex-column">
         <!--        <div class="header mb-3 d-flex flex-row align-items-center justify-content-between flex-wrap gap-3">-->
         <!--          <div class="ms-filter-box-mobile d-flex align-items-center gap-2 pointer" @click="visibleFilters = true">-->
         <!--            Bộ lọc-->
@@ -96,61 +96,71 @@
         <!--            <div class="right-side">tesst</div>-->
         <!--          </div>-->
         <!--        </div>-->
-        <div class="main ms-product-list d-flex gx-0 gy-0 flex-grow-1">
+        <div class="main ms-product-list gx-0 gy-0 flex-grow-1 h-100">
           <div class="row gx-3 gy-3 mt-2">
-            <div class="col-xxl-3 col-lg-4 col-sm-6 ms-item position-relative" v-for="item in products"
-                 :key="item">
-              <div class="ms-item-main d-flex flex-column justify-content-between">
-                <div class="ms-product_image position-relative">
-                  <div class="ms-offer-tag position-absolute top-0 left-0">
-                    <Tag value="HOT" class="hot ms-offer-tag_item"></Tag>
-                  </div>
-                  <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
-                  <div class="ms-product-buttons w-100">
-                    <div class="d-flex justify-content-between gap-3">
-                      <Button
-                          class="ms-btn orange rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: $t('favorite'), escape: true }">
-                        <div class="icon-only icon-heart_black"></div>
-                      </Button>
-                      <Button
-                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: $t('add_to_cart'), escape: true }">
-                        <div class="icon-only icon-simple_cart-black"></div>
-                      </Button>
-                      <Button
-                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
-                          v-tooltip.bottom="{ value: $t('view_details'), escape: true }">
-                        <div class="icon-only icon-eye"></div>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <div class="rating d-flex gap-2 flex-wrap mt-3">
-                  <div class="star-rating">
-                    <Rating v-model="item.rating" readonly :cancel="false"/>
-                  </div>
-                  <div class="quantity-rating">
-                    (52,677)
-                  </div>
-                </div>
-                <div class="ms-offer_name text-start">
-                  Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...
-                </div>
-                <div class="ms-offer_price text-start">
-                  <span class="offer-price_origin">25.000.000đ</span>
-                  <span class="offer-price_final">20.000.000đ</span>
-                </div>
+            <div v-if="products.total === 0">
+              <div class="d-flex flex-column p-24 justify-content-center align-items-center">
+                <div class="icon-empty_table"></div>
+                <div>{{ $t('no_results_found') }}</div>
               </div>
+            </div>
+            <div class="col-xxl-3 col-lg-4 col-sm-6 ms-item position-relative" v-for="item in products.data"
+                 :key="item">
+              <ProductItem :data="item"></ProductItem>
+              <!--              <div class="ms-item-main d-flex flex-column justify-content-between">-->
+              <!--                <div class="ms-product_image position-relative">-->
+              <!--                  <div class="ms-offer-tag position-absolute top-0 left-0">-->
+              <!--                    <Tag value="HOT" class="hot ms-offer-tag_item"></Tag>-->
+              <!--                  </div>-->
+              <!--                  &lt;!&ndash;                  <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>&ndash;&gt;-->
+              <!--                  <Image :src="item.medias[0].media_url" alt="Image"/>-->
+              <!--                  <div class="ms-product-buttons w-100">-->
+              <!--                    <div class="d-flex justify-content-between gap-3">-->
+              <!--                      <Button-->
+              <!--                          class="ms-btn orange rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"-->
+              <!--                          v-tooltip.bottom="{ value: $t('favorite'), escape: true }">-->
+              <!--                        <div class="icon-only icon-heart_black"></div>-->
+              <!--                      </Button>-->
+              <!--                      <Button-->
+              <!--                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"-->
+              <!--                          v-tooltip.bottom="{ value: $t('add_to_cart'), escape: true }">-->
+              <!--                        <div class="icon-only icon-simple_cart-black"></div>-->
+              <!--                      </Button>-->
+              <!--                      <Button-->
+              <!--                          class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"-->
+              <!--                          v-tooltip.bottom="{ value: $t('view_details'), escape: true }">-->
+              <!--                        <div class="icon-only icon-eye"></div>-->
+              <!--                      </Button>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--                <div class="rating d-flex gap-2 flex-wrap mt-3">-->
+              <!--                  <div class="star-rating">-->
+              <!--                    <Rating v-model="item.rating" readonly :cancel="false"/>-->
+              <!--                  </div>-->
+              <!--                  <div class="quantity-rating">-->
+              <!--                    (52,677)-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--                <div class="ms-offer_name text-start">-->
+              <!--                  {{ item.productName }}-->
+              <!--                </div>-->
+              <!--                <div class="ms-offer_price text-start">-->
+              <!--                  <span class="offer-price_origin">25.000.000đ</span>-->
+              <!--                  <span class="offer-price_final">{{ formatCurrency({value: Number(item.productPrice)}) }}</span>-->
+              <!--                </div>-->
+              <!--              </div>-->
             </div>
           </div>
         </div>
         <div class="footer">
-          <Paginator :rows="10" :totalRecords="120"></Paginator>
+          <Paginator :rows="products.perPage" :totalRecords="products.total"
+                     v-if="products.total"></Paginator>
         </div>
       </div>
     </div>
   </div>
+  <TheLoading :fixed="true" v-if="isLoadingProduct"/>
 </template>
 
 <script>
@@ -170,6 +180,10 @@ import Button from 'primevue/button';
 import Tag from 'primevue/tag';
 import SelectButton from 'primevue/selectbutton';
 import ToggleButton from 'primevue/togglebutton';
+import TheLoading from "@/components/TheLoading.vue";
+import {mapGetters, mapActions} from "vuex";
+import {formatCurrency} from "../../../../common/function";
+import ProductItem from '@/components/ProductItem.vue'
 
 export default {
   components: {
@@ -189,6 +203,8 @@ export default {
     ShopGirdFilter,
     SelectButton,
     ToggleButton,
+    TheLoading,
+    ProductItem,
   },
   data() {
     return {
@@ -206,189 +222,72 @@ export default {
         {
           name: this.$t('related'),
           type: 1,
+          orderType: 1,
           selected: false,
         },
         {
           name: this.$t('newest'),
           type: 1,
+          orderType: 2,
           selected: false,
         },
         {
           name: this.$t('best_selling'),
           type: 1,
+          orderType: 3,
           selected: false,
         },
         {
           name: this.$t('price'),
           type: 2,
+          orderType: 4,
           selected: false,
         },
         {
           name: this.$t('filter'),
           type: 3,
+          orderType: 4,
           selected: false,
         },
       ],
+      pagination: {
+        limit: 20,
+        categoryId: null,
+        withCategoryChildren: true,
+        rangePrice: [0, 999999999],
+      },
       visibleFilters: false,
       filtersParent: {},
       selectedCategory: 'Production',
       selectedCategories: null,
-      products: [
-        {
-          id: '1000',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1001',
-          code: 'nvklal433',
-          name: 'Black Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 72,
-          category: 'Accessories',
-          quantity: 61,
-          inventoryStatus: 'INSTOCK',
-          rating: 4
-        },
-        {
-          id: '1002',
-          code: 'zz21cz3c1',
-          name: 'Blue Band',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 79,
-          category: 'Fitness',
-          quantity: 2,
-          inventoryStatus: 'LOWSTOCK',
-          rating: 3
-        },
-        {
-          id: '1003',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1004',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1005',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1006',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        }, {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-      ],
     }
   },
   methods: {
-    applyFilter(filters, isWithTimeOut = false) {
+    formatCurrency,
+    ...mapActions(['getProductWithFilter']),
+    async applyFilter(filters, isWithTimeOut = false) {
       let timeOut = isWithTimeOut ? 750 : 0;
       clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
-        if (JSON.stringify(filters) !== JSON.stringify(this.filtersParent)) {
-          this.filtersParent = filters;
+        if (filters.categoryId) {
+          this.$router.push({query: {categoryId: filters.categoryId}});
         }
+
+        Object.keys(filters).forEach(key => {
+          this.pagination[key] = filters[key];
+        })
+        this.handlerFilter();
       }, timeOut);
+    },
+
+    handlerFilter() {
+      this.pagination.categoryId = this.pagination.categoryId ? this.pagination.categoryId : Number(this.$route.query.categoryId);
+      this.getProductWithFilter({
+        filters: {
+          'filters': this.pagination,
+          'order': this.selectedOrder
+        }
+      });
     },
 
     changeOrder() {
@@ -402,9 +301,19 @@ export default {
         this.selectedOrder = null;
       }
 
+      this.handlerFilter();
       this.previousSelectedOrder = this.selectedOrder;
     }
   },
+
+  created() {
+    this.handlerFilter();
+  },
+
+  computed: {
+    ...mapGetters(['products', 'isLoadingProduct']),
+  }
+
 }
 </script>
 
@@ -468,6 +377,17 @@ export default {
         }
       }
 
+    }
+
+    .ms-product_image {
+      .p-image {
+        width: 100%;
+        height: 100%;
+
+        img {
+          height: 100%;
+        }
+      }
     }
 
     .right-side {

@@ -2,7 +2,7 @@
   <div class="ms-shop-gird_desktop">
     <Panel :header="$t('category')" toggleable class="ms-category">
       <div v-for="category in getCategory" :key="category.key" class="d-flex gap-2 align-items-center pointer">
-        <RadioButton v-model="filters.category" :inputId="`category-${category.key}`" name="dynamic"
+        <RadioButton v-model="filters.categoryId" :inputId="`category-${category.key}`" name="dynamic"
                      @change="$emit('applyFilter', filters)"
                      :value="category.key"/>
         <label :for="`category-${category.key}`" class=" truncate-text-1 pointer" :title="category.label">{{
@@ -19,17 +19,17 @@
             <div class="label text-start">{{ $t('min_price') }}</div>
             <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[0]" v-if="filters.rangePrice[0] < filters.rangePrice[1]"
                          mode="currency" inputClass="text-start" :min="0" :max="maxRangePrice"
-                         currency="VND" locale="vi" @input="$emit('applyFilter', filters, true)"/>
+                         currency="VND" locale="vi" @blur="$emit('applyFilter', filters, true)"/>
             <InputNumber :placeholder="$t('min_price')" v-model="filters.rangePrice[1]"
                          mode="currency" inputClass="text-start" :min="0" :max="maxRangePrice"
-                         currency="VND" locale="vi" @input="$emit('applyFilter', filters, true)" v-else/>
+                         currency="VND" locale="vi" @blur="$emit('applyFilter', filters, true)" v-else/>
           </div>
           <div class="col-xxl-6 d-flex gap-2 flex-column">
             <div class="label text-start">{{ $t('max_price') }}</div>
             <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[1]" v-if="filters.rangePrice[1] > filters.rangePrice[0]" mode="currency"
-                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @input="$emit('applyFilter', filters, true)"/>
+                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @blur="$emit('applyFilter', filters)"/>
             <InputNumber :placeholder="$t('max_price')" v-model="filters.rangePrice[0]" mode="currency"
-                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @input="$emit('applyFilter', filters, true)" v-else/>
+                         currency="VND" locale="vi" inputClass="text-start" :min="0" :max="maxRangePrice" @blur="$emit('applyFilter', filters)" v-else/>
           </div>
         </div>
         <div class="ms-error-text" v-if="invalidFilters['rangePrice']">{{ invalidFilters['rangePrice'] }}</div>
@@ -47,7 +47,7 @@
       <div class="row gy-2">
         <div v-for="brand of getBrand" :key="brand.id" class="d-flex gap-2 align-items-center col-xxl-12">
           <Checkbox v-model="filters.brands" :inputId="`brand-${brand.id}`" :name="`brand-${brand.id}`"
-                    :value="`brand-${brand.id}`" @change="$emit('applyFilter', filters, true)"/>
+                    :value="brand.id" @change="$emit('applyFilter', filters, true)"/>
           <label :for="`brand-${brand.id}`" class="truncate-text-1 pointer">{{ brand.brand_name }}</label>
         </div>
       </div>
@@ -75,6 +75,7 @@ import {mapActions, mapGetters} from "vuex";
 import Slider from 'primevue/slider';
 import Rating from 'primevue/rating';
 import InputNumber from 'primevue/inputnumber';
+import {MAX_PRICE} from "@/common/enums";
 
 export default {
   props: {
@@ -96,12 +97,12 @@ export default {
   data() {
     return {
       filters: {
-        category: null,
+        categoryId: null,
         brands: [],
-        rangePrice: [20000000, 60000000],
+        rangePrice: [0, 999999999],
         search: null,
       },
-      maxRangePrice: 999999999,
+      maxRangePrice: MAX_PRICE,
       invalidFilters: [],
       sliderPriceOptions: [
         {name: 'under_1_million', key: 'A', value: [0, 1000000]},
@@ -110,7 +111,7 @@ export default {
         {name: 'from_6_to_8_million', key: 'D', value: [6000000, 8000000]},
         {name: 'from_15_to_20_million', key: 'O', value: [15000000, 20000000]},
         {name: 'from_20_to_100_million', key: 'Q', value: [20000000, 100000000]},
-        {name: 'over_100_million', key: 'R', value: [100000000, 999999999]},
+        {name: 'over_100_million', key: 'R', value: [100000000, MAX_PRICE]},
       ],
       ratings: [
         5,
@@ -122,15 +123,19 @@ export default {
   },
   methods: {
     ...mapActions(['loadCategory', 'loadBrand']),
+
+    handlerQuery() {
+      if (this.$route.query.categoryId) {
+        this.filters.categoryId = Number(this.$route.query.categoryId);
+      }
+    }
   },
   async created() {
     if (Object.keys(this.filtersParent).length !== 0) {
       this.filters = {...this.filtersParent}
     }
     await this.loadBrand();
-    // if (!this.filters.category && this.getCategory.length > 0) {
-    //   this.filters.category = this.getCategory[0].key
-    // }
+    this.handlerQuery();
   },
 }
 </script>

@@ -36,13 +36,18 @@ const routes: Array<RouteRecordRaw> = [
                 },
             },
             {
-                path: '/shop/gird',
-                name: 'shop_gird',
-                components: {
-                    header: () => import('@/views/user/components/Header.vue'),
-                    content: () => import('@/views/user/components/gird/ShopGrid.vue'),
-                    footer: () => import('@/views/user/components/Footer.vue'),
-                },
+                path: 'shop',
+                children: [
+                    {
+                        path: 'gird',
+                        name: 'shop_gird',
+                        components: {
+                            header: () => import('@/views/user/components/Header.vue'),
+                            content: () => import('@/views/user/components/gird/ShopGrid.vue'),
+                            footer: () => import('@/views/user/components/Footer.vue'),
+                        },
+                    },
+                ]
             },
             {
                 path: 'dashboard',
@@ -94,7 +99,13 @@ const routes: Array<RouteRecordRaw> = [
                             content: () => import('@/views/user/components/dashboard/BrowsingHistory.vue'),
                         },
                     },
-
+                    {
+                        path: 'track-order',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/TrackOrder.vue'),
+                        },
+                    },
                 ],
             },
         ],

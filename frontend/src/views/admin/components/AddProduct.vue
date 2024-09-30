@@ -232,7 +232,8 @@
                       Thương hiệu
                     </div>
                     <div class="">
-                      <Dropdown v-model="selectedProduct.brand" :options="brands" optionLabel="brand_name"
+                      <Dropdown v-model="selectedProduct.brand_id" :options="brands" optionLabel="brand_name"
+                                optionValue="id"
                                 placeholder="Chọn một thương hiệu"
                                 :emptyMessage="$t('please_enter')"
                                 checkmark
@@ -1082,9 +1083,7 @@ import {getBrand, addBrand} from "@/api/brand";
 import {getSize, addSize} from "@/api/size";
 
 export default {
-  computed: {
-
-  },
+  computed: {},
   components: {
     TheLoading,
     Button,
@@ -1996,7 +1995,7 @@ export default {
         formData.append('product', JSON.stringify(this.selectedProduct))
         formData.append('category_id', Object.keys(this.selectedCategory)[0])
         formData.append('properties', JSON.stringify(this.selectedProperty));
-        formData.append('size_id', JSON.stringify(this.selectedProduct.size_id));
+        formData.append('size_id', this.selectedProduct.size_id ?? null);
         if (this.selectedProduct.has_variant) {
           formData.append('variants', JSON.stringify(this.variantsData))
         } else {
@@ -2023,7 +2022,6 @@ export default {
           }, 350);
         })
       } else {
-        console.log(this.invalidProduct)
       }
     },
 
@@ -2072,7 +2070,7 @@ export default {
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'category';
       }
 
-      if (!this.selectedProduct.brand) {
+      if (!this.selectedProduct.brand_id) {
         this.invalidProduct['brand'] = this.$t('please_choose_one_option');
         scrollToInvalidProduct = scrollToInvalidProduct ?? 'brand';
       }
@@ -2209,12 +2207,10 @@ export default {
       }
 
       if (this.brands.filter(item => item.brand_name === this.valueBrandSelectAddOption).length === 0) {
-        this.selectedProduct.brand = {
-          brand_name: this.valueBrandSelectAddOption
-        }
-        await addBrand(this.selectedProduct.brand).then(res => {
+        this.selectedProduct.brand_id = this.valueBrandSelectAddOption.id
+        await addBrand(this.valueBrandSelectAddOption).then(res => {
+          this.brands.push(this.valueBrandSelectAddOption)
           this.valueBrandSelectAddOption = null;
-          this.brands.push(this.selectedProduct.brand)
         }).catch(error => {
           console.log(error)
         })

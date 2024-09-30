@@ -1,6 +1,6 @@
 <template>
-  <div class="ms-product-item">
-    <div class="top-offer_item">
+  <div class="ms-product-item h-100 d-flex">
+    <div class="top-offer_item flex-1">
       <div class="ms-offer-tag">
         <div class="sold-out ms-offer-tag_item d-none">
           BÁN HẾT
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="ms-offer_image position-relative">
-        <Image :src="require('@public/assets/images/products/drone.png')" alt="Image"/>
+        <Image :src="data.medias[0].media_url" alt="Image"/>
         <div class="ms-offer-buttons w-100">
           <div class="d-flex justify-content-between gap-3">
             <Button
@@ -43,11 +43,11 @@
         </div>
       </div>
       <div class="ms-offer_name text-start">
-        Bose Sport Earbuds - Wireless Earphones - Bluetooth In Earasdadasdasdasdas
+        {{ data.productName }}
       </div>
       <div class="ms-offer_price text-start">
         <span class="offer-price_origin">25.000.000đ</span>
-        <span class="offer-price_final">20.000.000đ</span>
+        <span class="offer-price_final">{{ formatCurrency({value: Number(data.productPrice)}) }}</span>
       </div>
     </div>
   </div>
@@ -58,11 +58,14 @@ import Tag from 'primevue/tag';
 import Image from 'primevue/image';
 import Button from 'primevue/button';
 import Rating from 'primevue/rating';
+import {formatCurrency} from "../common/function";
 
 export default {
+  methods: {formatCurrency},
   props: {
     data: {
-
+      type: Object,
+      required: true,
     }
   },
   components: {
@@ -114,6 +117,19 @@ export default {
     justify-content: center;
     width: 100%;
     max-height: 188px;
+
+    .p-image {
+      width: 100%;
+      height: 100%;
+      min-height: 188px;
+      display: flex;
+      justify-content: center;
+
+      img {
+        height: 100%;
+        max-height: 188px;
+      }
+    }
   }
 
   .ms-offer_name {

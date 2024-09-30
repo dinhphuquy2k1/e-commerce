@@ -81,7 +81,7 @@ CREATE TABLE `products`
     `size_image`         varchar(255) COLLATE utf8mb4_unicode_ci NULL,
     `size_id`            bigint(20) unsigned NULL,
     `has_variant`        tinyint(1) NOT NULL DEFAULT '0',
-    `brand`              varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `brand_id`           bigint(20) unsigned NOT NULL,
     `min_price`          int(11) COLLATE utf8mb4_unicode_ci NULL,
     `max_price`          int(11) COLLATE utf8mb4_unicode_ci NULL,
     `product_quantity`   int(11) COLLATE utf8mb4_unicode_ci NULL,
@@ -94,8 +94,10 @@ CREATE TABLE `products`
     PRIMARY KEY (`id`),
     KEY                  `products_category_id_foreign` (`category_id`),
     KEY                  `products_size_id_foreign` (`size_id`),
+    KEY                  `products_brand_id_foreign` (`brand_id`),
     CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
     CONSTRAINT `products_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE CASCADE
+    CONSTRAINT `products_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS variants;

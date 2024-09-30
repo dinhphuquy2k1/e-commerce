@@ -42,3 +42,5 @@ export const MESSAGE = {
 export const TIMEOUT = {
     LOADING: 750,
 }
+
+export const MAX_PRICE = 999999999;

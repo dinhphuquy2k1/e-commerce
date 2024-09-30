@@ -1,4 +1,4 @@
-import {getProduct} from "@/api/product";
+import {getProduct, getProductWithFilter} from "@/api/product";
 import {TIMEOUT} from "@/common/enums";
 
 export default {
@@ -38,6 +38,23 @@ export default {
                 });
             });
         },
+
+        getProductWithFilter({commit}: { commit: any }, payload: { filters: {} } = {filters: {}}): Promise<void> {
+            commit('SET_LOADING');
+            return new Promise<void>((resolve, reject) => {
+                const { filters } = payload;
+                getProductWithFilter(filters).then((response: any) => {
+                    commit('SET_PRODUCT', response);
+                    resolve();
+                }).catch((error: any) => {
+                    reject(error);
+                }).finally(() => {
+                    setTimeout(() => {
+                        commit('SET_LOADING');
+                    }, TIMEOUT.LOADING)
+                });
+            });
+        }
     },
 
     getters: {

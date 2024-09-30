@@ -5,13 +5,14 @@
         Mua sắm với danh mục
       </div>
       <div class="ms-store_categories-main">
-        <Carousel :value="products" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular :autoplayInterval="3000">
+        <Carousel :value="getCategory" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
+                  :autoplayInterval="3000">
           <template #item="slotProps">
-            <div class="d-flex flex-column align-items-center justify-content-center store-category_item">
+            <div class="d-flex flex-column align-items-center justify-content-between store-category_item flex-1" @click="selectCategory(slotProps.data)">
               <div>
-                <Image :src="require('@public/assets/images/products/'+ slotProps.data.image)" alt="Image"/>
+                <Image :src="require('@public/assets/'+ slotProps.data.media)" alt="Image"/>
               </div>
-              <div class="mt-4">{{ slotProps.data.name }}</div>
+              <div class="mt-3 text-center label">{{ slotProps.data.label }}</div>
             </div>
           </template>
         </Carousel>
@@ -24,6 +25,7 @@
 <script>
 import Image from 'primevue/image';
 import Carousel from 'primevue/carousel';
+import {mapGetters} from "vuex";
 
 export default {
   components: {
@@ -32,104 +34,6 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          id: '1000',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1001',
-          code: 'nvklal433',
-          name: 'Black Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 72,
-          category: 'Accessories',
-          quantity: 61,
-          inventoryStatus: 'INSTOCK',
-          rating: 4
-        },
-        {
-          id: '1002',
-          code: 'zz21cz3c1',
-          name: 'Blue Band',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 79,
-          category: 'Fitness',
-          quantity: 2,
-          inventoryStatus: 'LOWSTOCK',
-          rating: 3
-        },
-        {
-          id: '1003',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1004',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1005',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1006',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1007',
-          code: '244wgerg2',
-          name: 'Blue T-Shirt',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 29,
-          category: 'Clothing',
-          quantity: 25,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-      ],
       responsiveOptions: [
         {
           breakpoint: '1400px',
@@ -148,6 +52,14 @@ export default {
         },
       ]
     };
+  },
+  methods: {
+    selectCategory(data) {
+      this.$router.push({ name: 'shop_gird', query: { categoryId: data.key } });
+    },
+  },
+  computed: {
+    ...mapGetters(['getCategory']),
   },
 }
 </script>
@@ -170,17 +82,36 @@ export default {
   .ms-store_categories-main {
     .p-carousel-items-container {
       .p-carousel-item {
+        cursor: pointer;
+        display: flex;
+
         .store-category_item {
           padding: 24px 12px;
           margin: 0.5rem;
           border-radius: 4px;
           border: 1px solid #E4E7E9 !important;
           background: #FFF !important;
+
+          .label {
+            color: var(--Gray-900);
+            font-weight: 500;
+            font-size: 16px;
+          }
         }
 
         .p-image {
           max-width: 148px;
           max-height: 148px;
+          background-color: transparent;
+          mix-blend-mode: multiply;
+
+          img {
+            height: 148px;
+            width: 148px;
+            max-width: 148px;
+            max-height: 148px;
+            border-radius: 4px;
+          }
         }
       }
     }

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GenitiveType;
 use App\Models\Media;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\Variant;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Brand;
-use Illuminate\Http\Response;
-use App\Enums\GenitiveType;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +51,7 @@ class ApiProductController extends Controller
                 'variant' => 'required_without:variants',
                 'product' => 'required|json',
                 'category_id' => 'required|exists:categories,id',
-                'size_id' => 'nullable|required_without:sizeImage|exists:sizes,id',
+                'size_id' => 'nullable|required_without:sizeImage',
                 'sizeImage' => 'nullable|required_without:size_id|file|mimetypes:image/*|max:2048',
             ],
             [
@@ -119,12 +121,13 @@ class ApiProductController extends Controller
                 'description' => 'required|string',
                 'use_sample_size' => 'boolean',
                 'size_id' => 'nullable|exists:sizes,id',
-                'brand.brand_name' => 'required|string',
+                'brand_id' => 'required|integer',
             ],
             [
                 'product_name.required' => 'Tên sản phẩm không được để trống',
                 'size_id.exists' => 'Mã kích thước không tồn tại',
                 'description.required' => 'Mô tả không được để trống',
+                'brand_id' => 'Thương hiệu không được để trống',
             ]);
 
         if ($dataValidator->fails() || $productValidator->fails() || ($request['variant'] && $variantValidator->fails()) || ($request['variants'] && $variantsValidator->fails())) {
@@ -173,10 +176,6 @@ class ApiProductController extends Controller
                 ];
             }
 
-
-            $product['brand'] = json_encode([
-                'brand_name' => $product['brand']['brand_name'],
-            ]);
             $product['category_id'] = $request['category_id'];
             $product['properties'] = $request['properties'] ?? null;
             $product['has_variant'] = $product['has_variant'] ?? false;
@@ -185,6 +184,13 @@ class ApiProductController extends Controller
                 $variant = json_decode($request['variant'], true);
                 $product['product_price'] = $variant['retailPrice'];
                 $product['product_quantity'] = $variant['quantity'];
+            } else {
+                $product['product_quantity'] = 0;
+                foreach ($variants as &$variant) {
+                    $product['product_quantity'] += $variant['quantity'];
+                }
+
+                $product['product_price'] = $request['product']['min_price'];
             }
             DB::beginTransaction();
             $productID = Product::insertGetId($product);
@@ -218,5 +224,130 @@ class ApiProductController extends Controller
             return $this->sendResponseBadRequest(['message' => $th->getMessage()]);
         }
         return $this->sendResponseSuccess();
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getProductWithFilter(Request $request): array
+    {
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'filters' => 'array|required',
+                'filters.limit' => 'required|integer|min:1|max:100',
+                'filters.categoryId' => 'nullable|exists:categories,id',
+                'filters.withCategoryChildren' => 'required_with:filters.categoryId|boolean',
+                'filters.rangePrice' => 'required|array',
+                'filters.brands' => 'nullable|array',
+                'order' => 'nullable|array',
+                'order.orderType' => 'required_with:order|integer',
+                'order.selected' => 'required_with:order|boolean',
+            ]
+        );
+
+        if ($validate->fails()) {
+            return [];
+        }
+
+        $filters = $request->get('filters');
+        $order = $request->get('order');
+        $queryBuilder = Product::query();
+
+        if (!empty($filters['categoryId'])) {
+            if ($filters['withCategoryChildren']) {
+                $categories = Cache::get('categories');
+                $category = $categories[0];
+                foreach ($categories as $item) {
+                    if ($filters['categoryId'] == $item['key']) {
+                        $category = $item;
+                        break;
+                    }
+                }
+                $categoryIds = Category::getCategoryIds($category);
+                $queryBuilder->whereIn('category_id', $categoryIds);
+            } else {
+                $queryBuilder->where('category_id', $filters['categoryId']);
+            }
+        }
+
+        $minPrice = $filters['rangePrice'][0];
+        $maxPrice = $filters['rangePrice'][1];
+        if ($minPrice > $maxPrice) {
+            $minPrice = $maxPrice;
+            $maxPrice = $minPrice;
+        }
+
+        if (!empty($filters['brands'])) {
+            $queryBuilder->whereIn('brand_id', $filters['brands']);
+        }
+
+        $queryBuilder->where('product_price', '>=', $minPrice);
+        $queryBuilder->where('product_price', '<=', $maxPrice);
+        $queryBuilder->orWhere(function ($query) use ($minPrice, $maxPrice, $filters, $categoryIds) {
+            $query->whereNotNull('max_price')
+                ->where('max_price', '<=', $maxPrice);
+            if (!empty($filters['categoryId'])) {
+                if (!empty($categoryIds)) {
+                    $query->whereIn('category_id', $categoryIds);
+                } else {
+                    $query->where('category_id', $filters['categoryId']);
+                }
+            }
+
+            if (!empty($filters['brands'])) {
+                $query->whereIn('brand_id', $filters['brands']);
+            }
+        });
+
+        if ($order) {
+            switch ($order['orderType']) {
+                // liên quan
+                case 1:
+
+                    break;
+                //mới nhất
+                case 2:
+                    break;
+                // bán chạy
+                case 3:
+                    break;
+                // Giá
+                case 4:
+                    if ($order['selected']) {
+                        $queryBuilder->orderBy('product_price');
+                    }
+                    else {
+                        $queryBuilder->orderBy('product_price', 'desc');
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $products = $queryBuilder->with('medias')->paginate($request['filters']['limit']);
+        $results = [];
+        foreach ($products as $key => &$product) {
+            foreach ($product['medias'] as &$media) {
+                $media['media_url'] = asset('storage/' . $media['media_url']);
+            }
+
+            $results['data'][] = [
+                'index' => $key,
+                'productName' => $product['product_name'],
+                'brand_id' => $product['brand_id'],
+                'medias' => $product['medias'],
+                'productPrice' => $product['product_price'],
+            ];
+        }
+
+        return array_merge([
+            'perPage' => $products->perPage(),
+            'currentPage' => $products->currentPage(),
+            'total' => $products->total(),
+            'totalPages' => $products->lastPage(),
+        ], $results);
     }
 }

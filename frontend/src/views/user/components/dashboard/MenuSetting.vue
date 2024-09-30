@@ -72,13 +72,13 @@ export default {
         {
           label: 'Lịch sử đơn hàng',
           icon: 'pi pi-search',
-          route: '/setting',
+          route: '/dashboard/order-history',
           items: [],
         },
         {
           label: 'Theo dõi đơn hàng',
           icon: 'pi pi-search',
-          route: '/setting',
+          route: '/dashboard/track-order',
           items: [],
         },
         {

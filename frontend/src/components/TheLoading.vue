@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-loading" :class="{ 'fixed': fixed, 'absolute': !fixed, 'ms-loading_background': useBackground }">
+  <div class="ms-loading" :class="{ 'fixed-loading': fixed, 'absolute': !fixed, 'ms-loading_background': useBackground }">
     <span class="loader"></span>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
 
 </script>
 <style>
-.fixed {
+.fixed-loading {
   position: fixed;
   top: 0;
   left: 0;

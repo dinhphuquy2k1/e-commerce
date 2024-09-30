@@ -18,7 +18,7 @@
     <div class="w-100 d-flex justify-content-between gap-12 align-items-center ms-middle_header"
          :class="{ 'fixed': isScrolled }">
       <div class="icon-w32 icon-list_white pointer ms-header_list"></div>
-      <div class="m-logo_container d-flex align-items-center">
+      <div class="m-logo_container d-flex align-items-center pointer" @click="$router.push({ name: 'home' })">
         <div class="logo"></div>
         <div class="title">Noble</div>
       </div>
