@@ -38,6 +38,7 @@ Route::prefix('menus')->group(function () {
 
 Route::prefix('product')->group(function () {
     Route::post('/', [ApiProductController::class, 'get']);
+    Route::get('/{id}', [ApiProductController::class, 'getById'])->where('id', '[0-9]+');
     Route::post('/create', [ApiProductController::class, 'store']);
     Route::post('/filters', [ApiProductController::class, 'getProductWithFilter']);
 });

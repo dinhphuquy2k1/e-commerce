@@ -133,7 +133,8 @@
                       {{ invalidProduct['category'] }}
                     </div>
                   </div>
-                  <div class="group-form_box group-form_properties" v-if="properties?.properties?.length > 0">
+                  <div class="group-form_box group-form_properties" v-if="properties?.properties?.length > 0"
+                       ref="properties">
                     <div class="label d-flex align-items-center">
                       Thuộc tính sản phẩm
                       <div class="icon16 icon-note text-start"
@@ -143,12 +144,18 @@
                       <div v-for="(property, index) in properties.properties"
                            class="col-lg-4 col-sm-6 gx-3 gy-3 col-xs-12">
                         <div class="group-form_box" v-if="properties.propertyType?.INPUT_TEXT?.value === property.type">
-                          <div class="label">{{ property['name'] }}</div>
+                          <div class="label d-flex align-items-center">
+                            <span class="required" v-if="property.required">*</span>
+                            {{ property['name'] }}
+                          </div>
                           <div class="">
                             <InputText v-model="selectedProperty[index]"
+                                       :class="{'error': invalidProduct[`property${index}`]}"
                                        :placeholder="$t('input_property_placeholder')"></InputText>
                           </div>
-                          <div class="ms-error-text"></div>
+                          <div class="ms-error-text" v-if="invalidProduct[`property${index}`]">
+                            {{ invalidProduct[`property${index}`] }}
+                          </div>
                         </div>
                         <div class="group-form_box"
                              v-else-if="properties.propertyType?.SELECT_SINGLE_WITH_ADD_OPTION?.value === property.type || properties.propertyType?.SELECT_SINGLE?.value === property.type">
@@ -159,6 +166,7 @@
                           <div class="">
                             <Dropdown v-model="selectedProperty[index]" :options="property.property_values"
                                       optionLabel="value"
+                                      :class="{'error': invalidProduct[`property${index}`]}"
                                       @before-show="beforeShowSelectWithAddOption(index)"
                                       :placeholder="$t('select_property_placeholder')"
                                       showClear
@@ -187,17 +195,23 @@
                               </template>
                             </Dropdown>
                           </div>
-                          <div class="ms-error-text"></div>
+                          <div class="ms-error-text" v-if="invalidProduct[`property${index}`]">
+                            {{ invalidProduct[`property${index}`] }}
+                          </div>
                         </div>
                         <div class="group-form_box"
                              v-else-if="properties.propertyType?.SELECT_MULTIPLE_WITH_ADD_OPTION?.value === property.type || properties.propertyType?.SELECT_MULTIPLE?.value === property.type">
-                          <div class="label">{{ property['name'] }}</div>
+                          <div class="label d-flex align-items-center">
+                            <span class="required" v-if="property.required">*</span>
+                            {{ property['name'] }}
+                          </div>
                           <div class="">
                             <MultiSelect v-model="selectedProperty[index]" :options="property.property_values"
                                          optionLabel="value"
                                          :placeholder="$t('select_property_placeholder')"
                                          display="chip"
                                          filter
+                                         :class="{'error': invalidProduct[`property${index}`]}"
                                          @before-show="beforeShowSelectWithAddOption(index)"
                                          class="ms-category text-start">
                               <template #footer
@@ -221,7 +235,9 @@
                               </template>
                             </MultiSelect>
                           </div>
-                          <div class="ms-error-text"></div>
+                          <div class="ms-error-text" v-if="invalidProduct[`property${index}`]">
+                            {{ invalidProduct[`property${index}`] }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -845,7 +861,8 @@
     </div>
   </div>
 
-  <Dialog v-model:visible="isCropperImage" modal header="Cắt hình ảnh" :style="{ width: '25rem' }">
+  <Dialog v-model:visible="isCropperImage" modal header="Cắt hình ảnh" :style="{ width: '25rem' }"
+          @hide="hideCropImage">
     <vue-cropper ref="cropper" :src="imageSrc" :autoCrop="true"
                  :aspectRatio="1"
                  :autoCropArea="1"
@@ -1508,8 +1525,8 @@ export default {
      * @param index
      */
     changeImageProduct(event, index) {
-      this.imageProducts[index].image = event.files[0];
-      const file = event.files[0];
+      this.imageProducts[index].image = event.files[event.files.length - 1];
+      const file = event.files[event.files.length - 1];
       const reader = new FileReader();
       reader.onload = (event) => {
         this.imageSrc = event.target.result;
@@ -1922,6 +1939,20 @@ export default {
     },
 
     /**
+     * clear data when close crop image
+     */
+    hideCropImage() {
+      if (this.isCropImageProduct) {
+        if (!this.imageProducts[this.indexSelectedImageProduct].imageData) {
+          this.imageProducts[this.indexSelectedImageProduct].image = null;
+          this.imageProducts[this.indexSelectedImageProduct].imageData = null;
+          this.imageSrc = null;
+        }
+        this.isCropImageProduct = false;
+      }
+    },
+
+    /**
      * Click button thêm hàng cho bảng kích thước
      * @param index
      */
@@ -1994,7 +2025,18 @@ export default {
         }
         formData.append('product', JSON.stringify(this.selectedProduct))
         formData.append('category_id', Object.keys(this.selectedCategory)[0])
-        formData.append('properties', JSON.stringify(this.selectedProperty));
+        let properties = [];
+        this.selectedProperty.forEach((item, index) => {
+          if (item) {
+            properties.push({
+              id: this.properties.properties[index].id,
+              type: this.properties.properties[index].type,
+              name: this.properties.properties[index].name,
+              data: item
+            })
+          }
+        });
+        formData.append('properties', JSON.stringify(properties));
         formData.append('size_id', this.selectedProduct.size_id ?? null);
         if (this.selectedProduct.has_variant) {
           formData.append('variants', JSON.stringify(this.variantsData))
@@ -2018,7 +2060,9 @@ export default {
         }).finally(() => {
           setTimeout(() => {
             this.isLoading = false;
-            this.$router.push({name: this.routerBackName});
+            // if (isSuccess) {
+            //   this.$router.push({name: this.routerBackName});
+            // }
           }, 350);
         })
       } else {
@@ -2097,6 +2141,13 @@ export default {
           }
         }
       }
+
+      this.properties.properties.forEach((item, index) => {
+        if (item.required === 1 && !this.selectedProperty[index]) {
+          this.invalidProduct[`property${index}`] = this.$t('please_fill_in_this_field');
+          scrollToInvalidProduct = scrollToInvalidProduct ?? 'properties';
+        }
+      })
 
       // có biến thể
       if (this.selectedProduct.has_variant) {

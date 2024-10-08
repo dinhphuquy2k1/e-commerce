@@ -130,5 +130,8 @@
   "order_id": "ID đơn hàng",
   "order_id_sent": "ID đơn hàng mà chúng tôi đã gửi cho bạn trong địa chỉ email của bạn.",
   "lookup": "Tra cứu",
-  "no_results_found": "Không tìm thấy kết quả nào"
+  "no_results_found": "Không tìm thấy kết quả nào",
+  "in_stock": "Còn hàng",
+  "out_of_stock": "Hết hàng",
+  "almost_out_of_stock": "Sắp hết"
 }

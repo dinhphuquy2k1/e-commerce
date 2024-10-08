@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
                 },
             },
             {
-                path: '/product/detail',
+                path: '/product/:id',
                 name: 'product_detail',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),

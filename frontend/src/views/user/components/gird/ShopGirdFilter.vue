@@ -1,7 +1,7 @@
 <template>
   <div class="ms-shop-gird_desktop">
     <Panel :header="$t('category')" toggleable class="ms-category">
-      <div v-for="category in getCategory" :key="category.key" class="d-flex gap-2 align-items-center pointer">
+      <div v-for="category in categories" :key="category.key" class="d-flex gap-2 align-items-center pointer">
         <RadioButton v-model="filters.categoryId" :inputId="`category-${category.key}`" name="dynamic"
                      @change="$emit('applyFilter', filters)"
                      :value="category.key"/>
@@ -92,7 +92,7 @@ export default {
     InputNumber,
   },
   computed: {
-    ...mapGetters(['getCategory', 'getBrand']),
+    ...mapGetters(['categories', 'getBrand']),
   },
   data() {
     return {

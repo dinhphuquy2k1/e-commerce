@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\GenitiveType;
+use App\Enums\PropertyType;
+use App\Models\Category;
 use App\Models\Media;
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\ProductProperty;
 use App\Models\Variant;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +32,96 @@ class ApiProductController extends Controller
 
         $products = Product::orderByDesc('created_at')->paginate($request->get('limit'))->toArray();
         return $this->sendResponseSuccess($products);
+    }
+
+    public function getById(Request $request, int $id)
+    {
+        $data = Product::find($id);
+
+        if (!$data) {
+            return [];
+        } else {
+            $product = $data->load(['brand', 'category', 'medias', 'products_properties', 'variants.media'])->toArray();
+            foreach ($product['medias'] as &$media) {
+                $media = [
+                    'url' => asset('storage/' . $media['media_url']),
+                ];
+            }
+
+            foreach ($product['products_properties'] as &$property) {
+                $property = [
+                    'id' => $property['id'],
+                    'propertyName' => $property['property_name'],
+                    'type' => $property['type'],
+                    'value' => json_decode($property['value'], true),
+                ];
+            }
+
+            $variants = [];
+            $variantOptions = [];
+            $variantTypes = [];
+            $minPrice = PHP_INT_MAX;
+            $variantChoose = [];
+            foreach ($product['variants'] as &$variant) {
+                $contents = json_decode($variant['content'], true);
+                $types = [];
+                foreach ($contents as $key => $item) {
+                    if (preg_match('/^variant_(name|option)_(\d+)$/', $key, $matches)) {
+                        $type = $matches[1]; // 'name' hoặc 'option'
+                        $index = $matches[2]; // Chỉ số (0, 1, ...)
+                        if ($type == 'name') {
+                            $variants[$key] = $item;
+                            continue;
+                        }
+
+                        $types[] = $item;
+                        $variantOptions[$index][] = $item;
+                    }
+                }
+
+                $variantTypes[implode('|', $types)] = [
+                    'id' => $variant['id'],
+                    'url' => asset('storage/' . $variant['media']['media_url']),
+                    'price' => $variant['variant_price'],
+                    'quantity' => $variant['variant_quantity'],
+                ];
+
+                if ($variant['variant_price'] < $minPrice) {
+                    $minPrice = $variant['variant_price'];
+                    $variantChoose = $types;
+                }
+            }
+
+            foreach ($variantOptions as &$variantOption) {
+                $variantOption = array_values(array_unique($variantOption));
+            }
+
+            $result = [
+                'productName' => $product['product_name'],
+                'productPrice' => $product['product_price'],
+                'productQuantity' => $product['product_quantity'],
+                'description' => $product['description'],
+                'brand' => $product['brand']['brand_name'],
+                'category' => $product['category']['name'],
+                'medias' => $product['medias'],
+                'hasVariant' => $product['has_variant'],
+                'productProperties' => $product['products_properties'],
+                'propertyTypes' => collect(PropertyType::getInstances())->map(function ($instance) {
+                    return [
+                        'value' => $instance->value,
+                        'description' => $instance->description,
+                    ];
+                })->toArray(),
+                'variants' => [
+                    'masters' => array_values($variants),
+                    'options' => $variantOptions,
+                    'types' => $variantTypes,
+                    'select' => $variantChoose
+                ],
+            ];
+
+            return $this->sendResponseSuccess($result);
+        }
     }
 
     /**
@@ -114,6 +204,23 @@ class ApiProductController extends Controller
             );
         }
 
+        if ($request['properties']) {
+            $propertiesValidator = Validator::make(
+                json_decode($request['properties'], true),
+                [
+                    '*.id' => 'required|integer|exists:properties,id',
+                    '*.type' => 'required|integer',
+                    '*.name' => 'required',
+                    '*.data' => 'required',
+                ],
+                [
+                    '*.id.required' => 'Id không trống',
+                    '*.id.exists' => 'Id properties không tồn tại',
+                    '*.data.required' => 'data không trống',
+                ]
+            );
+        }
+
         $productValidator = Validator::make(
             json_decode($request['product'], true),
             [
@@ -130,7 +237,7 @@ class ApiProductController extends Controller
                 'brand_id' => 'Thương hiệu không được để trống',
             ]);
 
-        if ($dataValidator->fails() || $productValidator->fails() || ($request['variant'] && $variantValidator->fails()) || ($request['variants'] && $variantsValidator->fails())) {
+        if ($dataValidator->fails() || $productValidator->fails() || ($request['variant'] && $variantValidator->fails()) || ($request['variants'] && $variantsValidator->fails()) || ($request['properties'] && $propertiesValidator->fails())) {
             $errors = [];
             if ($dataValidator->fails()) {
                 $errors = $dataValidator->errors()->toArray();
@@ -144,6 +251,10 @@ class ApiProductController extends Controller
 
             if ($request['variants'] && $variantsValidator->fails()) {
                 $errors = array_merge($variantsValidator->errors()->toArray(), $errors);
+            }
+
+            if ($request['properties'] && $propertiesValidator->fails()) {
+                $errors = array_merge($propertiesValidator->errors()->toArray(), $errors);
             }
             return $this->sendResponse(ResponseAlias::HTTP_UNPROCESSABLE_ENTITY, $errors);
         }
@@ -177,7 +288,6 @@ class ApiProductController extends Controller
             }
 
             $product['category_id'] = $request['category_id'];
-            $product['properties'] = $request['properties'] ?? null;
             $product['has_variant'] = $product['has_variant'] ?? false;
             // ko có biến thể
             if (!$product['has_variant']) {
@@ -190,7 +300,7 @@ class ApiProductController extends Controller
                     $product['product_quantity'] += $variant['quantity'];
                 }
 
-                $product['product_price'] = $request['product']['min_price'];
+                $product['product_price'] = json_decode($request['product'], true)['min_price'];
             }
             DB::beginTransaction();
             $productID = Product::insertGetId($product);
@@ -198,7 +308,8 @@ class ApiProductController extends Controller
                 $item['product_id'] = $productID;
             }
             Media::insert($mediaAttributes);
-            $variantMediaIds = array_slice(Media::latest()->take(count($mediaAttributes))->pluck('id')->toArray(), -count($variantImages), count($variantImages));
+            $variantMediaIds = array_slice(Media::latest()->take(count($mediaAttributes))->pluck('id')->toArray(),
+                -count($variantImages), count($variantImages));
             // có biến thể
             if ($product['has_variant']) {
                 foreach ($variants as $key => &$variant) {
@@ -210,7 +321,21 @@ class ApiProductController extends Controller
                         'variant_quantity' => $variant['quantity'],
                     ];
                 }
+            }
 
+            if ($request['properties']) {
+                $properties = [];
+                foreach (json_decode($request['properties'], true) as $key => $value) {
+                    $properties[] = [
+                        'product_id' => $productID,
+                        'property_id' => $value['id'],
+                        'value' => json_encode($value['data']),
+                        'property_name' => $value['name'],
+                        'type' => $value['type'],
+                    ];
+                }
+
+                ProductProperty::insert($properties);
             }
 
             Variant::insert($variants);
@@ -253,6 +378,7 @@ class ApiProductController extends Controller
 
         $filters = $request->get('filters');
         $order = $request->get('order');
+        $categoryIds = [];
         $queryBuilder = Product::query();
 
         if (!empty($filters['categoryId'])) {
@@ -317,8 +443,7 @@ class ApiProductController extends Controller
                 case 4:
                     if ($order['selected']) {
                         $queryBuilder->orderBy('product_price');
-                    }
-                    else {
+                    } else {
                         $queryBuilder->orderBy('product_price', 'desc');
                     }
                     break;
@@ -335,6 +460,7 @@ class ApiProductController extends Controller
             }
 
             $results['data'][] = [
+                'id' => $product['id'],
                 'index' => $key,
                 'productName' => $product['product_name'],
                 'brand_id' => $product['brand_id'],

@@ -31,3 +31,10 @@ export function getProductWithFilter(filters: any): Promise<any> {
         data: filters
     });
 }
+
+export function getProductById(id: any): Promise<any> {
+    return request({
+        url: `product/${id}`,
+        method: 'GET',
+    });
+}

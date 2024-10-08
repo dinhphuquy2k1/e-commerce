@@ -10,15 +10,16 @@
           <!--                   alt="Image"/>-->
           <!--          </div>-->
           <div class="ms-product-images flex-1 d-flex">
-            <Galleria :value="products" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true"
-                      :containerClass="['ms-product-images_galleria lr-slider-galleria d-flex flex-1', {'ms-product-images_galleria_no-thumbnail': products.length <= 1}]">
+            <Galleria :value="product.medias" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true"
+                      :activeIndex="activeImage"
+                      :containerClass="['ms-product-images_galleria lr-slider-galleria d-flex flex-1', {'ms-product-images_galleria_no-thumbnail': product.medias.length <= 1}]">
               <template #item="slotProps">
-                <Image :src="require('@public/assets/images/products/'+ slotProps.item.image)"
+                <Image :src="slotProps.item.url"
                        alt="Image" preview/>
               </template>
               <template #thumbnail="slotProps">
                 <div class="images_galleria-item_thumbnail">
-                  <Image :src="require('@public/assets/images/products/'+ slotProps.item.image)"
+                  <Image :src="slotProps.item.url"
                          alt="Image"/>
                 </div>
               </template>
@@ -47,7 +48,7 @@
             </div>
           </div>
           <div class="text-start ms-title">
-            2020 Apple MacBook Pro with Apple M1 Chip (13-inch, 8GB RAM, 256GB SSD Storage) - Space Gray
+            {{ product.productName }}
           </div>
           <div class="ms-info-box">
             <div class="row gy-2 gx-2">
@@ -57,28 +58,31 @@
               </div>
               <div class="col-6 d-flex gap-2">
                 <div class="title">Tình trạng:</div>
-                <div class="value availability">Còn hàng</div>
+                <div class="value availability">{{
+                    maxQuantity > 0 ? (maxQuantity < 5 ? $t('almost_out_of_stock') : $t('in_stock')) : $t('out_of_stock')
+                  }}
+                </div>
               </div>
               <div class="col-6 d-flex gap-2">
                 <div class="title">Thương hiệu:</div>
-                <div class="value">Apple</div>
+                <div class="value">{{ product.brand }}</div>
               </div>
               <div class="col-6 d-flex gap-2">
                 <div class="title">Danh mục:</div>
-                <div class="value">Electronics Devices</div>
+                <div class="value">{{ product.category }}</div>
               </div>
             </div>
           </div>
           <div class="ms-price-box d-flex gap-3 align-items-center flex-wrap">
-            <div class="ms-price-discount">25.000.000đ</div>
-            <div class="ms-price-origin">20.000.000đ</div>
+            <div class="ms-price-discount">{{ formatCurrency({value: product.productPrice}) }}</div>
+            <div class="ms-price-origin">{{ formatCurrency({value: product.productPrice}) }}</div>
             <div>
               <Tag value="21% OFF" class="sale ms-offer-tag_item"></Tag>
             </div>
           </div>
 
           <div class="ms-option-box mt-4">
-            <div class="row g-3">
+            <div class="row g-3" v-if="product.variants">
               <!--              <div class="col-6">-->
               <!--                <div class="ms-option-title mb-2">-->
               <!--                  Màu sắc-->
@@ -100,12 +104,14 @@
               <!--                  </ScrollPanel>-->
               <!--                </div>-->
               <!--              </div>-->
-              <div class="col-6 ">
+              <div class="col-6" v-for="(item, index) in product.variants.masters">
                 <div class="ms-option-title mb-2">
-                  Màu sắc
+                  {{ item }}
                 </div>
                 <div class="ms-option-list">
-                  <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Category"
+                  <Dropdown v-model="selectedVariant[index]" :options="product.variants.options[index]"
+                            :placeholder="$t('please_choose')"
+                            @change="changeVariantOption"
                             class="ms-category"/>
                 </div>
               </div>
@@ -115,6 +121,7 @@
           <div class="group-button d-flex row gy-2 gx-3">
             <div class="col-xxl-3">
               <InputNumber v-model="value" showButtons buttonLayout="horizontal" class="w-100 h-36"
+                           :max="maxQuantity"
                            decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary">
                 <template #incrementbuttonicon>
                   <span class="pi pi-plus"/>
@@ -187,18 +194,7 @@
                   <div class="title">Mô tả</div>
                   <div class="content">
                     <ScrollPanel style="width: 100%; height: 200px; text-align: left">
-                      <p>
-                        MacBook Pro mạnh mẽ nhất từng có ở đây. Với chip M1 Pro hoặc M1 Max cực nhanh — silicon đầu tiên
-                        của Apple được thiết kế dành cho các chuyên gia — bạn sẽ có được hiệu năng đột phá và thời lượng
-                        pin đáng kinh ngạc. Thêm vào đó là màn hình Liquid Retina XDR tuyệt đẹp, camera và âm thanh tốt
-                        nhất từng có trên máy tính xách tay Mac và tất cả các cổng bạn cần. Chiếc máy tính xách tay đầu
-                        tiên thuộc loại này, chiếc MacBook Pro này là một con quái vật. M1 Pro đưa hiệu năng vượt trội
-                        của kiến ​​trúc M1 lên một tầm cao mới dành cho người dùng chuyên nghiệp.
-                        <br>
-                        Ngay cả những dự án đầy tham vọng nhất cũng có thể được xử lý dễ dàng với tối đa 10 lõi CPU, tối
-                        đa 16 lõi GPU, Công cụ thần kinh 16 lõi và các công cụ mã hóa và giải mã chuyên dụng hỗ trợ
-                        codec H.264, HEVC và ProRes.
-                      </p>
+                      <div v-html="product?.description"></div>
                     </ScrollPanel>
                   </div>
                 </div>
@@ -303,13 +299,19 @@
             </div>
           </TabPanel>
           <TabPanel header="Thông tin thêm">
-            <p class="m-0">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-              rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-              explicabo. Nemo enim
-              ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-              qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-            </p>
+            <div class="row" v-if="product.productProperties.length > 0">
+              <div class="col-sm-6" v-for="item in product.productProperties">
+                <div class="d-flex gap-2">
+                  <div class="label">{{item.propertyName}}:</div>
+                  <div class="text" v-if="product.propertyTypes.INPUT_TEXT.value === item.type">{{item.value}}</div>
+                  <div class="text" v-if="product.propertyTypes.SELECT_SINGLE.value === item.type">{{item.value.value}}</div>
+                  <div class="text" v-if="product.propertyTypes.SELECT_MULTIPLE_WITH_ADD_OPTION.value === item.type">{{item.value}}</div>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              {{ $t('no_data') }}
+            </div>
           </TabPanel>
           <TabPanel header="Về người bán">
             <p class="m-0">
@@ -375,6 +377,7 @@
       </div>
     </div>
   </div>
+  <TheLoading :fixed="true" v-if="isLoadingProduct"/>
 </template>
 
 <script>
@@ -393,6 +396,9 @@ import Tag from 'primevue/tag';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import ScrollPanel from 'primevue/scrollpanel';
+import TheLoading from "@/components/TheLoading.vue";
+import {mapGetters, mapActions} from 'vuex';
+import {formatCurrency} from "@/common/function";
 
 export default {
   components: {
@@ -411,6 +417,7 @@ export default {
     InputText,
     CommentView,
     Dropdown,
+    TheLoading,
   },
   data() {
     return {
@@ -437,45 +444,10 @@ export default {
           'child': [],
         }
       ],
-      products: [
-        {
-          id: '1000',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'Rectangle 20.png',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1001',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-        {
-          id: '1001',
-          code: 'f230fh0g3',
-          name: 'Bamboo Watch',
-          description: 'Product Description',
-          image: 'Image.png',
-          price: 65,
-          category: 'Accessories',
-          quantity: 24,
-          inventoryStatus: 'INSTOCK',
-          rating: 5
-        },
-
-      ],
+      products: null,
+      selectedVariant: [],
+      activeImage: 0,
+      maxQuantity: 1,
       responsiveOptions: [
         {
           breakpoint: '1400px',
@@ -517,11 +489,47 @@ export default {
       ]
     }
   },
+
   methods: {
+    ...mapActions(['getProductById']),
+    formatCurrency,
     changeImage() {
       console.log(this.pageImage)
+    },
+
+    /**
+     * Sự kiện lựa chọn các option biến thể
+     */
+    changeVariantOption() {
+      let variant = this.product.variants.types[this.selectedVariant.join('|')];
+
+      this.activeImage = this.product.medias.findIndex(item => item.url === variant.url);
+      this.product.productPrice = variant.price;
+      this.maxQuantity = variant.quantity;
     }
-  }
+  },
+
+  async created() {
+    await this.getProductById({id: this.$route.params.id});
+
+    // xử lý lựa chọn 1 biến thể có giá tiền nhỏ nhất
+    if (this.product.hasVariant) {
+      this.product.variants.masters.forEach((item, index) => {
+        this.selectedVariant[index] = this.product.variants.select[index];
+
+        let variant = this.product.variants.types[this.product.variants.select.join('|')];
+
+        this.activeImage = this.product.medias.findIndex(item => item.url === variant.url);
+        this.maxQuantity = variant.quantity;
+      })
+    } else {
+      this.maxQuantity = this.product.productQuantity;
+    }
+  },
+
+  computed: {
+    ...mapGetters(['product', 'isLoadingProduct']),
+  },
 }
 </script>
 

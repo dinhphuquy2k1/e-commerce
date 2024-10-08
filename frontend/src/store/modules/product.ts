@@ -1,16 +1,25 @@
-import {getProduct, getProductWithFilter} from "@/api/product";
+import {getProduct, getProductWithFilter, getProductById} from "@/api/product";
 import {TIMEOUT} from "@/common/enums";
 
 export default {
     namespace: 'product',
     state: {
         products: [],
+        product: {
+            medias: [],
+            productProperties: [],
+            propertyTypes: [],
+        },
         isLoadingProduct: false,
         filter: null,
     },
     mutations: {
-        SET_PRODUCT(state: any, products: []) {
+        SET_PRODUCTS(state: any, products: []) {
             state.products = products;
+        },
+
+        SET_PRODUCT(state: any, product: any) {
+            state.product = product;
         },
 
         SET_LOADING(state: any) {
@@ -25,9 +34,9 @@ export default {
         loadProduct({commit}: { commit: any }, payload: { filter: {} } = {filter: {}}): Promise<void> {
             commit('SET_LOADING');
             return new Promise<void>((resolve, reject) => {
-                const { filter } = payload;
+                const {filter} = payload;
                 getProduct(filter).then((response: any) => {
-                    commit('SET_PRODUCT', response.data);
+                    commit('SET_PRODUCTS', response.data);
                     resolve();
                 }).catch((error: any) => {
                     reject(error);
@@ -42,9 +51,25 @@ export default {
         getProductWithFilter({commit}: { commit: any }, payload: { filters: {} } = {filters: {}}): Promise<void> {
             commit('SET_LOADING');
             return new Promise<void>((resolve, reject) => {
-                const { filters } = payload;
+                const {filters} = payload;
                 getProductWithFilter(filters).then((response: any) => {
-                    commit('SET_PRODUCT', response);
+                    commit('SET_PRODUCTS', response);
+                    resolve();
+                }).catch((error: any) => {
+                    reject(error);
+                }).finally(() => {
+                    setTimeout(() => {
+                        commit('SET_LOADING');
+                    }, TIMEOUT.LOADING)
+                });
+            });
+        },
+
+        getProductById({commit}: { commit: any }, payload: { id: BigInt }): Promise<void> {
+            commit('SET_LOADING');
+            return new Promise<void>((resolve, reject) => {
+                getProductById(payload.id).then((response: any) => {
+                    commit('SET_PRODUCT', response.data);
                     resolve();
                 }).catch((error: any) => {
                     reject(error);
@@ -58,11 +83,15 @@ export default {
     },
 
     getters: {
-        products(state: any, {commit}: { commit: Function }) {
+        products(state: any) {
             return state.products
         },
 
-        isLoadingProduct(state: any, {commit}: { commit: Function }) {
+        product(state: any) {
+            return state.product
+        },
+
+        isLoadingProduct(state: any) {
             return state.isLoadingProduct;
         }
     }

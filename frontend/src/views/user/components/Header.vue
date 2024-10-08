@@ -41,7 +41,8 @@
     </div>
     <div class="w-100 d-flex justify-content-between align-items-center ms-bottom_header">
       <div class="left-side d-flex align-items-center gap-3">
-        <Dropdown v-model="selectedCity" :options="getCategory" optionLabel="name" placeholder="Category"
+        <Dropdown v-model="selectedCategory" :options="categories" optionLabel="label" :placeholder="$t('category')"
+                  @change="changeCategory"
                   class="ms-category"/>
         <div class="left-side_item align-items-center justify-content-center">
           <div class="icon map"></div>
@@ -83,11 +84,11 @@ export default {
     InputText
   },
   computed: {
-    ...mapGetters(['getCategory']),
+    ...mapGetters(['categories']),
   },
   data() {
     return {
-      selectedCity: null,
+      selectedCategory: null,
       textSearch: null,
       isScrolled: false,
       cities: [
@@ -110,9 +111,12 @@ export default {
     handleScroll() {
       this.isScrolled = window.scrollY > 50;
     },
+    changeCategory() {
+      this.$router.push({name: 'shop_gird', query: {categoryId: this.selectedCategory.key}});
+    }
   },
-  created() {
-    this.loadCategory();
+  async created() {
+    await this.loadCategory();
   }
 }
 </script>

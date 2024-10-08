@@ -82,20 +82,25 @@ import Image from 'primevue/image';
 import Rating from 'primevue/rating';
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
+import Button from 'primevue/button';
 
 export default {
   props: {
-    comments: []
+    comments: {
+      type: Array
+    }
   },
   components: {
     Image,
     Rating,
     InputText,
     Textarea,
+    Button,
   },
   data() {
     return {
       isReply: [],
+      value: 5,
     }
   }
 }

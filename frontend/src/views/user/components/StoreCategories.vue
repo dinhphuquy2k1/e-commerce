@@ -5,7 +5,7 @@
         Mua sắm với danh mục
       </div>
       <div class="ms-store_categories-main">
-        <Carousel :value="getCategory" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
+        <Carousel :value="categories" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
                   :autoplayInterval="3000">
           <template #item="slotProps">
             <div class="d-flex flex-column align-items-center justify-content-between store-category_item flex-1" @click="selectCategory(slotProps.data)">
@@ -59,7 +59,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getCategory']),
+    ...mapGetters(['categories']),
   },
 }
 </script>

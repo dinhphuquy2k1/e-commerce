@@ -87,7 +87,6 @@ CREATE TABLE `products`
     `product_quantity`   int(11) COLLATE utf8mb4_unicode_ci NULL,
     `product_price`      int(11) COLLATE utf8mb4_unicode_ci NULL,
     `product_sku_seller` int(11) COLLATE utf8mb4_unicode_ci NULL,
-    `properties`         json NULL,
     `description`        varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
     `created_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -96,8 +95,26 @@ CREATE TABLE `products`
     KEY                  `products_size_id_foreign` (`size_id`),
     KEY                  `products_brand_id_foreign` (`brand_id`),
     CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `products_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE CASCADE
+    CONSTRAINT `products_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE CASCADE,
     CONSTRAINT `products_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS products_properties;
+CREATE TABLE `products_properties`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `product_id`    bigint(20) unsigned NOT NULL,
+    `property_id`   bigint(20) unsigned NOT NULL,
+    `property_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `value`         json                                    NOT NULL,
+    `type`          int(11) NOT NULL DEFAULT '0',
+    `created_at`    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY             `products_properties_product_id_foreign` (`product_id`),
+    KEY             `products_properties_property_id_foreign` (`property_id`),
+    CONSTRAINT `products_properties_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `products_properties_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS variants;

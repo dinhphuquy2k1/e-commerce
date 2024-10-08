@@ -27,7 +27,7 @@ export default {
     },
 
     getters: {
-        getCategory(state: any, {commit}: { commit: Function }) {
+        categories(state: any, {commit}: { commit: Function }) {
             return state.categories
         },
     }

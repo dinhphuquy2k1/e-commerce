@@ -785,3 +785,20 @@ nav a {
 .color-primary-500 {
     color: var(--Primary-500);
 }
+
+.scroll {
+  touch-action: pan-y;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.scroll .scroll-x {
+  overflow-y: hidden;
+  overflow-x: auto;
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll .scroll-x::-webkit-scrollbar {
+  display: none;
+}

@@ -27,6 +27,7 @@
               <div class="icon-only icon-simple_cart-black"></div>
             </Button>
             <Button
+                @click="viewDetail(data)"
                 class="ms-btn white rounded-circle h-40 d-flex icon-only justify-content-center ms-btn_search mt-4"
                 v-tooltip.bottom="{ value: `Xem chi tiết`, escape: true }">
               <div class="icon-only icon-eye"></div>
@@ -61,7 +62,12 @@ import Rating from 'primevue/rating';
 import {formatCurrency} from "../common/function";
 
 export default {
-  methods: {formatCurrency},
+  methods: {
+    formatCurrency,
+    viewDetail(data) {
+      this.$router.push({name: 'product_detail', params: {id: data.id}})
+    }
+  },
   props: {
     data: {
       type: Object,

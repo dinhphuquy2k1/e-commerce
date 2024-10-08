@@ -19,21 +19,42 @@
       </div>
     </div>
     <div>
-      <TopOffer></TopOffer>
+      <BoxHome :header="$t('Màn hình nổi bật')"/>
     </div>
     <div>
-      <StoreCategories/>
+      <BoxAds/>
     </div>
     <div>
-      <FeaturedProducts/>
+      <BoxHome :header="$t('Màn hình nổi bật')"/>
     </div>
     <div>
-      <ComputerAccessories/>
+      <BoxAds/>
     </div>
     <div>
-      <FooterBanner/>
+      <BoxHome :header="$t('Màn hình nổi bật')" :with-slider="true"/>
     </div>
-    <PromotionalTile/>
+    <div>
+      <BoxAds/>
+    </div>
+    <div>
+      <BoxHome :header="$t('Màn hình nổi bật')" :with-slider="true"/>
+    </div>
+<!--    <div>-->
+<!--      <TopOffer></TopOffer>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <StoreCategories/>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <FeaturedProducts/>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <ComputerAccessories/>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <FooterBanner/>-->
+<!--    </div>-->
+<!--    <PromotionalTile/>-->
     <div>
       <LastestNew/>
     </div>
@@ -49,7 +70,8 @@ import ComputerAccessories from '@/views/user/components/ComputerAccessories.vue
 import LastestNew from '@/views/user/components/LastestNew.vue';
 import FooterBanner from '@/views/user/components/FooterBanner.vue';
 import PromotionalTile from '@/views/user/components/PromotionalTile.vue';
-
+import BoxHome from "@/views/user/components/BoxHome.vue";
+import BoxAds from "@/views/user/components/BoxAds.vue";
 export default {
   components: {
     Banner,
@@ -59,7 +81,9 @@ export default {
     ComputerAccessories,
     LastestNew,
     FooterBanner,
-    PromotionalTile
+    PromotionalTile,
+    BoxHome,
+    BoxAds,
   },
   data() {
     return {
