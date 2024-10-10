@@ -202,7 +202,7 @@
                   </div>
                 </div>
               </div>
-              <div class="ms-description-right-side col-xxl-6 row gy-3">
+              <div class="ms-description-right-side col-xxl-6 row">
                 <div class="col-sm-6">
                   <div class="title">{{ $t('features') }}</div>
                   <div class="content d-flex flex-column">
