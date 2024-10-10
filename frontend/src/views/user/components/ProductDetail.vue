@@ -53,29 +53,29 @@
           <div class="ms-info-box">
             <div class="row gy-2 gx-2">
               <div class="col-6 d-flex gap-2">
-                <div class="title">Mã hàng:</div>
+                <div class="title">{{ $t('item_code') }}:</div>
                 <div class="value">A264671</div>
               </div>
               <div class="col-6 d-flex gap-2">
-                <div class="title">Tình trạng:</div>
+                <div class="title">{{ $t('condition') }}:</div>
                 <div class="value availability">{{
                     maxQuantity > 0 ? (maxQuantity < 5 ? $t('almost_out_of_stock') : $t('in_stock')) : $t('out_of_stock')
                   }}
                 </div>
               </div>
               <div class="col-6 d-flex gap-2">
-                <div class="title">Thương hiệu:</div>
+                <div class="title">{{ $t('brand') }}:</div>
                 <div class="value">{{ product.brand }}</div>
               </div>
               <div class="col-6 d-flex gap-2">
-                <div class="title">Danh mục:</div>
+                <div class="title">{{ $t('category') }}:</div>
                 <div class="value">{{ product.category }}</div>
               </div>
             </div>
           </div>
           <div class="ms-price-box d-flex gap-3 align-items-center flex-wrap">
-            <div class="ms-price-discount">{{ formatCurrency({value: product.productPrice}) }}</div>
-            <div class="ms-price-origin">{{ formatCurrency({value: product.productPrice}) }}</div>
+            <div class="ms-price-discount">{{ formatCurrency({value: selectProduct.price}) }}</div>
+            <div class="ms-price-origin">{{ formatCurrency({value: selectProduct.price}) }}</div>
             <div>
               <Tag value="21% OFF" class="sale ms-offer-tag_item"></Tag>
             </div>
@@ -120,8 +120,11 @@
 
           <div class="group-button d-flex row gy-2 gx-3">
             <div class="col-xxl-3">
-              <InputNumber v-model="value" showButtons buttonLayout="horizontal" class="w-100 h-36"
+              <InputNumber v-model="selectProduct.quantity" showButtons buttonLayout="horizontal" class="w-100 h-36"
                            :max="maxQuantity"
+                           :min="1"
+                           :allowEmpty="false"
+                           @input="changeQuantity"
                            decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary">
                 <template #incrementbuttonicon>
                   <span class="pi pi-plus"/>
@@ -135,14 +138,14 @@
               <Button
                   class="ms-btn orange d-flex justify-content-center flex-grow-1 ms-btn_search w-100 ps-3 pe-3 gap-2">
                 <div class="icon-only icon-simple_cart"></div>
-                <div class="fw-semibold">Thêm vào giỏ hàng</div>
+                <div class="fw-semibold">{{ $t('add_to_cart') }}</div>
               </Button>
             </div>
 
             <div class="col-xxl-3 d-flex">
               <Button
                   class="ms-btn border-orange d-flex justify-content-center flex-grow-1 ps-3 pe-3 gap-2">
-                <div class="fw-semibold">Mua ngay</div>
+                <div class="fw-semibold">{{ $t('buy_now') }}</div>
               </Button>
             </div>
           </div>
@@ -151,11 +154,11 @@
             <div class="gap-4 d-flex ms-left-side">
               <div class="item">
                 <div class="icon icon-heart_black"></div>
-                <div class="title truncate-text">Yêu thích</div>
+                <div class="title truncate-text">{{ $t('favorite') }}</div>
               </div>
               <div class="item">
                 <div class="icon icon-compare"></div>
-                <div class="title truncate-text">So sánh</div>
+                <div class="title truncate-text">{{ $t('compare') }}</div>
               </div>
             </div>
             <div class="ms-right-side d-flex gap-3 align-items-center justify-content-end">
@@ -170,7 +173,7 @@
           </div>
 
           <div class="ms-pay-group d-flex flex-column">
-            <div class="text-start">Đảm bảo 100% thanh toán an toàn</div>
+            <div class="text-start">{{ $t('100_percent_secure_payment') }}</div>
             <div class="ms-pay-images d-flex gap-3 align-items-center">
               <Image :src="require('@public/assets/icons/visa_updated_1.svg')" width="50" alt="Image"/>
               <Image :src="require('@public/assets/icons/swish.svg')" width="50" alt="Image"/>
@@ -187,61 +190,63 @@
       </div>
       <div class="ms-product-information_container mb-5">
         <TabView class="ms-product-information-tab-view">
-          <TabPanel header="Mô tả">
+          <TabPanel :header="$t('description')">
             <div class="ms-description-box row">
-              <div class="ms-description-left-side col-xxl-9 row">
+              <div class="ms-description-left-side col-xxl-6 row">
                 <div class="col-xxl-8">
-                  <div class="title">Mô tả</div>
+                  <div class="title">{{ $t('description') }}</div>
                   <div class="content">
                     <ScrollPanel style="width: 100%; height: 200px; text-align: left">
                       <div v-html="product?.description"></div>
                     </ScrollPanel>
                   </div>
                 </div>
-                <div class="col-xxl-4">
-                  <div class="title">Tính năng</div>
+              </div>
+              <div class="ms-description-right-side col-xxl-6 row gy-3">
+                <div class="col-sm-6">
+                  <div class="title">{{ $t('features') }}</div>
                   <div class="content d-flex flex-column">
                     <div class="item">
-                      <div class="icon icon-medal"></div>
-                      <div class="text">Bảo hành 1 năm miễn phí</div>
+                      <div class="icon-w24 icon-medal"></div>
+                      <div class="text">{{ $t('1_year_warranty_free') }}</div>
                     </div>
                     <div class="item">
-                      <div class="icon icon-truck"></div>
-                      <div class="text">Miễn phí vận chuyển & Giao hàng Nhanh</div>
+                      <div class="icon-w24 icon-truck"></div>
+                      <div class="text">{{ $t('free_shipping_fast_delivery') }}</div>
                     </div>
                     <div class="item">
-                      <div class="icon icon-handshake"></div>
-                      <div class="text">Đảm bảo hoàn tiền 100%</div>
+                      <div class="icon-w24 icon-handshake"></div>
+                      <div class="text">{{ $t('easy') }}</div>
                     </div>
                     <div class="item">
-                      <div class="icon icon-head-phone_orange"></div>
-                      <div class="text">Hỗ trợ khách hàng 24/7</div>
+                      <div class="icon-w24 icon-head-phone_orange"></div>
+                      <div class="text">{{ $t('customer_support_24_7') }}</div>
                     </div>
                     <div class="item">
-                      <div class="icon icon-credit_card_orange"></div>
-                      <div class="text">Phương thức thanh toán an toàn</div>
+                      <div class="icon-w24 icon-credit_card_orange"></div>
+                      <div class="text">{{ $t('safe_payment_methods') }}</div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="ms-description-right-side col-xxl-3">
-                <div class="title">Thông tin vận chuyển</div>
-                <div class="content">
-                  <div class="item">
-                    <div class="icon">Chuyển phát nhanh:</div>
-                    <div class="text">2-4 ngày</div>
-                  </div>
-                  <div class="item">
-                    <div class="icon">Vận chuyển địa phương:</div>
-                    <div class="text">3-4 ngày</div>
-                  </div>
-                  <div class="item">
-                    <div class="icon">Vận chuyển thường:</div>
-                    <div class="text">4-6 ngày</div>
-                  </div>
-                  <div class="item">
-                    <div class="icon">Vận chuyển quốc tế:</div>
-                    <div class="text">tối đa 1 tuần</div>
+                <div class="col-sm-6">
+                  <div class="title">{{ $t('shipping_information') }}</div>
+                  <div class="content">
+                    <div class="item">
+                      <div class="icon">{{ $t('express_delivery') }}:</div>
+                      <div class="text">{{ $t('to_from_days', {'fromDate': 2, 'toDate': 4}) }}</div>
+                    </div>
+                    <div class="item">
+                      <div class="icon">{{ $t('local_shipping') }}:</div>
+                      <div class="text">{{ $t('to_from_days', {'fromDate': 3, 'toDate': 4}) }}</div>
+                    </div>
+                    <div class="item">
+                      <div class="icon">{{ $t('regular_shipping') }}:</div>
+                      <div class="text">{{ $t('to_from_days', {'fromDate': 4, 'toDate': 6}) }}</div>
+                    </div>
+                    <div class="item">
+                      <div class="icon">{{ $t('international_shipping') }}:</div>
+                      <div class="text">{{ $t('up_to_1_week') }}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -254,7 +259,7 @@
                 <div class="content mt-4 d-flex flex-column gap-3">
                   <div class="rc-form review-form row g-4">
                     <div class="col-md-4">
-                      <Textarea v-model="value" rows="4" cols="30"/>
+                      <Textarea v-model="selectQuantity" rows="4" cols="30"/>
                     </div>
                     <div class="col-md-8 d-flex">
                       <div class="flex-1 d-flex">
@@ -265,13 +270,13 @@
                           <div class="col-6">
                             <InputText type="text" :placeholder="$t('purchase_phone_number')"/>
                           </div>
-                          <div class="col-6">
+                          <div class="col-6 d-flex align-items-end">
                             <InputText type="text" :placeholder="$t('email')"/>
                           </div>
                           <div class="col d-flex align-items-center">
                             <div class="d-flex align-items-center gap-3">
                               {{ $t('your_rating') }}:
-                              <Rating v-model="value" :cancel="false"/>
+                              <Rating v-model="selectQuantity" :cancel="false"/>
                             </div>
                           </div>
                         </div>
@@ -298,14 +303,18 @@
               </div>
             </div>
           </TabPanel>
-          <TabPanel header="Thông tin thêm">
+          <TabPanel :header="$t('additional_information')">
             <div class="row" v-if="product.productProperties.length > 0">
               <div class="col-sm-6" v-for="item in product.productProperties">
                 <div class="d-flex gap-2">
-                  <div class="label">{{item.propertyName}}:</div>
-                  <div class="text" v-if="product.propertyTypes.INPUT_TEXT.value === item.type">{{item.value}}</div>
-                  <div class="text" v-if="product.propertyTypes.SELECT_SINGLE.value === item.type">{{item.value.value}}</div>
-                  <div class="text" v-if="product.propertyTypes.SELECT_MULTIPLE_WITH_ADD_OPTION.value === item.type">{{item.value}}</div>
+                  <div class="label">{{ item.propertyName }}:</div>
+                  <div class="text" v-if="product.propertyTypes.INPUT_TEXT.value === item.type">{{ item.value }}</div>
+                  <div class="text" v-if="product.propertyTypes.SELECT_SINGLE.value === item.type">
+                    {{ item.value.value }}
+                  </div>
+                  <div class="text" v-if="product.propertyTypes.SELECT_MULTIPLE_WITH_ADD_OPTION.value === item.type">
+                    {{ item.value }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -313,7 +322,7 @@
               {{ $t('no_data') }}
             </div>
           </TabPanel>
-          <TabPanel header="Về người bán">
+          <TabPanel :header="$t('about_the_seller')">
             <p class="m-0">
               At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
               atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
@@ -327,11 +336,17 @@
       </div>
 
       <div class="ms-product-relationship">
-        <div class="row">
-          <div class="col-xl-3 mb-3 col-md-12" v-for="item in 4">
-            <div class="ms-product-relationship-mobile d-none">
-              <div class="text-start title mb-3">FLASH SALE TODAY</div>
-              <Carousel :value="products" :page="pageImage" :numVisible="2" :numScroll="1"
+        <div class="row gap-3 mb-4">
+          <div class="col-12" v-if="product.relations?.data.length > 0">
+            <div class="ms-product-relationship-mobile">
+              <div class="ins-selectable-element d-flex flex-wrap justify-content-between">
+                <div class="header">
+                  <div class="title">
+                    <a href="">{{ $t('see_more_about', {'name': product.relations.title}) }}</a>
+                  </div>
+                </div>
+              </div>
+              <Carousel :value="product.relations.data" :page="pageImage" :numVisible="5" :numScroll="1"
                         :responsiveOptions="responsiveProductRelationshipOptions"
                         :showIndicators="false"
                         @update:page="changeImage"
@@ -353,24 +368,6 @@
                   </div>
                 </template>
               </Carousel>
-            </div>
-            <div class="ms-product-relationship-desktop">
-              <div class="text-start title mb-3">FLASH SALE TODAY</div>
-              <div class="d-flex flex-column gap-3 ms-box-items">
-                <div class="ms-box-item d-flex gap-3 pointer" v-for="item in products" :key="item">
-                  <div class="ms-box-item_left">
-                    <div class="ms-box-image">
-                      <Image :src="require('@public/assets/images/products/Image.png')" alt="Image"/>
-                    </div>
-                  </div>
-                  <div class="ms-box-item_right d-flex flex-column align-items-between justify-content-between">
-                    <div class="title text-start truncate-text-2">Bose Sport Earbuds - Wireless Earphones - Bluetooth In
-                      Ear
-                    </div>
-                    <div class="price text-start">20.000.000đ</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -422,7 +419,6 @@ export default {
   data() {
     return {
       rating: 5,
-      value: 1,
       pageImage: 0,
       comments: [
         {
@@ -448,6 +444,11 @@ export default {
       selectedVariant: [],
       activeImage: 0,
       maxQuantity: 1,
+      selectQuantity: null,
+      selectProduct: {
+        quantity: 1,
+        price: 0,
+      },
       responsiveOptions: [
         {
           breakpoint: '1400px',
@@ -472,20 +473,25 @@ export default {
       ],
       responsiveProductRelationshipOptions: [
         {
-          breakpoint: '992px',
+          breakpoint: '1400px',
+          numVisible: 4,
+          numScroll: 1
+        },
+        {
+          breakpoint: '1199px',
+          numVisible: 3,
+          numScroll: 1
+        },
+        {
+          breakpoint: '768px',
           numVisible: 2,
           numScroll: 1
         },
         {
-          breakpoint: '767px',
-          numVisible: 2,
-          numScroll: 1
-        },
-        {
-          breakpoint: '420px',
+          breakpoint: '450px',
           numVisible: 1,
           numScroll: 1
-        },
+        }
       ]
     }
   },
@@ -501,12 +507,25 @@ export default {
      * Sự kiện lựa chọn các option biến thể
      */
     changeVariantOption() {
-      let variant = this.product.variants.types[this.selectedVariant.join('|')];
+      try {
+        let variant = this.product.variants.types[this.selectedVariant.join('|')];
 
-      this.activeImage = this.product.medias.findIndex(item => item.url === variant.url);
-      this.product.productPrice = variant.price;
-      this.maxQuantity = variant.quantity;
+        this.activeImage = this.product.medias.findIndex(item => item.url === variant.url);
+        this.selectProduct.price = this.product.productPrice = variant.price;
+        this.maxQuantity = variant.quantity;
+        this.selectProduct.quantity = 1;
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    /**
+     * Tăng giảm số lượng sản phẩm
+     */
+    changeQuantity() {
+      this.selectProduct.price = this.product.productPrice * this.selectProduct.quantity;
     }
+
   },
 
   async created() {
@@ -521,9 +540,11 @@ export default {
 
         this.activeImage = this.product.medias.findIndex(item => item.url === variant.url);
         this.maxQuantity = variant.quantity;
+        this.selectProduct.price = variant.price;
       })
     } else {
       this.maxQuantity = this.product.productQuantity;
+      this.selectProduct.price = this.product.productPrice;
     }
   },
 
@@ -576,7 +597,6 @@ export default {
 
         .ms-description-right-side {
           border-left: 1px solid #E4E7E9;
-          padding-left: 24px;
 
           .content {
             text-align: left;
@@ -930,9 +950,7 @@ export default {
       }
     }
   }
-}
 
-@media (max-width: 992px) {
   .ms-product-relationship {
     .ms-product-relationship-mobile {
       display: block !important;
@@ -1002,31 +1020,33 @@ export default {
     }
 
   }
-}
 
-@media (max-width: 1200px) {
-  .ms-product-relationship-desktop {
-    .ms-box-items {
-      flex-direction: row !important;
+  .ins-selectable-element {
+    .header {
+      background: var(--Secondary-500);
+      margin-bottom: 20px;
+      display: inline-block;
+      height: 30px;
+      overflow: hidden;
 
-      .ms-box-item {
-        flex-direction: column !important;
+      &:after {
+        content: " ";
+        border-top: 30px solid var(--Secondary-700);
+        border-left: 30px solid var(--Secondary-500);
+        margin-left: 40px;
+      }
 
-        .ms-box-item_left {
-          display: flex;
-          justify-content: center;
+      .title {
+        padding: 5px 60px 2px 35px;
+        margin: 0 0 0 60px;
+        background: var(--Secondary-700);
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
 
-          .ms-box-image {
-            width: 200px;
-            display: flex;
-            justify-content: center;
-          }
-        }
-
-        .ms-box-item_right {
-          .title {
-            margin-bottom: 10px;
-          }
+        a {
+          color: var(--primary);
+          text-decoration: none;
         }
       }
     }
@@ -1038,6 +1058,12 @@ export default {
     .ms-box-image {
       max-width: 150px;
     }
+  }
+}
+
+@media (max-width: 1400px) {
+  .ms-description-right-side {
+    border-left: unset !important;
   }
 }
 </style>

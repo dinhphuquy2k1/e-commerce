@@ -2,14 +2,14 @@
   <div class="live-chat">
     <div id="live-chat-btn" v-if="isShow">
       <div class="image has-tooltip" v-tooltip="'Mở trang trò chuyện'"></div>
-<!--      <div class="hide" @click="isShow = false"></div>-->
+      <!--      <div class="hide" @click="isShow = false"></div>-->
     </div>
     <div id="quick-icon" v-else>
       <div class="toggle" @click="isToggle = !isToggle">
         <div class="img" :class="{'img-show': isToggle, 'img-hide': !isToggle}"></div>
       </div>
       <ul class="list-icon" :class="{'show': !isToggle, 'hide': isToggle}">
-        <li class="icon live-chat has-tooltip" v-tooltip="'Mở trang trò chuyện'"></li>
+        <li class="icon live-chat has-tooltip" v-tooltip="$t('open_chat_page')"></li>
       </ul>
     </div>
   </div>
@@ -106,7 +106,7 @@ export default {
       width: 40px;
     }
 
-     .hide{
+    .hide {
       width: 0;
     }
 

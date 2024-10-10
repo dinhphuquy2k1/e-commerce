@@ -30,9 +30,14 @@ class ApiCategoryController extends Controller
             $ret = Cache::get('categories');
         } else {
             $categories = Category::whereIn('id', $this->categoryIds)->orWhereNotNull('parent_id')->with('media')->get()->toArray();
-            $ret = $this->recursiveCategory($categories);
-            Cache::put('categories', $ret);
+            $categoryInfos = [];
+            $result = $this->recursiveCategory($categories, null, $categoryInfos);
+            Cache::put('categories', $result['tree']);
+            Cache::put('categoryRelations', $result['relations']);
+            Cache::put('categoryInfos', $categoryInfos);
+            $ret = $result['tree'];
         }
+
         return $this->sendResponseSuccess($ret);
     }
 
@@ -41,23 +46,40 @@ class ApiCategoryController extends Controller
      * @param $parentId
      * @return array
      */
-    public function recursiveCategory(array $categories, $parentId = null): array
+    public function recursiveCategory(array $categories, $parentId = null, &$categoryInfo = []): array
     {
         $result = [];
+        $groupedIds = [];
+
         foreach ($categories as $category) {
+            $categoryInfo[$category['id']] = $category['name'];
             if ($parentId == $category['parent_id']) {
-                $category = [
+                $group = [];
+                $group[] = $category['id'];
+
+                $childResult = $this->recursiveCategory($categories, $category['id'], $categoryInfo);
+                foreach ($childResult['relations'] as $childGroup) {
+                    $group = array_merge($group, $childGroup);
+                }
+
+                $categoryTree = [
                     'label' => $category['name'],
                     'key' => $category['id'],
                     'parent_id' => $category['parent_id'],
                     'media' => $category['media']['media_url'] ?? null,
                     'description' => $category['description'],
-                    'children' => $this->recursiveCategory($categories, $category['id']),
+                    'children' => $childResult['tree'],
                 ];
-                $result[] = $category;
+
+                $groupedIds[] = $group;
+                $result[] = $categoryTree;
             }
         }
-        return $result;
+
+        return [
+            'tree' => $result,
+            'relations' => $groupedIds
+        ];
     }
 
     /**

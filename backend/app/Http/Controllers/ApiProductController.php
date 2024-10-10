@@ -96,6 +96,49 @@ class ApiProductController extends Controller
                 $variantOption = array_values(array_unique($variantOption));
             }
 
+            // Lấy ra danh sách các sản phẩm liên quan
+            $categoryRelations = Cache::get('categoryRelations');
+            $categoryInfos = Cache::get('categoryInfos');
+            $relationIds = [];
+            foreach ($categoryRelations as $relation) {
+                if (in_array($product['category_id'], $relation)) {
+                    $relationIds = $relation;
+                    break;
+                }
+            }
+
+            $productRelations = Product::whereIn('category_id', $relationIds)
+                ->with(['brand', 'category', 'medias', 'products_properties', 'variants.media'])
+                ->get()
+                ->groupBy('category_id')
+                ->map(function ($categoryProducts) {
+                    return $categoryProducts->take(25);
+                })->sortByDesc(function ($categoryProducts) {
+                    return $categoryProducts->count();
+                })->first();
+
+            $productRelationResults = [
+                'data' => [],
+                'title' => '',
+            ];
+
+            if (!empty($productRelations)) {
+                $productRelations = $productRelations->toArray();
+                $title = null;
+                foreach ($productRelations as &$productRelation) {
+                    $title = $categoryInfos[$productRelation['category_id']];
+                    foreach ($productRelation['medias'] as &$media) {
+                        $media = [
+                            'url' => asset('storage/' . $media['media_url']),
+                        ];
+                    }
+                }
+                $productRelationResults = [
+                    'data' => $productRelations,
+                    'title' => $title,
+                ];
+            }
+
             $result = [
                 'productName' => $product['product_name'],
                 'productPrice' => $product['product_price'],
@@ -118,10 +161,29 @@ class ApiProductController extends Controller
                     'types' => $variantTypes,
                     'select' => $variantChoose
                 ],
+                'relations' => $productRelationResults
             ];
 
             return $this->sendResponseSuccess($result);
         }
+    }
+
+    function findParentCategory($categories, $categoryKey, $parent = null)
+    {
+        foreach ($categories as $category) {
+            if ($category['key'] == $categoryKey) {
+                return $parent;
+            }
+
+            if (!empty($category['children'])) {
+                $foundParent = $this->findParentCategory($category['children'], $categoryKey, $category);
+                if ($foundParent) {
+                    return $foundParent;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

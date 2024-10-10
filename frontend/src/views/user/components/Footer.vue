@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start fw-semibold mb-2">Danh mục hàng đầu</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('top_category')}}</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -62,7 +62,7 @@
             </ul>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start fw-semibold mb-2">Danh mục liên kết</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('linked_category')}}</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -101,7 +101,7 @@
             </ul>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6 ms-popular_list">
-            <div class="title text-start fw-semibold mb-2">Thẻ phổ biến</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('popular_tags')}}</div>
             <div class="d-flex flex-wrap gap-2 ms-popular_list">
               <div class="item-popular">Game</div>
               <div class="item-popular">iPhone</div>
