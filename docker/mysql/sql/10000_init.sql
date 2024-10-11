@@ -152,7 +152,7 @@ DROP TABLE IF EXISTS shopping_mall_tags;
 CREATE TABLE shopping_mall_tags
 (
     `id`                      bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `name`                    VARCHAR(500)        NOT NULL,
+    `name`                    VARCHAR(20)         NOT NULL,
     `shopping_mall_config_id` bigint(20) unsigned NOT NULL,
     `created_at`              TIMESTAMP DEFAULT now(),
     `updated_at`              TIMESTAMP DEFAULT now() ON UPDATE now(),
