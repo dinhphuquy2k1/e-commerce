@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiCategoryController;
@@ -28,6 +29,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/upload/image', [ApiCategoryController::class, 'uploadImage']);
 Route::post('/categories/properties/{id}', [ApiCategoryController::class, 'getProperties']);
+Route::prefix('')->group(function () {
+    Route::get('/configs', [ApiHomeController::class, 'getConfigs']);
+});
+
 Route::prefix('categories')->group(function () {
     Route::get('/', [ApiCategoryController::class, 'get']);
 });

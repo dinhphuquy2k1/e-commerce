@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-box-home-wrapper mt-4">
+  <div class="ms-box-home-wrapper mt-4 d-flex flex-column">
     <div class="header-container d-flex flex-wrap justify-content-between">
       <div class="header">
         <div class="title">
@@ -8,22 +8,22 @@
       </div>
       <div class="scroll">
         <div class="other-link scroll-x">
-          <div class="other-link-item pointer" v-for="item in 10">
-            asus
+          <div class="other-link-item pointer" v-for="item in data.tags">
+            {{ item.title }}
           </div>
           <div class="other-link-item actived pointer">{{ $t('view_all') }}</div>
         </div>
       </div>
     </div>
-    <div class="content-container" v-if="!withSlider">
-      <div class="row g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+    <div class="content-container flex-1 d-flex" v-if="!withSlider && products?.data?.length > 0">
+      <div class="row g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 flex-1">
         <div v-for="item in products.data" class="flex-1">
           <ProductItem :data="item"></ProductItem>
         </div>
       </div>
     </div>
 
-    <div v-else class="content-container-slider">
+    <div v-if="withSlider && products?.data?.length > 0" class="content-container-slider">
       <Carousel :value="products.data" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
                 :showIndicators="false"
                 :autoplayInterval="5000"
@@ -32,6 +32,13 @@
           <ProductItem :data="slotProps.data"></ProductItem>
         </template>
       </Carousel>
+    </div>
+
+    <div class="" v-if="products.length === 0 || products?.data?.length > 0">
+      <div class="d-flex flex-column p-24 justify-content-center align-items-center">
+        <div class="icon-empty_table"></div>
+        <div>{{ $t('no_data') }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,12 +51,15 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
   props: {
     header: {
-      type: String,
       required: true,
+      type: String,
     },
     withSlider: {
       type: Boolean,
       default: false,
+    },
+    data: {
+      type: [],
     }
   },
   components: {
@@ -92,11 +102,11 @@ export default {
     ...mapActions(['getProductWithFilter']),
   },
   created() {
-    this.getProductWithFilter({
-      filters: {
-        'filters': this.pagination,
-      }
-    });
+    // this.getProductWithFilter({
+    //   filters: {
+    //     'filters': this.pagination,
+    //   }
+    // });
   },
   computed: {
     ...mapGetters(['products']),
@@ -149,7 +159,7 @@ export default {
         margin-left: 10px;
         border: 1px solid #ccc;
         background: #fff;
-        padding: 5px 10px;
+        padding: 4px 10px;
         border-radius: 8px;
         color: #333;
         margin-bottom: 18px;

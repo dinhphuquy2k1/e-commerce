@@ -22,6 +22,14 @@ class Product extends Model
     }
 
     /**
+     * @return HasOne
+     */
+    public function media(): HasOne
+    {
+        return $this->hasOne(Media::class);
+    }
+
+    /**
      * @return HasMany
      */
     public function products_properties(): HasMany

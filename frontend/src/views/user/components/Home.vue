@@ -3,6 +3,7 @@
     <div>
       <Banner></Banner>
     </div>
+    <SpinSetting/>
     <div class="core-value_container">
       <div class="corevalue row g-0">
         <div v-for="(item, index) in coreValues" class="col-xxl-3 col-sm-6 col-6 corevalue-item">
@@ -18,43 +19,26 @@
         </div>
       </div>
     </div>
-    <div>
-      <BoxHome :header="$t('Màn hình nổi bật')"/>
+    <div v-for="item in configs.data">
+      <BoxHome :header="item.title" v-if="item.type !== configs?.type?.ADS?.value" :data="item"/>
+      <BoxAds v-else/>
     </div>
-    <div>
-      <BoxAds/>
-    </div>
-    <div>
-      <BoxHome :header="$t('Màn hình nổi bật')"/>
-    </div>
-    <div>
-      <BoxAds/>
-    </div>
-    <div>
-      <BoxHome :header="$t('Màn hình nổi bật')" :with-slider="true"/>
-    </div>
-    <div>
-      <BoxAds/>
-    </div>
-    <div>
-      <BoxHome :header="$t('Màn hình nổi bật')" :with-slider="true"/>
-    </div>
-<!--    <div>-->
-<!--      <TopOffer></TopOffer>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <StoreCategories/>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <FeaturedProducts/>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <ComputerAccessories/>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <FooterBanner/>-->
-<!--    </div>-->
-<!--    <PromotionalTile/>-->
+    <!--    <div>-->
+    <!--      <TopOffer></TopOffer>-->
+    <!--    </div>-->
+    <!--    <div>-->
+    <!--      <StoreCategories/>-->
+    <!--    </div>-->
+    <!--    <div>-->
+    <!--      <FeaturedProducts/>-->
+    <!--    </div>-->
+    <!--    <div>-->
+    <!--      <ComputerAccessories/>-->
+    <!--    </div>-->
+    <!--    <div>-->
+    <!--      <FooterBanner/>-->
+    <!--    </div>-->
+    <!--    <PromotionalTile/>-->
     <div>
       <LastestNew/>
     </div>
@@ -72,6 +56,9 @@ import FooterBanner from '@/views/user/components/FooterBanner.vue';
 import PromotionalTile from '@/views/user/components/PromotionalTile.vue';
 import BoxHome from "@/views/user/components/BoxHome.vue";
 import BoxAds from "@/views/user/components/BoxAds.vue";
+import SpinSetting from "@/views/user/components/SpinSetting.vue";
+import {mapGetters, mapActions} from 'vuex';
+
 export default {
   components: {
     Banner,
@@ -84,6 +71,10 @@ export default {
     PromotionalTile,
     BoxHome,
     BoxAds,
+    SpinSetting,
+  },
+  computed: {
+    ...mapGetters(['configs']),
   },
   data() {
     return {
@@ -110,6 +101,13 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    ...mapActions(['loadConfig']),
+  },
+
+  created() {
+    this.loadConfig();
   }
 }
 </script>
@@ -134,7 +132,7 @@ export default {
           border-right: none;
         }
 
-        &:not(:first-child){
+        &:not(:first-child) {
           padding-left: 10px;
         }
       }
