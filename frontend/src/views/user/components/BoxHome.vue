@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <div v-if="withSlider && products?.data?.length > 0" class="content-container-slider">
-      <Carousel :value="products.data" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
+    <div v-if="withSlider && data?.items?.length > 0" class="content-container-slider">
+      <Carousel :value="data.items" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
                 :showIndicators="false"
                 :autoplayInterval="5000"
                 containerClass="ms-carousel-inline">
@@ -34,7 +34,7 @@
       </Carousel>
     </div>
 
-    <div class="" v-if="products.length === 0 || products?.data?.length > 0">
+    <div class="" v-if="data.items.length === 0 || data?.items?.length > 0">
       <div class="d-flex flex-column p-24 justify-content-center align-items-center">
         <div class="icon-empty_table"></div>
         <div>{{ $t('no_data') }}</div>

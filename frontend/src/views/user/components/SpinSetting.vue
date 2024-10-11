@@ -1,7 +1,9 @@
 <template>
-  <div class="ms-spin-setting-wrapper pointer" v-if="visible" :style="{backgroundColor: background}">
+  <div class="ms-spin-setting-wrapper pointer" v-if="finalSetting.visible"
+       :style="{backgroundColor: finalSetting.background, position: finalSetting.position, right: finalSetting.right, top: finalSetting.top, transform: finalSetting.transform, borderRadius: finalSetting.borderRadius, width: finalSetting.width}">
     <Accordion>
-      <AccordionTab>
+      <AccordionTab :disabled="finalSetting.items.length === 0"
+                    :headerClass="{'ms-spin-fixed': finalSetting.position === 'fixed'}">
         <template #header>
           <div class="ms-spin-setting-container d-flex gap-2 align-items-center">
             <div class="ms-spin-icon icon-w24">
@@ -17,10 +19,9 @@
             <div class="ms-spin-title">{{ $t('setting') }}</div>
           </div>
         </template>
-
-        <template #collapseicon>
-          123
-        </template>
+        <div v-for="item in finalSetting.items">
+          {{ item.title}}
+        </div>
       </AccordionTab>
     </Accordion>
   </div>
@@ -30,32 +31,47 @@
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 
-
 export default {
   components: {
     Accordion,
     AccordionTab,
   },
   props: {
-    visible: {
-      default: true
+    setting: {
+      type: {},
+      default: {},
     },
-    background: {
-      default: "rgba(255, 255, 255, 0.8)"
-    }
-  }
+  },
+  computed: {
+    finalSetting() {
+      const position = this.$props.setting.position || 'absolute';
+      let transform = '';
+      if (position === 'absolute') {
+        transform = 'translate(50%, -50%)'
+      }
+
+      return {
+        ...this.$props.setting,
+        position: position,
+        top: this.$props.setting.top || '50%',
+        right: this.$props.setting.right || '50%',
+        visible: this.$props.setting.visible ?? true,
+        background: this.$props.setting.background || 'rgba(255, 255, 255, 0.8)',
+        transform: transform,
+        items: this.$props.setting.items || [],
+      };
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 .ms-spin-setting-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 8px 16px;
   z-index: 99;
-  color: #d13f4a;
+  width: max-content;
+  height: auto;
+  max-width: 150px;
+  color: #d13f4a !important;
 
   .p-accordion {
 
@@ -63,16 +79,49 @@ export default {
       margin-bottom: 0;
 
       .p-accordion-header {
+        &.p-disabled {
+          opacity: 1;
+        }
+
         .p-accordion-header-action {
-          padding: 0;
+          padding: 8px 16px;
           border: unset;
           background: unset;
+
+          .p-icon {
+            display: none;
+          }
+
+          &:focus-visible {
+            box-shadow: unset;
+          }
+        }
+
+
+        &.ms-spin-fixed {
+          .p-accordion-header-action {
+            padding: 16px;
+          }
         }
       }
 
     }
   }
 
+  .ms-spin-setting-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    .ms-spin-icon {
+      animation: rotate 2s linear infinite;
+      display: inline-block;
+    }
+
+    .ms-spin-title {
+      text-align: center;
+      color: #d13f4a !important;
+    }
+  }
 
   &:hover {
     color: red;
@@ -82,13 +131,11 @@ export default {
         stroke: red
       }
     }
-  }
 
-  .ms-spin-setting-container {
-    .ms-spin-icon {
-      animation: rotate 2s linear infinite;
-      display: inline-block;
+    .ms-spin-title {
+      color: red;
     }
+
   }
 }
 

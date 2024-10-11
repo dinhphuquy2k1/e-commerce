@@ -3,7 +3,7 @@
     <div>
       <Banner></Banner>
     </div>
-    <SpinSetting/>
+    <SpinSetting :setting="{ position: 'fixed', right: '20px', top: '20px', background: 'rgba(0,0,0,0.8)', borderRadius: '10px', items: settingItems, width: '150px'}"/>
     <div class="core-value_container">
       <div class="corevalue row g-0">
         <div v-for="(item, index) in coreValues" class="col-xxl-3 col-sm-6 col-6 corevalue-item">
@@ -99,7 +99,17 @@ export default {
           description: this.$t('contact_online_chat'),
           icon: 'headphone',
         }
-      ]
+      ],
+      settingItems: [
+        {
+          title: this.$t('banner_settings'),
+          route: '',
+        },
+        {
+          title: this.$t('display_settings'),
+          route: '',
+        },
+      ],
     }
   },
   methods: {

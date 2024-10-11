@@ -55,4 +55,26 @@
       }
     }
   }
+
+  .p-galleria-item-wrapper {
+    align-items: center;
+
+    .p-galleria-item-container {
+      align-items: center;
+      flex: 1;
+      width: 100%;
+
+      .p-galleria-item-nav {
+        top: unset;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+
+        .p-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
 }
