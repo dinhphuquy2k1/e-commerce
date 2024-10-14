@@ -3,7 +3,6 @@
     <Galleria :value="configs.banners" :numVisible="4" :responsiveOptions="responsiveOptions" :circular="true"
               containerClass="flex-1 mw-100"
               :showItemNavigators="true"
-
               :showThumbnailNavigators="false">
       <template #item="slotProps">
         <SpinSetting></SpinSetting>
@@ -69,10 +68,14 @@ export default {
     .p-galleria-item-wrapper {
       position: relative;
 
+      .p-galleria-item {
+        height: 375px;
+      }
+
       img {
         width: 100%;
         max-height: 450px;
-        height: auto;
+        height: 375px;
         border-radius: 10px;
       }
     }
