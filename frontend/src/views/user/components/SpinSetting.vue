@@ -1,9 +1,11 @@
 <template>
   <div class="ms-spin-setting-wrapper pointer" v-if="finalSetting.visible"
-       :style="{backgroundColor: finalSetting.background, position: finalSetting.position, right: finalSetting.right, top: finalSetting.top, transform: finalSetting.transform, borderRadius: finalSetting.borderRadius, width: finalSetting.width}">
+       :class="{ 'ms-spin-fixed': finalSetting.position === 'fixed', 'ms-spin-static': finalSetting.position === 'static' }"
+       :style="{ backgroundColor: finalSetting.background, position: finalSetting.position, right: finalSetting.right, top: finalSetting.top, transform: finalSetting.transform, borderRadius: finalSetting.borderRadius, width: finalSetting.width }">
     <Accordion>
       <AccordionTab :disabled="finalSetting.items.length === 0"
-                    :headerClass="{'ms-spin-fixed': finalSetting.position === 'fixed'}">
+                    :headerClass="{ 'ms-spin-fixed': finalSetting.position === 'fixed' }"
+                    :contentClass="{ 'ms-spin-fixed': finalSetting.position === 'fixed' }">
         <template #header>
           <div class="ms-spin-setting-container d-flex gap-2 align-items-center">
             <div class="ms-spin-icon icon-w24">
@@ -19,8 +21,10 @@
             <div class="ms-spin-title">{{ $t('setting') }}</div>
           </div>
         </template>
-        <div v-for="item in finalSetting.items">
-          {{ item.title}}
+        <div class="d-flex flex-column gap-2">
+          <div v-for="item in finalSetting.items" class="ms-spin-item">
+            {{ item.title }}
+          </div>
         </div>
       </AccordionTab>
     </Accordion>
@@ -73,6 +77,15 @@ export default {
   max-width: 150px;
   color: #d13f4a !important;
 
+  &.ms-spin-fixed {
+    .p-accordion {
+      .p-accordion-tab {
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+      }
+    }
+  }
+
   .p-accordion {
 
     .p-accordion-tab {
@@ -105,6 +118,44 @@ export default {
         }
       }
 
+      .p-toggleable-content {
+
+        // border-radius: 10px;
+        &.ms-spin-fixed {
+          .p-accordion-content {
+            text-align: center;
+            padding: 0 16px 16px 16px;
+            border: unset;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--primary);
+
+            .ms-spin-item {
+              &:hover {
+                color: red;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.ms-spin-static {
+    .p-accordion {
+
+      .p-accordion-tab {
+        margin-bottom: 0;
+
+        .p-accordion-header {
+          &.p-disabled {
+            opacity: 1;
+          }
+
+          .p-accordion-header-action {
+            padding: 0;
+          }
+        }
+      }
     }
   }
 
@@ -112,6 +163,7 @@ export default {
     display: flex;
     flex: 1;
     justify-content: center;
+
     .ms-spin-icon {
       animation: rotate 2s linear infinite;
       display: inline-block;
@@ -143,9 +195,9 @@ export default {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-
 </style>

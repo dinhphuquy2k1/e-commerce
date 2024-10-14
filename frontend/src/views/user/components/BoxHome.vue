@@ -1,10 +1,15 @@
 <template>
   <div class="ms-box-home-wrapper mt-4 d-flex flex-column">
     <div class="header-container d-flex flex-wrap justify-content-between">
-      <div class="header">
-        <div class="title">
-          <a href="">{{ header }}</a>
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <div class="d-flex align-items-center">
+          <div class="header">
+            <div class="title">
+              <a href="">{{ header }}</a>
+            </div>
+          </div>
         </div>
+        <SpinSetting :setting="{position: 'static'}"/>
       </div>
       <div class="scroll">
         <div class="other-link scroll-x">
@@ -25,9 +30,7 @@
 
     <div v-if="withSlider && data?.items?.length > 0" class="content-container-slider">
       <Carousel :value="data.items" :numVisible="5" :numScroll="1" :responsiveOptions="responsiveOptions" circular
-                :showIndicators="false"
-                :autoplayInterval="5000"
-                containerClass="ms-carousel-inline">
+                :showIndicators="false" :autoplayInterval="5000" containerClass="ms-carousel-inline">
         <template #item="slotProps">
           <ProductItem :data="slotProps.data"></ProductItem>
         </template>
@@ -46,6 +49,7 @@
 <script>
 import ProductItem from "@/components/ProductItem.vue";
 import Carousel from 'primevue/carousel';
+import SpinSetting from "@/views/user/components/SpinSetting.vue";
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
@@ -59,12 +63,13 @@ export default {
       default: false,
     },
     data: {
-      type: [],
+      type: {},
     }
   },
   components: {
     ProductItem,
     Carousel,
+    SpinSetting,
   },
   data() {
     return {
@@ -122,7 +127,6 @@ export default {
   .header-container {
     .header {
       background: var(--Secondary-500,);
-      margin-bottom: 20px;
       display: inline-block;
       height: 30px;
       overflow: hidden;

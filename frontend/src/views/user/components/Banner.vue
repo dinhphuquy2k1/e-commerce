@@ -1,15 +1,18 @@
 <template>
   <div class="ms-banner d-flex">
-    <Galleria :value="products" :numVisible="4" :circular="true" containerClass="flex-1"
-              :showItemNavigators="true" :showThumbnailNavigators="false">
+    <Galleria :value="configs.banners" :numVisible="4" :circular="true" containerClass="flex-1"
+              :showItemNavigators="true"
+              :autoPlay="true" :transitionInterval="7000"
+              :showThumbnailNavigators="false">
       <template #item="slotProps">
-        <img src="http://localhost:30001/storage/banner/mobile-t2-1200x375.png" :alt="slotProps.item.name"
-             class="w-6 shadow-2"/>
+        <SpinSetting></SpinSetting>
+        <img :src="slotProps.item.medias[0].url" :alt="slotProps.item.name"
+             class="w-6 shadow-2" v-if="slotProps.item.medias.length > 0"/>
       </template>
       <template #thumbnail="slotProps">
-        <div class="">
-          <div class="title">Viettel T2-4G</div>
-          <div class="description">Sóng mọi nơi</div>
+        <div class="d-flex align-items-center flex-column flex-1 justify-content-center">
+          <div class="title">{{ slotProps.item.title }}</div>
+          <div class="description">{{ slotProps.item.description }}</div>
         </div>
       </template>
     </Galleria>
@@ -20,12 +23,18 @@
 import Carousel from 'primevue/carousel';
 import Button from 'primevue/button';
 import Galleria from 'primevue/galleria';
+import SpinSetting from './SpinSetting.vue';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
   components: {
     Carousel,
     Button,
     Galleria,
+    SpinSetting,
+  },
+  computed: {
+    ...mapGetters(['configs']),
   },
   data() {
     return {
@@ -94,14 +103,16 @@ export default {
 .ms-banner {
   padding: 24px var(--padding-base) 24px var(--padding-base);
   max-height: 550px;
-  height: 550px;
 
   .p-galleria-content {
     .p-galleria-item-wrapper {
+      position: relative;
+
       img {
         width: 100%;
         max-height: 450px;
-        height: 450px;
+        height: auto;
+        border-radius: 10px;
       }
     }
 
@@ -113,6 +124,8 @@ export default {
           padding-right: 10px;
 
           .p-galleria-thumbnail-item-content {
+            display: flex;
+            height: 100%;
             //border: 1px solid;
             border-radius: 8px;
             background-color: var(--Gray-50);

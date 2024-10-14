@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PropertyType;
+use App\Models\Banner;
 use App\Models\ShoppingMallConfig;
 use App\Enums\ConfigType;
 use Illuminate\Http\JsonResponse;
@@ -17,8 +18,10 @@ class ApiHomeController extends Controller
         $configs = ShoppingMallConfig::with([
             'ads.media',
             'tags.items',
-            'items.product.media'
+            'items.product.media',
         ])->orderBy('display_order')->get();
+
+        $banners = Banner::with('medias')->get();
 
         if (empty($configs)) {
             return $this->sendResponseSuccess();
@@ -69,6 +72,27 @@ class ApiHomeController extends Controller
                 'description' => $instance->description,
             ];
         })->toArray();
+
+        $results['banners'] = [];
+        if (!empty($banners)) {
+            foreach ($banners->toArray() as &$banner) {
+                foreach ($banner['medias'] as &$media) {
+                    $media = [
+                        'url' => asset('storage/' . $media['media_url']),
+                        'type' => $media['type'],
+                    ];
+                }
+
+                $banner = [
+                    'title' => $banner['title'],
+                    'description' => $banner['description'],
+                    'medias' => $banner['medias'],
+                ];
+
+                $results['banners'][] = $banner;
+            }
+        }
+
         return $this->sendResponseSuccess($results);
     }
 }

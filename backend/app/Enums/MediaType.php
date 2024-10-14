@@ -13,4 +13,8 @@ final class MediaType extends Enum
 {
     const IMAGE =   0;
     const VIDEO =   1;
+
+    const PC = 2;
+    const MOBILE = 3;
+    const BOTH = 4;
 }

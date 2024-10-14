@@ -182,6 +182,19 @@ CREATE TABLE shopping_mall_items
     CONSTRAINT `shopping_mall_item_shopping_mall_config_id_foreign` FOREIGN KEY (`shopping_mall_config_id`) REFERENCES `shopping_mall_configs` (`id`) ON DELETE CASCADE
 );
 
+-- item for tag and small_config
+DROP TABLE IF EXISTS banners;
+CREATE TABLE banners
+(
+    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `title`       VARCHAR(100)        NOT NULL,
+    `description` VARCHAR(100)        NOT NULL,
+    `link`        VARCHAR(500)        NULL COMMENT 'Link',
+    `created_at`  TIMESTAMP DEFAULT now(),
+    `updated_at`  TIMESTAMP DEFAULT now() ON UPDATE now(),
+    PRIMARY KEY (`id`)
+);
+
 DROP TABLE IF EXISTS medias;
 CREATE TABLE `medias`
 (
@@ -190,6 +203,7 @@ CREATE TABLE `medias`
     `product_id`            bigint(20) unsigned                     NULL,
     `category_id`           bigint(20) unsigned                     NULL,
     `shopping_mall_item_id` bigint(20) unsigned                     NULL,
+    `banner_id`             bigint(20) unsigned                     NULL,
     `type`                  tinyint(11)                             NOT NULL DEFAULT '0',
     `genitive`              tinyint(11)                             NOT NULL DEFAULT '0', -- thuộc về (sản phẩm, kích thước ...)
     `created_at`            TIMESTAMP                                        DEFAULT now(),
@@ -198,9 +212,11 @@ CREATE TABLE `medias`
     KEY `medias_product_id_foreign` (`product_id`),
     KEY `medias_category_id_foreign` (`category_id`),
     KEY `medias_shopping_mall_item_id_foreign` (`shopping_mall_item_id`),
+    KEY `medias_banner_id_foreign` (`banner_id`),
     CONSTRAINT `medias_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
     CONSTRAINT `medias_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `medias_shopping_mall_item_id_foreign` FOREIGN KEY (`shopping_mall_item_id`) REFERENCES `shopping_mall_items` (`id`) ON DELETE CASCADE
+    CONSTRAINT `medias_shopping_mall_item_id_foreign` FOREIGN KEY (`shopping_mall_item_id`) REFERENCES `shopping_mall_items` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `medias_banner_id_foreign` FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;

@@ -3,7 +3,8 @@
     <div>
       <Banner></Banner>
     </div>
-    <SpinSetting :setting="{ position: 'fixed', right: '20px', top: '20px', background: 'rgba(0,0,0,0.8)', borderRadius: '10px', items: settingItems, width: '150px'}"/>
+    <SpinSetting
+      :setting="{ position: 'fixed', right: '20px', top: '20px', background: 'rgba(0,0,0,0.8)', borderRadius: '10px', items: settingItems, width: '150px' }" />
     <div class="core-value_container">
       <div class="corevalue row g-0">
         <div v-for="(item, index) in coreValues" class="col-xxl-3 col-sm-6 col-6 corevalue-item">
@@ -20,8 +21,8 @@
       </div>
     </div>
     <div v-for="item in configs.data">
-      <BoxHome :header="item.title" v-if="item.type !== configs?.type?.ADS?.value" :data="item"/>
-      <BoxAds v-else/>
+      <BoxHome :header="item.title" v-if="item.type !== configs?.type?.ADS?.value" :data="item" />
+      <BoxAds v-else />
     </div>
     <!--    <div>-->
     <!--      <TopOffer></TopOffer>-->
@@ -40,7 +41,7 @@
     <!--    </div>-->
     <!--    <PromotionalTile/>-->
     <div>
-      <LastestNew/>
+      <LastestNew />
     </div>
   </div>
 </template>
