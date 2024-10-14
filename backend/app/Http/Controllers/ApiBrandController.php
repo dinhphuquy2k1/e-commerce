@@ -28,20 +28,25 @@ class ApiBrandController extends Controller
     {
         $attribute = $request->validate(
             [
-                'brand_name' => 'required|string',
+                'brand_name' => 'required|string|unique:brands,brand_name',
             ],
             [
                 'brand_name.required' => 'Tên thương hiệu không được để trống',
                 'brand_name.string' => 'Tên thương hiệu phải là chuỗi',
+                'brand_name.unique' => 'Tên thương hiệu đã tồn tại',
             ]
         );
         try {
             DB::beginTransaction();
-            Brand::insert($attribute);
+            $brand = Brand::create($attribute);
             DB::commit();
-            return $this->sendResponseSuccess();
+            return $this->sendResponseSuccess($brand->toArray());
         } catch (\Throwable $th) {
             DB::rollBack();
+            echo "<pre>";
+            print_r($th->getMessage());
+            echo "</pre>";
+            exit();
             return $this->sendResponseBadRequest();
         }
     }

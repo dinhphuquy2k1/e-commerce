@@ -1,13 +1,19 @@
 <template>
-  <div class="ms-ads">
+  <div class="ms-ads position-relative">
     <div class="pointer">
       <img src="http://localhost:30001/storage/ads/xiaomi-1200x200.png" alt="">
+      <SpinSetting></SpinSetting>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import SpinSetting from "@/views/user/components/SpinSetting.vue";
+export default {
+  components: {
+    SpinSetting,
+  },
+}
 </script>
 
 <style lang="scss">

@@ -2258,9 +2258,9 @@ export default {
       }
 
       if (this.brands.filter(item => item.brand_name === this.valueBrandSelectAddOption).length === 0) {
-        this.selectedProduct.brand_id = this.valueBrandSelectAddOption.id
-        await addBrand(this.valueBrandSelectAddOption).then(res => {
-          this.brands.push(this.valueBrandSelectAddOption)
+        await addBrand({brand_name: this.valueBrandSelectAddOption}).then(res => {
+          this.brands.push(res.data)
+          this.selectedProduct.brand_id = res.data.id
           this.valueBrandSelectAddOption = null;
         }).catch(error => {
           console.log(error)
