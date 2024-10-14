@@ -71,13 +71,13 @@ export default {
 
 <style lang="scss">
 .ms-spin-setting-wrapper {
-  z-index: 99;
   width: max-content;
   height: auto;
   max-width: 150px;
   color: #d13f4a !important;
 
   &.ms-spin-fixed {
+    z-index: 100001;
     .p-accordion {
       .p-accordion-tab {
         background-color: rgba(0, 0, 0, 0.8);

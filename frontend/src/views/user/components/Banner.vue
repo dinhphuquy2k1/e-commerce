@@ -1,8 +1,9 @@
 <template>
   <div class="ms-banner d-flex">
-    <Galleria :value="configs.banners" :numVisible="4" :circular="true" containerClass="flex-1"
+    <Galleria :value="configs.banners" :numVisible="4" :responsiveOptions="responsiveOptions" :circular="true"
+              containerClass="flex-1 mw-100"
               :showItemNavigators="true"
-              :autoPlay="true" :transitionInterval="7000"
+
               :showThumbnailNavigators="false">
       <template #item="slotProps">
         <SpinSetting></SpinSetting>
@@ -10,7 +11,7 @@
              class="w-6 shadow-2" v-if="slotProps.item.medias.length > 0"/>
       </template>
       <template #thumbnail="slotProps">
-        <div class="d-flex align-items-center flex-column flex-1 justify-content-center">
+        <div class="d-flex align-items-center flex-column w-100 justify-content-center">
           <div class="title">{{ slotProps.item.title }}</div>
           <div class="description">{{ slotProps.item.description }}</div>
         </div>
@@ -39,62 +40,22 @@ export default {
   data() {
     return {
       products: [],
-
+      responsiveOptions: [
+        {
+          breakpoint: '1200px',
+          numVisible: 3
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 2
+        },
+        {
+          breakpoint: '576px',
+          numVisible: 1
+        },
+      ]
     };
   },
-  mounted() {
-    this.products = [
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'Image.png',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'image 5.png',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'Image.png',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'image 5.png',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-    ]
-  },
-
   methods: {}
 }
 </script>
@@ -131,7 +92,7 @@ export default {
             background-color: var(--Gray-50);
             box-shadow: 0px 8px 24px 0px rgba(25, 28, 31, 0.12);
             width: 100%;
-            padding: 10px 15px;
+            padding: 10px;
             text-align: center;
             color: #666;
 
