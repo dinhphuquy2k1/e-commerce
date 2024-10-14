@@ -1,4 +1,5 @@
 import {getConfig} from "@/api/shopping_mall";
+import {TIMEOUT} from "@/common/enums";
 
 export default {
     namespace: 'shopping_mall',
@@ -20,12 +21,17 @@ export default {
     actions: {
 
         loadConfig({commit}: { commit: any }): Promise<void> {
+            commit('SET_LOADING');
             return new Promise<void>((resolve, reject) => {
                 getConfig().then((response: any) => {
                     commit('SET_CONFIGS', response.data);
                     resolve();
                 }).catch((error: any) => {
                     reject(error);
+                }).finally(() => {
+                    setTimeout(() => {
+                        commit('SET_LOADING');
+                    }, TIMEOUT.LOADING)
                 });
             });
         },

@@ -68,14 +68,10 @@ export default {
     .p-galleria-item-wrapper {
       position: relative;
 
-      .p-galleria-item {
-        height: 375px;
-      }
-
       img {
         width: 100%;
-        max-height: 450px;
-        height: 375px;
+        max-height: 400px;
+        height: 400px;
         border-radius: 10px;
       }
     }
@@ -118,6 +114,42 @@ export default {
               background-color: var(--Secondary-700);
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .ms-banner {
+
+    .p-galleria-content {
+      .p-galleria-item-wrapper {
+        position: relative;
+
+        img {
+          width: 100%;
+          max-height: 250px;
+          height: 250px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .ms-banner {
+
+    .p-galleria-content {
+      .p-galleria-item-wrapper {
+        position: relative;
+
+        img {
+          width: 100%;
+          max-height: 375px;
+          height: 172px;
+          border-radius: 10px;
         }
       }
     }

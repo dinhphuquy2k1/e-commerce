@@ -4,7 +4,7 @@
       <Banner></Banner>
     </div>
     <SpinSetting
-      :setting="{ position: 'fixed', right: '20px', top: '20px', background: 'rgba(0,0,0,0.8)', borderRadius: '10px', items: settingItems, width: '150px' }" />
+        :setting="{ position: 'fixed', right: '20px', top: '20px', background: 'rgba(0,0,0,0.8)', borderRadius: '10px', items: settingItems, width: '150px' }"/>
     <div class="core-value_container">
       <div class="corevalue row g-0">
         <div v-for="(item, index) in coreValues" class="col-xxl-3 col-sm-6 col-6 corevalue-item">
@@ -21,8 +21,8 @@
       </div>
     </div>
     <div v-for="item in configs.data">
-      <BoxHome :header="item.title" v-if="item.type !== configs?.type?.ADS?.value" :data="item" />
-      <BoxAds v-else />
+      <BoxHome :header="item.title" v-if="item.type !== configs?.type?.ADS?.value" :data="item"/>
+      <BoxAds v-else/>
     </div>
     <!--    <div>-->
     <!--      <TopOffer></TopOffer>-->
@@ -41,9 +41,10 @@
     <!--    </div>-->
     <!--    <PromotionalTile/>-->
     <div>
-      <LastestNew />
+      <LastestNew/>
     </div>
   </div>
+  <TheLoading v-if="isLoadingConfig" :fixed="true"/>
 </template>
 
 <script>
@@ -58,6 +59,7 @@ import PromotionalTile from '@/views/user/components/PromotionalTile.vue';
 import BoxHome from "@/views/user/components/BoxHome.vue";
 import BoxAds from "@/views/user/components/BoxAds.vue";
 import SpinSetting from "@/views/user/components/SpinSetting.vue";
+import TheLoading from "@/components/TheLoading.vue";
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
@@ -73,9 +75,10 @@ export default {
     BoxHome,
     BoxAds,
     SpinSetting,
+    TheLoading,
   },
   computed: {
-    ...mapGetters(['configs']),
+    ...mapGetters(['configs', "isLoadingConfig"]),
   },
   data() {
     return {
@@ -110,6 +113,10 @@ export default {
           title: this.$t('display_settings'),
           route: '',
         },
+        {
+          title: this.$t('contact_title'),
+          route: '',
+        },
       ],
     }
   },
@@ -133,7 +140,6 @@ export default {
       border: 1px solid #E4E7E9;
       background: #FFF;
       display: flex;
-      margin-top: 24px;
       padding: 16px;
 
       .corevalue-item {
