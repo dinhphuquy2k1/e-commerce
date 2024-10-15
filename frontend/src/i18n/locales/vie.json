@@ -161,5 +161,12 @@
   "setting": "Cài đặt",
   "banner_settings": "Cài đặt banner",
   "display_settings": "Cài đặt hiển thị",
-  "contact_title": "Thông tin liên hệ"
+  "contact_title": "Thông tin liên hệ",
+  "login": "Đăng nhập",
+  "register": "Đăng kí",
+  "password": "Mật khẩu",
+  "or": "hoặc",
+  "forgot_password": "Quên mật khẩu?",
+  "email_or_phone": "Email hoặc số điện thoại",
+  "login_with": "Đăng nhập với {name}"
 }

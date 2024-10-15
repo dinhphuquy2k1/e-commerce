@@ -27,6 +27,15 @@ const routes: Array<RouteRecordRaw> = [
                 },
             },
             {
+                path: '/login',
+                name: 'login',
+                components: {
+                    header: () => import('@/views/user/components/Header.vue'),
+                    content: () => import('@/views/user/components/Login.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+            },
+            {
                 path: '/product/:id',
                 name: 'product_detail',
                 components: {
