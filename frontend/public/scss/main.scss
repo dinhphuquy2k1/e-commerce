@@ -783,7 +783,7 @@ nav a {
 }
 
 .color-primary-500 {
-    color: var(--Primary-500);
+  color: var(--Primary-500);
 }
 
 .scroll {
@@ -801,4 +801,8 @@ nav a {
 
 .scroll .scroll-x::-webkit-scrollbar {
   display: none;
+}
+
+.mw-content {
+  max-width: max-content;
 }

@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'home',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    content: () => import('@/views/user/components/Home.vue'),
+                    content: () => import('@/views/user/components/home/Home.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'product_detail',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    content: () => import('@/views/user/components/ProductDetail.vue'),
+                    content: () => import('@/views/user/components/product/ProductDetail.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
@@ -53,6 +53,15 @@ const routes: Array<RouteRecordRaw> = [
                         components: {
                             header: () => import('@/views/user/components/Header.vue'),
                             content: () => import('@/views/user/components/gird/ShopGrid.vue'),
+                            footer: () => import('@/views/user/components/Footer.vue'),
+                        },
+                    },
+                    {
+                        path: 'cart',
+                        name: 'shop_cart',
+                        components: {
+                            header: () => import('@/views/user/components/Header.vue'),
+                            content: () => import('@/views/user/components/order/ShoppingCart.vue'),
                             footer: () => import('@/views/user/components/Footer.vue'),
                         },
                     },
@@ -98,7 +107,7 @@ const routes: Array<RouteRecordRaw> = [
                         path: 'shop-cart',
                         components: {
                             menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
-                            content: () => import('@/views/user/components/dashboard/ShoppingCart.vue'),
+                            content: () => import('@/views/user/components/order/ShoppingCart.vue'),
                         },
                     },
                     {

@@ -232,6 +232,11 @@ span.icon24 {
   background-image: url('@public/assets/icons/ArrowRightOrange.svg');
 }
 
+.icon-arrow-left_primary {
+  rotate: 180deg;
+  background-image: url('@public/assets/icons/ArrowRightPrimary.svg');
+}
+
 .icon-w24 {
   width: 24px;
   height: 24px;

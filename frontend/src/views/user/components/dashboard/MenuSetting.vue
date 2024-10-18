@@ -84,7 +84,7 @@ export default {
         {
           label: 'Giỏ hàng',
           icon: 'pi pi-search',
-          route: '/setting',
+          route: '/dashboard/shop-cart',
           items: [],
         },
         {

@@ -56,6 +56,15 @@ export default {
 
     .ms-settings-right_side {
       overflow: auto;
+
+      .ms-shopping-cart_wrapper {
+        padding: unset;
+
+        .ms-shopping-cart_container {
+          margin: unset !important;
+
+        }
+      }
     }
   }
 }

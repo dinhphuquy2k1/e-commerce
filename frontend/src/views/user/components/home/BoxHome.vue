@@ -1,6 +1,6 @@
 <template>
   <div class="ms-box-home-wrapper mt-4 d-flex flex-column">
-    <div class="header-container d-flex flex-wrap justify-content-between">
+    <div class="header-container d-flex flex-wrap justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-2 mb-2">
         <div class="d-flex align-items-center">
           <div class="header">
@@ -49,7 +49,7 @@
 <script>
 import ProductItem from "@/components/ProductItem.vue";
 import Carousel from 'primevue/carousel';
-import SpinSetting from "@/views/user/components/SpinSetting.vue";
+import SpinSetting from "@/views/user/components/home/SpinSetting.vue";
 import {mapGetters, mapActions} from 'vuex';
 
 export default {

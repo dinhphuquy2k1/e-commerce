@@ -218,7 +218,6 @@ import Dropdown from "primevue/dropdown";
 import InputNumber from "primevue/inputnumber";
 import TreeSelect from "primevue/treeselect";
 import RadioButton from 'primevue/radiobutton';
-
 import {mapGetters, mapActions} from 'vuex';
 
 export default {

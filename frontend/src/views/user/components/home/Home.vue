@@ -48,17 +48,17 @@
 </template>
 
 <script>
-import Banner from '@/views/user/components/Banner.vue';
-import TopOffer from '@/views/user/components/TopOffer.vue';
-import StoreCategories from '@/views/user/components/StoreCategories.vue';
-import FeaturedProducts from '@/views/user/components/FeaturedProducts.vue';
-import ComputerAccessories from '@/views/user/components/ComputerAccessories.vue';
-import LastestNew from '@/views/user/components/LastestNew.vue';
-import FooterBanner from '@/views/user/components/FooterBanner.vue';
-import PromotionalTile from '@/views/user/components/PromotionalTile.vue';
-import BoxHome from "@/views/user/components/BoxHome.vue";
-import BoxAds from "@/views/user/components/BoxAds.vue";
-import SpinSetting from "@/views/user/components/SpinSetting.vue";
+import Banner from '@/views/user/components/banner/Banner.vue';
+import TopOffer from '@/views/user/components/home/TopOffer.vue';
+import StoreCategories from '@/views/user/components/home/StoreCategories.vue';
+import FeaturedProducts from '@/views/user/components/home/FeaturedProducts.vue';
+import ComputerAccessories from '@/views/user/components/home/ComputerAccessories.vue';
+import LastestNew from '@/views/user/components/home/LastestNew.vue';
+import FooterBanner from '@/views/user/components/banner/FooterBanner.vue';
+import PromotionalTile from '@/views/user/components/home/PromotionalTile.vue';
+import BoxHome from "@/views/user/components/home/BoxHome.vue";
+import BoxAds from "@/views/user/components/home/BoxAds.vue";
+import SpinSetting from "@/views/user/components/home/SpinSetting.vue";
 import TheLoading from "@/components/TheLoading.vue";
 import {mapGetters, mapActions} from 'vuex';
 

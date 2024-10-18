@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SpinSetting from "@/views/user/components/SpinSetting.vue";
+import SpinSetting from "@/views/user/components/home/SpinSetting.vue";
 export default {
   components: {
     SpinSetting,

@@ -23,7 +23,7 @@
 import Carousel from 'primevue/carousel';
 import Button from 'primevue/button';
 import Galleria from 'primevue/galleria';
-import SpinSetting from './SpinSetting.vue';
+import SpinSetting from '../home/SpinSetting.vue';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {

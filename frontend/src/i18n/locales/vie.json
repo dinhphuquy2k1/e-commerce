@@ -168,5 +168,14 @@
   "or": "hoặc",
   "forgot_password": "Quên mật khẩu?",
   "email_or_phone": "Email hoặc số điện thoại",
-  "login_with": "Đăng nhập với {name}"
+  "login_with": "Đăng nhập với {name}",
+  "total_value": "Tổng giá trị",
+  "discount": "Giảm giá",
+  "total_payment": "Tổng thanh toán",
+  "payment_details": "Chi tiết thanh toán",
+  "shipping_fee": "Phí giao hàng",
+  "free": "Miễn phí",
+  "continue_shopping": "Tiếp tục mua sắm",
+  "discount_code": "Mã giảm giá",
+  "quantity": "Số lượng"
 }
