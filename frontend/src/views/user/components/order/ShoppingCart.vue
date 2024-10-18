@@ -15,7 +15,7 @@
                        class="flex1 flex-column mw-100"
                        scrollable
                        style="min-width: 100%"
-                       :value="isLoadingProduct ? Array.from({ length: getNumberDefault }, () => ({ ...{} })) : test"
+                       :value="isLoadingProduct ? Array.from({ length: 3 }, () => ({ ...{} })) : test"
                        @rowDblclick="onRowSelect($event.data)" rowHover>
               <template #paginatorstart>
                 <Button type="button" icon="pi pi-refresh" text/>
@@ -99,7 +99,8 @@
         </div>
       </div>
       <div class="col-lg-4 mt-0 d-flex flex-column">
-        <div class="right-side text-start flex-1">
+        <div class="right-side text-start flex-1 position-relative">
+          <TheLoading v-if="isLoadingProduct"></TheLoading>
           <div class="header">
             {{ $t('payment_details') }}
           </div>
@@ -122,7 +123,8 @@
             </div>
           </div>
         </div>
-        <div class="ms-coupon mt-4">
+        <div class="ms-coupon mt-4 position-relative">
+          <TheLoading v-if="isLoadingProduct"></TheLoading>
           <div class="header">
             {{ $t('discount_code') }}
           </div>
@@ -148,10 +150,12 @@ import Column from 'primevue/column';
 import Skeleton from 'primevue/skeleton';
 import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
+import TheLoading from "@/components/TheLoading.vue";
 
 export default {
   components: {
+    TheLoading,
     Button,
     DataTable,
     Column,
@@ -177,9 +181,11 @@ export default {
       ]
     }
   },
-  methods: {},
+  methods: {
+    ...mapActions(['getProductWithFilter'])
+  },
   created() {
-
+    this.getProductWithFilter();
   },
 }
 </script>

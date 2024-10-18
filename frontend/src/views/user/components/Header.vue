@@ -27,7 +27,8 @@
         <div class="icon24 icon search-right search"></div>
       </div>
       <div class="m-header_actions d-flex">
-        <div class="d-flex cart pointer flex-column justify-content-center me-4 item-action">
+        <div class="d-flex cart pointer flex-column justify-content-center me-4 item-action"
+             @click="$router.push({name: 'shop_cart'})">
           <div class="icon"></div>
           <div class="title">2</div>
         </div>
