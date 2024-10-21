@@ -1,53 +1,982 @@
 <template>
   <nav class="ma-navbar position-relative d-flex flex-column justify-content-between"
        :class="{'collapsed': isCollapsed}">
-    <div class="left-container flex-grow-1">
-      <PanelMenu v-model:expanded-keys="expandedKeys" :model="menus" multiple>
-        <template #item="{ item }">
-          <router-link v-if="item.route && item.items.length===0" :to="item.route"
-                       class="ma-navbar-parent d-flex align-items-center">
-            <div class="d-flex flex-grow-1 align-items-center gap-1 cursor-pointer menu-item">
-              <span :class="[item.icon, 'text-primary']"/>
-              <span :class="['ml-2', { 'font-semibold': item.items }]">{{ item.label }}</span>
+    <div class="left-container flex-grow-1 mt-2">
+      <div class="left-container-inner">
+        <PanelMenu v-model:expanded-keys="expandedKeys" :model="menus" :multiple="!isCollapsed"
+                   @panel-open="onOpenPanelMenu">
+          <template #item="{ item }">
+            <router-link v-if="item.route != null && item.items.length===0" :to="item.route"
+                         class="ma-navbar-parent d-flex align-items-center"
+                         @click="onClickMenuItem"
+                         v-tooltip.right="{ value: isCollapsed && item.parent_id === null ? item.label : '' , escape: true }">
+              <div class="d-flex flex-grow-1 align-items-center gap-1 cursor-pointer menu-item">
+                <span :class="[item.icon, 'text-primary icon']"/>
+                <span :class="['ml-2', { 'font-semibold': item.items }]">{{ item.label }}</span>
+              </div>
+            </router-link>
+            <div v-else class="ma-navbar-parent d-flex align-items-center"
+                 :class="{'p-submenu-icon': item.items.length > 0}"
+                 v-tooltip.right="{ value: isCollapsed ? item.label : '' , escape: true }">
+              <div class="menu-item align-items-center gap-1 flex-grow-1 d-flex">
+                <div class="icon" :class="[item.icon]"></div>
+                <div class="flex-grow-1 ms-text">{{ item.label }}</div>
+                <span v-if="item.items" class="pi arrow-right pi-angle-up text-primary ml-auto"/>
+              </div>
             </div>
-          </router-link>
-          <div v-else class="ma-navbar-parent d-flex align-items-center"
-               :class="{'p-submenu-icon': item.items.length > 0}">
-            <div class="menu-item align-items-center gap-1 flex-grow-1 d-flex">
-              <div class="icon" :class="[item.icon]"></div>
-              <div class="flex-grow-1">{{ item.label }}</div>
-              <span v-if="item.items" class="pi arrow-right pi-angle-up text-primary ml-auto"/>
-            </div>
-          </div>
-        </template>
-      </PanelMenu>
-    </div>
-    <div class="toggle-button-container">
-      <div class="toggle-button gap-2 d-flex pointer show justify-content-start" :class="{'hidden': isCollapsed}"
-           @click="isCollapsed = !isCollapsed">
-        <span class="icon"></span>
-        <span class="toggle-title text-start">Thu gọn</span>
+          </template>
+        </PanelMenu>
       </div>
     </div>
-
+    <!--    <div class="toggle-button-container">-->
+    <!--      <div class="toggle-button gap-2 d-flex pointer show justify-content-start" :class="{'hidden': isCollapsed}"-->
+    <!--           @click="isCollapsed = !isCollapsed">-->
+    <!--        <span class="icon"></span>-->
+    <!--        <span class="toggle-title text-start">Thu gọn</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </nav>
 </template>
 
 <script>
 import PanelMenu from 'primevue/panelmenu';
+import Menu from 'primevue/menu';
 import {getMenu} from "@/api/menu";
 
 export default {
   props: ['isChatNavbar'],
   components: {
-    PanelMenu
+    PanelMenu,
+    Menu,
   },
   data() {
     return {
       isCollapsed: false,
-      menus: [],
+      menus: [
+        {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        }, {
+          "key": 1,
+          "id": 1,
+          "label": "Trang ch\u1ee7",
+          "icon": "icon-home_default",
+          "route": "\/admin\/homepage",
+          "display": 0,
+          "parent_id": null,
+          "items": [],
+          "routes": [],
+          "route_keys": []
+        },
+        {
+          "key": 10,
+          "id": 10,
+          "label": "T\u1ed5ng quan",
+          "icon": "icon-challenge_default",
+          "route": null,
+          "display": 0,
+          "parent_id": null,
+          "items": [
+            {
+              "key": 11,
+              "id": 11,
+              "label": "\u0110\u01a1n h\u00e0ng",
+              "icon": null,
+              "route": "\/admin\/dashboard\/order",
+              "display": 0,
+              "parent_id": 10,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 12,
+              "id": 12,
+              "label": "S\u1ea3n ph\u1ea9m",
+              "icon": null,
+              "route": "\/admin\/dashboard\/product",
+              "display": 0,
+              "parent_id": 10,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            }
+          ],
+          "routes": [
+            "\/admin\/dashboard\/order",
+            "\/admin\/dashboard\/product"
+          ],
+          "route_keys": [
+            11,
+            12
+          ]
+        },
+        {
+          "key": 20,
+          "id": 20,
+          "label": "S\u1ea3n ph\u1ea9m",
+          "icon": "icon-product_default",
+          "route": null,
+          "display": 0,
+          "parent_id": null,
+          "items": [
+            {
+              "key": 21,
+              "id": 21,
+              "label": "Qu\u1ea3n l\u00fd s\u1ea3n ph\u1ea9m",
+              "icon": null,
+              "route": "\/admin\/product\/manage",
+              "display": 0,
+              "parent_id": 20,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 22,
+              "id": 22,
+              "label": "Th\u00eam s\u1ea3n ph\u1ea9m m\u1edbi",
+              "icon": null,
+              "route": "\/admin\/product\/create",
+              "display": 0,
+              "parent_id": 20,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 23,
+              "id": 23,
+              "label": "C\u00f4ng c\u1ee5 h\u00e0ng lo\u1ea1t",
+              "icon": null,
+              "route": "\/admin\/product\/batch",
+              "display": 0,
+              "parent_id": 20,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            }
+          ],
+          "routes": [
+            "\/admin\/product\/manage",
+            "\/admin\/product\/create",
+            "\/admin\/product\/batch"
+          ],
+          "route_keys": [
+            21,
+            22,
+            23
+          ]
+        },
+        {
+          "key": 50,
+          "id": 50,
+          "label": "\u0110\u01a1n h\u00e0ng",
+          "icon": "icon-order_default",
+          "route": null,
+          "display": 0,
+          "parent_id": null,
+          "items": [
+            {
+              "key": 51,
+              "id": 51,
+              "label": "Qu\u1ea3n l\u00fd \u0111\u01a1n h\u00e0ng",
+              "icon": "pi pi-envelope",
+              "route": "\/admin\/order\/manage",
+              "display": 0,
+              "parent_id": 50,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 52,
+              "id": 52,
+              "label": "Qu\u1ea3n l\u00fd y\u00eau c\u1ea7u h\u1ee7y",
+              "icon": "pi pi-envelope",
+              "route": "\/admin\/order\/cancellation",
+              "display": 0,
+              "parent_id": 50,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 53,
+              "id": 53,
+              "label": "Qu\u1ea3n l\u00fd \u0111\u01a1n h\u00e0ng ho\u00e0n tr\u1ea3",
+              "icon": "pi pi-envelope",
+              "route": "\/admin\/order\/return",
+              "display": 0,
+              "parent_id": 50,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            }
+          ],
+          "routes": [
+            "\/admin\/order\/manage",
+            "\/admin\/order\/cancellation",
+            "\/admin\/order\/return"
+          ],
+          "route_keys": [
+            51,
+            52,
+            53
+          ]
+        },
+        {
+          "key": 100,
+          "id": 100,
+          "label": "T\u00e0i kho\u1ea3n c\u1ee7a t\u00f4i",
+          "icon": "icon-account_default",
+          "route": null,
+          "display": 0,
+          "parent_id": null,
+          "items": [
+            {
+              "key": 101,
+              "id": 101,
+              "label": "H\u1ed3 s\u01a1 ngu\u1eddi b\u00e1n",
+              "icon": "pi pi-envelope",
+              "route": "\/admin\/profile\/seller-profile",
+              "display": 0,
+              "parent_id": 100,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            },
+            {
+              "key": 102,
+              "id": 102,
+              "label": "C\u00e0i \u0111\u1eb7t t\u00e0i kho\u1ea3n",
+              "icon": "pi pi-envelope",
+              "route": "\/admin\/profile\/account-setting",
+              "display": 0,
+              "parent_id": 100,
+              "items": [],
+              "routes": [],
+              "route_keys": []
+            }
+          ],
+          "routes": [
+            "\/admin\/profile\/seller-profile",
+            "\/admin\/profile\/account-setting"
+          ],
+          "route_keys": [
+            101,
+            102
+          ]
+        }
+      ],
       expandedKeys: {},
+      items: [],
     }
+  },
+  mounted() {
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
   },
   methods: {
     expandedMenu() {
@@ -61,6 +990,32 @@ export default {
         }
       }
     },
+
+    /**
+     * click menu item
+     */
+    onClickMenuItem(item) {
+      if (this.isCollapsed) {
+        this.expandedKeys = {}
+      }
+    },
+
+    onOpenPanelMenu(event) {
+      if (this.isCollapsed) {
+        this.expandedKeys = {
+          [event.item.key]: true
+        }
+      }
+    },
+
+    checkWindowSize() {
+      // Kiểm tra kích thước cửa sổ
+      this.isCollapsed = window.innerWidth < 1200;
+      if (this.isCollapsed) {
+        this.expandedKeys = {};
+      }
+    },
+
     /**
      * Lấy danh sách menu
      */
@@ -73,6 +1028,10 @@ export default {
       })
     },
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.checkWindowSize);
+  },
+
   async created() {
     await this.loadMenu();
     this.expandedMenu();
@@ -82,7 +1041,6 @@ export default {
 
 <style lang="scss">
 .ma-navbar {
-  overflow: hidden;
   width: $navbar-width;
   padding: 1px;
   transition: width .2s;
@@ -90,16 +1048,27 @@ export default {
   background: #fff;
   height: 100%;
 
-  &:hover {
-    overflow-y: auto;
-  }
-
-  &.collapsed {
-    min-width: 56px;
-    width: 56px;
-  }
+  //&:hover {
+  //  overflow-y: auto;
+  //}
 
   .left-container {
+    padding: 0 8px 0 8px;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .ma-navbar-parent {
+      .icon {
+        min-width: 24px;
+        min-height: 24px;
+      }
+    }
+
+    .left-container-inner {
+
+    }
+
     .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content {
       border-radius: unset;
     }
@@ -128,7 +1097,7 @@ export default {
         .p-menuitem {
           .menu-item {
             span {
-              padding-left: 10px;
+              padding-left: 12px;
             }
           }
         }
@@ -137,10 +1106,6 @@ export default {
 
 
     .p-panelmenu {
-      a:hover {
-
-      }
-
       ol, ul, dl {
         margin: unset;
         padding-left: 1.5rem;
@@ -196,9 +1161,10 @@ export default {
       }
 
       .menu-item {
-        padding: 12px;
-        margin: 8px 8px 0 8px;
-        border-radius: 8px;
+        height: 36px;
+        padding: 0 8px;
+        border-radius: 4px;
+        margin-top: 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -212,16 +1178,16 @@ export default {
         }
 
         &:hover {
-          background: #eff7ff;
-          color: #ff6d00;
+          background: rgba(0, 0, 0, .08);
+          color: var(--Secondary-500);
           cursor: pointer;
         }
       }
 
       .router-link-active {
         .menu-item {
-          background: #fbe9e7;
-          color: #ff6d00;
+          background: rgba(0, 0, 0, .08);
+          color: var(--Secondary-500);
         }
 
         &.ma-navbar-parent {
@@ -231,6 +1197,19 @@ export default {
         }
       }
 
+    }
+  }
+
+  &.collapsed {
+    .p-panelmenu-panel {
+      &:has(.router-link-active) {
+        .p-panelmenu-header-content {
+          .menu-item {
+            background: rgba(0, 0, 0, .08);
+            color: var(--Secondary-500);
+          }
+        }
+      }
     }
   }
 
@@ -285,6 +1264,45 @@ export default {
     }
   }
 
+  &.collapsed {
+    min-width: $navbar-collapsed-width;
+    width: $navbar-collapsed-width;
 
+    .p-panelmenu {
+      .p-panelmenu-panel {
+
+        .ma-navbar-parent {
+          .ms-text {
+            display: none;
+          }
+        }
+
+        .p-toggleable-content {
+          transition: unset !important;
+          position: absolute;
+          box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.12);
+          width: 200px;
+          height: 100%;
+          left: 58px;
+          top: 0;
+          z-index: 2;
+
+          .p-panelmenu-content {
+            height: 100%;
+            padding: 6px;
+            border: 1px solid var(--Gray-100);
+            border-radius: unset;
+          }
+
+          .p-menuitem-content {
+            span {
+              padding-left: 0 !important;
+            }
+          }
+        }
+      }
+
+    }
+  }
 }
 </style>

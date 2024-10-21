@@ -60,7 +60,8 @@ export default {
 .ma-header-wrapper {
   height: 56px;
   min-height: 56px;
-  background: #fff;
+  background: #121212;
+  color: #fff;
   width: 100%;
   box-shadow: inset 0 1.5px 2px 0 rgba(0, 0, 0, .1);
 

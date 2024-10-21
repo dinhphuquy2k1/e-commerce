@@ -16,6 +16,8 @@ INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(52, 'Quản lý yêu cầu hủy', 'pi pi-envelope', 0, '/admin/order/cancellation', 50, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(53, 'Quản lý đơn hàng hoàn trả', 'pi pi-envelope', 0, '/admin/order/return', 50, now(), now());
 
+INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(70, 'Trung tâm mua sắm', 'icon-shopping_mall_default', 0, '/admin/shopping-mall', null, now(), now());
+
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(100, 'Tài khoản của tôi', 'icon-account_default', 0, null, null, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(101, 'Hồ sơ nguời bán', 'pi pi-envelope', 0, '/admin/profile/seller-profile', 100, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(102, 'Cài đặt tài khoản', 'pi pi-envelope', 0, '/admin/profile/account-setting', 100, now(), now());

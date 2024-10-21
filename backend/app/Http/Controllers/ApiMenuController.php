@@ -20,7 +20,7 @@ class ApiMenuController extends Controller
         return $this->sendResponseSuccess($ret);
     }
 
-    public function recursiveMenu(array $menus, $parentId = null): array
+    public function recursiveMenu(array $menus, $parentId = null, $level = 0): array
     {
         $result = [];
         foreach ($menus as $menu) {
@@ -33,7 +33,8 @@ class ApiMenuController extends Controller
                     'route' => $menu['route'],
                     'display' => $menu['display'],
                     'parent_id' => $menu['parent_id'],
-                    'items' => $this->recursiveMenu($menus, $menu['id']),
+                    'level' => $level,
+                    'items' => $this->recursiveMenu($menus, $menu['id'], $level + 1),
                 ];
                 $category['routes'] = array_column($category['items'], 'route');
                 $category['route_keys'] = array_column($category['items'], 'key');
