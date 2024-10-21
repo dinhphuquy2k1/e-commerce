@@ -26,6 +26,10 @@
             </div>
           </template>
         </PanelMenu>
+        <div class="position-absolute top-0 ms-hide-submenu" v-if="isCollapsed && Object.keys(expandedKeys).length > 0"
+             @click="expandedKeys = {}">
+
+        </div>
       </div>
     </div>
     <!--    <div class="toggle-button-container">-->
@@ -366,7 +370,7 @@ export default {
           transition: unset !important;
           position: absolute;
           box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.12);
-          width: 200px;
+          width: $navbar-submenu-width;
           height: 100%;
           left: 58px;
           top: 0;
@@ -387,6 +391,14 @@ export default {
         }
       }
 
+    }
+
+    .ms-hide-submenu {
+      left: calc($navbar-collapsed-width + $navbar-submenu-width);
+      top: 0;
+      width: calc(100vw - $navbar-collapsed-width - $navbar-submenu-width);
+      height: 100%;
+      z-index: 10;
     }
   }
 }
