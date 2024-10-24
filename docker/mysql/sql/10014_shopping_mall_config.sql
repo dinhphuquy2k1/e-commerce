@@ -1,39 +1,39 @@
 SET
     CHARSET UTF8;
 
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (1, 'Điện thoại nổi bật', 0, 5, 25, 1, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (1, 'Điện thoại nổi bật', 0, 5, 1, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (2, 'ads', 2, 5, 25, 2, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (2, 'ads', 2, 5,2, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (3, 'Laptop nổi bật', 0, 5, 15, 3, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (3, 'Laptop nổi bật', 0, 5, 3, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (4, 'ads', 2, 5, 25, 4, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (4, 'ads', 2, 5, 4, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (5, 'Màn hình nổi bật', 0, 5, 15, 5, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (5, 'Màn hình nổi bật', 0, 5, 5, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (6, 'ads', 2, 5, 25, 6, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (6, 'ads', 2, 5, 6, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (7, 'Âm thanh nổi bật', 1, 5, 25, 7, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (7, 'Âm thanh nổi bật', 1, 5,7, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (8, 'ads', 2, 5, 25, 8, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (8, 'ads', 2, 5, 8, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (9, 'Điện máy nổi bật', 1, 5, 25, 9, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (9, 'Điện máy nổi bật', 1, 5, 9, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (10, 'ads', 2, 5, 25, 10, now(), now());
-INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, quantity, display_order, created_at,
+VALUES (10, 'ads', 2, 5, 10, now(), now());
+INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (11, 'Tablet', 1, 5, 25, 11, now(), now());
+VALUES (11, 'Tablet', 1, 5, 11, now(), now());
 
 -- Điện thoại nổi bật
 INSERT IGNORE INTO shopping_mall_tags
