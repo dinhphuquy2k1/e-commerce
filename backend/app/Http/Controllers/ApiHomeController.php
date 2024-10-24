@@ -69,7 +69,6 @@ class ApiHomeController extends Controller
                 'title' => $config['title'],
                 'type' => $config['type'],
                 'columnsPerRow' => $config['columns_per_row'],
-                'quantity' => $config['quantity'],
                 'displayOrder' => $config['display_order'],
                 'isUse' => $config['is_use'],
                 'items' => $config['type'] != ConfigType::ADS ? $config['items'] : [],

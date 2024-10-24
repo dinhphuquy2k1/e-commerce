@@ -64,11 +64,14 @@
                         </div>
                       </div>
                       <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
-                        <div class="left-side">Số lượng sản phẩm</div>
+                        <div class="left-side">Sản phẩm đã chọn</div>
                         <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.quantity }}</div>
+                          <div v-if="!editActive[index]">{{ item.items.length }}</div>
                           <div v-else>
-                            <InputNumber v-model="data.quantity" showButtons :min="1" :max="100"/>
+                            <Button
+                                class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+                              <div class="fw-medium">{{ $t('change') }}</div>
+                            </Button>
                           </div>
                         </div>
                       </div>

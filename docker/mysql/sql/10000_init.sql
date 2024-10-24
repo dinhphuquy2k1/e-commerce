@@ -143,7 +143,6 @@ CREATE TABLE shopping_mall_configs
     `type`            tinyint(11)                        NOT NULL DEFAULT 0 COMMENT '0: default, 1: slider, 2: ads',
     `is_use`          tinyint(11)                        NOT NULL DEFAULT 1 COMMENT '0: hide, 1: show',
     `columns_per_row` int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0,
-    `quantity`        int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT 'Total',
     `display_order`   int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT 'Display order',
     `created_at`      TIMESTAMP                                   DEFAULT now(),
     `updated_at`      TIMESTAMP                                   DEFAULT now() ON UPDATE now(),

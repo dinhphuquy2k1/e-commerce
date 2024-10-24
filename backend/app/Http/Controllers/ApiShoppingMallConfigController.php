@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
 use App\Models\ShoppingMallConfig;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +19,6 @@ class ApiShoppingMallConfigController extends Controller
             'id' => 'required|exists:shopping_mall_configs,id',
             'title' => 'required|string|max:50',
             'columnsPerRow' => 'required|integer|min:1|max:10',
-            'quantity' => 'required|integer|min:1|max:100',
             'type' => 'required|integer',
             'isUse' => 'required|integer',
             'displayOrder' => 'required|integer',
@@ -32,7 +30,6 @@ class ApiShoppingMallConfigController extends Controller
                 [
                     'title' => $attribute['title'],
                     'columns_per_row' => $attribute['columnsPerRow'],
-                    'quantity' => $attribute['quantity'],
                     'type' => $attribute['type'],
                     'is_use' => $attribute['isUse'],
                     'display_order' => $attribute['displayOrder'],
@@ -42,10 +39,6 @@ class ApiShoppingMallConfigController extends Controller
             return $this->sendResponseSuccess(['message' => 'success']);
         } catch (\Throwable $th) {
             DB::rollBack();
-            echo "<pre>";
-            print_r($th->getMessage());
-            echo "</pre>";
-            exit();
             return $this->sendResponse($th->getCode(), ['message' => $th->getMessage()]);
         }
     }
