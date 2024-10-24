@@ -125,7 +125,7 @@ export default {
   },
 
   created() {
-    this.loadConfig();
+    this.loadConfig({isUse: 1});
   }
 }
 </script>
