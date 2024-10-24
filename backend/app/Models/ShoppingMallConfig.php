@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class ShoppingMallConfig extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     /**
      * @return HasOne

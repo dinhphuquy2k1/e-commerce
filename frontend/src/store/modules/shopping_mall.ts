@@ -20,10 +20,11 @@ export default {
 
     actions: {
 
-        loadConfig({commit}: { commit: any }): Promise<void> {
+        loadConfig({commit}: { commit: any }, payload: { isUse: any } = {isUse: ''}): Promise<void> {
             commit('SET_LOADING');
             return new Promise<void>((resolve, reject) => {
-                getConfig().then((response: any) => {
+                const {isUse} = payload;
+                getConfig(isUse).then((response: any) => {
                     commit('SET_CONFIGS', response.data);
                     resolve();
                 }).catch((error: any) => {

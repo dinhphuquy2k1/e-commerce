@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-ads position-relative">
+  <div class="ms-ads position-relative mt-4">
     <div class="pointer">
       <img src="http://localhost:30001/storage/ads/xiaomi-1200x200.png" alt="">
       <SpinSetting></SpinSetting>

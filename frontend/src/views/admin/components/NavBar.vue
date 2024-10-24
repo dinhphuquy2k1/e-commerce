@@ -11,7 +11,7 @@
                          @click="onClickMenuItem"
                          v-tooltip.right="{ value: isCollapsed && item.parent_id === null ? item.label : '' , escape: true }">
               <div class="d-flex flex-grow-1 align-items-center gap-1 cursor-pointer menu-item">
-                <span :class="[item.icon, 'text-primary icon']"/>
+                <span :class="[item.icon, 'text-primary icon', {'icon-mw24': item.icon}]"/>
                 <span :class="['ml-2', { 'font-semibold': item.items }]">{{ item.label }}</span>
               </div>
             </router-link>
@@ -19,7 +19,7 @@
                  :class="{'p-submenu-icon': item.items.length > 0}"
                  v-tooltip.right="{ value: isCollapsed ? item.label : '' , escape: true }">
               <div class="menu-item align-items-center gap-1 flex-grow-1 d-flex">
-                <div class="icon" :class="[item.icon]"></div>
+                <div class="icon icon-mw24" :class="[item.icon]"></div>
                 <div class="flex-grow-1 ms-text">{{ item.label }}</div>
                 <span v-if="item.items" class="pi arrow-right pi-angle-up text-primary ml-auto"/>
               </div>
@@ -146,13 +146,6 @@ export default {
     height: calc(100% - 50px);
     overflow-y: auto;
     overflow-x: hidden;
-
-    .ma-navbar-parent {
-      .icon {
-        min-width: 24px;
-        min-height: 24px;
-      }
-    }
 
     .left-container-inner {
 

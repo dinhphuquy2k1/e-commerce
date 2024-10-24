@@ -147,14 +147,6 @@ const routes: Array<RouteRecordRaw> = [
                 path: 'dashboard',
                 children: [
                     {
-                        path: '',
-                        components: {
-                            header: () => import('@/views/admin/components/Header.vue'),
-                            content: () => import('@/views/admin/components/AddProduct.vue'),
-                            navbar: () => import('@/views/admin/components/NavBar.vue'),
-                        }
-                    },
-                    {
                         path: 'order',
                         components: {
                             header: () => import('@/views/admin/components/Header.vue'),
@@ -174,13 +166,6 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'product',
                 children: [
-                    {
-                        path: '',
-                        components: {
-                            header: () => import('@/views/admin/components/Header.vue'),
-                            content: () => import('@/views/admin/components/AddProduct.vue'),
-                        }
-                    },
                     {
                         path: 'manage',
                         name: 'manage_product',
@@ -235,6 +220,20 @@ const routes: Array<RouteRecordRaw> = [
                                 },
                             },
                         ],
+                    },
+                ],
+            },
+            {
+                path: 'shopping-mall',
+                children: [
+                    {
+                        path: 'setting',
+                        name: 'interface_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/ScreenSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
                     },
                 ],
             },

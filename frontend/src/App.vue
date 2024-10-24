@@ -1,13 +1,23 @@
 <template>
   <router-view name="home"></router-view>
+  <Toast/>
 </template>
 
 <script>
 import HomeView from '@/views/user/HomeView.vue'
+import Toast from 'primevue/toast';
+import {mapActions} from 'vuex';
 
 export default {
-  components:{
-    HomeView
+  components: {
+    HomeView,
+    Toast,
+  },
+  methods: {
+    ...mapActions(['setToast']),
+  },
+  created() {
+    this.setToast({toast: this.$toast})
   }
 }
 </script>

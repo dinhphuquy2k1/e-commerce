@@ -11,11 +11,18 @@
         <div class="right-btt-action right-action icon-notify icon24 has-tooltip" v-tooltip.bottom="'Thông báo'"></div>
         <div class="right-btt-action right-action icon-setting icon24 setting has-tooltip"
              v-tooltip.bottom="'Cài đặt'"></div>
-        <div class="h-100">
+        <div class="h-100 ms-header-profile">
           <Button
               @click="toggle" aria-haspopup="true"
               aria-controls="overlay_menu"
-              class="ms-btn primary h-100 rounded-0 mw-0 d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+              class="ms-btn btn-transparent h-100 rounded-0 mw-0 d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+            <div class="icon-w24 ms-avatar">
+              <img
+                  :src="require('@public/assets/images/7220334d431949e0972ce009d8d8d09b~tplv-aphluv4xwc-origin-jpeg.jpeg')"
+                  alt="" width="24" height="24">
+            </div>
+            <div class="title">Phú Quý</div>
+            <div class="icon"></div>
           </Button>
           <Menu ref="menu" id="overlay_menu" :model="items" :popup="true"/>
         </div>
@@ -106,6 +113,23 @@ export default {
         cursor: pointer;
         background-color: #f5f5f5;
         background-size: 24px;
+      }
+
+      .ms-avatar {
+        opacity: 0.9;
+        img {
+          border-radius: 50%;
+        }
+      }
+
+      .title {
+        color: var(--primary);
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        overflow: hidden;
+        word-break: break-all;
+        opacity: 0.7;
       }
     }
   }

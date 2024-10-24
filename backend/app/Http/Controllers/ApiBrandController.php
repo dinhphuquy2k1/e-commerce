@@ -43,10 +43,6 @@ class ApiBrandController extends Controller
             return $this->sendResponseSuccess($brand->toArray());
         } catch (\Throwable $th) {
             DB::rollBack();
-            echo "<pre>";
-            print_r($th->getMessage());
-            echo "</pre>";
-            exit();
             return $this->sendResponseBadRequest();
         }
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\ApiMenuController;
 use App\Http\Controllers\ApiWareHouseController;
 use App\Http\Controllers\ApiRoleController;
 use App\Http\Controllers\ApiOrderController;
+use App\Http\Controllers\ApiShoppingMallConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,8 @@ Route::prefix('warehouses')->group(function () {
 Route::prefix('roles')->group(function () {
     Route::get('/', [ApiRoleController::class, 'get']);
     Route::get('/:type', [ApiRoleController::class, 'getRoleByType']);
+});
+
+Route::prefix('shopping')->group(function () {
+    Route::post('/config', [ApiShoppingMallConfigController::class, 'update']);
 });

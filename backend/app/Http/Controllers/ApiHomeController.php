@@ -6,20 +6,29 @@ use App\Enums\PropertyType;
 use App\Models\Banner;
 use App\Models\ShoppingMallConfig;
 use App\Enums\ConfigType;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class ApiHomeController extends Controller
 {
     /**
+     * @param Request $request
      * @return JsonResponse
      */
-    public function getConfigs(): JsonResponse
+    public function getConfigs(Request $request): JsonResponse
     {
-        $configs = ShoppingMallConfig::with([
+        $isUse = $request->query('isUse');
+        $query = ShoppingMallConfig::with([
             'ads.media',
             'tags.items',
             'items.product.media',
-        ])->orderBy('display_order')->get();
+        ])->orderBy('display_order');
+
+        if (isset($isUse)) {
+            $query->where('is_use', $isUse);
+        }
+
+        $configs = $query->get();
 
         $banners = Banner::with('medias')->get();
 
@@ -56,10 +65,13 @@ class ApiHomeController extends Controller
             }
 
             $results['data'][] = [
+                'id' => $config['id'],
                 'title' => $config['title'],
                 'type' => $config['type'],
                 'columnsPerRow' => $config['columns_per_row'],
                 'quantity' => $config['quantity'],
+                'displayOrder' => $config['display_order'],
+                'isUse' => $config['is_use'],
                 'items' => $config['type'] != ConfigType::ADS ? $config['items'] : [],
                 'url' => $config['url'] ?? null,
                 'tags' => $config['tags'],
@@ -70,6 +82,22 @@ class ApiHomeController extends Controller
             return [
                 'value' => $instance->value,
                 'description' => $instance->description,
+            ];
+        })->toArray();
+
+        $results['optionTypes'] = collect(ConfigType::getInstances())->reject(function ($instance) {
+            return in_array($instance->value, [ConfigType::ADS]);
+        })->values()->map(function ($instance) {
+            switch ((int)$instance->value) {
+                case ConfigType::SLIDER:
+                    $description = 'slider';
+                    break;
+                default:
+                    $description = 'default_text';
+            }
+            return [
+                'value' => $instance->value,
+                'description' => $description,
             ];
         })->toArray();
 

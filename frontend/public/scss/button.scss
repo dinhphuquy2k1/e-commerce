@@ -246,4 +246,18 @@
       }
     }
   }
+
+  &.btn-edit-adm {
+    background-color: rgba(0, 0, 0, .05);
+    border: 1px solid transparent;
+    color: rgba(0, 0, 0, .92);
+    padding: 3px 12px;
+    height: unset;
+    min-height: unset;
+    font-size: 12px !important;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
+  }
 }
