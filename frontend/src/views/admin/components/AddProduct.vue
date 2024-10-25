@@ -1422,7 +1422,7 @@ export default {
         }
       })
       if (scrollToSizeTable) {
-        this.$refs[scrollToSizeTable][0].scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.$refs[scrollToSizeTable][0].scrollIntoView({behavior: 'smooth', block: 'start'});
       }
       return Object.keys(this.invalidSizeTable).length <= 0;
     },

@@ -1,4 +1,4 @@
-import {getConfig} from "@/api/shopping_mall";
+import {addConfig, getConfig} from "@/api/shopping_mall";
 import {TIMEOUT} from "@/common/enums";
 
 export default {
@@ -6,6 +6,8 @@ export default {
     state: {
         configs: [],
         isLoadingConfig: false,
+        isLoadingAddConfig: false,
+        config: null,
     },
 
     mutations: {
@@ -15,6 +17,14 @@ export default {
 
         SET_LOADING(state: any) {
             state.isLoadingConfig = !state.isLoadingConfig
+        },
+
+        SET_LOADING_ADD(state: any) {
+            state.isLoadingAddConfig = !state.isLoadingAddConfig
+        },
+
+        SET_CONFIG(state: any, config: any) {
+            state.config = config;
         }
     },
 
@@ -36,6 +46,23 @@ export default {
                 });
             });
         },
+
+        addConfig({commit}: { commit: any }, payload: { data: {} } = {data: {}}): Promise<void> {
+            commit('SET_LOADING_ADD');
+            return new Promise<void>((resolve, reject) => {
+                const {data} = payload;
+                addConfig(data).then((response: any) => {
+                    commit('SET_CONFIG', response.data.data);
+                    resolve();
+                }).catch((error: any) => {
+                    reject(error);
+                }).finally(() => {
+                    setTimeout(() => {
+                        commit('SET_LOADING_ADD');
+                    }, TIMEOUT.LOADING)
+                });
+            });
+        },
     },
 
     getters: {
@@ -45,6 +72,14 @@ export default {
 
         isLoadingConfig(state: any) {
             return state.isLoadingConfig;
+        },
+
+        isLoadingAddConfig(state: any) {
+            return state.isLoadingAddConfig
+        },
+
+        config(state: any) {
+            return state.config
         }
     }
 };

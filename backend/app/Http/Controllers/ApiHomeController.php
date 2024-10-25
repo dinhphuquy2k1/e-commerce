@@ -6,6 +6,8 @@ use App\Enums\PropertyType;
 use App\Models\Banner;
 use App\Models\ShoppingMallConfig;
 use App\Enums\ConfigType;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -13,9 +15,9 @@ class ApiHomeController extends Controller
 {
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    public function getConfigs(Request $request): JsonResponse
+    public function getConfigs(Request $request)
     {
         $isUse = $request->query('isUse');
         $query = ShoppingMallConfig::with([
@@ -90,6 +92,23 @@ class ApiHomeController extends Controller
             switch ((int)$instance->value) {
                 case ConfigType::SLIDER:
                     $description = 'slider';
+                    break;
+                default:
+                    $description = 'default_text';
+            }
+            return [
+                'value' => $instance->value,
+                'description' => $description,
+            ];
+        })->toArray();
+
+        $results['optionTypeAll'] = collect(ConfigType::getInstances())->values()->map(function ($instance) {
+            switch ((int)$instance->value) {
+                case ConfigType::SLIDER:
+                    $description = 'slider';
+                    break;
+                case ConfigType::ADS:
+                    $description = 'ads';
                     break;
                 default:
                     $description = 'default_text';

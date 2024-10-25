@@ -4,7 +4,7 @@
       <div class="list-title flex-grow-1 text-start">{{ $t('interface_settings') }}</div>
       <div>
         <Button
-            @click="$router.push({name: 'add_product'})"
+            @click="onAddDisplaySetting"
             class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
           <div class="icon24 add-white"></div>
           <div class="fw-semibold">{{ $t('add_display') }}</div>
@@ -19,166 +19,163 @@
           </div>
           <div class="ms-setting-container flex-1 d-flex" v-if="configs?.data?.length > 0 && !isLoadingConfig">
             <div class="ms-setting-main flex-1 d-flex flex-column gap-3">
-              <div v-for="(item, index) in configs.data" class="ms-setting-item">
-                <div class="ms-setting-item-value" :class="{'ms-setting-item-ads': item.type === configs?.type?.ADS?.value}">
-                  <div class="ms-setting-item_header d-flex justify-content-between">
-                    <div class="left-side text-neutral-text1">
-                      <div v-if="!editActive[index]">
-                        <div v-if="item.type !== configs?.type?.ADS?.value">
+              <div v-for="(item, index) in configs.data" class="ms-setting-item" :ref="`ms-setting-item-${item.id}`">
+                <div>
+                  <div class="ms-setting-item-value" :class="{'ms-setting-item-ads': item.type === configs?.type?.ADS?.value}">
+                    <div class="ms-setting-item_header d-flex justify-content-between">
+                      <div class="left-side text-neutral-text1">
+                        <div v-if="!editActive[index]">
                           {{ item.title }}
                         </div>
-                        <div v-if="item.type === configs?.type?.ADS?.value">
-                          {{ $t('advertising_images') }}
+                        <div v-else>
+                          <InputText v-model="data.title" maxlength="30"/>
                         </div>
                       </div>
-                      <div v-else>
-                        <InputText v-model="data.title" maxlength="30"/>
+                      <div class="right-side">
+                        <div v-if="!editActive[index]" class="d-flex gap-3">
+                          <Button
+                              @click="onEditSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
+                            <div class="icon-w16 icon-edit-blue"></div>
+                            <div class="">{{ $t('edit') }}</div>
+                          </Button>
+                          <Button
+                              @click="onDeleteSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex flex-grow-1 ms-btn_search gap-2">
+                            <div class="icon24 delete"
+                                 style="transform: scale(0.8); min-width: 16px; width: 16px; min-height: 16px; height: 16px;"></div>
+                            <div class="">{{ $t('remove') }}</div>
+                          </Button>
+                        </div>
+                        <div class="d-flex align-items-center gap-3" v-else>
+                          <Button
+                              @click="onCancelSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 gap-2 mw-0">
+                            <div class="">{{ $t('cancel') }}</div>
+                          </Button>
+                          <Button
+                              @click="onSaveSetting(item, index)"
+                              class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 h-0 gap-2 mw-0">
+                            <div class="">{{ $t('save') }}</div>
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                    <div class="right-side">
-                      <div v-if="!editActive[index]" class="d-flex gap-3">
-                        <Button
-                            @click="onEditSettingItem(item, index)"
-                            class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
-                          <div class="icon-w16 icon-edit-blue"></div>
-                          <div class="">{{ $t('edit') }}</div>
-                        </Button>
-                        <Button
-                            @click="onDeleteSettingItem(item, index)"
-                            class="ms-btn btn-edit-adm d-flex flex-grow-1 ms-btn_search gap-2">
-                          <div class="icon24 delete"
-                               style="transform: scale(0.8); min-width: 16px; width: 16px; min-height: 16px; height: 16px;"></div>
-                          <div class="">{{ $t('remove') }}</div>
-                        </Button>
-                      </div>
-                      <div class="d-flex align-items-center gap-3" v-else>
-                        <Button
-                            @click="onCancelSettingItem(item, index)"
-                            class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 gap-2 mw-0">
-                          <div class="">{{ $t('cancel') }}</div>
-                        </Button>
-                        <Button
-                            @click="onSaveSetting(item, index)"
-                            class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 h-0 gap-2 mw-0">
-                          <div class="">{{ $t('save') }}</div>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ms-setting-item_main mt-3" v-if="item.type !== configs?.type?.ADS?.value">
-                    <div></div>
-                    <div class="ms-main-items">
-                      <div class="item d-flex justify-content-between align-items-center rounded-t-4">
-                        <div class="left-side">Số sản phẩm trên mỗi dòng</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.columnsPerRow }}</div>
-                          <div v-else>
-                            <InputNumber v-model="data.columnsPerRow" showButtons :min="1" :max="10"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
-                        <div class="left-side">Sản phẩm đã chọn</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.items.length }}</div>
-                          <div v-else>
-                            <Button
-                                class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                              <div class="fw-medium">{{ $t('change') }}</div>
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
-                        <div class="left-side">Số lượng thẻ</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.tags.length }}</div>
-                          <div v-else>
-                            <Button
-                                class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
-                              <div class="fw-medium">{{ $t('change') }}</div>
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
-                        <div class="left-side">Kiểu hiển thị</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ optionTypeTexts[item.type] }}</div>
-                          <div v-else>
-                            <SelectButton v-model="data.type" :options="optionTypes" optionLabel="description"
-                                          optionValue="value"
-                                          class="ms-select-button outline-primary"
-                                          aria-labelledby="basic"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
-                        <div class="left-side">Thứ tự hiển thị</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
-                          <div v-else>
-                            <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
-                        <div class="left-side">Trạng thái</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">
-                            <div class="d-flex status-ctn max-content" v-if="item.isUse"
-                                 style="background-color: rgb(229, 250, 237);">
-                              <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
-                              <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
+                    <div class="ms-setting-item_main mt-3" v-if="item.type !== configs?.type?.ADS?.value">
+                      <div></div>
+                      <div class="ms-main-items">
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4">
+                          <div class="left-side">Số sản phẩm trên mỗi dòng</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.columnsPerRow }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.columnsPerRow" showButtons :min="1" :max="10"/>
                             </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Sản phẩm đã chọn</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.items.length }}</div>
+                            <div v-else>
+                              <Button
+                                  class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+                                <div class="fw-medium">{{ $t('change') }}</div>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Số lượng thẻ</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.tags.length }}</div>
+                            <div v-else>
+                              <Button
+                                  class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+                                <div class="fw-medium">{{ $t('change') }}</div>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Kiểu hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ optionTypeTexts[item.type] }}</div>
+                            <div v-else>
+                              <SelectButton v-model="data.type" :options="optionTypes" optionLabel="description"
+                                            optionValue="value"
+                                            class="ms-select-button outline-primary"
+                                            aria-labelledby="basic"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Thứ tự hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Trạng thái</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">
+                              <div class="d-flex status-ctn max-content" v-if="item.isUse"
+                                   style="background-color: rgb(229, 250, 237);">
+                                <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
+                                <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
+                              </div>
 
-                            <div class="d-flex status-ctn max-content" v-else
-                                 style="background-color: rgb(254, 243, 231);">
-                              <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
-                              <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              <div class="d-flex status-ctn max-content" v-else
+                                   style="background-color: rgb(254, 243, 231);">
+                                <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
+                                <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              </div>
                             </div>
-                          </div>
-                          <div v-else>
-                            <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            <div v-else>
+                              <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="ms-setting-item_main mt-3" v-if="item.type === configs?.type?.ADS?.value">
-                    <div></div>
-                    <div class="ms-main-items">
-                      <div class="item d-flex justify-content-between align-items-center rounded-t-4">
-                        <Image src="http://localhost:30001/storage/ads/xiaomi-1200x200.png" alt="Image" preview class="flex-1"
-                               imageClass="w-100 rounded-8"/>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
-                        <div class="left-side">Thứ tự hiển thị</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
-                          <div v-else>
-                            <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
+                    <div class="ms-setting-item_main mt-3" v-if="item.type === configs?.type?.ADS?.value">
+                      <div></div>
+                      <div class="ms-main-items">
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4">
+                          <Image src="http://localhost:30001/storage/ads/xiaomi-1200x200.png" alt="Image" preview class="flex-1"
+                                 imageClass="w-100 rounded-8"/>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Thứ tự hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
-                        <div class="left-side">Trạng thái</div>
-                        <div class="right-side">
-                          <div v-if="!editActive[index]">
-                            <div class="d-flex status-ctn max-content" v-if="item.isUse"
-                                 style="background-color: rgb(229, 250, 237);">
-                              <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
-                              <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
-                            </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Trạng thái</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">
+                              <div class="d-flex status-ctn max-content" v-if="item.isUse"
+                                   style="background-color: rgb(229, 250, 237);">
+                                <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
+                                <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
+                              </div>
 
-                            <div class="d-flex status-ctn max-content" v-else
-                                 style="background-color: rgb(254, 243, 231);">
-                              <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
-                              <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              <div class="d-flex status-ctn max-content" v-else
+                                   style="background-color: rgb(254, 243, 231);">
+                                <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
+                                <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              </div>
                             </div>
-                          </div>
-                          <div v-else>
-                            <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            <div v-else>
+                              <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -198,7 +195,7 @@
     </div>
   </div>
 
-  <Dialog v-model:visible="isPopupDelete" modal closeOnEscape :style="{ width: '25vw' }"
+  <Dialog v-model:visible="isPopupDelete" modal closeOnEscape
           :header="$t('notification')">
     <TheLoading v-if="isLoadingDelete"/>
     <div class="w-full flex flex-column">
@@ -216,6 +213,55 @@
             @click="onClickApplyDelete"
             class="ms-btn danger d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
           <div class="fw-medium">{{ $t('delete') }}</div>
+        </Button>
+      </div>
+    </template>
+  </Dialog>
+
+  <Dialog v-model:visible="isPopupAdd" modal closeOnEscape
+          :header="$t('add_display')" style="width: 25vw">
+    <TheLoading v-if="isLoadingAdd"/>
+    <div class="w-full d-flex flex-column">
+      <div class="group-form_box gap-3">
+        <div class="label d-flex align-items-center">
+          {{ $t('display_type') }}
+          <span class="required">*</span>
+        </div>
+        <div class="flex-1 mt-1">
+          <Dropdown v-model="data['displayType']" :options="optionTypeAll" optionLabel="description"
+                    optionValue="value"
+                    :class="{'error': invalid['displayType']}"
+          ></Dropdown>
+        </div>
+        <div class="ms-error-text" v-if="invalid['displayType']">
+          {{ invalid['displayType'] }}
+        </div>
+      </div>
+      <div class="group-form_box gap-3 mt-3" v-if="data['displayType'] != null && data['displayType'] !== configs?.type?.ADS?.value">
+        <div class="label d-flex align-items-center">
+          {{ $t('title') }}
+          <span class="required">*</span>
+        </div>
+        <div class="flex-1 mt-1">
+          <InputText v-model="data['title']" maxlength="30" :class="{'error': invalid['title']}"/>
+        </div>
+        <div class="ms-error-text" v-if="invalid['title']">
+          {{ invalid['title'] }}
+        </div>
+      </div>
+    </div>
+    <template #footer>
+      <div>
+        <Button
+            class="ms-btn btn-secondary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('cancel') }}</div>
+        </Button>
+      </div>
+      <div>
+        <Button
+            @click="onHandlerAddSetting"
+            class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('save') }}</div>
         </Button>
       </div>
     </template>
@@ -243,7 +289,7 @@ import Dialog from 'primevue/dialog';
 import TheLoading from "@/components/TheLoading.vue";
 import {mapActions, mapGetters} from 'vuex';
 import {TIMEOUT} from "@/common/enums";
-import {updateConfig, deleteConfig} from "@/api/shopping_mall";
+import {updateConfig, deleteConfig, addConfig} from "@/api/shopping_mall";
 
 export default {
   components: {
@@ -274,6 +320,8 @@ export default {
       data: {},
       optionTypes: [],
       optionTypeTexts: [],
+      optionTypeAll: [],
+      optionTypeAllText: [],
       tabs: [
         {title: this.$t('everything')},
         {title: this.$t('in_use')},
@@ -281,6 +329,9 @@ export default {
       ],
       isPopupDelete: false,
       isLoadingDelete: false,
+      isPopupAdd: false,
+      isLoadingAdd: false,
+      invalid: [],
     }
   },
 
@@ -290,6 +341,11 @@ export default {
 
   methods: {
     ...mapActions(['loadConfig']),
+
+    onAddDisplaySetting() {
+      this.isPopupAdd = true;
+      this.data = {};
+    },
 
     /**
      * Click button edit item
@@ -362,6 +418,59 @@ export default {
       })
     },
 
+    /**
+     * Click button save setting
+     */
+    onHandlerAddSetting() {
+      try {
+        if (this.validateAddSetting()) {
+          switch (this.data.displayType) {
+            case this.configs?.type?.ADS?.value:
+              this.data.title = this.$t('advertising_images');
+              break;
+          }
+
+          this.isLoadingAdd = true;
+          addConfig(this.data).then(async res => {
+            this.isPopupAdd = false;
+            await this.configs.data.push(res.data.data)
+            this.$refs[`ms-setting-item-${res.data.data.id}`][0].scrollIntoView({behavior: 'smooth', block: 'center'});
+            // res.data.data.configId
+          }).catch(error => {
+            console.log(error)
+          }).finally(() => {
+            setTimeout(() => {
+              this.isLoadingAdd = false;
+            }, TIMEOUT.LOADING)
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    /**
+     * validate form add setting
+     * @returns {boolean}
+     */
+    validateAddSetting() {
+      this.invalid = [];
+      if (this.data.displayType == null) {
+        this.invalid['displayType'] = this.$t('name_cannot_be_empty', {name: this.$t('display_type')})
+      } else {
+        switch (this.data.displayType) {
+          case this.configs?.type?.DEFAULT?.value:
+          case this.configs?.type?.SLIDER?.value:
+            if (!this.data.title) {
+              this.invalid['title'] = this.$t('name_cannot_be_empty', {name: this.$t('title')})
+            }
+            break;
+        }
+      }
+
+      return Object.keys(this.invalid).length === 0;
+    },
+
     handlerIsUse() {
       let isUse = '';
       if (this.activeIndex === 1) {
@@ -379,10 +488,18 @@ export default {
   async created() {
     await this.loadConfig();
     this.optionTypes = this.configs.optionTypes
+    this.optionTypeAll = this.configs.optionTypeAll
     if (this.optionTypes) {
       this.optionTypes.forEach(item => {
         item.description = this.$t(item.description)
         this.optionTypeTexts[item.value] = item.description
+      })
+    }
+
+    if (this.optionTypeAll) {
+      this.optionTypeAll.forEach(item => {
+        item.description = this.$t(item.description)
+        this.optionTypeAllText[item.value] = item.description
       })
     }
   }

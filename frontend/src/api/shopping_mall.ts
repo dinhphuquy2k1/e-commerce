@@ -12,10 +12,22 @@ export function getConfig(isUse: any): Promise<any> {
  * update config
  * @param data
  */
-export function updateConfig(data: {}): Promise<AxiosResponse<any>> {
+export function addConfig(data: {}): Promise<AxiosResponse<any>> {
     return request({
         url: 'shopping/config',
         method: 'POST',
+        data: data,
+    });
+}
+
+/**
+ * update config
+ * @param data
+ */
+export function updateConfig(data: {}): Promise<AxiosResponse<any>> {
+    return request({
+        url: 'shopping/config',
+        method: 'PUT',
         data: data,
     });
 }

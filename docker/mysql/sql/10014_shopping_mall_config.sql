@@ -6,31 +6,31 @@ INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, disp
 VALUES (1, 'Điện thoại nổi bật', 0, 5, 1, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (2, 'ads', 2, 5,2, now(), now());
+VALUES (2, 'Hình ảnh quảng cáo', 2, 5,2, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
 VALUES (3, 'Laptop nổi bật', 0, 5, 3, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (4, 'ads', 2, 5, 4, now(), now());
+VALUES (4, 'Hình ảnh quảng cáo', 2, 5, 4, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
 VALUES (5, 'Màn hình nổi bật', 0, 5, 5, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (6, 'ads', 2, 5, 6, now(), now());
+VALUES (6, 'Hình ảnh quảng cáo', 2, 5, 6, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
 VALUES (7, 'Âm thanh nổi bật', 1, 5,7, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (8, 'ads', 2, 5, 8, now(), now());
+VALUES (8, 'Hình ảnh quảng cáo', 2, 5, 8, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
 VALUES (9, 'Điện máy nổi bật', 1, 5, 9, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
-VALUES (10, 'ads', 2, 5, 10, now(), now());
+VALUES (10, 'Hình ảnh quảng cáo', 2, 5, 10, now(), now());
 INSERT IGNORE INTO shopping_mall_configs (id, title, type, columns_per_row, display_order, created_at,
                                           updated_at)
 VALUES (11, 'Tablet', 1, 5, 11, now(), now());

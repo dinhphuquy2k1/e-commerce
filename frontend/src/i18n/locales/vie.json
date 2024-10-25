@@ -204,5 +204,11 @@
   "image": "Hình ảnh",
   "remove": "Xóa",
   "confirm_delete": "Bạn có chắc chắn muốn xóa không?",
-  "delete": "Xóa"
+  "delete": "Xóa",
+  "add": "Thêm",
+  "confirm": "Xác nhận",
+  "add_new": "Thêm mới",
+  "ads": "Quảng cáo",
+  "display_type": "Loại hiển thị",
+  "name_cannot_be_empty": "{name} không được để trống"
 }

@@ -3,24 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use App\Enums\MenuType;
 
 class ApiMenuController extends Controller
 {
     /**
      * @param int $menuType
-     * @return JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|object
      */
-    public function getMenu(int $menuType): JsonResponse
+    public function getMenu(int $menuType)
     {
         $menus = Menu::where('menu_type', $menuType)->get()->toArray();
         $ret = $this->recursiveMenu($menus);
         return $this->sendResponseSuccess($ret);
     }
 
-    public function recursiveMenu(array $menus, $parentId = null, $level = 0): array
+    /**
+     * @param array $menus
+     * @param ?int $parentId
+     * @param int $level
+     * @return array
+     */
+    public function recursiveMenu(array $menus, ?int $parentId = null, int $level = 0): array
     {
         $result = [];
         foreach ($menus as $menu) {

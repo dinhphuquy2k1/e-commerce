@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
@@ -29,14 +31,14 @@ class Controller extends BaseController
     /**
      * @param array $body
      * @param string $message
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseSuccess(array $body = [], string $message = ''): JsonResponse
+    protected function sendResponseSuccess(array $body = [], string $message = '')
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_OK);
     }
 

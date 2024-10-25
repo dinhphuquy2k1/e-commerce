@@ -12,6 +12,8 @@ class ShoppingMallItem extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * @return hasOne
      */
