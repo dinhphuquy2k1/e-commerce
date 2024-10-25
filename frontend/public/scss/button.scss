@@ -260,4 +260,13 @@
       background-color: rgba(0, 0, 0, .08);
     }
   }
+
+  &.danger {
+    color: var(--primary);
+    background: var(--danger);
+
+    &:hover {
+      background: var(--danger-100);
+    }
+  }
 }

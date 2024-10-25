@@ -75,4 +75,5 @@ Route::prefix('roles')->group(function () {
 
 Route::prefix('shopping')->group(function () {
     Route::post('/config', [ApiShoppingMallConfigController::class, 'update']);
+    Route::delete('/config/{id}', [ApiShoppingMallConfigController::class, 'delete'])->where('id', '[0-9]+');;
 });

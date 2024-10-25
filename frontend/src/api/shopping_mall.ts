@@ -19,3 +19,14 @@ export function updateConfig(data: {}): Promise<AxiosResponse<any>> {
         data: data,
     });
 }
+
+/**
+ * update config
+ * @param id
+ */
+export function deleteConfig(id: Number): Promise<AxiosResponse<any>> {
+    return request({
+        url: `shopping/config/${id}`,
+        method: 'DELETE',
+    });
+}

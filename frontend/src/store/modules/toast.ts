@@ -25,6 +25,11 @@ export default {
             {severity: ToastSeverity.SUCCESS, summary: i18n.global.messages[i18n.global.locale].notification, detail: i18n.global.messages[i18n.global.locale].more_success, life: 3000}) {
             state.toast.add({severity: severity, summary: summary, detail: detail, life: life});
         },
+
+        handlerDeleteSuccess({state}: { state: any }, {severity, summary, detail, life} =
+            {severity: ToastSeverity.SUCCESS, summary: i18n.global.messages[i18n.global.locale].notification, detail: i18n.global.messages[i18n.global.locale].delete_success, life: 3000}) {
+            state.toast.add({severity: severity, summary: summary, detail: detail, life: life});
+        },
     },
     getters: {},
 };

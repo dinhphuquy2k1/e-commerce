@@ -42,4 +42,23 @@ class ApiShoppingMallConfigController extends Controller
             return $this->sendResponse($th->getCode(), ['message' => $th->getMessage()]);
         }
     }
+
+    /**
+     * @param int $id
+     * @return JsonResponse|void
+     */
+    public function delete(int $id)
+    {
+        try {
+            DB::beginTransaction();
+            ShoppingMallConfig::destroy($id);
+            DB::commit();
+
+            return $this->sendResponseSuccess(['message' => 'success']);
+        }
+        catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendResponse($th->getCode(), ['message' => $th->getMessage()]);
+        }
+    }
 }

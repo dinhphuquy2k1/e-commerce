@@ -15,6 +15,6 @@ export default createStore({
         order,
         brand,
         shopping_mall,
-        toast
+        toast,
     }
 })

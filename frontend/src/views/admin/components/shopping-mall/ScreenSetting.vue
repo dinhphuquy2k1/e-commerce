@@ -20,23 +20,37 @@
           <div class="ms-setting-container flex-1 d-flex" v-if="configs?.data?.length > 0 && !isLoadingConfig">
             <div class="ms-setting-main flex-1 d-flex flex-column gap-3">
               <div v-for="(item, index) in configs.data" class="ms-setting-item">
-                <div v-if="item.type !== configs?.type?.ADS?.value" class="ms-setting-item-value">
+                <div class="ms-setting-item-value" :class="{'ms-setting-item-ads': item.type === configs?.type?.ADS?.value}">
                   <div class="ms-setting-item_header d-flex justify-content-between">
                     <div class="left-side text-neutral-text1">
                       <div v-if="!editActive[index]">
-                        {{ item.title }}
+                        <div v-if="item.type !== configs?.type?.ADS?.value">
+                          {{ item.title }}
+                        </div>
+                        <div v-if="item.type === configs?.type?.ADS?.value">
+                          {{ $t('advertising_images') }}
+                        </div>
                       </div>
                       <div v-else>
                         <InputText v-model="data.title" maxlength="30"/>
                       </div>
                     </div>
                     <div class="right-side">
-                      <Button v-if="!editActive[index]"
-                              @click="onEditSettingItem(item, index)"
-                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
-                        <div class="icon-w16 icon-edit-blue"></div>
-                        <div class="">{{ $t('edit') }}</div>
-                      </Button>
+                      <div v-if="!editActive[index]" class="d-flex gap-3">
+                        <Button
+                            @click="onEditSettingItem(item, index)"
+                            class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
+                          <div class="icon-w16 icon-edit-blue"></div>
+                          <div class="">{{ $t('edit') }}</div>
+                        </Button>
+                        <Button
+                            @click="onDeleteSettingItem(item, index)"
+                            class="ms-btn btn-edit-adm d-flex flex-grow-1 ms-btn_search gap-2">
+                          <div class="icon24 delete"
+                               style="transform: scale(0.8); min-width: 16px; width: 16px; min-height: 16px; height: 16px;"></div>
+                          <div class="">{{ $t('remove') }}</div>
+                        </Button>
+                      </div>
                       <div class="d-flex align-items-center gap-3" v-else>
                         <Button
                             @click="onCancelSettingItem(item, index)"
@@ -51,7 +65,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ms-setting-item_main mt-3">
+                  <div class="ms-setting-item_main mt-3" v-if="item.type !== configs?.type?.ADS?.value">
                     <div></div>
                     <div class="ms-main-items">
                       <div class="item d-flex justify-content-between align-items-center rounded-t-4">
@@ -131,35 +145,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div v-if="item.type === configs?.type?.ADS?.value" class="ms-setting-item-ads ms-setting-item-value">
-                  <div class="ms-setting-item_header d-flex justify-content-between">
-                    <div class="left-side text-neutral-text1">
-                      {{ $t('advertising_images') }}
-                    </div>
-                    <div class="right-side">
-                      <Button v-if="!editActive[index]"
-                              @click="onEditSettingItem(item, index)"
-                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
-                        <div class="icon-w16 icon-edit-blue"></div>
-                        <div class="">{{ $t('edit') }}</div>
-                      </Button>
-                      <div class="d-flex align-items-center gap-3" v-else>
-                        <Button
-                            @click="onCancelSettingItem(item, index)"
-                            class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 gap-2 mw-0">
-                          <div class="">{{ $t('cancel') }}</div>
-                        </Button>
-                        <Button
-                            @click="onSaveSetting(item, index)"
-                            class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 h-0 gap-2 mw-0">
-                          <div class="">{{ $t('save') }}</div>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="ms-setting-item_main mt-3">
+                  <div class="ms-setting-item_main mt-3" v-if="item.type === configs?.type?.ADS?.value">
                     <div></div>
                     <div class="ms-main-items">
                       <div class="item d-flex justify-content-between align-items-center rounded-t-4">
@@ -211,6 +197,29 @@
       </TabView>
     </div>
   </div>
+
+  <Dialog v-model:visible="isPopupDelete" modal closeOnEscape :style="{ width: '25vw' }"
+          :header="$t('notification')">
+    <TheLoading v-if="isLoadingDelete"/>
+    <div class="w-full flex flex-column">
+      <span>{{ $t('confirm_delete') }}</span>
+    </div>
+    <template #footer>
+      <div>
+        <Button
+            class="ms-btn btn-secondary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('cancel') }}</div>
+        </Button>
+      </div>
+      <div>
+        <Button
+            @click="onClickApplyDelete"
+            class="ms-btn danger d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('delete') }}</div>
+        </Button>
+      </div>
+    </template>
+  </Dialog>
 </template>
 
 <script>
@@ -230,9 +239,11 @@ import InputSwitch from 'primevue/inputswitch';
 import RadioButton from 'primevue/radiobutton';
 import SelectButton from 'primevue/selectbutton';
 import Image from 'primevue/image';
+import Dialog from 'primevue/dialog';
 import TheLoading from "@/components/TheLoading.vue";
 import {mapActions, mapGetters} from 'vuex';
-import {updateConfig} from "@/api/shopping_mall";
+import {TIMEOUT} from "@/common/enums";
+import {updateConfig, deleteConfig} from "@/api/shopping_mall";
 
 export default {
   components: {
@@ -253,6 +264,7 @@ export default {
     TabPanel,
     TheLoading,
     Image,
+    Dialog,
   },
 
   data() {
@@ -266,7 +278,9 @@ export default {
         {title: this.$t('everything')},
         {title: this.$t('in_use')},
         {title: this.$t('not_in_use')},
-      ]
+      ],
+      isPopupDelete: false,
+      isLoadingDelete: false,
     }
   },
 
@@ -317,6 +331,35 @@ export default {
         });
       }
       this.configs.data[index] = this.data
+    },
+
+    /**
+     * Click button delete setting item
+     * @param item
+     * @param index
+     */
+    onDeleteSettingItem(item, index) {
+      this.isPopupDelete = true;
+      this.data = item;
+    },
+
+    /**
+     * Click button apply delete
+     */
+    onClickApplyDelete() {
+      this.isLoadingDelete = true;
+      deleteConfig(this.data.id).then(res => {
+        this.$store.dispatch('handlerDeleteSuccess')
+        this.loadConfig({isUse: this.handlerIsUse()});
+      })
+          .catch(error => {
+
+          }).finally(() => {
+        this.isPopupDelete = false;
+        setTimeout(() => {
+          this.isLoadingDelete = false;
+        }, TIMEOUT.LOADING)
+      })
     },
 
     handlerIsUse() {

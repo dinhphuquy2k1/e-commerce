@@ -199,6 +199,10 @@
   "success": "Thành công",
   "notification": "Thông báo",
   "more_success": "Thêm thành công",
+  "delete_success": "Xóa thành công",
   "advertising_images": "Hình ảnh quảng cáo",
-  "image": "Hình ảnh"
+  "image": "Hình ảnh",
+  "remove": "Xóa",
+  "confirm_delete": "Bạn có chắc chắn muốn xóa không?",
+  "delete": "Xóa"
 }

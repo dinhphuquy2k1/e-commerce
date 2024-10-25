@@ -3,6 +3,7 @@ import App from './App.vue'
 import PrimeVue from 'primevue/config';
 import Tooltip from 'primevue/tooltip';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import i18n from "@/i18n";
 import router from './router'
@@ -15,5 +16,6 @@ app
     .use(router)
     .use(i18n)
     .use(ToastService)
+    .use(ConfirmationService)
     .use(store)
     .mount('#app')
