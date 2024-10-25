@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criteria;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ApiBrandController extends Controller
 {
     /**
-     * Lấy danh sách thương hiệu
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         return $this->sendResponseSuccess(Brand::orderBy('id', 'DESC')->get()->toArray());
     }
 
     /**
-     * Thêm mới thương hiệu
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
     public function store(Request $request)
     {

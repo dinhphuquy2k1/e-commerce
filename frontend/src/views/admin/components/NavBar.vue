@@ -91,8 +91,12 @@ export default {
 
     onOpenPanelMenu(event) {
       if (this.isCollapsed) {
-        this.expandedKeys = {
-          [event.item.key]: true
+        if (event.item.items.length > 0) {
+          this.expandedKeys = {
+            [event.item.key]: true
+          }
+        } else {
+          this.expandedKeys = {}
         }
       }
     },

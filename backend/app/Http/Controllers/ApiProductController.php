@@ -9,8 +9,11 @@ use App\Models\Media;
 use App\Models\Product;
 use App\Models\ProductProperty;
 use App\Models\Variant;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -22,9 +25,9 @@ class ApiProductController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(Request $request): JsonResponse
+    public function get(Request $request)
     {
         $request->validate([
             'limit' => 'integer|min:1|max:100',
@@ -188,9 +191,9 @@ class ApiProductController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|JsonResponse|Response|object
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         $dataValidator = Validator::make(
             $request->all(),

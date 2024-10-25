@@ -17,9 +17,9 @@ class Controller extends BaseController
     /**
      * @param int $status
      * @param array $body
-     * @return JsonResponse
+     * @return JsonResponse|object
      */
-    protected function sendResponse(int $status, array $body = []): JsonResponse
+    protected function sendResponse(int $status, array $body = [])
     {
         $content = [
             'data' => $body,
@@ -44,27 +44,27 @@ class Controller extends BaseController
 
     /**
      * @param array $body
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseBadRequest(array $body = []): JsonResponse
+    protected function sendResponseBadRequest(array $body = [])
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * @param array $body
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseServerError(array $body = []): JsonResponse
+    protected function sendResponseServerError(array $body = [])
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

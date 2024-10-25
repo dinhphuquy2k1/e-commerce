@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Enums\RoleType;
+use Illuminate\Http\Response;
 
 class ApiRoleController extends Controller
 {
     /**
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         return $this->sendResponseSuccess($this->getRole());
     }
@@ -56,9 +59,9 @@ class ApiRoleController extends Controller
 
     /**
      * @param int $type
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function getRoleByType(int $type): JsonResponse
+    public function getRoleByType(int $type)
     {
         return $this->sendResponseSuccess($this->getRole($type));
     }

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +19,7 @@ class ApiShoppingMallConfigController extends Controller
 {
     /**
      * @param Request $request
-     * @return Application|ResponseFactory|JsonResponse|\Illuminate\Http\Response|object
+     * @return Application|ResponseFactory|JsonResponse|Response|object
      */
     public function save(Request $request)
     {
@@ -89,9 +90,9 @@ class ApiShoppingMallConfigController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|JsonResponse|Response|object
      */
-    public function update(Request $request): JsonResponse
+    public function update(Request $request)
     {
         $attribute = $request->validate([
             'id' => 'required|exists:shopping_mall_configs,id',
@@ -123,7 +124,7 @@ class ApiShoppingMallConfigController extends Controller
 
     /**
      * @param int $id
-     * @return JsonResponse|void
+     * @return Application|ResponseFactory|JsonResponse|Response|object
      */
     public function delete(int $id)
     {

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PropertyType;
+use App\Models\Category;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use App\Enums\PropertyType;
 
 class ApiCategoryController extends Controller
 {
@@ -22,9 +24,9 @@ class ApiCategoryController extends Controller
     ];
 
     /**
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         if (Cache::has('categories')) {
             $ret = Cache::get('categories');
@@ -83,11 +85,10 @@ class ApiCategoryController extends Controller
     }
 
     /**
-     * Lấy danh sách property theo id category
      * @param int $id
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function getProperties(int $id): JsonResponse
+    public function getProperties(int $id)
     {
         $properties = Category::with('properties.property_values')->find($id);
         if (!$properties) {

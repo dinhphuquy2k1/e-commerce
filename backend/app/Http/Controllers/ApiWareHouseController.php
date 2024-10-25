@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\WareHouse;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Enums\WareHouseType;
+use Illuminate\Http\Response;
 
 class ApiWareHouseController extends Controller
 {
 
     /**
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         $warehouses = WareHouse::all()->toArray();
         $ret = [
@@ -25,9 +28,9 @@ class ApiWareHouseController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         return $this->sendResponseSuccess();
     }

@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Size;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ApiSizeController extends Controller
 {
 
     /**
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         $ret = Size::orderByDesc('created_at')->get()->toArray();
         foreach ($ret as &$item) {
@@ -25,9 +28,9 @@ class ApiSizeController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         $attribute = $request->validate(
             [
