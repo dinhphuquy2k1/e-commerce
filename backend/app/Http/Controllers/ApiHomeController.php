@@ -10,12 +10,13 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class ApiHomeController extends Controller
 {
     /**
      * @param Request $request
-     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
+     * @return Application|ResponseFactory|Response|object
      */
     public function getConfigs(Request $request)
     {
@@ -137,6 +138,46 @@ class ApiHomeController extends Controller
 
                 $results['banners'][] = $banner;
             }
+        }
+
+        return $this->sendResponseSuccess($results);
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|ResponseFactory|Response|object
+     */
+    public function getBanners(Request $request)
+    {
+        $query = Banner::with('medias')->orderBy('display_order');
+        $isUse = $request->query('isUse');
+        if (isset($isUse)) {
+            $query->where('is_use', $isUse);
+        }
+
+        $banners = $query->get();
+
+        if (empty($banners)) {
+            return $this->sendResponseSuccess();
+        }
+
+        $results = [];
+        foreach ($banners->toArray() as $banner) {
+            $media = array_pop($banner['medias']);
+            if ($media) {
+                $media = asset('storage/' . $media['media_url']);
+            }
+
+            $results[] = [
+                'id' => $banner['id'],
+                'title' => $banner['title'],
+                'description' => $banner['description'],
+                'displayOrder' => $banner['display_order'],
+                'link' => $banner['link'],
+                'linkType' => $banner['link_type'],
+                'isUse' => $banner['is_use'],
+                'media' => $media,
+            ];
         }
 
         return $this->sendResponseSuccess($results);

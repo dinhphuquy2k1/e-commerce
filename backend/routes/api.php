@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiBannerController;
 use App\Http\Controllers\ApiHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::post('/upload/image', [ApiCategoryController::class, 'uploadImage']);
 Route::post('/categories/properties/{id}', [ApiCategoryController::class, 'getProperties']);
 Route::prefix('')->group(function () {
     Route::get('/configs', [ApiHomeController::class, 'getConfigs']);
+    Route::get('/banners', [ApiHomeController::class, 'getBanners']);
 });
 
 Route::prefix('categories')->group(function () {
@@ -76,5 +78,9 @@ Route::prefix('roles')->group(function () {
 Route::prefix('shopping')->group(function () {
     Route::post('/config', [ApiShoppingMallConfigController::class, 'save']);
     Route::put('/config', [ApiShoppingMallConfigController::class, 'update']);
-    Route::delete('/config/{id}', [ApiShoppingMallConfigController::class, 'delete'])->where('id', '[0-9]+');;
+    Route::delete('/config/{id}', [ApiShoppingMallConfigController::class, 'delete'])->where('id', '[0-9]+');
+    Route::post('/banner', [ApiBannerController::class, 'save']);
+    Route::put('/banner', [ApiBannerController::class, 'update']);
+    Route::delete('/banner/{id}', [ApiBannerController::class, 'delete'])->where('id', '[0-9]+');
 });
+

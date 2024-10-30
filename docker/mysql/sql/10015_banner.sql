@@ -2,35 +2,35 @@ SET
     CHARSET UTF8;
 
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (1, 'Mở bán Iphone 16 pro', 'Ưu đãi tới 7 triệu đồng', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (1, 'Mở bán Iphone 16 pro', 'Ưu đãi tới 7 triệu đồng', 1, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (2, 'Back 2 School', 'Siêu sale tới 70%', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (2, 'Back 2 School', 'Siêu sale tới 70%', 2, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (3, 'Khuyến mãi phụ kiện Xiaomi', 'Giá chỉ từ 279.000đ', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (3, 'Khuyến mãi phụ kiện Xiaomi', 'Giá chỉ từ 279.000đ', 3, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (4, 'BTS MSI', 'Chọn sức mạnh mới. Chọn MSI', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (4, 'BTS MSI', 'Chọn sức mạnh mới. Chọn MSI', 4, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (5, 'Amazfit T-rex 3', 'Quà tặng hấp dẫn', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (5, 'Amazfit T-rex 3', 'Quà tặng hấp dẫn', 5, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (6, 'HONOR X7b | Giá chỉ từ 4.390.000đ', 'Mua ngay', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (6, 'HONOR X7b | Giá chỉ từ 4.390.000đ', 'Mua ngay', 6, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (7, 'HONOR 200', 'Chuyên gia ghi nét chân dung', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (7, 'HONOR 200', 'Chuyên gia ghi nét chân dung', 7, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (8, 'ASUS AI', 'Học chất chơi chill', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (8, 'ASUS AI', 'Học chất chơi chill', 8, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (9, 'Mở bán Xiaomi 14T series', 'Tổng ưu đãi lên đến 5.5 triệu', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (9, 'Mở bán Xiaomi 14T series', 'Tổng ưu đãi lên đến 5.5 triệu', 9, '', 2, now(), now());
 INSERT IGNORE INTO banners
-    (id, title, description, link, created_at, updated_at)
-VALUES (10, 'Tecno Spark Go 1', 'Bứt phá và tỏa sáng', '', now(), now());
+    (id, title, description, display_order, link, link_type, created_at, updated_at)
+VALUES (10, 'Tecno Spark Go 1', 'Bứt phá và tỏa sáng', 10, '', 2, now(), now());
 
 -- image
 INSERT IGNORE INTO medias

@@ -142,7 +142,7 @@ CREATE TABLE shopping_mall_configs
     `title`           VARCHAR(50)                        NOT NULL,
     `type`            tinyint(11)                        NOT NULL DEFAULT 0 COMMENT '0: default, 1: slider, 2: ads',
     `is_use`          tinyint(11)                        NOT NULL DEFAULT 1 COMMENT '0: hide, 1: show',
-    `columns_per_row` int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0,
+    `columns_per_row` int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 5,
     `display_order`   int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT 'Display order',
     `created_at`      TIMESTAMP                                   DEFAULT now(),
     `updated_at`      TIMESTAMP                                   DEFAULT now() ON UPDATE now(),
@@ -189,12 +189,15 @@ CREATE TABLE shopping_mall_items
 DROP TABLE IF EXISTS banners;
 CREATE TABLE banners
 (
-    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `title`       VARCHAR(100)        NOT NULL,
-    `description` VARCHAR(100)        NOT NULL,
-    `link`        VARCHAR(500)        NULL COMMENT 'Link',
-    `created_at`  TIMESTAMP DEFAULT now(),
-    `updated_at`  TIMESTAMP DEFAULT now() ON UPDATE now(),
+    `id`            bigint(20) unsigned                NOT NULL AUTO_INCREMENT,
+    `title`         VARCHAR(100)                       NOT NULL,
+    `description`   VARCHAR(100)                       NOT NULL,
+    `display_order` int(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 1 COMMENT 'Display order',
+    `is_use`        tinyint(11)                        NOT NULL DEFAULT 1 COMMENT '0: hide, 1: show',
+    `link`          VARCHAR(500)                       NULL COMMENT 'Link',
+    `link_type`     tinyint(11)                        NOT NULL DEFAULT 1 COMMENT '1: link product, 2: link other',
+    `created_at`    TIMESTAMP                                   DEFAULT now(),
+    `updated_at`    TIMESTAMP                                   DEFAULT now() ON UPDATE now(),
     PRIMARY KEY (`id`)
 );
 

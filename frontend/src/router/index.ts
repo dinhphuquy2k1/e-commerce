@@ -235,6 +235,15 @@ const routes: Array<RouteRecordRaw> = [
                             navbar: () => import('@/views/admin/components/NavBar.vue'),
                         }
                     },
+                    {
+                        path: 'banner',
+                        name: 'banner_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/BannerSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
                 ],
             },
             {
