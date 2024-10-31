@@ -64,7 +64,7 @@
               <div class="title">{{ $t('social_links_title') }}</div>
               <div class="description mt-1">{{ $t('social_links_description') }}</div>
             </div>
-            <div class="main mt-3">
+            <div class="main mt-4">
               <div class="row gy-3 row-cols-xxl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
                 <div class="col" v-for="item in data.social">
                   <div class="ms-social_item">
