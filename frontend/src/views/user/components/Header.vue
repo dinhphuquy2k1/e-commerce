@@ -62,10 +62,10 @@
           </div>
         </div>
       </div>
-      <div class="right-side">
+      <div class="right-side" v-if="contacts?.data?.[contacts?.contactType?.PHONE.value]?.[0]?.value">
         <div class="call-now d-flex align-items-center gap-2">
           <div class="icon"></div>
-          <div class="title">{{ contacts?.data?.[contacts?.contactType?.OTHER.value]?.[0]?.value }}</div>
+          <div class="title">{{ contacts?.data?.[contacts?.contactType?.PHONE.value]?.[0]?.value }}</div>
         </div>
       </div>
     </div>

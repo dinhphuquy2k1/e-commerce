@@ -244,6 +244,15 @@ const routes: Array<RouteRecordRaw> = [
                             navbar: () => import('@/views/admin/components/NavBar.vue'),
                         }
                     },
+                    {
+                        path: 'contact',
+                        name: 'contact_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/ContactSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
                 ],
             },
             {

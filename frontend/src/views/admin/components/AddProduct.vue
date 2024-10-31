@@ -836,7 +836,7 @@
         </div>
       </div>
 
-      <div class="popup-footer">
+      <div class="popup-footer mb-3">
         <div class="flex-row">
           <div class="flex-grow-1"></div>
           <div class="d-flex">

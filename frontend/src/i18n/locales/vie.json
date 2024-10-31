@@ -211,5 +211,14 @@
   "add_new": "Thêm mới",
   "ads": "Quảng cáo",
   "display_type": "Loại hiển thị",
-  "name_cannot_be_empty": "{name} không được để trống"
+  "name_cannot_be_empty": "{name} không được để trống",
+  "contact_setting": "Cài đặt thông tin liên hệ",
+  "contact": "Thông tin liên hệ",
+  "contact_admin_description": "Quản lý và cập nhật thông tin liên hệ để người dùng dễ dàng kết nối với doanh nghiệp.",
+  "address": "Địa chỉ",
+  "link": "Liên kết",
+  "use": "Sử dụng",
+  "no_use": "Không sử dụng",
+  "social_links_title": "Liên kết mạng xã hội",
+  "social_links_description": "Quản lý các liên kết đến trang mạng xã hội để tăng cường kết nối với người dùng."
 }

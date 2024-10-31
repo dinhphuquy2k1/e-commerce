@@ -11,13 +11,13 @@
             <div class="text-start text-wrap mt-3">
               <span class="fw-semibold ms-footer_label">Hỗ trợ khách hàng:</span>
               <br>
-              {{ contacts?.data?.[contacts?.contactType?.OTHER.value]?.[0]?.value }}
+              {{ contacts?.data?.[contacts?.contactType?.PHONE.value]?.[0]?.value }}
               <br>
               <br>
               <span class="ms-footer_label mt-3">Thành Phố Hà Nội</span>
               <br>
               <br>
-              support@ecommerce.com
+              {{ contacts?.data?.[contacts?.contactType?.EMAIL.value]?.[0]?.value }}
             </div>
             <div class="social-container mt-3 d-flex">
               <div v-for="item in contacts?.data?.[contacts?.contactType?.SOCIAL.value]">
