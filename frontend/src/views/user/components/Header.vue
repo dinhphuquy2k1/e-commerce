@@ -7,11 +7,9 @@
       <div class="social-contact_container d-flex justify-content-between align-items-center">
         <div class="pe-3">{{ $t('follow') }}:</div>
         <div class="social-contact_list d-flex gap-2">
-          <div class="social-contact_item twitter"></div>
-          <div class="social-contact_item facebook"></div>
-          <div class="social-contact_item pinterest"></div>
-          <div class="social-contact_item youtube"></div>
-          <div class="social-contact_item instagram"></div>
+          <div v-for="item in contacts?.data?.[contacts?.contactType?.SOCIAL.value]" class="pointer">
+            <div class="social-contact_item" :class="[item.icon]"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +65,7 @@
       <div class="right-side">
         <div class="call-now d-flex align-items-center gap-2">
           <div class="icon"></div>
-          <div class="title">+84-325-451-325</div>
+          <div class="title">{{ contacts?.data?.[contacts?.contactType?.OTHER.value]?.[0]?.value }}</div>
         </div>
       </div>
     </div>
@@ -85,7 +83,7 @@ export default {
     InputText
   },
   computed: {
-    ...mapGetters(['categories']),
+    ...mapGetters(['categories', 'contacts']),
   },
   data() {
     return {

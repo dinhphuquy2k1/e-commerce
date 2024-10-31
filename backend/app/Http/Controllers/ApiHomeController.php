@@ -33,7 +33,7 @@ class ApiHomeController extends Controller
 
         $configs = $query->get();
 
-        $banners = Banner::with('medias')->get();
+        $banners = Banner::with('medias')->where('is_use', 1)->get();
 
         if (empty($configs)) {
             return $this->sendResponseSuccess();

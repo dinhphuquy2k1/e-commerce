@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiBannerController;
+use App\Http\Controllers\ApiContactController;
 use App\Http\Controllers\ApiHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::post('/categories/properties/{id}', [ApiCategoryController::class, 'getPr
 Route::prefix('')->group(function () {
     Route::get('/configs', [ApiHomeController::class, 'getConfigs']);
     Route::get('/banners', [ApiHomeController::class, 'getBanners']);
+    Route::get('/contacts', [ApiContactController::class, 'get']);
 });
 
 Route::prefix('categories')->group(function () {

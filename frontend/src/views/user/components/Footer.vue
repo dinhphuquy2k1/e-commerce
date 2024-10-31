@@ -11,7 +11,7 @@
             <div class="text-start text-wrap mt-3">
               <span class="fw-semibold ms-footer_label">Hỗ trợ khách hàng:</span>
               <br>
-              (629) 555-0129
+              {{ contacts?.data?.[contacts?.contactType?.OTHER.value]?.[0]?.value }}
               <br>
               <br>
               <span class="ms-footer_label mt-3">Thành Phố Hà Nội</span>
@@ -20,25 +20,15 @@
               support@ecommerce.com
             </div>
             <div class="social-container mt-3 d-flex">
-              <div class="facebook me-2">
-                <div class="icon"></div>
-              </div>
-              <div class="twitter me-2">
-                <div class="icon"></div>
-              </div>
-              <div class="linkedin me-2">
-                <div class="icon"></div>
-              </div>
-              <div class="instagram me-2">
-                <div class="icon"></div>
-              </div>
-              <div class="youtube me-2">
-                <div class="icon"></div>
+              <div v-for="item in contacts?.data?.[contacts?.contactType?.SOCIAL.value]">
+                <div class="me-2" :class="[item.icon]">
+                  <div class="icon"></div>
+                </div>
               </div>
             </div>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start fw-semibold mb-2">{{ $t('top_category')}}</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('top_category') }}</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -62,7 +52,7 @@
             </ul>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6">
-            <div class="title text-start fw-semibold mb-2">{{ $t('linked_category')}}</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('linked_category') }}</div>
             <ul class="nav flex-column text-start">
               <li class="nav-item">
                 Laptop
@@ -101,7 +91,7 @@
             </ul>
           </div>
           <div class="ms-footer_item col-lg col-md-4 col-6 ms-popular_list">
-            <div class="title text-start fw-semibold mb-2">{{ $t('popular_tags')}}</div>
+            <div class="title text-start fw-semibold mb-2">{{ $t('popular_tags') }}</div>
             <div class="d-flex flex-wrap gap-2 ms-popular_list">
               <div class="item-popular">Game</div>
               <div class="item-popular">iPhone</div>
@@ -136,6 +126,8 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
   data() {
     return {
@@ -169,7 +161,10 @@ export default {
         }
       ]
     }
-  }
+  },
+  computed: {
+    ...mapGetters(['contacts']),
+  },
 }
 </script>
 
@@ -331,6 +326,12 @@ $padding: 72px;
       .instagram {
         .icon {
           background-image: url('@public/assets/icons/instagram3.svg');
+        }
+      }
+
+      .pinterest {
+        .icon {
+          background-image: url('@public/assets/icons/pinterest3.svg');
         }
       }
 

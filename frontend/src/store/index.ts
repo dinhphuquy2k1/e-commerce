@@ -6,6 +6,7 @@ import order from "@/store/modules/order";
 import brand from "@/store/modules/brand";
 import shopping_mall from "@/store/modules/shopping_mall";
 import banner from "@/store/modules/banner";
+import contact from "@/store/modules/contact";
 import toast from "@/store/modules/toast";
 
 export default createStore({
@@ -17,6 +18,7 @@ export default createStore({
         brand,
         shopping_mall,
         banner,
+        contact,
         toast,
     }
 })

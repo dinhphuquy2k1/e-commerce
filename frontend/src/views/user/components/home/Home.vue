@@ -78,7 +78,7 @@ export default {
     TheLoading,
   },
   computed: {
-    ...mapGetters(['configs', "isLoadingConfig"]),
+    ...mapGetters(['configs', "isLoadingConfig", 'contacts']),
   },
   data() {
     return {
@@ -121,11 +121,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadConfig']),
+    ...mapActions(['loadConfig', 'loadContact']),
   },
 
   created() {
     this.loadConfig({isUse: 1});
+    this.loadContact();
   }
 }
 </script>

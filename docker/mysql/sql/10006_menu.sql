@@ -19,6 +19,7 @@ INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(70, 'Trung tâm mua sắm', 'icon-shopping_mall_default', 0, null, null, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(71, 'Cài đặt giao diện', null, 0, '/admin/shopping-mall/setting', 70, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(72, 'Cài đặt biểu ngữ', null, 0, '/admin/shopping-mall/banner', 70, now(), now());
+INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(73, 'Thông tin liên hệ', null, 0, '/admin/shopping-mall/contact', 70, now(), now());
 
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(100, 'Tài khoản của tôi', 'icon-account_default', 0, null, null, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(101, 'Hồ sơ người bán', null, 0, '/admin/profile/seller-profile', 100, now(), now());

@@ -398,5 +398,18 @@ CREATE TABLE order_details
     CONSTRAINT `order_details_variant_id_foreign` FOREIGN KEY (`variant_id`) REFERENCES `variants` (`id`) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS contacts;
+CREATE TABLE contacts
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `value`         VARCHAR(500)        NOT NULL,
+    `icon`          VARCHAR(500)        NULL,
+    `type`          tinyint(11)         NOT NULL DEFAULT 1 COMMENT '1: other, 2: social',
+    `display_order` int(11)             NOT NULL DEFAULT 0 COMMENT 'Display order',
+    `created_at`    TIMESTAMP                    DEFAULT now(),
+    `updated_at`    TIMESTAMP                    DEFAULT now() ON UPDATE now(),
+    PRIMARY KEY (`id`)
+);
+
 SET
     FOREIGN_KEY_CHECKS = 1; -- enable check foreign key
