@@ -78,7 +78,7 @@
                           {{ $t('link') }}
                         </div>
                         <div class="flex-1">
-                          <InputText v-model="data.phone"
+                          <InputText v-model="item.value"
                                      :class="{'error': invalid['displayType']}"
                           ></InputText>
                         </div>
