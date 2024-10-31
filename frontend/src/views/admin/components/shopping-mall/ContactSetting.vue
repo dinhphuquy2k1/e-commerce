@@ -218,25 +218,27 @@ export default {
   async created() {
     await this.loadContact();
 
-    Object.entries(this.contacts?.contactType).forEach(item => {
-      let contacts = this.contacts?.data?.[item?.[1].value];
-      if (contacts && contacts.length === 1) {
-        contacts.forEach((contact) => {
-          this.data[item[0].toLocaleLowerCase()] = contact.value
-        })
-      }
-
-      if (contacts && contacts.length > 1) {
-        contacts.forEach((contact) => {
-          this.data[item[0].toLocaleLowerCase()].forEach((data) => {
-            if (data.icon === contact.icon) {
-              data.value = contact.icon
-              data.isUse = contact.isUse
-            }
+    if (this.contacts.length > 0) {
+      Object.entries(this.contacts?.contactType).forEach(item => {
+        let contacts = this.contacts?.data?.[item?.[1].value];
+        if (contacts && contacts.length === 1) {
+          contacts.forEach((contact) => {
+            this.data[item[0].toLocaleLowerCase()] = contact.value
           })
-        })
-      }
-    })
+        }
+
+        if (contacts && contacts.length > 1) {
+          contacts.forEach((contact) => {
+            this.data[item[0].toLocaleLowerCase()].forEach((data) => {
+              if (data.icon === contact.icon) {
+                data.value = contact.icon
+                data.isUse = contact.isUse
+              }
+            })
+          })
+        }
+      })
+    }
   }
 }
 </script>
