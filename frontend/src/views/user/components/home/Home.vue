@@ -126,7 +126,6 @@ export default {
 
   created() {
     this.loadConfig({isUse: 1});
-    this.loadContact();
   }
 }
 </script>

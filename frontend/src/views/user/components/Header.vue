@@ -106,7 +106,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
-    ...mapActions(['loadCategory']),
+    ...mapActions(['loadCategory', 'loadContact']),
     handleScroll() {
       this.isScrolled = window.scrollY > 50;
     },
@@ -116,6 +116,7 @@ export default {
   },
   async created() {
     await this.loadCategory();
+    this.loadContact();
   }
 }
 </script>

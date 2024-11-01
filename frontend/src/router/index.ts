@@ -256,6 +256,29 @@ const routes: Array<RouteRecordRaw> = [
                 ],
             },
             {
+                path: 'news',
+                children: [
+                    {
+                        path: 'manage',
+                        name: 'manage_news',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/news/NewsList.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
+                    {
+                        path: 'create',
+                        name: 'create_news',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/news/NewsCreate.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    }
+                ],
+            },
+            {
                 path: 'order',
                 children: [
                     {

@@ -220,5 +220,7 @@
   "use": "Sử dụng",
   "no_use": "Không sử dụng",
   "social_links_title": "Liên kết mạng xã hội",
-  "social_links_description": "Quản lý các liên kết đến trang mạng xã hội để tăng cường kết nối với người dùng."
+  "social_links_description": "Quản lý các liên kết đến trang mạng xã hội để tăng cường kết nối với người dùng.",
+  "news_management": "Quản lý tin tức",
+  "add_new_news": "Thêm tin tức mới"
 }
