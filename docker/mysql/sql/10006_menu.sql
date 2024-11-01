@@ -25,6 +25,9 @@ INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(81, 'Quản lý tin tức', null, 0, '/admin/news/manage', 80, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(82, 'Thêm tin tức mới', null, 0, '/admin/news/create', 80, now(), now());
 
+INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(90, 'Bình luận', 'icon-chat_default', 0, null, null, now(), now());
+INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(91, 'Quản lý bình luận', null, 0, '/admin/comment/manage', 90, now(), now());
+
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(100, 'Tài khoản của tôi', 'icon-account_default', 0, null, null, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(101, 'Hồ sơ người bán', null, 0, '/admin/profile/seller-profile', 100, now(), now());
 INSERT IGNORE INTO menus (id, label, icon, menu_type, route, parent_id, created_at, updated_at) VALUES(102, 'Cài đặt tài khoản', null, 0, '/admin/profile/account-setting', 100, now(), now());
