@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
@@ -15,9 +17,9 @@ class Controller extends BaseController
     /**
      * @param int $status
      * @param array $body
-     * @return JsonResponse
+     * @return JsonResponse|object
      */
-    protected function sendResponse(int $status, array $body = []): JsonResponse
+    protected function sendResponse(int $status, array $body = [])
     {
         $content = [
             'data' => $body,
@@ -29,40 +31,40 @@ class Controller extends BaseController
     /**
      * @param array $body
      * @param string $message
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseSuccess(array $body = [], string $message = ''): JsonResponse
+    protected function sendResponseSuccess(array $body = [], string $message = '')
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
      * @param array $body
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseBadRequest(array $body = []): JsonResponse
+    protected function sendResponseBadRequest(array $body = [])
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * @param array $body
-     * @return JsonResponse
+     * @return Application|ResponseFactory|\Illuminate\Http\Response|object
      */
-    protected function sendResponseServerError(array $body = []): JsonResponse
+    protected function sendResponseServerError(array $body = [])
     {
         $content = [
             'data' => $body,
         ];
-        return response()->json($content)
+        return response($content)
             ->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

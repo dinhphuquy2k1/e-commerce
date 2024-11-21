@@ -21,6 +21,11 @@
   background-position: center;
 }
 
+.icon-mw24 {
+  min-width: 24px;
+  min-height: 24px;
+}
+
 .icon-error-text {
   height: 14px;
   width: 14px;
@@ -189,6 +194,10 @@ span.icon24 {
   background-image: url('@public/assets/icons/Heart_black.svg');
 }
 
+.icon-list_white {
+  background-image: url('@public/assets/icons/list_white.svg');
+}
+
 .icon-simple_cart {
   background-position: center;
   background-image: url('@public/assets/icons/ShoppingCartSimple.svg');
@@ -228,9 +237,19 @@ span.icon24 {
   background-image: url('@public/assets/icons/ArrowRightOrange.svg');
 }
 
+.icon-arrow-left_primary {
+  rotate: 180deg;
+  background-image: url('@public/assets/icons/ArrowRightPrimary.svg');
+}
+
 .icon-w24 {
   width: 24px;
   height: 24px;
+}
+
+.icon-w16 {
+  width: 16px;
+  height: 16px;
 }
 
 .icon-w20 {
@@ -240,6 +259,16 @@ span.icon24 {
   &:hover {
     cursor: pointer;
   }
+}
+
+.icon-w32 {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-w40 {
+  width: 40px;
+  height: 40px;
 }
 
 .icon-user-circle {
@@ -256,6 +285,46 @@ span.icon24 {
 
 .icon-home {
   background-image: url('@public/assets/icons/House.svg');
+}
+
+.icon-bag {
+  background-image: url('@public/assets/icons/bi_bag.svg');
+}
+
+.icon-bag-primary {
+  background-image: url('@public/assets/icons/bi_bag_primary.svg');
+}
+
+.icon-heart {
+  background-image: url('@public/assets/icons/heart_home.svg');
+}
+
+.icon-heart-primary {
+  background-image: url('@public/assets/icons/heart_primary.svg');
+}
+
+.icon-profile-avatar {
+  background-image: url('@public/assets/icons/profile_avatar.svg');
+}
+
+.icon-profile-avatar-primary {
+  background-image: url('@public/assets/icons/profile_avatar_primary.svg');
+}
+
+.icon-cil-search {
+  background-image: url('@public/assets/icons/cil_search.svg');
+}
+
+.icon-cil-search-primary {
+  background-image: url('@public/assets/icons/cil_search_primary.svg');
+}
+
+.icon-fluent_home {
+  background-image: url('@public/assets/icons/fluent_home-32-regular.svg');
+}
+
+.icon-fluent_home-primary {
+  background-image: url('@public/assets/icons/fluent_home-32-primary.svg');
 }
 
 .icon-home_orange {
@@ -420,6 +489,18 @@ span.icon24 {
   background: transparent url("@public/assets/icons/icon-product_default.svg") no-repeat center;
 }
 
+.icon-blog_default {
+  height: 24px;
+  width: 24px;
+  background: transparent url("@public/assets/icons/ic-blog_default.svg") no-repeat center;
+}
+
+.icon-chat_default {
+  height: 24px;
+  width: 24px;
+  background: transparent url("@public/assets/icons/ic-chat-default.svg") no-repeat center;
+}
+
 .icon-home_default {
   height: 24px;
   width: 24px;
@@ -436,6 +517,12 @@ span.icon24 {
   height: 24px;
   width: 24px;
   background: transparent url("@public/assets/icons/ic-order_default.svg") no-repeat center;
+}
+
+.icon-shopping_mall_default {
+  height: 24px;
+  width: 24px;
+  background: transparent url("@public/assets/icons/ic_shopping_mall_default.svg") no-repeat center;
 }
 
 .icon-challenge_default {
@@ -466,4 +553,36 @@ span.icon24 {
   height: 24px;
   width: 24px;
   background: transparent url("@public/assets/icons/icon-close.svg") no-repeat center;
+}
+
+.icon-media-setting {
+  background: transparent url("@public/assets/icons/icon-media-setting.svg") no-repeat center;
+}
+
+.icon-sort-duo {
+  background: transparent url("@public/assets/icons/icon-sort-duo.svg") no-repeat center;
+}
+
+.icon-sort-up {
+  background: transparent url("@public/assets/icons/icon-sort-up.svg") no-repeat center;
+}
+
+.icon-rocket {
+  background: transparent url("@public/assets/icons/icon-rocket.svg") no-repeat center;
+}
+
+.icon-receipt {
+  background: transparent url("@public/assets/icons/icon-receipt.svg") no-repeat center;
+}
+
+.icon-package-green {
+  background: transparent url("@public/assets/icons/icon-package-green.svg") no-repeat center;
+}
+
+.icon-setting-red {
+  background: transparent url("@public/assets/icons/icon-setting-red.svg") no-repeat center;
+}
+
+.icon-edit-blue {
+  background: transparent url("@public/assets/icons/ic_edit_blue.svg") no-repeat center;
 }

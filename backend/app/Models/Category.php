@@ -36,4 +36,19 @@ class Category extends Model
     {
         return $this->hasOne(Media::class);
     }
+
+    /**
+     * @param $category
+     * @return array
+     */
+    public static function getCategoryIds($category): array
+    {
+        $result[] = $category['key'];
+
+        foreach ($category['children'] as $child) {
+            $result = array_merge($result, self::getCategoryIds($child));
+        }
+
+        return $result;
+    }
 }

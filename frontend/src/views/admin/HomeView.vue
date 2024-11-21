@@ -8,16 +8,12 @@
       </div>
     </div>
   </div>
-  <LiveChat/>
 </template>
 
 <script>
-import LiveChat from "@/components/LiveChat.vue";
 
 export default {
-  components: {
-    LiveChat
-  },
+  components: {},
   data() {
     return {}
   }
@@ -91,7 +87,8 @@ export default {
           background: #fff;
           border: 1px solid var(--Gray-100);
           border-radius: 4px;
-          .p-inputtext{
+
+          .p-inputtext {
             background: transparent;
           }
         }
@@ -117,7 +114,7 @@ export default {
     }
 
     nav + .ma-content {
-      width: calc(100% - 56px);
+      width: calc(100% - $navbar-collapsed-width);
     }
   }
 }

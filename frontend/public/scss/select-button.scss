@@ -1,0 +1,36 @@
+.ms-select-button {
+
+  .p-button {
+    height: 36px;
+    padding: 8px 16px;
+
+    &:focus {
+      box-shadow: unset;
+    }
+
+    &.p-highlight {
+      &:not(:last-child) {
+        border-right: 1px solid #2979ff;
+      }
+
+      & + .p-button {
+        border-left: 0;
+      }
+    }
+  }
+
+  &.outline-primary {
+    .p-button {
+
+      &.p-highlight {
+        border-color: #2979ff;
+        color: #2979ff;
+        background: transparent;
+      }
+
+      .p-button-label {
+        font-weight: unset;
+      }
+    }
+  }
+}

@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss">
 .ms-bread-crumb_wrapper {
-  padding: 0 $padding-base;
+  padding: 0 var(--padding-base);
   background: var(--Gray-50);
   height: 72px;
 

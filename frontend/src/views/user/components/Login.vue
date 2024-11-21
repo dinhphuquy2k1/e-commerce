@@ -2,40 +2,40 @@
   <div class="ms-login_wrapper">
     <div class="ms-login_container">
       <TabView>
-        <TabPanel header="Đăng nhập">
+        <TabPanel :header="$t('login')">
           <div class="ms-login_main d-flex flex-column gap-3">
             <div class="row gy-2">
-              <div class="col-12 text-start">Email hoặc số điện thoại:</div>
+              <div class="col-12 text-start">{{ $t('email_or_phone') }}:</div>
               <div class="col-12">
-                <InputText type="text"/>
+                <InputText type="text" autofocus/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
             </div>
             <div class="row gy-2">
-              <div class="col-12 text-start">Mật khẩu:</div>
+              <div class="col-12 text-start">{{ $t('password') }}:</div>
               <div class="col-12">
-                <InputText type="text"/>
+                <InputText type="password"/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
-              <div class="col-12 text-start mt-2 ms-forget_password">Quên mật khẩu?</div>
+              <div class="col-12 text-start mt-2 ms-forget_password">{{ $t('forgot_password') }}</div>
             </div>
             <div class="row gx-0 gy-0">
               <Button class="ms-btn orange ms-btn_search mt-2 text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
-                  <div>Đăng nhập</div>
+                  <div>{{ $t('login') }}</div>
                   <div class="icon-w20 icon-arrow-right_white"></div>
                 </div>
               </Button>
             </div>
             <div class="row position-relative d-flex justify-content-center gy-0 gx-0 mt-3">
               <div class="line"></div>
-              <div class="text"><span>hoặc</span></div>
+              <div class="text"><span>{{ $t('or') }}</span></div>
             </div>
             <div class="row gx-0 gy-0 ms-login-with">
               <Button class="ms-btn white ms-btn_search mt-2 text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
                   <div class="icon-w20 icon-google"></div>
-                  <div class="text">Đăng nhập với google</div>
+                  <div class="text">{{ $t('login_with', {name: 'google'}) }}</div>
                 </div>
               </Button>
             </div>
@@ -43,59 +43,59 @@
               <Button class="ms-btn white ms-btn_search text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
                   <div class="icon-w20 icon-apple"></div>
-                  <div class="text">Đăng nhập với AppleID</div>
+                  <div class="text">{{ $t('login_with', {name: 'AppleID'}) }}</div>
                 </div>
               </Button>
             </div>
           </div>
         </TabPanel>
-        <TabPanel header="Đăng kí">
+        <TabPanel :header="$t('register')">
           <div class="ms-login_main d-flex flex-column gap-3">
             <div class="row gy-2">
-              <div class="col-12 text-start">Họ tên:</div>
+              <div class="col-12 text-start">{{ $t('full_name') }}:</div>
               <div class="col-12">
                 <InputText type="text"/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
             </div>
             <div class="row gy-2">
-              <div class="col-12 text-start">Email hoặc số điện thoại:</div>
+              <div class="col-12 text-start">{{ $t('email_or_phone') }}:</div>
               <div class="col-12">
                 <InputText type="text"/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
             </div>
             <div class="row gy-2">
-              <div class="col-12 text-start">Mật khẩu:</div>
+              <div class="col-12 text-start">{{ $t('password') }}:</div>
               <div class="col-12">
-                <InputText type="text"/>
+                <InputText type="password"/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
             </div>
             <div class="row gy-2">
-              <div class="col-12 text-start">Nhập lại mật khẩu:</div>
+              <div class="col-12 text-start">{{ $t('confirm_password') }}:</div>
               <div class="col-12">
-                <InputText type="text"/>
+                <InputText type="password"/>
                 <div class="ms-error-text text-start mt-2 d-none">Lỗi</div>
               </div>
             </div>
             <div class="row gx-0 gy-0">
               <Button class="ms-btn orange ms-btn_search mt-2 text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
-                  <div>Đăng kí</div>
+                  <div>{{ $t('register') }}</div>
                   <div class="icon-w20 icon-arrow-right_white"></div>
                 </div>
               </Button>
             </div>
             <div class="row position-relative d-flex justify-content-center gy-0 gx-0 mt-3">
               <div class="line"></div>
-              <div class="text"><span>hoặc</span></div>
+              <div class="text"><span>{{ $t('or') }}</span></div>
             </div>
             <div class="row gx-0 gy-0 ms-login-with">
               <Button class="ms-btn white ms-btn_search mt-2 text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
                   <div class="icon-w20 icon-google"></div>
-                  <div class="text">Đăng nhập với google</div>
+                  <div class="text">{{ $t('login_with', {name: 'google'}) }}</div>
                 </div>
               </Button>
             </div>
@@ -103,7 +103,7 @@
               <Button class="ms-btn white ms-btn_search text-center d-flex justify-content-center ps-3 pe-3">
                 <div class="d-flex align-items-center gap-1">
                   <div class="icon-w20 icon-apple"></div>
-                  <div class="text">Đăng nhập với AppleID</div>
+                  <div class="text">{{ $t('login_with', {name: 'AppleID'}) }}</div>
                 </div>
               </Button>
             </div>
@@ -119,13 +119,15 @@ import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
+import FocusTrap from 'primevue/focustrap';
 
 export default {
   components: {
     TabView,
     TabPanel,
     InputText,
-    Button
+    Button,
+    FocusTrap,
   }
 }
 </script>

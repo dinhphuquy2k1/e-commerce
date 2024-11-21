@@ -113,6 +113,6 @@ export default {
 
 <style lang="scss">
 .ms-compare-wrapper {
-  padding: 72px $padding-base;
+  padding: 72px var(--padding-base);
 }
 </style>

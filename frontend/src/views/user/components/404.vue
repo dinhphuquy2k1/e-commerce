@@ -4,9 +4,9 @@
       <Image :src="require('@public/assets/images/404.png')" class="flex-grow-1"
              alt="Image"/>
       <div class="ms-404-content d-flex flex-column align-items-center justify-content-center">
-        <div class="title">Không tìm thấy trang</div>
-        <div class="description text-center">Đã xảy ra lỗi. Có vẻ như không thể tìm thấy yêu cầu của bạn.<br>
-          Liên kết bị hỏng hoặc trang đã bị xóa.
+        <div class="title">{{ $t('not_found') }}</div>
+        <div class="description text-center">{{ $t('error_occurred') }} {{ $t('request_not_found') }}<br>
+          {{ $t('link_broken') }}
         </div>
         <div class="buttons d-flex gap-4 ms-4 justify-content-center  align-items-center">
           <Button
@@ -14,14 +14,14 @@
               class="ms-btn orange ms-btn_search text-center d-flex justify-content-center ps-3 pe-3">
             <div class="d-flex align-items-center gap-1">
               <div class="icon-w20 icon-arrow-left_white"></div>
-              <div>Quay lại</div>
+              <div>{{ $t('go_back')}}</div>
             </div>
           </Button>
           <Button
               class="ms-btn border-orange_white ms-btn_search text-center d-flex justify-content-center ps-3 pe-3">
             <div class="d-flex align-items-center gap-1">
               <div class="icon-w20 icon-home_orange"></div>
-              <div class="">Quay về trang chủ</div>
+              <div class="">{{ $t('back_home') }}</div>
             </div>
           </Button>
         </div>

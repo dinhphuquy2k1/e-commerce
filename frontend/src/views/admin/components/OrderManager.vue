@@ -166,7 +166,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -178,7 +178,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -190,7 +190,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -202,7 +202,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -214,7 +214,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -226,7 +226,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -238,7 +238,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -250,7 +250,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -262,7 +262,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -274,7 +274,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -286,7 +286,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -298,7 +298,7 @@
                 <Dropdown v-model="invalidSizeTable" :options="[]" optionLabel="value"
                           autoOptionFocus
                           selectOnFocus
-                          :placeholder="MESSAGE.TRANSFER_OPTION"
+                          :placeholder="$t('transfer_option')"
                           class="ms-category text-start"/>
               </div>
               <div class="ms-error-text">
@@ -371,9 +371,6 @@ export default {
   },
 
   computed: {
-    MESSAGE() {
-      return MESSAGE
-    },
     ...mapGetters(['orders', 'isLoadingOrder']),
   }
 }

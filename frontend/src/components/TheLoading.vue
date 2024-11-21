@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-loading" :class="{ 'fixed': fixed, 'absolute': !fixed, 'ms-loading_background': useBackground }">
+  <div class="ms-loading" :class="{ 'fixed-loading': fixed, 'absolute': !fixed, 'ms-loading_background': useBackground, 'ms-loading-without_background': noBackground }">
     <span class="loader"></span>
   </div>
 </template>
@@ -15,13 +15,16 @@ export default {
     },
     useBackground: {
       default: false,
-    }
+    },
+    noBackground: {
+      default: false,
+    },
   }
 }
 
 </script>
 <style>
-.fixed {
+.fixed-loading {
   position: fixed;
   top: 0;
   left: 0;
@@ -76,6 +79,12 @@ export default {
 
 .p-datatable .p-datatable-loading-overlay{
   z-index: 1000000;
+}
+
+.ms-loading {
+  &.ms-loading-without_background {
+    background-color: transparent;
+  }
 }
 
 @keyframes rotation {

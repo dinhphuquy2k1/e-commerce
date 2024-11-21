@@ -1,0 +1,724 @@
+<template>
+  <div class="form-list flex-grow-1 flex-column d-flex position-relative mw-100 ms-seller_profile ms-screen-setting-wrapper overflow-auto">
+    <div class="d-flex flex-row title-box align-items-center gap-2">
+      <div class="list-title flex-grow-1 text-start">{{ $t('banner_settings') }}</div>
+      <div>
+        <Button
+            @click="onAddBanner"
+            class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="icon24 add-white"></div>
+          <div class="fw-semibold">{{ $t('add_banner') }}</div>
+        </Button>
+      </div>
+    </div>
+    <div class="flex1 d-flex flex-column position-relative">
+      <TabView v-model:activeIndex="activeIndex" class="flex1 d-flex flex-column" @tab-click="loadBanner({isUse: this.handlerIsUse()})">
+        <TabPanel v-for="tab in tabs" :header="tab.title" :key="tab.title">
+          <div class="flex-1 position-relative bg-white rounded-4" v-if="isLoadingBanner">
+            <TheLoading :no-background="true"/>
+          </div>
+          <div class="ms-setting-container flex-1 d-flex" v-if="banners.length > 0 && !isLoadingBanner">
+            <div class="ms-setting-main flex-1 d-flex flex-column gap-3">
+              <div v-for="(item, index) in banners" class="ms-setting-item" :ref="`ms-setting-item-${item.id}`">
+                <div>
+                  <div class="ms-setting-item-value ms-setting-item-ads">
+                    <div class="ms-setting-item_header d-flex justify-content-between">
+                      <div class="left-side text-neutral-text1">
+                        <div v-if="!editActive[index]">
+                          {{ item.title }}
+                        </div>
+                        <div v-else>
+                          <InputText v-model="data.title" maxlength="30"/>
+                        </div>
+                      </div>
+                      <div class="right-side">
+                        <div v-if="!editActive[index]" class="d-flex gap-3">
+                          <Button
+                              @click="onEditSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search gap-2">
+                            <div class="icon-w16 icon-edit-blue"></div>
+                            <div class="">{{ $t('edit') }}</div>
+                          </Button>
+                          <Button
+                              @click="onDeleteSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex flex-grow-1 ms-btn_search gap-2">
+                            <div class="icon24 delete"
+                                 style="transform: scale(0.8); min-width: 16px; width: 16px; min-height: 16px; height: 16px;"></div>
+                            <div class="">{{ $t('remove') }}</div>
+                          </Button>
+                        </div>
+                        <div class="d-flex align-items-center gap-3" v-else>
+                          <Button
+                              @click="onCancelSettingItem(item, index)"
+                              class="ms-btn btn-edit-adm d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 gap-2 mw-0">
+                            <div class="">{{ $t('cancel') }}</div>
+                          </Button>
+                          <Button
+                              @click="onSaveSetting(item, index)"
+                              class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search pe-3 ps-3 h-0 gap-2 mw-0">
+                            <div class="">{{ $t('save') }}</div>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ms-setting-item_main mt-3" v-if="item.type !== configs?.type?.ADS?.value">
+                      <div></div>
+                      <div class="ms-main-items">
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4">
+                          <div class="left-side">Số sản phẩm trên mỗi dòng</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.columnsPerRow }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.columnsPerRow" showButtons :min="1" :max="10"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Sản phẩm đã chọn</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.items.length }}</div>
+                            <div v-else>
+                              <Button
+                                  class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+                                <div class="fw-medium">{{ $t('change') }}</div>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Số lượng thẻ</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.tags.length }}</div>
+                            <div v-else>
+                              <Button
+                                  class="ms-btn border-primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+                                <div class="fw-medium">{{ $t('change') }}</div>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4 border-t-0">
+                          <div class="left-side">Kiểu hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ optionTypeTexts[item.type] }}</div>
+                            <div v-else>
+                              <SelectButton v-model="data.type" :options="optionTypes" optionLabel="description"
+                                            optionValue="value"
+                                            class="ms-select-button outline-primary"
+                                            aria-labelledby="basic"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Thứ tự hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Trạng thái</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">
+                              <div class="d-flex status-ctn max-content" v-if="item.isUse"
+                                   style="background-color: rgb(229, 250, 237);">
+                                <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
+                                <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
+                              </div>
+
+                              <div class="d-flex status-ctn max-content" v-else
+                                   style="background-color: rgb(254, 243, 231);">
+                                <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
+                                <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              </div>
+                            </div>
+                            <div v-else>
+                              <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ms-setting-item_main mt-3" v-if="item.type === configs?.type?.ADS?.value">
+                      <div></div>
+                      <div class="ms-main-items">
+                        <div class="item d-flex justify-content-between align-items-center rounded-t-4">
+                          <Image src="http://localhost:30001/storage/ads/xiaomi-1200x200.png" alt="Image" preview class="flex-1"
+                                 imageClass="w-100 rounded-8"/>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Thứ tự hiển thị</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">{{ item.displayOrder }}</div>
+                            <div v-else>
+                              <InputNumber v-model="data.displayOrder" showButtons :min="1"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item d-flex justify-content-between align-items-center rounded-b-4 border-t-0">
+                          <div class="left-side">Trạng thái</div>
+                          <div class="right-side">
+                            <div v-if="!editActive[index]">
+                              <div class="d-flex status-ctn max-content" v-if="item.isUse"
+                                   style="background-color: rgb(229, 250, 237);">
+                                <div class="status-dot" style="background-color: rgb(0, 200, 83);"></div>
+                                <div class="status-text" style="color: rgb(0, 200, 83);">{{ $t('in_use') }}</div>
+                              </div>
+
+                              <div class="d-flex status-ctn max-content" v-else
+                                   style="background-color: rgb(254, 243, 231);">
+                                <div class="status-dot" style="background-color: rgb(243, 141, 21);"></div>
+                                <div class="status-text" style="color: rgb(243, 141, 21);">{{ $t('not_in_use') }}</div>
+                              </div>
+                            </div>
+                            <div v-else>
+                              <InputSwitch v-model="data.isUse" :trueValue="1" :falseValue="0"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="banners.length === 0 && !isLoadingBanner"
+               class="ms-setting-empty flex-1 d-flex flex-column align-items-center justify-content-center">
+            <div class="icon-no-data"></div>
+            <div class="text-center">{{ $t('no_data') }}</div>
+          </div>
+        </TabPanel>
+
+      </TabView>
+    </div>
+  </div>
+
+  <Dialog v-model:visible="isPopupDelete" modal closeOnEscape
+          :header="$t('notification')">
+    <TheLoading v-if="isLoadingDelete"/>
+    <div class="w-full flex flex-column">
+      <span>{{ $t('confirm_delete') }}</span>
+    </div>
+    <template #footer>
+      <div>
+        <Button
+            class="ms-btn btn-secondary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('cancel') }}</div>
+        </Button>
+      </div>
+      <div>
+        <Button
+            @click="onClickApplyDelete"
+            class="ms-btn danger d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('delete') }}</div>
+        </Button>
+      </div>
+    </template>
+  </Dialog>
+
+  <Dialog v-model:visible="isPopupAdd" modal closeOnEscape
+          :header="$t('add_banner')" style="width: 40vw">
+    <TheLoading v-if="isLoadingAdd"/>
+    <div class="w-full d-flex flex-column">
+      <div class="d-flex gap-3">
+        <div class="group-form_box gap-3 flex-1">
+          <div class="label d-flex align-items-center">
+            {{ $t('display_type') }}
+            <span class="required">*</span>
+          </div>
+          <div class="flex-1 mt-1">
+            <Dropdown v-model="data['displayType']" :options="optionTypeAll" optionLabel="description"
+                      optionValue="value"
+                      :class="{'error': invalid['displayType']}"
+            ></Dropdown>
+          </div>
+          <div class="ms-error-text" v-if="invalid['displayType']">
+            {{ invalid['displayType'] }}
+          </div>
+        </div>
+        <div class="group-form_box gap-3 flex-1">
+          <div class="label d-flex align-items-center">
+            {{ $t('display_type') }}
+            <span class="required">*</span>
+          </div>
+          <div class="flex-1 mt-1">
+            <Dropdown v-model="data['displayType']" :options="optionTypeAll" optionLabel="description"
+                      optionValue="value"
+                      :class="{'error': invalid['displayType']}"
+            ></Dropdown>
+          </div>
+          <div class="ms-error-text" v-if="invalid['displayType']">
+            {{ invalid['displayType'] }}
+          </div>
+        </div>
+
+      </div>
+      <div class="group-form_box gap-3">
+        <div class="label d-flex align-items-center">
+          {{ $t('display_type') }}
+          <span class="required">*</span>
+        </div>
+        <div class="flex-1 mt-1">
+          <Dropdown v-model="data['displayType']" :options="optionTypeAll" optionLabel="description"
+                    optionValue="value"
+                    :class="{'error': invalid['displayType']}"
+          ></Dropdown>
+        </div>
+        <div class="ms-error-text" v-if="invalid['displayType']">
+          {{ invalid['displayType'] }}
+        </div>
+      </div>
+      <div class="group-form_box gap-3 mt-3" v-if="data['displayType'] != null && data['displayType'] !== configs?.type?.ADS?.value">
+        <div class="label d-flex align-items-center">
+          {{ $t('title') }}
+          <span class="required">*</span>
+        </div>
+        <div class="flex-1 mt-1">
+          <InputText v-model="data['title']" maxlength="30" :class="{'error': invalid['title']}"/>
+        </div>
+        <div class="ms-error-text" v-if="invalid['title']">
+          {{ invalid['title'] }}
+        </div>
+      </div>
+    </div>
+    <template #footer>
+      <div>
+        <Button
+            class="ms-btn btn-secondary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('cancel') }}</div>
+        </Button>
+      </div>
+      <div>
+        <Button
+            @click="onHandlerAddSetting"
+            class="ms-btn primary d-flex justify-content-center flex-grow-1 ms-btn_search ps-3 pe-3 gap-2">
+          <div class="fw-medium">{{ $t('save') }}</div>
+        </Button>
+      </div>
+    </template>
+  </Dialog>
+</template>
+
+<script>
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
+import Skeleton from 'primevue/skeleton';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Checkbox from "primevue/checkbox";
+import OverlayPanel from 'primevue/overlaypanel';
+import Dropdown from "primevue/dropdown";
+import InputNumber from "primevue/inputnumber";
+import TreeSelect from "primevue/treeselect";
+import InputSwitch from 'primevue/inputswitch';
+import RadioButton from 'primevue/radiobutton';
+import SelectButton from 'primevue/selectbutton';
+import Image from 'primevue/image';
+import Dialog from 'primevue/dialog';
+import TheLoading from "@/components/TheLoading.vue";
+import {mapActions, mapGetters} from 'vuex';
+import {TIMEOUT} from "@/common/enums";
+import {updateBanner, addBanner, deleteBanner} from "@/api/banner";
+
+export default {
+  components: {
+    Button,
+    InputText,
+    Skeleton,
+    DataTable,
+    Column,
+    Checkbox,
+    OverlayPanel,
+    Dropdown,
+    InputNumber,
+    TreeSelect,
+    RadioButton,
+    SelectButton,
+    InputSwitch,
+    TabView,
+    TabPanel,
+    TheLoading,
+    Image,
+    Dialog,
+  },
+
+  data() {
+    return {
+      activeIndex: 0,
+      editActive: [],
+      data: {},
+      optionTypes: [],
+      optionTypeTexts: [],
+      optionTypeAll: [],
+      optionTypeAllText: [],
+      tabs: [
+        {title: this.$t('everything')},
+        {title: this.$t('in_use')},
+        {title: this.$t('not_in_use')},
+      ],
+      isPopupDelete: false,
+      isLoadingDelete: false,
+      isPopupAdd: false,
+      isLoadingAdd: false,
+      invalid: [],
+    }
+  },
+
+  computed: {
+    ...mapGetters(['banners', "isLoadingBanner"]),
+  },
+
+  methods: {
+    ...mapActions(['loadBanner']),
+
+    onAddBanner() {
+      this.isPopupAdd = true;
+      this.data = {};
+    },
+
+    /**
+     * Click button edit item
+     * @param item
+     * @param index
+     */
+    onEditSettingItem(item, index) {
+      this.editActive[index] = true;
+      this.data = {...item};
+    },
+
+    /**
+     * Click button cancel setting item
+     * @param item
+     * @param index
+     */
+    onCancelSettingItem(item, index) {
+      if (JSON.stringify(item) !== JSON.stringify(this.data)) {
+        item = this.data
+      }
+
+      this.editActive[index] = false;
+    },
+
+    /**
+     * Click button save setting item
+     * @param item
+     * @param index
+     */
+    onSaveSetting(item, index) {
+      if (JSON.stringify(this.banners[index]) !== JSON.stringify(this.data)) {
+        updateBanner(this.data).then(res => {
+          this.$store.dispatch('handlerAddSuccess');
+          this.loadBanner({isUse: this.handlerIsUse()});
+        }).catch(error => {
+
+        }).finally(() => {
+          this.editActive[index] = false;
+        });
+      }
+      this.banners[index] = this.data
+    },
+
+    /**
+     * Click button delete setting item
+     * @param item
+     * @param index
+     */
+    onDeleteSettingItem(item, index) {
+      this.isPopupDelete = true;
+      this.data = item;
+    },
+
+    /**
+     * Click button apply delete
+     */
+    onClickApplyDelete() {
+      this.isLoadingDelete = true;
+      deleteBanner(this.data.id).then(res => {
+        this.$store.dispatch('handlerDeleteSuccess')
+        this.loadBanner({isUse: this.handlerIsUse()});
+      })
+          .catch(error => {
+
+          }).finally(() => {
+        this.isPopupDelete = false;
+        setTimeout(() => {
+          this.isLoadingDelete = false;
+        }, TIMEOUT.LOADING)
+      })
+    },
+
+    /**
+     * Click button save setting
+     */
+    onHandlerAddSetting() {
+      try {
+        if (this.validateAddBanner()) {
+          this.isLoadingAdd = true;
+          addBanner(this.data).then(async res => {
+            this.isPopupAdd = false;
+            await this.configs.data.push(res.data.data)
+            this.$refs[`ms-setting-item-${res.data.data.id}`][0].scrollIntoView({behavior: 'smooth', block: 'center'});
+            // res.data.data.configId
+          }).catch(error => {
+            console.log(error)
+          }).finally(() => {
+            setTimeout(() => {
+              this.isLoadingAdd = false;
+            }, TIMEOUT.LOADING)
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    /**
+     * validate form add setting
+     * @returns {boolean}
+     */
+    validateAddBanner() {
+      this.invalid = [];
+      if (this.data.displayType == null) {
+        this.invalid['displayType'] = this.$t('name_cannot_be_empty', {name: this.$t('display_type')})
+      } else {
+        switch (this.data.displayType) {
+          case this.configs?.type?.DEFAULT?.value:
+          case this.configs?.type?.SLIDER?.value:
+            if (!this.data.title) {
+              this.invalid['title'] = this.$t('name_cannot_be_empty', {name: this.$t('title')})
+            }
+            break;
+        }
+      }
+
+      return Object.keys(this.invalid).length === 0;
+    },
+
+    handlerIsUse() {
+      let isUse = '';
+      if (this.activeIndex === 1) {
+        isUse = 1;
+      }
+
+      if (this.activeIndex === 2) {
+        isUse = 0;
+      }
+
+      return isUse;
+    },
+  },
+
+  async created() {
+    await this.loadBanner();
+  }
+}
+</script>
+
+<style lang="scss">
+.ms-seller_profile {
+
+  .theme-arco-divider-vertical {
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    display: inline-block;
+    height: 20px;
+    margin: 0;
+    max-width: 1px;
+    min-width: 1px;
+    vertical-align: middle;
+  }
+
+  .ms-shop_logo {
+    background-color: #ebeef5;
+    border: 0 solid;
+    border-radius: 50%;
+    height: 109px;
+    overflow: hidden;
+    position: relative;
+    width: 109px;
+  }
+
+  .ms-table_roles {
+    tr {
+      max-height: 33px;
+
+      td {
+        white-space: wrap !important;
+        max-height: 33px;
+
+        .truncate-text-3 {
+          margin-top: 12px;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+
+  .p-tabview-nav-container {
+    margin-bottom: 16px;
+
+    .p-tabview-nav-content {
+      .p-tabview-nav {
+        border: unset;
+        background: transparent;
+
+        .p-tabview-header {
+          border: unset;
+
+          .p-tabview-nav-link {
+            border: unset;
+            font-size: 16px;
+            font-weight: 500;
+            background: transparent;
+          }
+
+          &.p-highlight {
+            border-bottom: 1px solid #FA8232;
+
+            .p-tabview-nav-link {
+              border-bottom: 1px solid #FA8232;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .p-tabview-panels {
+    display: flex;
+    border-radius: 8px;
+    flex: 1;
+    background: unset;
+    padding: unset;
+
+    .ms-tab_panel {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .p-tabview-panel {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      min-height: 0;
+
+      .p-datatable {
+        flex-grow: 1;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+
+        .p-datatable-table {
+
+          &:not(.loading) .p-datatable-tbody > tr.p-datatable-emptymessage > td, &:not(.loading) .p-datatable-tbody > tr:last-child > td {
+            border-bottom: none !important;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.ms-screen-setting-wrapper {
+
+  .p-tabview {
+    .p-tabview-nav-container {
+      .p-tabview-nav-content {
+        .p-tabview-nav {
+          .p-tabview-header {
+            padding: 4px 0;
+            margin: 0 12px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &.p-highlight {
+              border-bottom: unset;
+
+              .p-tabview-nav-link {
+                border-bottom: unset;
+
+                .p-tabview-title {
+                  border-bottom: 1px solid #FA8232;
+                }
+              }
+            }
+
+            .p-tabview-nav-link {
+              padding: unset;
+
+              .p-tabview-title {
+                padding: 0 0 4px 0;
+                line-height: 24px;
+              }
+            }
+
+            &:hover {
+              .p-tabview-nav-link {
+                background-color: #f0f0f0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ms-setting-container {
+    .ms-setting-main {
+      .ms-setting-item {
+        border-color: var(--theme-arco-color-border-2);
+        border-radius: 4px;
+        border-width: 1px;
+        border-style: solid;
+        padding: 24px;
+        background-color: var(--primary);
+
+        &:last-child {
+          margin-bottom: 24px;
+        }
+
+        .ms-setting-item-value {
+          .ms-setting-item_header {
+            .left-side {
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .right-side {
+              .ms-btn {
+                padding: 3px 8px;
+              }
+            }
+          }
+
+          .ms-setting-item_main {
+            .ms-main-items {
+              .item {
+                padding: 20px;
+                border-width: 1px;
+                border-style: solid;
+                border-color: var(--theme-arco-color-bg-bg2);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ms-setting-empty {
+    background-color: var(--primary);
+    border-radius: 4px;
+  }
+}
+
+</style>

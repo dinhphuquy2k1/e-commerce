@@ -1,13 +1,23 @@
 <template>
   <router-view name="home"></router-view>
+  <Toast/>
 </template>
 
 <script>
 import HomeView from '@/views/user/HomeView.vue'
+import Toast from 'primevue/toast';
+import {mapActions} from 'vuex';
 
 export default {
-  components:{
-    HomeView
+  components: {
+    HomeView,
+    Toast,
+  },
+  methods: {
+    ...mapActions(['setToast']),
+  },
+  created() {
+    this.setToast({toast: this.$toast})
   }
 }
 </script>
@@ -15,9 +25,9 @@ export default {
 <style lang="scss">
 @import url('../public/scss/main.scss');
 
-.p-dropdown, .p-treeselect, .p-multiselect, .p-inputtext, .ms-btn {
+.p-dropdown, .p-treeselect, .p-multiselect, .p-inputtext:not(.p-inputtextarea, .p-inputnumber-input), .ms-btn {
   line-height: unset;
-  height: $input-select-height;
+  height: $input-height;
 }
 
 nav {

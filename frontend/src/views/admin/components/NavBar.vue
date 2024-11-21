@@ -1,66 +1,114 @@
 <template>
   <nav class="ma-navbar position-relative d-flex flex-column justify-content-between"
        :class="{'collapsed': isCollapsed}">
-    <div class="left-container flex-grow-1">
-      <PanelMenu v-model:expanded-keys="expandedKeys" :model="menus" multiple>
-        <template #item="{ item }">
-          <router-link v-if="item.route && item.items.length===0" :to="item.route"
-                       class="ma-navbar-parent d-flex align-items-center">
-            <div class="d-flex flex-grow-1 align-items-center gap-1 cursor-pointer menu-item">
-              <span :class="[item.icon, 'text-primary']"/>
-              <span :class="['ml-2', { 'font-semibold': item.items }]">{{ item.label }}</span>
+    <div class="left-container flex-grow-1 mt-2">
+      <div class="left-container-inner">
+        <PanelMenu v-model:expanded-keys="expandedKeys" :model="menus" :multiple="!isCollapsed"
+                   @panel-open="onOpenPanelMenu">
+          <template #item="{ item }">
+            <router-link v-if="item.route != null && item.items.length===0" :to="item.route"
+                         class="ma-navbar-parent d-flex align-items-center"
+                         @click="onClickMenuItem"
+                         v-tooltip.right="{ value: isCollapsed && item.parent_id === null ? item.label : '' , escape: true }">
+              <div class="d-flex flex-grow-1 align-items-center gap-1 cursor-pointer menu-item">
+                <span :class="[item.icon, 'text-primary icon', {'icon-mw24': item.icon}]"/>
+                <span :class="['ml-2', { 'font-semibold': item.items }]">{{ item.label }}</span>
+              </div>
+            </router-link>
+            <div v-else class="ma-navbar-parent d-flex align-items-center"
+                 :class="{'p-submenu-icon': item.items.length > 0}"
+                 v-tooltip.right="{ value: isCollapsed ? item.label : '' , escape: true }">
+              <div class="menu-item align-items-center gap-1 flex-grow-1 d-flex">
+                <div class="icon icon-mw24" :class="[item.icon]"></div>
+                <div class="flex-grow-1 ms-text">{{ item.label }}</div>
+                <span v-if="item.items" class="pi arrow-right pi-angle-up text-primary ml-auto"/>
+              </div>
             </div>
-          </router-link>
-          <div v-else class="ma-navbar-parent d-flex align-items-center"
-               :class="{'p-submenu-icon': item.items.length > 0}">
-            <div class="menu-item align-items-center gap-1 flex-grow-1 d-flex">
-              <div class="icon" :class="[item.icon]"></div>
-              <div class="flex-grow-1">{{ item.label }}</div>
-              <span v-if="item.items" class="pi arrow-right pi-angle-up text-primary ml-auto"/>
-            </div>
-          </div>
-        </template>
-      </PanelMenu>
-    </div>
-    <div class="toggle-button-container">
-      <div class="toggle-button gap-2 d-flex pointer show justify-content-start" :class="{'hidden': isCollapsed}"
-           @click="isCollapsed = !isCollapsed">
-        <span class="icon"></span>
-        <span class="toggle-title text-start">Thu gọn</span>
+          </template>
+        </PanelMenu>
+        <div class="position-absolute top-0 ms-hide-submenu" v-if="isCollapsed && Object.keys(expandedKeys).length > 0"
+             @click="expandedKeys = {}">
+
+        </div>
       </div>
     </div>
-
+    <!--    <div class="toggle-button-container">-->
+    <!--      <div class="toggle-button gap-2 d-flex pointer show justify-content-start" :class="{'hidden': isCollapsed}"-->
+    <!--           @click="isCollapsed = !isCollapsed">-->
+    <!--        <span class="icon"></span>-->
+    <!--        <span class="toggle-title text-start">Thu gọn</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </nav>
 </template>
 
 <script>
 import PanelMenu from 'primevue/panelmenu';
+import Menu from 'primevue/menu';
 import {getMenu} from "@/api/menu";
 
 export default {
   props: ['isChatNavbar'],
   components: {
-    PanelMenu
+    PanelMenu,
+    Menu,
   },
   data() {
     return {
       isCollapsed: false,
       menus: [],
       expandedKeys: {},
+      items: [],
     }
+  },
+  mounted() {
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
   },
   methods: {
     expandedMenu() {
-      for (const [index, item] of this.menus.entries()) {
-        const find = item.routes.findIndex(route => route === this.$route.path);
-        if (find !== -1) {
-          this.expandedKeys = {
-            [item.key]: true
+      if (!this.isCollapsed) {
+        for (const [index, item] of this.menus.entries()) {
+          const find = item.routes.findIndex(route => route === this.$route.path);
+          if (find !== -1) {
+            this.expandedKeys = {
+              [item.key]: true
+            }
+            break;
           }
-          break;
         }
       }
     },
+
+    /**
+     * click menu item
+     */
+    onClickMenuItem(item) {
+      if (this.isCollapsed) {
+        this.expandedKeys = {}
+      }
+    },
+
+    onOpenPanelMenu(event) {
+      if (this.isCollapsed) {
+        if (event.item.items.length > 0) {
+          this.expandedKeys = {
+            [event.item.key]: true
+          }
+        } else {
+          this.expandedKeys = {}
+        }
+      }
+    },
+
+    checkWindowSize() {
+      // Kiểm tra kích thước cửa sổ
+      this.isCollapsed = window.innerWidth < 1200;
+      if (this.isCollapsed) {
+        this.expandedKeys = {};
+      }
+    },
+
     /**
      * Lấy danh sách menu
      */
@@ -73,6 +121,10 @@ export default {
       })
     },
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.checkWindowSize);
+  },
+
   async created() {
     await this.loadMenu();
     this.expandedMenu();
@@ -82,7 +134,6 @@ export default {
 
 <style lang="scss">
 .ma-navbar {
-  overflow: hidden;
   width: $navbar-width;
   padding: 1px;
   transition: width .2s;
@@ -90,16 +141,20 @@ export default {
   background: #fff;
   height: 100%;
 
-  &:hover {
-    overflow-y: auto;
-  }
-
-  &.collapsed {
-    min-width: 56px;
-    width: 56px;
-  }
+  //&:hover {
+  //  overflow-y: auto;
+  //}
 
   .left-container {
+    padding: 0 8px 0 8px;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .left-container-inner {
+
+    }
+
     .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content {
       border-radius: unset;
     }
@@ -128,7 +183,7 @@ export default {
         .p-menuitem {
           .menu-item {
             span {
-              padding-left: 10px;
+              padding-left: 12px;
             }
           }
         }
@@ -137,10 +192,6 @@ export default {
 
 
     .p-panelmenu {
-      a:hover {
-
-      }
-
       ol, ul, dl {
         margin: unset;
         padding-left: 1.5rem;
@@ -196,9 +247,10 @@ export default {
       }
 
       .menu-item {
-        padding: 12px;
-        margin: 8px 8px 0 8px;
-        border-radius: 8px;
+        height: 36px;
+        padding: 0 8px;
+        border-radius: 4px;
+        margin-top: 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -212,16 +264,16 @@ export default {
         }
 
         &:hover {
-          background: #eff7ff;
-          color: #ff6d00;
+          background: rgba(0, 0, 0, .08);
+          color: var(--Secondary-500);
           cursor: pointer;
         }
       }
 
       .router-link-active {
         .menu-item {
-          background: #fbe9e7;
-          color: #ff6d00;
+          background: rgba(0, 0, 0, .08);
+          color: var(--Secondary-500);
         }
 
         &.ma-navbar-parent {
@@ -231,6 +283,19 @@ export default {
         }
       }
 
+    }
+  }
+
+  &.collapsed {
+    .p-panelmenu-panel {
+      &:has(.router-link-active) {
+        .p-panelmenu-header-content {
+          .menu-item {
+            background: rgba(0, 0, 0, .08);
+            color: var(--Secondary-500);
+          }
+        }
+      }
     }
   }
 
@@ -285,6 +350,53 @@ export default {
     }
   }
 
+  &.collapsed {
+    min-width: $navbar-collapsed-width;
+    width: $navbar-collapsed-width;
 
+    .p-panelmenu {
+      .p-panelmenu-panel {
+
+        .ma-navbar-parent {
+          .ms-text {
+            display: none;
+          }
+        }
+
+        .p-toggleable-content {
+          transition: unset !important;
+          position: absolute;
+          box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.12);
+          width: $navbar-submenu-width;
+          height: 100%;
+          left: 58px;
+          top: 0;
+          z-index: 2;
+
+          .p-panelmenu-content {
+            height: 100%;
+            padding: 6px;
+            border: 1px solid var(--Gray-100);
+            border-radius: unset;
+          }
+
+          .p-menuitem-content {
+            span {
+              padding-left: 0 !important;
+            }
+          }
+        }
+      }
+
+    }
+
+    .ms-hide-submenu {
+      left: calc($navbar-collapsed-width + $navbar-submenu-width);
+      top: 0;
+      width: calc(100vw - $navbar-collapsed-width - $navbar-submenu-width);
+      height: 100%;
+      z-index: 10;
+    }
+  }
 }
 </style>

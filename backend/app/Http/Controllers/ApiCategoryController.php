@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PropertyType;
+use App\Models\Category;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use App\Enums\PropertyType;
 
 class ApiCategoryController extends Controller
 {
@@ -22,17 +24,22 @@ class ApiCategoryController extends Controller
     ];
 
     /**
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function get(): JsonResponse
+    public function get()
     {
         if (Cache::has('categories')) {
             $ret = Cache::get('categories');
         } else {
             $categories = Category::whereIn('id', $this->categoryIds)->orWhereNotNull('parent_id')->with('media')->get()->toArray();
-            $ret = $this->recursiveCategory($categories);
-            Cache::put('categories', $ret);
+            $categoryInfos = [];
+            $result = $this->recursiveCategory($categories, null, $categoryInfos);
+            Cache::put('categories', $result['tree']);
+            Cache::put('categoryRelations', $result['relations']);
+            Cache::put('categoryInfos', $categoryInfos);
+            $ret = $result['tree'];
         }
+
         return $this->sendResponseSuccess($ret);
     }
 
@@ -41,31 +48,47 @@ class ApiCategoryController extends Controller
      * @param $parentId
      * @return array
      */
-    public function recursiveCategory(array $categories, $parentId = null): array
+    public function recursiveCategory(array $categories, $parentId = null, &$categoryInfo = []): array
     {
         $result = [];
+        $groupedIds = [];
+
         foreach ($categories as $category) {
+            $categoryInfo[$category['id']] = $category['name'];
             if ($parentId == $category['parent_id']) {
-                $category = [
+                $group = [];
+                $group[] = $category['id'];
+
+                $childResult = $this->recursiveCategory($categories, $category['id'], $categoryInfo);
+                foreach ($childResult['relations'] as $childGroup) {
+                    $group = array_merge($group, $childGroup);
+                }
+
+                $categoryTree = [
                     'label' => $category['name'],
                     'key' => $category['id'],
                     'parent_id' => $category['parent_id'],
                     'media' => $category['media']['media_url'] ?? null,
                     'description' => $category['description'],
-                    'children' => $this->recursiveCategory($categories, $category['id']),
+                    'children' => $childResult['tree'],
                 ];
-                $result[] = $category;
+
+                $groupedIds[] = $group;
+                $result[] = $categoryTree;
             }
         }
-        return $result;
+
+        return [
+            'tree' => $result,
+            'relations' => $groupedIds
+        ];
     }
 
     /**
-     * Lấy danh sách property theo id category
      * @param int $id
-     * @return JsonResponse
+     * @return Application|ResponseFactory|Response|object
      */
-    public function getProperties(int $id): JsonResponse
+    public function getProperties(int $id)
     {
         $properties = Category::with('properties.property_values')->find($id);
         if (!$properties) {

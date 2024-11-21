@@ -3,27 +3,128 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'home',
         components: {
             home: () => import('@/views/user/HomeView.vue'),
         },
         children: [
             {
                 path: '',
+                name: 'home',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    content: () => import('@/views/user/components/Home.vue'),
+                    content: () => import('@/views/user/components/home/Home.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
             },
             {
                 path: '/setting',
+                name: 'user_setting',
                 components: {
                     header: () => import('@/views/user/components/Header.vue'),
-                    menu: () => import('@/views/user/components/MenuSetting.vue'),
-                    content: () => import('@/views/user/components/OrderHistory.vue'),
+                    menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                    content: () => import('@/views/user/components/dashboard/OrderHistory.vue'),
                     footer: () => import('@/views/user/components/Footer.vue'),
                 },
+            },
+            {
+                path: '/login',
+                name: 'login',
+                components: {
+                    header: () => import('@/views/user/components/Header.vue'),
+                    content: () => import('@/views/user/components/Login.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+            },
+            {
+                path: '/product/:id',
+                name: 'product_detail',
+                components: {
+                    header: () => import('@/views/user/components/Header.vue'),
+                    content: () => import('@/views/user/components/product/ProductDetail.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+            },
+            {
+                path: 'shop',
+                children: [
+                    {
+                        path: 'gird',
+                        name: 'shop_gird',
+                        components: {
+                            header: () => import('@/views/user/components/Header.vue'),
+                            content: () => import('@/views/user/components/gird/ShopGrid.vue'),
+                            footer: () => import('@/views/user/components/Footer.vue'),
+                        },
+                    },
+                    {
+                        path: 'cart',
+                        name: 'shop_cart',
+                        components: {
+                            header: () => import('@/views/user/components/Header.vue'),
+                            content: () => import('@/views/user/components/order/ShoppingCart.vue'),
+                            footer: () => import('@/views/user/components/Footer.vue'),
+                        },
+                    },
+                ]
+            },
+            {
+                path: 'dashboard',
+                components: {
+                    content: () => import('@/views/user/components/dashboard/Settings.vue'),
+                    header: () => import('@/views/user/components/Header.vue'),
+                    footer: () => import('@/views/user/components/Footer.vue'),
+                },
+                children: [
+                    {
+                        path: '',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/Dashboard.vue'),
+                        }
+                    },
+                    {
+                        path: 'order-history',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/OrderHistory.vue'),
+                        }
+                    },
+                    {
+                        path: 'settings',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/AccountSetting.vue'),
+                        },
+                    },
+                    {
+                        path: 'wish-list',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/WishList.vue'),
+                        },
+                    },
+                    {
+                        path: 'shop-cart',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/order/ShoppingCart.vue'),
+                        },
+                    },
+                    {
+                        path: 'browsing-history',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/BrowsingHistory.vue'),
+                        },
+                    },
+                    {
+                        path: 'track-order',
+                        components: {
+                            menu: () => import('@/views/user/components/dashboard/MenuSetting.vue'),
+                            content: () => import('@/views/user/components/dashboard/TrackOrder.vue'),
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -46,14 +147,6 @@ const routes: Array<RouteRecordRaw> = [
                 path: 'dashboard',
                 children: [
                     {
-                        path: '',
-                        components: {
-                            header: () => import('@/views/admin/components/Header.vue'),
-                            content: () => import('@/views/admin/components/AddProduct.vue'),
-                            navbar: () => import('@/views/admin/components/NavBar.vue'),
-                        }
-                    },
-                    {
                         path: 'order',
                         components: {
                             header: () => import('@/views/admin/components/Header.vue'),
@@ -73,13 +166,6 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'product',
                 children: [
-                    {
-                        path: '',
-                        components: {
-                            header: () => import('@/views/admin/components/Header.vue'),
-                            content: () => import('@/views/admin/components/AddProduct.vue'),
-                        }
-                    },
                     {
                         path: 'manage',
                         name: 'manage_product',
@@ -135,6 +221,61 @@ const routes: Array<RouteRecordRaw> = [
                             },
                         ],
                     },
+                ],
+            },
+            {
+                path: 'shopping-mall',
+                children: [
+                    {
+                        path: 'setting',
+                        name: 'interface_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/ScreenSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
+                    {
+                        path: 'banner',
+                        name: 'banner_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/BannerSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
+                    {
+                        path: 'contact',
+                        name: 'contact_setting',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/shopping-mall/ContactSetting.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
+                ],
+            },
+            {
+                path: 'news',
+                children: [
+                    {
+                        path: 'manage',
+                        name: 'manage_news',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/news/NewsList.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    },
+                    {
+                        path: 'create',
+                        name: 'create_news',
+                        components: {
+                            header: () => import('@/views/admin/components/Header.vue'),
+                            content: () => import('@/views/admin/components/news/NewsCreate.vue'),
+                            navbar: () => import('@/views/admin/components/NavBar.vue'),
+                        }
+                    }
                 ],
             },
             {

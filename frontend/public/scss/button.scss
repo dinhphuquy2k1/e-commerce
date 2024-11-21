@@ -11,6 +11,7 @@
   white-space: nowrap;
   align-items: center;
   justify-items: center;
+  color: unset;
 
   &:disabled {
     opacity: .56;
@@ -243,6 +244,29 @@
         position: absolute;
         right: 0;
       }
+    }
+  }
+
+  &.btn-edit-adm {
+    background-color: rgba(0, 0, 0, .05);
+    border: 1px solid transparent;
+    color: rgba(0, 0, 0, .92);
+    padding: 3px 12px;
+    height: unset;
+    min-height: unset;
+    font-size: 12px !important;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
+  }
+
+  &.danger {
+    color: var(--primary);
+    background: var(--danger);
+
+    &:hover {
+      background: var(--danger-100);
     }
   }
 }

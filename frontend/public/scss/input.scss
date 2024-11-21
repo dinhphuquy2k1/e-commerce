@@ -105,6 +105,7 @@ input:focus {
 .p-inputnumber {
   border: 1px solid var(--Gray-100);
   border-radius: 4px;
+  height: 36px;
 
   &:hover {
     border-color: #1a73e8;
@@ -114,36 +115,54 @@ input:focus {
     text-align: center;
     border: none;
     min-width: 10px;
+    height: unset;
   }
 
-  .p-button {
-    padding: unset;
-    background: #fff;
-    border: none;
-    border-radius: 4px;
-    height: 40px;
+  &.p-inputnumber-buttons-horizontal {
+    .p-button {
+      padding: unset;
+      background: #fff;
+      border: none;
+      border-radius: 4px;
+      height: $input-height;
 
-    &.p-button-icon-only {
-      width: unset;
-    }
+      &.p-button-icon-only {
+        width: unset;
+      }
 
-    .pi {
-      width: 16px;
-      height: 16px;
-      background-repeat: no-repeat;
-      background-position: center;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
+      .pi {
+        width: 16px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
 
-    .pi-minus {
-      background-image: url('@public/assets/icons/minus.svg');
-    }
+      .pi-minus {
+        background-image: url('@public/assets/icons/minus.svg');
+      }
 
-    .pi-plus {
-      background-image: url('@public/assets/icons/plus.svg');
+      .pi-plus {
+        background-image: url('@public/assets/icons/plus.svg');
+      }
     }
   }
+
+  &.p-inputnumber-buttons-stacked {
+    .p-inputnumber-button-group {
+      .p-button {
+        background: unset;
+        border: unset;
+        width: 40px;
+
+        svg {
+          color: #64748b;
+        }
+      }
+    }
+  }
+
 }
 
 /*input switch*/
@@ -183,6 +202,7 @@ input:focus {
 .p-checkbox, .p-radiobutton {
   width: 24px !important;
   height: 24px !important;
+  min-width: 24px;
 
   .p-checkbox-input, .p-radiobutton-input {
     position: absolute;
